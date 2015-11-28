@@ -1,0 +1,419 @@
+# Copyright (C) 2015 Derek Herman
+# This file is distributed under the same license as the Envato Market package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Envato Market 1.0.0-alpha\n"
+"Report-Msgid-Bugs-To: Envato Support Team <support@envato.com>\n"
+"POT-Creation-Date: 2015-11-28 11:37:18+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2015-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Envato Support Team <support@envato.com>\n"
+"Language-Team: Envato Support Team <support@envato.com>\n"
+"X-Generator: grunt-wp-i18n 0.5.3\n"
+
+#: envato-market.php:157 envato-market.php:167 inc/admin/admin.php:76
+#: inc/admin/admin.php:86 inc/api.php:80 inc/api.php:90 inc/github.php:70
+#: inc/github.php:80 inc/items.php:106 inc/items.php:116
+msgid "Cheatin&#8217; huh?"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Envato Market"
+msgstr ""
+
+#: inc/admin/admin.php:363
+msgid "Save"
+msgstr ""
+
+#: inc/admin/admin.php:364
+msgid "Remove"
+msgstr ""
+
+#: inc/admin/admin.php:365
+msgid "Cancel"
+msgstr ""
+
+#: inc/admin/admin.php:366
+msgid "An unknown error occurred. Try again."
+msgstr ""
+
+#: inc/admin/admin.php:384 inc/admin/view/partials/settings.php:19
+msgid "Test API Connection"
+msgstr ""
+
+#: inc/admin/admin.php:389 inc/admin/view/callback/setting/items.php:22
+msgid "ID"
+msgstr ""
+
+#: inc/admin/admin.php:391 inc/admin/functions.php:306
+#: inc/admin/view/callback/setting/items.php:24
+msgid "Delete"
+msgstr ""
+
+#: inc/admin/admin.php:402
+msgid "Remove Item"
+msgstr ""
+
+#: inc/admin/admin.php:403
+msgid ""
+"You are about to remove the connection between the Envato Market API and "
+"this item. You cannot undo this action."
+msgstr ""
+
+#: inc/admin/admin.php:408 inc/admin/view/callback/setting/items.php:37
+msgid "Add Item"
+msgstr ""
+
+#: inc/admin/admin.php:411 inc/admin/admin.php:485
+msgid "Token"
+msgstr ""
+
+#: inc/admin/admin.php:413
+msgid "Enter the Envato API Personal Token."
+msgstr ""
+
+#: inc/admin/admin.php:414
+msgid "Item ID"
+msgstr ""
+
+#: inc/admin/admin.php:416
+msgid "Enter the Envato Item ID."
+msgstr ""
+
+#: inc/admin/admin.php:439 inc/admin/admin.php:834 inc/admin/admin.php:872
+#: inc/admin/functions.php:168 inc/admin/functions.php:371
+msgid "Version %s"
+msgstr ""
+
+#: inc/admin/admin.php:439
+msgid "Version"
+msgstr ""
+
+#: inc/admin/admin.php:447 inc/admin/functions.php:176
+#: inc/admin/functions.php:379
+msgid "By"
+msgstr ""
+
+#: inc/admin/admin.php:454 inc/admin/admin.php:455 inc/admin/functions.php:149
+#: inc/admin/functions.php:352
+msgid "Install"
+msgstr ""
+
+#: inc/admin/admin.php:477
+msgid "Global OAuth Personal Token"
+msgstr ""
+
+#: inc/admin/admin.php:494
+msgid "Single Use OAuth Personal Tokens"
+msgstr ""
+
+#: inc/admin/admin.php:502
+msgid "Envato Market Items"
+msgstr ""
+
+#: inc/admin/admin.php:707 inc/admin/admin.php:732
+msgid "Installing Plugin..."
+msgstr ""
+
+#: inc/admin/admin.php:708
+msgid "You do not have sufficient permissions to install plugins on this site."
+msgstr ""
+
+#: inc/admin/admin.php:709 inc/admin/admin.php:734 inc/admin/admin.php:791
+#: inc/admin/upgrader-skins.php:118
+msgid "Return to Plugin Installer"
+msgstr ""
+
+#: inc/admin/admin.php:733 inc/admin/admin.php:790
+msgid "An error occurred, please check that the item ID is correct."
+msgstr ""
+
+#: inc/admin/admin.php:739
+msgid "Installing Plugin: %s"
+msgstr ""
+
+#: inc/admin/admin.php:764 inc/admin/admin.php:789
+msgid "Installing Theme..."
+msgstr ""
+
+#: inc/admin/admin.php:765
+msgid "You do not have sufficient permissions to install themes on this site."
+msgstr ""
+
+#: inc/admin/admin.php:766 inc/admin/upgrader-skins.php:68
+msgid "Return to Theme Installer"
+msgstr ""
+
+#: inc/admin/admin.php:798
+msgid "Installing Theme: %s"
+msgstr ""
+
+#: inc/admin/admin.php:838
+msgid "You do not have sufficient permissions to update plugins for this site."
+msgstr ""
+
+#: inc/admin/admin.php:882
+msgid "Unable to connect to the filesystem. Please confirm your credentials."
+msgstr ""
+
+#: inc/admin/admin.php:906
+msgid "The Token is missing."
+msgstr ""
+
+#: inc/admin/admin.php:908 inc/admin/admin.php:1002
+msgid "The Item ID is missing."
+msgstr ""
+
+#: inc/admin/admin.php:919
+msgid "The Token or Item ID is incorrect."
+msgstr ""
+
+#: inc/admin/admin.php:923
+msgid "The item cannot be downloaded."
+msgstr ""
+
+#: inc/admin/admin.php:986
+msgid "An unknown error occurred."
+msgstr ""
+
+#: inc/admin/functions.php:69 inc/admin/functions.php:261
+msgid "Update %s now"
+msgstr ""
+
+#: inc/admin/functions.php:73 inc/admin/functions.php:266
+msgid "Update Available"
+msgstr ""
+
+#: inc/admin/functions.php:88 inc/admin/functions.php:274
+msgid "View version %1$s details."
+msgstr ""
+
+#: inc/admin/functions.php:103
+msgid "Customize"
+msgstr ""
+
+#: inc/admin/functions.php:103
+msgid "Customize &#8220;%s&#8221;"
+msgstr ""
+
+#: inc/admin/functions.php:112 inc/admin/upgrader-skins.php:58
+msgid "Site Enable"
+msgstr ""
+
+#: inc/admin/functions.php:112
+msgid "Site Enable &#8220;%s&#8221;"
+msgstr ""
+
+#: inc/admin/functions.php:116 inc/admin/upgrader-skins.php:62
+msgid "Network Enable"
+msgstr ""
+
+#: inc/admin/functions.php:116
+msgid "Network Enable &#8220;%s&#8221;"
+msgstr ""
+
+#: inc/admin/functions.php:129 inc/admin/functions.php:320
+#: inc/admin/upgrader-skins.php:66
+msgid "Activate"
+msgstr ""
+
+#: inc/admin/functions.php:129 inc/admin/upgrader-skins.php:66
+msgid "Activate &#8220;%s&#8221;"
+msgstr ""
+
+#: inc/admin/functions.php:136 inc/admin/upgrader-skins.php:53
+msgid "Live Preview"
+msgstr ""
+
+#: inc/admin/functions.php:136 inc/admin/upgrader-skins.php:53
+msgid "Live Preview &#8220;%s&#8221;"
+msgstr ""
+
+#: inc/admin/functions.php:150 inc/admin/functions.php:353
+msgid "Install %s"
+msgstr ""
+
+#: inc/admin/functions.php:293
+msgid "Deactivate"
+msgstr ""
+
+#: inc/admin/functions.php:294
+msgid "Deactivate %s"
+msgstr ""
+
+#: inc/admin/functions.php:307
+msgid "Delete %s"
+msgstr ""
+
+#: inc/admin/functions.php:321
+msgid "Activate %s"
+msgstr ""
+
+#: inc/admin/functions.php:329 inc/admin/upgrader-skins.php:110
+msgid "Site Activate"
+msgstr ""
+
+#: inc/admin/functions.php:330
+msgid "Site Activate %s"
+msgstr ""
+
+#: inc/admin/functions.php:337 inc/admin/upgrader-skins.php:114
+msgid "Network Activate"
+msgstr ""
+
+#: inc/admin/functions.php:338
+msgid "Network Activate %s"
+msgstr ""
+
+#: inc/admin/upgrader-skins.php:103
+msgid "Activate Plugin"
+msgstr ""
+
+#: inc/admin/upgrader.php:34 inc/admin/upgrader.php:72
+msgid "Downloading the Envato Market upgrade package&#8230;"
+msgstr ""
+
+#: inc/admin/upgrader.php:45 inc/admin/upgrader.php:83
+msgid "Downloading the Envato Market install package&#8230;"
+msgstr ""
+
+#: inc/admin/view/callback/section/items.php:10
+msgid ""
+"Add Envato Market themes & plugins using multiple OAuth tokens. This is "
+"especially useful when an item has been purchased on behalf of a "
+"third-party. This works similarly to the global OAuth Personal Token, but "
+"for individual items and additionally requires the Envato Market item ID."
+msgstr ""
+
+#: inc/admin/view/callback/section/items.php:12
+msgid "Warning: These tokens can be revoked by the account holder at any time."
+msgstr ""
+
+#: inc/admin/view/callback/section/oauth.php:10
+msgid ""
+"OAuth is a protocol that lets external apps request authorization to "
+"private details in a user's Envato Market account without entering their "
+"password. This is preferred over Basic Authentication because tokens can be "
+"limited to specific types of data, and can be revoked by users at any time."
+msgstr ""
+
+#: inc/admin/view/callback/section/oauth.php:12
+msgid "You will need to %s, and then insert it below."
+msgstr ""
+
+#: inc/admin/view/callback/section/oauth.php:12
+msgid "generate a personal token"
+msgstr ""
+
+#: inc/admin/view/callback/setting/token.php:12
+msgid "Enter your Envato API Personal Token."
+msgstr ""
+
+#: inc/admin/view/notice/error-single-use.php:11
+msgid ""
+"One or more Single Use OAuth Personal Tokens could not be verified and "
+"should be removed."
+msgstr ""
+
+#: inc/admin/view/notice/error.php:11
+msgid ""
+"The OAuth Personal Token could not be verified. Please check that the Token "
+"has been entered correctly and has the minimum required permissions."
+msgstr ""
+
+#: inc/admin/view/notice/success-no-items.php:11
+msgid ""
+"Your OAuth Personal Token has been verified. However, there are no "
+"WordPress downloadable items in your account."
+msgstr ""
+
+#: inc/admin/view/notice/success-single-use.php:11
+msgid "All Single Use OAuth Personal Tokens have been verified."
+msgstr ""
+
+#: inc/admin/view/notice/success.php:11
+msgid "Your OAuth Personal Token has been verified."
+msgstr ""
+
+#: inc/admin/view/partials/intro.php:13
+msgid "Welcome!"
+msgstr ""
+
+#: inc/admin/view/partials/intro.php:14
+msgid ""
+"This plugin can install WordPress themes and plugins purchased from "
+"ThemeForest & CodeCanyon by connecting with the Envato Market API using a "
+"secure OAuth personal token. Once your themes & plugins are installed "
+"WordPress will periodically check for updates, so keeping your items up to "
+"date is as simple as a few clicks."
+msgstr ""
+
+#: inc/admin/view/partials/intro.php:15
+msgid ""
+"You can add a global token to connect all your items from your account, "
+"and/or connect directly with a specific item using a singe-use token & item "
+"ID. When the global token and single-use token are set for the same item, "
+"the single-use token will be used to communicate with the API."
+msgstr ""
+
+#: inc/admin/view/partials/intro.php:16
+msgid "Development of this plugin is done on %sGitHub%s. Pull requests welcome."
+msgstr ""
+
+#: inc/admin/view/partials/intro.php:19
+msgid "Active Theme"
+msgstr ""
+
+#: inc/admin/view/partials/settings.php:17
+msgid "Save Changes"
+msgstr ""
+
+#: inc/admin/view/partials/tabs.php:28
+msgid "Themes"
+msgstr ""
+
+#: inc/admin/view/partials/tabs.php:42
+msgid "Plugins"
+msgstr ""
+
+#: inc/admin/view/partials/tabs.php:45
+msgid "Settings"
+msgstr ""
+
+#: inc/api.php:127
+msgid "An API token is required."
+msgstr ""
+
+#: inc/api.php:140 inc/api.php:144
+msgid "An unknown API error occurred."
+msgstr ""
+
+#: inc/github.php:271
+msgid ""
+"%sActivate the Envato Market plugin%s to get updates for your ThemeForest "
+"and CodeCanyon items."
+msgstr ""
+
+#: inc/github.php:282
+msgid ""
+"%sInstall the Envato Market plugin%s to get updates for your ThemeForest "
+"and CodeCanyon items."
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://envato.github.io/wp-envato-market/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "WordPress Theme & Plugin management for the Envato Market."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Derek Herman"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://valendesigns.com/"
+msgstr ""

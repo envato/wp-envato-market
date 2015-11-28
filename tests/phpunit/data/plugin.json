@@ -1,0 +1,90 @@
+{
+	"id": 2751380,
+	"name": "Slider Revolution Responsive WordPress Plugin",
+	"description": "TONS OF HTML",
+	"site": "codecanyon.net",
+	"classification": "wordpress/interface-elements/sliders",
+	"classification_url": "http://codecanyon.net/category/wordpress/interface-elements/sliders",
+	"price_cents": 1900,
+	"number_of_sales": 75668,
+	"author_username": "themepunch",
+	"author_url": "http://codecanyon.net/user/themepunch",
+	"author_image": "https://0.s3.envato.com/files/146765454/TP_LOGO.png",
+	"url": "http://codecanyon.net/item/slider-revolution-responsive-wordpress-plugin/2751380",
+	"thumbnail_url": "https://0.s3.envato.com/files/144560542/smallicon.png",
+	"summary": "Compatible Browsers: IE9, IE10, IE11, Firefox, Safari, Opera, Chrome, Edge, Software Version: WordPress 4.3.1, WordPress 4.3, WordPress 4.2, WordPress 4.1, WordPress 4.0, WordPress 3.9, WordPress 3.8, WordPress 3.7, WordPress 3.6, WordPress 3.5, WordPress 3.4",
+	"rating": {
+		"rating": 4.79,
+		"count": 4457
+	},
+	"updated_at": "2015-11-16T23:16:59+11:00",
+	"published_at": "2012-07-31T17:29:21+10:00",
+	"trending": false,
+	"attributes": [
+		{
+			"name": "compatible-browsers",
+			"value": [
+				"IE9",
+				"IE10",
+				"IE11",
+				"Firefox",
+				"Safari",
+				"Opera",
+				"Chrome",
+				"Edge"
+			]
+		},
+		{
+			"name": "compatible-software",
+			"value": [
+				"WordPress 4.3.1",
+				"WordPress 4.3",
+				"WordPress 4.2",
+				"WordPress 4.1",
+				"WordPress 4.0",
+				"WordPress 3.9",
+				"WordPress 3.8",
+				"WordPress 3.7",
+				"WordPress 3.6",
+				"WordPress 3.5",
+				"WordPress 3.4"
+			]
+		},
+		{
+			"name": "compatible-with",
+			"value": null
+		},
+		{
+			"name": "demo-url",
+			"value": "http://themes.themepunch.com/redirect.php?theme=revolution_wp"
+		},
+		{
+			"name": "high-resolution",
+			"value": null
+		},
+		{
+			"name": "source-files-included",
+			"value": [
+				"JavaScript JS",
+				"HTML",
+				"CSS",
+				"PHP"
+			]
+		},
+		{
+			"name": "video-preview-resolution",
+			"value": null
+		}
+	],
+	"previews": {
+		"landscape_preview": {
+			"landscape_url": "https://image-cc.s3.envato.com/files/144560543/01_largepreview.jpg"
+		}
+	},
+	"wordpress_plugin_metadata": {
+		"plugin_name": "Slider Revolution",
+		"author": "ThemePunch",
+		"version": "5.1.2",
+		"description": "Slider Revolution - Premium responsive slider"
+	}
+}
