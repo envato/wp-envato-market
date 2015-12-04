@@ -22,6 +22,9 @@
 				<directory suffix=".php">node_modules</directory>
 				<directory suffix=".php">tests</directory>
 				<directory suffix=".php">vendor</directory>
+				<directory suffix=".php">inc/admin/view</directory>
+				<file>inc/admin/upgrader-skins.php</file>
+				<file>inc/admin/upgrader.php</file>
 			</exclude>
 		</whitelist>
 	</filter>

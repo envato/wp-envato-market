@@ -52,6 +52,7 @@ if ( empty( $_token ) ) {
 	}
 }
 define( 'TOKEN', $_token );
+define( 'TESTS_DATA_DIR', dirname( __FILE__ ) . '/../data' );
 
 unset( $_plugin_dir, $_plugin_file_candidate, $_plugin_file_src );
 

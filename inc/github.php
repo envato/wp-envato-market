@@ -27,6 +27,16 @@ if ( ! class_exists( 'Envato_Market_Github' ) ) :
 		private static $_instance = null;
 
 		/**
+		 * The API URL.
+		 *
+		 * @since 1.0.0
+		 * @access private
+		 *
+		 * @var string
+		 */
+		private static $api_url = 'http://envato.github.io/wp-envato-market/dist/update-check.json';
+
+		/**
 		 * The Envato_Market_Items Instance
 		 *
 		 * Ensures only one instance of this class exists in memory at any one time.
@@ -57,7 +67,7 @@ if ( ! class_exists( 'Envato_Market_Github' ) ) :
 		 * @codeCoverageIgnore
 		 */
 		private function __construct() {
-			// We do nothing here!
+			/* We do nothing here! */
 		}
 
 		/**
@@ -87,9 +97,8 @@ if ( ! class_exists( 'Envato_Market_Github' ) ) :
 		 * @uses add_filter() To add filters.
 		 *
 		 * @since 1.0.0
-		 * @access private
 		 */
-		private function init_actions() {
+		public function init_actions() {
 			add_filter( 'http_request_args', array( $this, 'update_check' ), 5, 2 );
 			add_filter( 'plugins_api', array( $this, 'plugins_api' ), 10, 3 );
 			add_filter( 'pre_set_site_transient_update_plugins', array( $this, 'update_plugins' ) );
@@ -107,9 +116,7 @@ if ( ! class_exists( 'Envato_Market_Github' ) ) :
 		 * @return false|object
 		 */
 		public function api_check() {
-			$url = 'http://envato.github.io/wp-envato-market/dist/update-check.json';
-
-			$raw_response = wp_remote_get( $url );
+			$raw_response = wp_remote_get( self::$api_url );
 			if ( is_wp_error( $raw_response ) ) {
 				return false;
 			}
