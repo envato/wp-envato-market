@@ -87,13 +87,7 @@ if ( ! class_exists( 'Envato_Market_Items' ) ) :
 		 * @codeCoverageIgnore
 		 */
 		private function __construct() {
-			/*
-			 * We do nothing here!
-			 *
-			 * @todo Might want to consider a dependency injection approach here, where the constructor takes
-			 * one instance of Envato_Market and then makes it a class variable; using dependnecy injection
-			 * can make it a lot easier to unit test, since the dependnecies you indicate can be mocked.
-			 */
+			/* We do nothing here! */
 		}
 
 		/**
@@ -123,18 +117,18 @@ if ( ! class_exists( 'Envato_Market_Items' ) ) :
 		 * @uses add_filter() To add filters.
 		 *
 		 * @since 1.0.0
-		 * @access private
-		 * @codeCoverageIgnore
 		 */
-		private function init_actions() {
+		public function init_actions() {
 			// Check for theme & plugin updates.
 			add_filter( 'http_request_args', array( $this, 'update_check' ), 5, 2 );
 
-			// Inject plugin updates into the response array. @todo Add non site transient.
+			// Inject plugin updates into the response array.
 			add_filter( 'pre_set_site_transient_update_plugins', array( $this, 'update_plugins' ) );
+			add_filter( 'pre_set_transient_update_plugins', array( $this, 'update_plugins' ) );
 
-			// Inject theme updates into the response array. @todo Add non site transient.
+			// Inject theme updates into the response array.
 			add_filter( 'pre_set_site_transient_update_themes', array( $this, 'update_themes' ) );
+			add_filter( 'pre_set_transient_update_themes', array( $this, 'update_themes' ) );
 
 			// Inject plugin information into the API calls.
 			add_filter( 'plugins_api', array( $this, 'plugins_api' ), 10, 3 );
@@ -283,7 +277,7 @@ if ( ! class_exists( 'Envato_Market_Items' ) ) :
 							'theme'       => $slug,
 							'new_version' => $premium['version'],
 							'url'         => $premium['url'],
-							'package'     => envato_market()->api()->deferred_download( $premium['id'] ), // @todo If dependency injected, this could be $this->api->deferred_download(...) and easier to mock.
+							'package'     => envato_market()->api()->deferred_download( $premium['id'] ),
 						);
 					}
 				}
@@ -309,13 +303,14 @@ if ( ! class_exists( 'Envato_Market_Items' ) ) :
 
 			foreach ( $installed as $plugin => $premium ) {
 				if ( isset( $plugins[ $plugin ] ) && version_compare( $plugins[ $plugin ]['Version'], $premium['version'], '<' ) ) {
-					$transient->response[ $plugin ] = (object) array(
+					$_plugin = array(
 						'slug'        => dirname( $plugin ),
 						'plugin'      => $plugin,
 						'new_version' => $premium['version'],
 						'url'         => $premium['url'],
 						'package'     => envato_market()->api()->deferred_download( $premium['id'] ),
 					);
+					$transient->response[ $plugin ] = (object) $_plugin;
 				}
 			}
 

@@ -7,9 +7,9 @@
  */
 
 /**
- * Class Tests_Envato_Market_Class
+ * Class Tests_Envato_Market
  */
-class Tests_Envato_Market_Class extends WP_UnitTestCase {
+class Tests_Envato_Market extends WP_UnitTestCase {
 
 	/**
 	 * The plugin metadata.

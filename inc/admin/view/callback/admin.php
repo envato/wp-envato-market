@@ -7,7 +7,7 @@
  */
 
 if ( isset( $_GET['action'] ) ) {
-	$id = ! empty( $_GET['id'] ) ? trim( $_GET['id'] ) : ''; // @todo sanitize.
+	$id = ! empty( $_GET['id'] ) ? absint( trim( $_GET['id'] ) ) : '';
 
 	if ( 'install-plugin' === $_GET['action'] ) {
 		Envato_Market_Admin::install_plugin( $id );
