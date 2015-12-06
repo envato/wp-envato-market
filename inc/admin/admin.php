@@ -95,11 +95,11 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 		 * @since 1.0.0
 		 */
 		public function init_actions() {
-			// Turn the UI off if allowed.
-			if ( false === envato_market()->get_data( 'admin' ) && false === envato_market()->get_option( 'is_plugin_active' ) ) {
+			// @codeCoverageIgnoreStart
+			if ( false === envato_market()->get_data( 'admin' ) && false === envato_market()->get_option( 'is_plugin_active' ) ) { // Turns the UI off if allowed.
 				return;
 			}
-
+			// @codeCoverageIgnoreEnd
 			// Deferred Download.
 			add_action( 'upgrader_package_options', array( $this, 'maybe_deferred_download' ), 99 );
 
@@ -232,17 +232,19 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 		public static function do_settings_sections( $page, $columns = 2 ) {
 			global $wp_settings_sections, $wp_settings_fields;
 
+			// @codeCoverageIgnoreStart
 			if ( ! isset( $wp_settings_sections[ $page ] ) ) {
 				return;
 			}
-
+			// @codeCoverageIgnoreEnd
 			$index = 0;
 
 			foreach ( (array) $wp_settings_sections[ $page ] as $section ) {
+				// @codeCoverageIgnoreStart
 				if ( ! isset( $wp_settings_fields ) || ! isset( $wp_settings_fields[ $page ] ) || ! isset( $wp_settings_fields[ $page ][ $section['id'] ] ) ) {
 					continue;
 				}
-
+				// @codeCoverageIgnoreEnd
 				$index++;
 
 				// Set the column class.
@@ -379,6 +381,8 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 
 		/**
 		 * Underscore (JS) templates for dialog windows.
+		 *
+		 * @codeCoverageIgnore
 		 */
 		public function render_templates() {
 			?>
@@ -512,6 +516,7 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 		 * Redirect after the enable action runs.
 		 *
 		 * @since 1.0.0
+		 * @codeCoverageIgnore
 		 */
 		public function maybe_redirect() {
 			if ( 'toplevel_page_' . envato_market()->get_slug() === get_current_screen()->id ) {
@@ -531,10 +536,11 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 		public function add_notices() {
 			if ( 'toplevel_page_' . envato_market()->get_slug() === get_current_screen()->id ) {
 
+				// @codeCoverageIgnoreStart
 				if ( isset( $_GET['authorization'] ) && 'check' === $_GET['authorization'] ) {
 					self::authorization_redirect();
 				}
-
+				// @codeCoverageIgnoreEnd
 				// Get the option array.
 				$option = envato_market()->get_options();
 
