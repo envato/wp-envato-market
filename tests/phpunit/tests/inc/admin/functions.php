@@ -111,6 +111,10 @@ class Tests_Envato_Market_Functions extends WP_UnitTestCase {
 	 * Themes column install
 	 */
 	function test_envato_market_themes_column_install() {
+		if ( is_multisite() ) {
+			$this->markTestSkipped( 'Cannot properly test envato_market_themes_column() install if on multisite.' );
+		}
+
 		$themes = array(
 			'install' => array(
 				array(
@@ -202,6 +206,10 @@ class Tests_Envato_Market_Functions extends WP_UnitTestCase {
 	 * Plugins column installed
 	 */
 	function test_envato_market_plugins_column_installed() {
+		if ( is_multisite() ) {
+			$this->markTestSkipped( 'Cannot properly test envato_market_plugins_column() delete if on multisite.' );
+		}
+
 		$plugins = array(
 			'installed' => array(
 				'envato-market/envato-market.php' => array(
@@ -245,6 +253,10 @@ class Tests_Envato_Market_Functions extends WP_UnitTestCase {
 	 * Plugins column install
 	 */
 	function test_envato_market_plugins_column_install() {
+		if ( is_multisite() ) {
+			$this->markTestSkipped( 'Cannot properly test envato_market_plugins_column() install if on multisite.' );
+		}
+
 		$plugins = array(
 			'install' => array(
 				'envato-market/envato-market.php' => array(
