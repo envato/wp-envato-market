@@ -873,9 +873,11 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 		 * @since 1.0.0
 		 *
 		 * @see Theme_Upgrader
+		 * @codeCoverageIgnore
 		 */
 		public function ajax_upgrade_theme() {
-			// @todo Nonce/cap check
+			check_ajax_referer( 'updates' );
+
 			global $wp_filesystem;
 
 			$theme = urldecode( $_POST['theme'] ); // @todo sanitize_key() or some sanitization
@@ -893,11 +895,9 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 			}
 
 			if ( ! current_user_can( 'update_themes' ) ) {
-				$status['error'] = __( 'You do not have sufficient permissions to update plugins for this site.', 'envato-market' );
+				$status['error'] = __( 'You do not have sufficient permissions to update themes for this site.', 'envato-market' );
 		 		wp_send_json_error( $status );
 			}
-
-			check_ajax_referer( 'updates' );
 
 			include_once( ABSPATH . 'wp-admin/includes/class-wp-upgrader.php' );
 
@@ -952,6 +952,7 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 		 * AJAX handler for adding items that use a non global token.
 		 *
 		 * @since 1.0.0
+		 * @codeCoverageIgnore
 		 */
 		public function ajax_add_item() {
 			if ( ! check_ajax_referer( self::AJAX_ACTION, 'nonce', false ) ) {
@@ -1048,6 +1049,7 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 		 * AJAX handler for removing items that use a non global token.
 		 *
 		 * @since 1.0.0
+		 * @codeCoverageIgnore
 		 */
 		public function ajax_remove_item() {
 			if ( ! check_ajax_referer( self::AJAX_ACTION, 'nonce', false ) ) {
