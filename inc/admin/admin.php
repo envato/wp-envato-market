@@ -196,9 +196,13 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 		 * Maybe delete the site transients.
 		 *
 		 * @since 1.0.0
+		 * @codeCoverageIgnore
 		 */
 		public function maybe_delete_transients() {
-			// @todo Nonce/cap check
+			if ( isset( $_POST['_wpnonce'] ) && ! wp_verify_nonce( $_POST['_wpnonce'], envato_market()->get_slug() . '-options' ) ) {
+		 		wp_die( __( 'You do not have sufficient permissions to delete transients.', 'envato-market' ) );
+			}
+
 			if ( isset( $_POST[ envato_market()->get_option_name() ] ) ) {
 				self::delete_transients();
 			}
@@ -880,7 +884,7 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 
 			global $wp_filesystem;
 
-			$theme = urldecode( $_POST['theme'] ); // @todo sanitize_key() or some sanitization
+			$theme = urldecode( sanitize_file_name( trim( $_POST['theme'] ) ) );
 
 			$status = array(
 				'update'     => 'theme',

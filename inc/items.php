@@ -122,11 +122,13 @@ if ( ! class_exists( 'Envato_Market_Items' ) ) :
 			// Check for theme & plugin updates.
 			add_filter( 'http_request_args', array( $this, 'update_check' ), 5, 2 );
 
-			// Inject plugin updates into the response array. @todo Add non site transient.
+			// Inject plugin updates into the response array.
 			add_filter( 'pre_set_site_transient_update_plugins', array( $this, 'update_plugins' ) );
+			add_filter( 'pre_set_transient_update_plugins', array( $this, 'update_plugins' ) );
 
-			// Inject theme updates into the response array. @todo Add non site transient.
+			// Inject theme updates into the response array.
 			add_filter( 'pre_set_site_transient_update_themes', array( $this, 'update_themes' ) );
+			add_filter( 'pre_set_transient_update_themes', array( $this, 'update_themes' ) );
 
 			// Inject plugin information into the API calls.
 			add_filter( 'plugins_api', array( $this, 'plugins_api' ), 10, 3 );

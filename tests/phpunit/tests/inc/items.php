@@ -40,7 +40,9 @@ class Tests_Envato_Market_Items extends WP_UnitTestCase {
 		$this->items->init_actions();
 		$this->assertEquals( 5, has_action( 'http_request_args', array( $this->items, 'update_check' ) ) );
 		$this->assertEquals( 10, has_action( 'pre_set_site_transient_update_plugins', array( $this->items, 'update_plugins' ) ) );
+		$this->assertEquals( 10, has_action( 'pre_set_transient_update_plugins', array( $this->items, 'update_plugins' ) ) );
 		$this->assertEquals( 10, has_action( 'pre_set_site_transient_update_themes', array( $this->items, 'update_themes' ) ) );
+		$this->assertEquals( 10, has_action( 'pre_set_transient_update_themes', array( $this->items, 'update_themes' ) ) );
 		$this->assertEquals( 10, has_action( 'plugins_api', array( $this->items, 'plugins_api' ) ) );
 		$this->assertEquals( 10, has_action( 'after_switch_theme', array( $this->items, 'rebuild_themes' ) ) );
 		$this->assertEquals( 10, has_action( 'activated_plugin', array( $this->items, 'rebuild_plugins' ) ) );

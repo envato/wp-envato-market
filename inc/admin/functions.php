@@ -104,6 +104,7 @@ function envato_market_themes_column( $group = 'install' ) {
 		} else if ( 'installed' === $group ) {
 			$can_activate = true;
 
+			// @codeCoverageIgnoreStart
 			// Multisite needs special attention.
 			if ( is_multisite() && ! $get_theme->is_allowed( 'both' ) && current_user_can( 'manage_sites' ) ) {
 				$can_activate = false;
@@ -116,7 +117,7 @@ function envato_market_themes_column( $group = 'install' ) {
 					$actions['network_enable'] = '<a href="' . esc_url( network_admin_url( wp_nonce_url( 'themes.php?action=enable&amp;theme=' . urlencode( $slug ) .'&amp;paged=1&amp;s', 'enable-theme_' . $slug ) ) ) . '" class="button"><span aria-hidden="true">' . __( 'Network Enable', 'envato-market' ) . '</span><span class="screen-reader-text">' . sprintf( __( 'Network Enable &#8220;%s&#8221;', 'envato-market' ), $name ) . '</span></a>';
 				}
 			}
-
+			// @codeCoverageIgnoreEnd
 			// Can activate theme.
 			if ( $can_activate && current_user_can( 'switch_themes' ) ) {
 				$activate_link = add_query_arg( array(
@@ -322,6 +323,8 @@ function envato_market_plugins_column( $group = 'install' ) {
 				</a>';
 			}
 
+			// @codeCoverageIgnoreStart
+			// Multisite needs special attention.
 			if ( is_multisite() ) {
 				if ( current_user_can( 'manage_sites' ) ) {
 					$actions['site_activate'] = '
@@ -339,6 +342,7 @@ function envato_market_plugins_column( $group = 'install' ) {
 					</a>';
 				}
 			}
+			// @codeCoverageIgnoreEnd
 		} else if ( 'install' === $group && current_user_can( 'install_plugins' ) ) {
 			// Install link.
 			$install_link = add_query_arg( array(
