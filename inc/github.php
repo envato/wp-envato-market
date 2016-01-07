@@ -109,7 +109,7 @@ if ( ! class_exists( 'Envato_Market_Github' ) ) :
 		}
 
 		/**
-		 * Check Guthub for an update.
+		 * Check Github for an update.
 		 *
 		 * @since 1.0.0
 		 *
