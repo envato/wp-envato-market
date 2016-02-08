@@ -1,0 +1,3 @@
+CHECK_SCOPE=all
+WPCS_GIT_TREE=develop
+PATH_INCLUDES='*.* css inc js sass'
