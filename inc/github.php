@@ -99,6 +99,12 @@ if ( ! class_exists( 'Envato_Market_Github' ) ) :
 		 * @since 1.0.0
 		 */
 		public function init_actions() {
+
+			// Bail outside of the WP Admin panel.
+			if ( ! is_admin() ) {
+				return;
+			}
+
 			add_filter( 'http_request_args', array( $this, 'update_check' ), 5, 2 );
 			add_filter( 'plugins_api', array( $this, 'plugins_api' ), 10, 3 );
 			add_filter( 'pre_set_site_transient_update_plugins', array( $this, 'update_plugins' ) );
