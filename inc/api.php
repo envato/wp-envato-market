@@ -327,6 +327,9 @@ if ( ! class_exists( 'Envato_Market_API' ) && class_exists( 'Envato_Market' ) ) 
 				}
 			}
 
+			// This may not exist.
+			$has_landscape = ! empty( $plugin['previews']['landscape_preview']['landscape_url'] );
+
 			return array(
 				'id' => $plugin['id'],
 				'name' => $plugin['wordpress_plugin_metadata']['plugin_name'],
@@ -336,7 +339,7 @@ if ( ! class_exists( 'Envato_Market_API' ) && class_exists( 'Envato_Market' ) ) 
 				'url' => $plugin['url'],
 				'author_url' => $plugin['author_url'],
 				'thumbnail_url' => $plugin['thumbnail_url'],
-				'landscape_url' => $plugin['previews']['landscape_preview']['landscape_url'],
+				'landscape_url' => ( $has_landscape ? $plugin['previews']['landscape_preview']['landscape_url'] : '' ),
 				'requires' => $requires,
 				'tested' => $tested,
 				'number_of_sales' => $plugin['number_of_sales'],
