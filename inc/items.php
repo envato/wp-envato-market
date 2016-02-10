@@ -461,10 +461,11 @@ if ( ! class_exists( 'Envato_Market_Items' ) ) :
 		 * Normalizes a string to do a value check against.
 		 *
 		 * Strip all HTML tags including script and style & then decode the
-		 * HTML entities so `&amp;` will equal `&` in the value check. This
-		 * is required becuase some themes & plugins add a link to the Author
-		 * field or ambersands to the names, which will not match the saved
-		 * value in the database causing a false negative.
+		 * HTML entities so `&amp;` will equal `&` in the value check and
+		 * finally lower case the entire string. This is required becuase some
+		 * themes & plugins add a link to the Author field or ambersands to the
+		 * names, or change the case of their files or names, which will not match
+		 * the saved value in the database causing a false negative.
 		 *
 		 * @since 1.0.0
 		 *
@@ -472,7 +473,7 @@ if ( ! class_exists( 'Envato_Market_Items' ) ) :
 		 * @return string
 		 */
 		public function normalize( $string ) {
-			return html_entity_decode( wp_strip_all_tags( $string ) );
+			return strtolower( html_entity_decode( wp_strip_all_tags( $string ) ) );
 		}
 
 		/**

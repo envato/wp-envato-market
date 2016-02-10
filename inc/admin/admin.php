@@ -199,11 +199,13 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 		 * @codeCoverageIgnore
 		 */
 		public function maybe_delete_transients() {
-			if ( isset( $_POST['_wpnonce'] ) && ! wp_verify_nonce( $_POST['_wpnonce'], envato_market()->get_slug() . '-options' ) ) {
-		 		wp_die( __( 'You do not have sufficient permissions to delete transients.', 'envato-market' ) );
-			}
-
 			if ( isset( $_POST[ envato_market()->get_option_name() ] ) ) {
+
+				// Nonce check.
+				if ( isset( $_POST['_wpnonce'] ) && ! wp_verify_nonce( $_POST['_wpnonce'], envato_market()->get_slug() . '-options' ) ) {
+		 			wp_die( __( 'You do not have sufficient permissions to delete transients.', 'envato-market' ) );
+				}
+
 				self::delete_transients();
 			}
 		}

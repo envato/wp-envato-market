@@ -167,6 +167,7 @@ module.exports = function( grunt ) {
 					'!.*',
 					'!.*/**',
 					'!.DS_Store',
+					'!code_of_conduct.md',
 					'!composer.json',
 					'!contributing.md',
 					'!dev-lib/**',

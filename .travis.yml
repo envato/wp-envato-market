@@ -12,16 +12,13 @@ env:
   - WP_VERSION=latest WP_MULTISITE=0
   - WP_VERSION=latest WP_MULTISITE=1
 
-before_script:
+install:
   - export DEV_LIB_PATH=dev-lib
   - if [ ! -e "$DEV_LIB_PATH" ] && [ -L .travis.yml ]; then export DEV_LIB_PATH=$( dirname $( readlink .travis.yml ) ); fi
-  - source $DEV_LIB_PATH/travis.before_script.sh
-  - export LIMIT_TRAVIS_PR_CHECK_SCOPE=all
-  - export WPCS_GIT_TREE=develop
-  - export PATH_INCLUDES='*.* css inc js sass'
+  - source $DEV_LIB_PATH/travis.install.sh
 
 script:
-  - $DEV_LIB_PATH/travis.script.sh
+  - source $DEV_LIB_PATH/travis.script.sh
 
 after_script:
-  - $DEV_LIB_PATH/travis.after_script.sh
+  - source $DEV_LIB_PATH/travis.after_script.sh
