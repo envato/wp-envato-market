@@ -12,3 +12,7 @@ npm-debug.log
 
 # Build tools
 /dev-lib/
+
+# Composer
+composer.lock
+/vendor/

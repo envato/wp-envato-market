@@ -1,7 +1,7 @@
 {
 	"name": "Envato Market",
 	"slug": "envato-market",
-	"version": "1.0.0-beta",
+	"version": "1.0.0-RC1",
 	"author": "<a href=\"http://valendesigns.com/\">Derek Herman</a>",
 	"author_profile": "//profiles.wordpress.org/valendesigns",
 	"contributors": {
@@ -25,7 +25,7 @@
 	"tags": {},
 	"donate_link": "",
 	"banners": {
-		"low": "https://envato.github.io/wp-envato-market/dist/banner-772x250.png",
-		"high": ""
+		"low": "https://envato.github.io/wp-envato-market/dist/banner-772x250.jpg",
+		"high": "https://envato.github.io/wp-envato-market/dist/banner-1544x500.jpg"
 	}
 }
