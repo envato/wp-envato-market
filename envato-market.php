@@ -7,7 +7,7 @@
  * Author: Derek Herman
  * Author URI: https://valendesigns.com/
  * Requires at least: 4.2
- * Tested up to: 4.3
+ * Tested up to: 4.4
  * Text Domain: envato-market
  * Domain Path: /languages/
  *
