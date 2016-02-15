@@ -332,19 +332,19 @@ if ( ! class_exists( 'Envato_Market_API' ) && class_exists( 'Envato_Market' ) ) 
 
 			return array(
 				'id' => $plugin['id'],
-				'name' => $plugin['wordpress_plugin_metadata']['plugin_name'],
-				'author' => $plugin['wordpress_plugin_metadata']['author'],
-				'version' => $plugin['wordpress_plugin_metadata']['version'],
+				'name' => ( isset( $plugin['wordpress_plugin_metadata']['plugin_name'] ) ? $plugin['wordpress_plugin_metadata']['plugin_name'] : NULL ),
+				'author' => ( isset( $plugin['wordpress_plugin_metadata']['author'] ) ? $plugin['wordpress_plugin_metadata']['author'] : NULL ),
+				'version' => ( isset( $plugin['wordpress_plugin_metadata']['version'] ) ? $plugin['wordpress_plugin_metadata']['version'] : NULL ),
 				'description' => self::remove_non_unicode( $plugin['wordpress_plugin_metadata']['description'] ),
-				'url' => $plugin['url'],
-				'author_url' => $plugin['author_url'],
-				'thumbnail_url' => $plugin['thumbnail_url'],
-				'landscape_url' => ( $has_landscape ? $plugin['previews']['landscape_preview']['landscape_url'] : '' ),
+				'url' => ( isset( $plugin['url'] ) ? $plugin['url'] : NULL ),
+				'author_url' => ( isset( $plugin['author_url'] ) ? $plugin['author_url'] : NULL ),
+				'thumbnail_url' => ( isset( $plugin['thumbnail_url'] ) ? $plugin['thumbnail_url'] : NULL ),
+				'landscape_url' => ( isset( $plugin['previews']['landscape_preview']['landscape_url'] ) ? $plugin['previews']['landscape_preview']['landscape_url'] : NULL ),
 				'requires' => $requires,
 				'tested' => $tested,
-				'number_of_sales' => $plugin['number_of_sales'],
-				'updated_at' => $plugin['updated_at'],
-				'rating' => $plugin['rating'],
+				'number_of_sales' => ( isset( $plugin['number_of_sales'] ) ? $plugin['number_of_sales'] : NULL ),
+				'updated_at' => ( isset( $plugin['updated_at'] ) ? $plugin['updated_at'] : NULL ),
+				'rating' => ( isset( $plugin['rating'] ) ? $plugin['rating'] : NULL ),
 			);
 		}
 
