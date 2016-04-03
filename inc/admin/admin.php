@@ -18,6 +18,7 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 
 		/**
 		 * Action nonce.
+		 *
 		 * @type string
 		 */
 		const AJAX_ACTION = 'envato_market';

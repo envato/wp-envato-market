@@ -5,6 +5,10 @@
 	<rule ref="WordPress-Core" />
 	<rule ref="WordPress-Docs" />
 
+	<rule ref="WordPress.NamingConventions.ValidVariableName.NotSnakeCase">
+		<severity>0</severity>
+	</rule>
+
 	<exclude-pattern>*/dev-lib/*</exclude-pattern>
 	<exclude-pattern>*/node_modules/*</exclude-pattern>
 	<exclude-pattern>*/tests/*</exclude-pattern>

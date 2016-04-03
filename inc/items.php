@@ -334,7 +334,7 @@ if ( ! class_exists( 'Envato_Market_Items' ) ) :
 			if ( 'plugin_information' === $action && isset( $args->slug ) ) {
 				$installed = array_merge( self::$plugins['active'], self::$plugins['installed'] );
 				foreach ( $installed as $slug => $plugin ) {
-					if ( $args->slug === dirname( $slug ) ) {
+					if ( dirname( $slug ) === $args->slug ) {
 						$response = new stdClass();
 						$response->slug = $args->slug;
 						$response->plugin = $slug;
