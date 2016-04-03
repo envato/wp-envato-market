@@ -285,7 +285,6 @@ module.exports = function( grunt ) {
 	] );
 
 	grunt.registerTask( 'deploy', [
-		'dev',
 		'copy',
 		'compress',
 		'clean'
