@@ -11,7 +11,7 @@ if ( ! class_exists( 'Envato_Market_Github' ) ) :
 	 * Creates the connection between Github to install & update the Envato Market plugin.
 	 *
 	 * @class Envato_Market_Github
-	 * @version 1.0.0
+	 * @version 1.0.1
 	 * @since 1.0.0
 	 */
 	class Envato_Market_Github {
@@ -112,6 +112,7 @@ if ( ! class_exists( 'Envato_Market_Github' ) ) :
 			add_filter( 'site_transient_update_plugins', array( $this, 'update_state' ) );
 			add_filter( 'transient_update_plugins', array( $this, 'update_state' ) );
 			add_action( 'admin_notices', array( $this, 'notice' ) );
+			add_action( 'wp_ajax_envato_market_dismiss_notice', array( $this, 'dismiss_notice' ) );
 		}
 
 		/**
@@ -252,6 +253,7 @@ if ( ! class_exists( 'Envato_Market_Github' ) ) :
 		 * Admin notices.
 		 *
 		 * @since 1.0.0
+		 * @updated 1.0.1
 		 *
 		 * @return string
 		 */
@@ -298,10 +300,46 @@ if ( ! class_exists( 'Envato_Market_Github' ) ) :
 				);
 			}
 
-			if ( isset( $message ) ) {
-				echo '<div class="updated notice is-dismissible"><p>' . wp_kses_post( $message ) . '</p></div>' . "\n";
+			if ( isset( $message ) && empty( get_option( 'envato-market-notice-dismissed' ) ) ) {
+    			?>
+
+    			<div class="updated envato-market-notice notice is-dismissible"><p><?php echo wp_kses_post( $message ); ?></p></div>
+
+    			<script>
+
+                                jQuery(document).ready(function( $ ) {
+
+					$(document).on( 'click', '.envato-market-notice .notice-dismiss', function() {
+					
+						jQuery.ajax({
+							url: ajaxurl,
+							data: {
+								action: 'envato_market_dismiss_notice'
+							}
+						});
+					
+					});
+				
+				});
+
+			</script>
+
+    			<?php
 			}
 		}
+
+		/**
+		 * Dismiss admin notice.
+		 *
+		 * @since 1.0.1
+		 */
+                public function dismiss_notice() {
+                	
+			update_option('envato-market-notice-dismissed', 1);
+			
+			wp_die();
+
+                }
 	}
 
 	if ( ! function_exists( 'envato_market_github' ) ) :
