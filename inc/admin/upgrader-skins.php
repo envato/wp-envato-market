@@ -59,7 +59,7 @@ if ( ! class_exists( 'Envato_Market_Theme_Installer_Skin' ) ) :
 				}
 
 				if ( current_user_can( 'manage_network_themes' ) ) {
-					$install_actions['network_enable'] = '<a href="' . esc_url( network_admin_url( wp_nonce_url( 'themes.php?action=enable&amp;theme=' . urlencode( $stylesheet ) .'&amp;paged=1&amp;s', 'enable-theme_' . $stylesheet ) ) ) . '" target="_parent">' . __( 'Network Enable', 'envato-market' ) . '</a>';
+					$install_actions['network_enable'] = '<a href="' . esc_url( network_admin_url( wp_nonce_url( 'themes.php?action=enable&amp;theme=' . urlencode( $stylesheet ) . '&amp;paged=1&amp;s', 'enable-theme_' . $stylesheet ) ) ) . '" target="_parent">' . __( 'Network Enable', 'envato-market' ) . '</a>';
 				}
 			}
 

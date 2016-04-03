@@ -390,7 +390,7 @@ if ( ! class_exists( 'Envato_Market_Items' ) ) :
 					}
 				}
 				self::process_themes( $themes );
-			} else if ( true === $use_cache ) {
+			} elseif ( true === $use_cache ) {
 				self::process_themes( self::$themes['purchased'] );
 			}
 		}
@@ -426,7 +426,7 @@ if ( ! class_exists( 'Envato_Market_Items' ) ) :
 					}
 				}
 				self::process_plugins( $plugins, $args );
-			} else if ( true === $use_cache ) {
+			} elseif ( true === $use_cache ) {
 				self::process_plugins( self::$plugins['purchased'], $args );
 			}
 		}

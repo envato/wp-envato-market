@@ -295,7 +295,7 @@ if ( ! class_exists( 'Envato_Market_Github' ) ) :
 					'<a href="' . esc_url( $activate_url ) . '">',
 					'</a>'
 				);
-			} else if ( 'install' === $state ) {
+			} elseif ( 'install' === $state ) {
 				$install_url = add_query_arg( array(
 					'action' => 'install-plugin',
 					'plugin' => $slug,
