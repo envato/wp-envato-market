@@ -180,7 +180,8 @@ module.exports = function( grunt ) {
 					'!phpunit.xml.dist',
 					'!readme.md',
 					'!sass/**',
-					'!tests/**'
+					'!tests/**',
+					'!vendor/**'
 				],
 				dest: 'dist/<%= pkg.name %>',
 				expand: true,
