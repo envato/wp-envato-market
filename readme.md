@@ -5,8 +5,8 @@ WordPress Theme & Plugin management for the Envato Market.
 
 **Contributors:** [valendesigns](https://profiles.wordpress.org/valendesigns)  
 **Requires at least:** 4.2  
-**Tested up to:** 4.4  
-**Stable tag:** 1.0.0-RC1  
+**Tested up to:** 4.5  
+**Stable tag:** 1.0.0-RC2  
 **License:** [GPLv2 or later](http://www.gnu.org/licenses/gpl-2.0.html)  
 
 [![Build Status](https://travis-ci.org/envato/wp-envato-market.svg?branch=master)](https://travis-ci.org/envato/wp-envato-market) [![Coverage Status](https://coveralls.io/repos/envato/wp-envato-market/badge.svg?branch=master)](https://coveralls.io/github/envato/wp-envato-market) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com) [![devDependency Status](https://david-dm.org/envato/wp-envato-market/dev-status.svg)](https://david-dm.org/envato/wp-envato-market#info=devDependencies) 
