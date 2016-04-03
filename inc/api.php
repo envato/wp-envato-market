@@ -11,7 +11,7 @@ if ( ! class_exists( 'Envato_Market_API' ) && class_exists( 'Envato_Market' ) ) 
 	 * Creates the Envato API connection.
 	 *
 	 * @class Envato_Market_API
-	 * @version 1.0.0normalize_theme
+	 * @version 1.0.0
 	 * @since 1.0.0
 	 */
 	class Envato_Market_API {
@@ -264,14 +264,14 @@ if ( ! class_exists( 'Envato_Market_API' ) && class_exists( 'Envato_Market' ) ) 
 		public function normalize_theme( $theme ) {
 			return array(
 				'id' => $theme['id'],
-				'name' => ( isset( $theme['wordpress_theme_metadata']['theme_name'] ) ? $theme['wordpress_theme_metadata']['theme_name'] : NULL ),
-				'author' => ( isset( $theme['wordpress_theme_metadata']['author_name'] ) ? $theme['wordpress_theme_metadata']['author_name'] : NULL ),
-				'version' => ( isset( $theme['wordpress_theme_metadata']['version'] ) ? $theme['wordpress_theme_metadata']['version'] : NULL ),
+				'name' => ( ! empty( $theme['wordpress_theme_metadata']['theme_name'] ) ? $theme['wordpress_theme_metadata']['theme_name'] : '' ),
+				'author' => ( ! empty( $theme['wordpress_theme_metadata']['author_name'] ) ? $theme['wordpress_theme_metadata']['author_name'] : '' ),
+				'version' => ( ! empty( $theme['wordpress_theme_metadata']['version'] ) ? $theme['wordpress_theme_metadata']['version'] : '' ),
 				'description' => self::remove_non_unicode( $theme['wordpress_theme_metadata']['description'] ),
-				'url' => ( isset( $theme['url'] ) ? $theme['url'] : NULL ),
-				'author_url' => ( isset( $theme['author_url'] ) ? $theme['author_url'] : NULL ),
-				'thumbnail_url' => ( isset( $theme['thumbnail_url'] ) ? $theme['thumbnail_url'] : NULL ),
-				'rating' => ( isset( $theme['rating'] ) ? $theme['rating'] : NULL ),
+				'url' => ( ! empty( $theme['url'] ) ? $theme['url'] : '' ),
+				'author_url' => ( ! empty( $theme['author_url'] ) ? $theme['author_url'] : '' ),
+				'thumbnail_url' => ( ! empty( $theme['thumbnail_url'] ) ? $theme['thumbnail_url'] : '' ),
+				'rating' => ( ! empty( $theme['rating'] ) ? $theme['rating'] : '' ),
 			);
 		}
 
@@ -327,24 +327,21 @@ if ( ! class_exists( 'Envato_Market_API' ) && class_exists( 'Envato_Market' ) ) 
 				}
 			}
 
-			// This may not exist.
-			$has_landscape = ! empty( $plugin['previews']['landscape_preview']['landscape_url'] );
-
 			return array(
 				'id' => $plugin['id'],
-				'name' => ( isset( $plugin['wordpress_plugin_metadata']['plugin_name'] ) ? $plugin['wordpress_plugin_metadata']['plugin_name'] : NULL ),
-				'author' => ( isset( $plugin['wordpress_plugin_metadata']['author'] ) ? $plugin['wordpress_plugin_metadata']['author'] : NULL ),
-				'version' => ( isset( $plugin['wordpress_plugin_metadata']['version'] ) ? $plugin['wordpress_plugin_metadata']['version'] : NULL ),
+				'name' => ( ! empty( $plugin['wordpress_plugin_metadata']['plugin_name'] ) ? $plugin['wordpress_plugin_metadata']['plugin_name'] : '' ),
+				'author' => ( ! empty( $plugin['wordpress_plugin_metadata']['author'] ) ? $plugin['wordpress_plugin_metadata']['author'] : '' ),
+				'version' => ( ! empty( $plugin['wordpress_plugin_metadata']['version'] ) ? $plugin['wordpress_plugin_metadata']['version'] : '' ),
 				'description' => self::remove_non_unicode( $plugin['wordpress_plugin_metadata']['description'] ),
-				'url' => ( isset( $plugin['url'] ) ? $plugin['url'] : NULL ),
-				'author_url' => ( isset( $plugin['author_url'] ) ? $plugin['author_url'] : NULL ),
-				'thumbnail_url' => ( isset( $plugin['thumbnail_url'] ) ? $plugin['thumbnail_url'] : NULL ),
-				'landscape_url' => ( isset( $plugin['previews']['landscape_preview']['landscape_url'] ) ? $plugin['previews']['landscape_preview']['landscape_url'] : NULL ),
+				'url' => ( ! empty( $plugin['url'] ) ? $plugin['url'] : '' ),
+				'author_url' => ( ! empty( $plugin['author_url'] ) ? $plugin['author_url'] : '' ),
+				'thumbnail_url' => ( ! empty( $plugin['thumbnail_url'] ) ? $plugin['thumbnail_url'] : '' ),
+				'landscape_url' => ( ! empty( $plugin['previews']['landscape_preview']['landscape_url'] ) ? $plugin['previews']['landscape_preview']['landscape_url'] : '' ),
 				'requires' => $requires,
 				'tested' => $tested,
-				'number_of_sales' => ( isset( $plugin['number_of_sales'] ) ? $plugin['number_of_sales'] : NULL ),
-				'updated_at' => ( isset( $plugin['updated_at'] ) ? $plugin['updated_at'] : NULL ),
-				'rating' => ( isset( $plugin['rating'] ) ? $plugin['rating'] : NULL ),
+				'number_of_sales' => ( ! empty( $plugin['number_of_sales'] ) ? $plugin['number_of_sales'] : '' ),
+				'updated_at' => ( ! empty( $plugin['updated_at'] ) ? $plugin['updated_at'] : '' ),
+				'rating' => ( ! empty( $plugin['rating'] ) ? $plugin['rating'] : '' ),
 			);
 		}
 
