@@ -11,7 +11,7 @@ if ( isset( $_GET['action'] ) ) {
 
 	if ( 'install-plugin' === $_GET['action'] ) {
 		Envato_Market_Admin::install_plugin( $id );
-	} else if ( 'install-theme' === $_GET['action'] ) {
+	} elseif ( 'install-theme' === $_GET['action'] ) {
 		Envato_Market_Admin::install_theme( $id );
 	}
 } else {

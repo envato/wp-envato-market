@@ -25,7 +25,7 @@ $plugins = envato_market()->items()->plugins( 'purchased' );
 	} else {
 		$theme_class[] = 'hidden';
 	}
-	echo '<a href="#themes" data-id="theme" class="nav-tab ' . esc_attr( implode( ' ', $theme_class ) ) . '">' . esc_html__( 'Themes', 'envato-market' ). '</a>';
+	echo '<a href="#themes" data-id="theme" class="nav-tab ' . esc_attr( implode( ' ', $theme_class ) ) . '">' . esc_html__( 'Themes', 'envato-market' ) . '</a>';
 
 	// Plugins tab.
 	$plugin_class = array();
@@ -39,7 +39,7 @@ $plugins = envato_market()->items()->plugins( 'purchased' );
 	} else {
 		$plugin_class[] = 'hidden';
 	}
-	echo '<a href="#plugins" data-id="plugin" class="nav-tab ' . esc_attr( implode( ' ', $plugin_class ) ) . '">' . esc_html__( 'Plugins', 'envato-market' ). '</a>';
+	echo '<a href="#plugins" data-id="plugin" class="nav-tab ' . esc_attr( implode( ' ', $plugin_class ) ) . '">' . esc_html__( 'Plugins', 'envato-market' ) . '</a>';
 
 	// Settings tab.
 	echo '<a href="#settings" class="nav-tab ' . esc_attr( 'settings' === $tab || empty( $tab ) ? 'nav-tab-active' : '' ) . '">' . esc_html__( 'Settings', 'envato-market' ) . '</a>';

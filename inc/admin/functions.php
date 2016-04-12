@@ -101,7 +101,7 @@ function envato_market_themes_column( $group = 'install' ) {
 			$customize_url .= '?theme=' . urlencode( $slug );
 			$customize_url .= '&return=' . urlencode( envato_market()->get_page_url() . '#themes' );
 			$actions['customize'] = '<a href="' . esc_url( $customize_url ) . '" class="button button-primary load-customize hide-if-no-customize"><span aria-hidden="true">' . __( 'Customize', 'envato-market' ) . '</span><span class="screen-reader-text">' . sprintf( __( 'Customize &#8220;%s&#8221;', 'envato-market' ), $name ) . '</span></a>';
-		} else if ( 'installed' === $group ) {
+		} elseif ( 'installed' === $group ) {
 			$can_activate = true;
 
 			// @codeCoverageIgnoreStart
@@ -114,7 +114,7 @@ function envato_market_themes_column( $group = 'install' ) {
 				}
 
 				if ( current_user_can( 'manage_network_themes' ) ) {
-					$actions['network_enable'] = '<a href="' . esc_url( network_admin_url( wp_nonce_url( 'themes.php?action=enable&amp;theme=' . urlencode( $slug ) .'&amp;paged=1&amp;s', 'enable-theme_' . $slug ) ) ) . '" class="button"><span aria-hidden="true">' . __( 'Network Enable', 'envato-market' ) . '</span><span class="screen-reader-text">' . sprintf( __( 'Network Enable &#8220;%s&#8221;', 'envato-market' ), $name ) . '</span></a>';
+					$actions['network_enable'] = '<a href="' . esc_url( network_admin_url( wp_nonce_url( 'themes.php?action=enable&amp;theme=' . urlencode( $slug ) . '&amp;paged=1&amp;s', 'enable-theme_' . $slug ) ) ) . '" class="button"><span aria-hidden="true">' . __( 'Network Enable', 'envato-market' ) . '</span><span class="screen-reader-text">' . sprintf( __( 'Network Enable &#8220;%s&#8221;', 'envato-market' ), $name ) . '</span></a>';
 				}
 			}
 			// @codeCoverageIgnoreEnd
@@ -137,7 +137,7 @@ function envato_market_themes_column( $group = 'install' ) {
 					$actions['customize_preview'] = '<a href="' . esc_url( $preview_url ) . '" class="button button-primary load-customize hide-if-no-customize"><span aria-hidden="true">' . __( 'Live Preview', 'envato-market' ) . '</span><span class="screen-reader-text">' . sprintf( __( 'Live Preview &#8220;%s&#8221;', 'envato-market' ), $name ) . '</span></a>';
 				}
 			}
-		} else if ( 'install' === $group && current_user_can( 'install_themes' ) ) {
+		} elseif ( 'install' === $group && current_user_can( 'install_themes' ) ) {
 			// Install link.
 			$install_link = add_query_arg( array(
 				'page'   => envato_market()->get_slug(),
@@ -146,7 +146,7 @@ function envato_market_themes_column( $group = 'install' ) {
 			), self_admin_url( 'admin.php' ) );
 
 			$actions['install'] = '
-			<a href="' .  wp_nonce_url( $install_link, 'install-theme_' . $theme['id'] ) . '" class="button button-primary">
+			<a href="' . wp_nonce_url( $install_link, 'install-theme_' . $theme['id'] ) . '" class="button button-primary">
 				<span aria-hidden="true">' . __( 'Install', 'envato-market' ) . '</span>
 				<span class="screen-reader-text">' . sprintf( __( 'Install %s', 'envato-market' ), $name ) . '</span>
 			</a>';
@@ -290,11 +290,11 @@ function envato_market_plugins_column( $group = 'install' ) {
 			), self_admin_url( 'plugins.php' ) );
 
 			$actions['deactivate'] = '
-			<a href="' .  wp_nonce_url( $deactivate_link, 'deactivate-plugin_' . $slug ) . '" class="button">
+			<a href="' . wp_nonce_url( $deactivate_link, 'deactivate-plugin_' . $slug ) . '" class="button">
 				<span aria-hidden="true">' . __( 'Deactivate', 'envato-market' ) . '</span>
 				<span class="screen-reader-text">' . sprintf( __( 'Deactivate %s', 'envato-market' ), $name ) . '</span>
 			</a>';
-		} else if ( 'installed' === $group ) {
+		} elseif ( 'installed' === $group ) {
 			if ( ! is_multisite() && current_user_can( 'delete_plugins' ) ) {
 				// Delete link.
 				$delete_link = add_query_arg( array(
@@ -303,7 +303,7 @@ function envato_market_plugins_column( $group = 'install' ) {
 				), self_admin_url( 'plugins.php' ) );
 
 				$actions['delete'] = '
-				<a href="' .  wp_nonce_url( $delete_link, 'bulk-plugins' ) . '" class="button-delete">
+				<a href="' . wp_nonce_url( $delete_link, 'bulk-plugins' ) . '" class="button-delete">
 					<span aria-hidden="true">' . __( 'Delete', 'envato-market' ) . '</span>
 					<span class="screen-reader-text">' . sprintf( __( 'Delete %s', 'envato-market' ), $name ) . '</span>
 				</a>';
@@ -317,7 +317,7 @@ function envato_market_plugins_column( $group = 'install' ) {
 				), self_admin_url( 'plugins.php' ) );
 
 				$actions['activate'] = '
-				<a href="' .  wp_nonce_url( $activate_link, 'activate-plugin_' . $slug ) . '" class="button">
+				<a href="' . wp_nonce_url( $activate_link, 'activate-plugin_' . $slug ) . '" class="button">
 					<span aria-hidden="true">' . __( 'Activate', 'envato-market' ) . '</span>
 					<span class="screen-reader-text">' . sprintf( __( 'Activate %s', 'envato-market' ), $name ) . '</span>
 				</a>';
@@ -343,7 +343,7 @@ function envato_market_plugins_column( $group = 'install' ) {
 				}
 			}
 			// @codeCoverageIgnoreEnd
-		} else if ( 'install' === $group && current_user_can( 'install_plugins' ) ) {
+		} elseif ( 'install' === $group && current_user_can( 'install_plugins' ) ) {
 			// Install link.
 			$install_link = add_query_arg( array(
 				'page'   => envato_market()->get_slug(),
@@ -352,7 +352,7 @@ function envato_market_plugins_column( $group = 'install' ) {
 			), self_admin_url( 'admin.php' ) );
 
 			$actions['install'] = '
-			<a href="' .  wp_nonce_url( $install_link, 'install-plugin_' . $plugin['id'] ) . '" class="button button-primary">
+			<a href="' . wp_nonce_url( $install_link, 'install-plugin_' . $plugin['id'] ) . '" class="button button-primary">
 				<span aria-hidden="true">' . __( 'Install', 'envato-market' ) . '</span>
 				<span class="screen-reader-text">' . sprintf( __( 'Install %s', 'envato-market' ), $name ) . '</span>
 			</a>';

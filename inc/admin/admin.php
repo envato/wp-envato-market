@@ -18,6 +18,7 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 
 		/**
 		 * Action nonce.
+		 *
 		 * @type string
 		 */
 		const AJAX_ACTION = 'envato_market';
@@ -358,8 +359,8 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 			$version = envato_market()->get_version();
 			$plugin_url = envato_market()->get_plugin_url();
 
-			wp_enqueue_script( $slug, $plugin_url . 'js/envato-market' . $min. '.js', array( 'jquery', 'jquery-ui-dialog', 'wp-util' ), $version, true );
-			wp_enqueue_script( $slug . '-updates', $plugin_url . 'js/updates' . $min. '.js', array( 'jquery', 'updates', 'wp-a11y', 'wp-util' ), $version, true );
+			wp_enqueue_script( $slug, $plugin_url . 'js/envato-market' . $min . '.js', array( 'jquery', 'jquery-ui-dialog', 'wp-util' ), $version, true );
+			wp_enqueue_script( $slug . '-updates', $plugin_url . 'js/updates' . $min . '.js', array( 'jquery', 'updates', 'wp-a11y', 'wp-util' ), $version, true );
 
 			// Script data array.
 			$exports = array(
@@ -629,7 +630,7 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 					$themes_notice = $this->authorize_themes();
 					if ( 'success-no-themes' === $themes_notice ) {
 						$themes_empty = true;
-					} else if ( 'error' === $themes_notice ) {
+					} elseif ( 'error' === $themes_notice ) {
 						$failed = true;
 					}
 				}
@@ -638,7 +639,7 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 					$plugins_notice = $this->authorize_plugins();
 					if ( 'success-no-plugins' === $plugins_notice ) {
 						$plugins_empty = true;
-					} else if ( 'error' === $plugins_notice ) {
+					} elseif ( 'error' === $plugins_notice ) {
 						$failed = true;
 					}
 				}
@@ -726,7 +727,7 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 
 			if ( is_wp_error( $response ) || empty( $response ) ) {
 				$notice = 'error';
-			} else if ( empty( $response['results'] ) ) {
+			} elseif ( empty( $response['results'] ) ) {
 				$notice = 'success-no-' . $type;
 			} else {
 				shuffle( $response['results'] );
@@ -943,11 +944,11 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 				}
 
 				wp_send_json_success( $status );
-			} else if ( is_wp_error( $result ) ) {
+			} elseif ( is_wp_error( $result ) ) {
 				$status['error'] = $result->get_error_message();
 		 		wp_send_json_error( $status );
 
-		 	} else if ( is_bool( $result ) && ! $result ) {
+		 	} elseif ( is_bool( $result ) && ! $result ) {
 				$status['errorCode'] = 'unable_to_connect_to_filesystem';
 				$status['error'] = __( 'Unable to connect to the filesystem. Please confirm your credentials.', 'envato-market' );
 
@@ -970,12 +971,12 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 			if ( ! check_ajax_referer( self::AJAX_ACTION, 'nonce', false ) ) {
 				status_header( 400 );
 				wp_send_json_error( 'bad_nonce' );
-			} else if ( 'POST' !== $_SERVER['REQUEST_METHOD'] ) {
+			} elseif ( 'POST' !== $_SERVER['REQUEST_METHOD'] ) {
 				status_header( 405 );
 				wp_send_json_error( 'bad_method' );
-			} else if ( empty( $_POST['token'] ) ) {
+			} elseif ( empty( $_POST['token'] ) ) {
 				wp_send_json_error( array( 'message' => __( 'The Token is missing.', 'envato-market' ) ) );
-			} else if ( empty( $_POST['id'] ) ) {
+			} elseif ( empty( $_POST['id'] ) ) {
 				wp_send_json_error( array( 'message' => __( 'The Item ID is missing.', 'envato-market' ) ) );
 			}
 
@@ -1067,10 +1068,10 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 			if ( ! check_ajax_referer( self::AJAX_ACTION, 'nonce', false ) ) {
 				status_header( 400 );
 				wp_send_json_error( 'bad_nonce' );
-			} else if ( 'POST' !== $_SERVER['REQUEST_METHOD'] ) {
+			} elseif ( 'POST' !== $_SERVER['REQUEST_METHOD'] ) {
 				status_header( 405 );
 				wp_send_json_error( 'bad_method' );
-			} else if ( empty( $_POST['id'] ) ) {
+			} elseif ( empty( $_POST['id'] ) ) {
 				wp_send_json_error( array( 'message' => __( 'The Item ID is missing.', 'envato-market' ) ) );
 			}
 
