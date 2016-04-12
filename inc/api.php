@@ -117,7 +117,7 @@ if ( ! class_exists( 'Envato_Market_API' ) && class_exists( 'Envato_Market' ) ) 
 			$defaults = array(
 				'headers' => array(
 					'Authorization' => 'Bearer ' . $this->token,
-					'User-Agent' => 'Envato Market WordPress Plugin (' . envato_market()->get_version() . ')',
+					'User-Agent' => 'WordPress - Envato Market ' . envato_market()->get_version(),
 				),
 				'timeout' => 20,
 			);
