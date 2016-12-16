@@ -225,12 +225,13 @@ if ( ! class_exists( 'Envato_Market_Github' ) ) :
 		 * @return string
 		 */
 		public function state() {
+			$state = '';
 			$option = 'envato_market_state';
 			$active_plugins = apply_filters( 'active_plugins', get_option( 'active_plugins' ) );
 			if ( in_array( 'envato-market/envato-market.php', $active_plugins ) ) {
 				$state = 'activated';
 				update_option( $option, $state );
-			} else {
+			} elseif ( function_exists( 'get_plugins' ) ) {
 				$state = 'install';
 				update_option( $option, $state );
 				foreach ( array_keys( get_plugins() ) as $plugin ) {
