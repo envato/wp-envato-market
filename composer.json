@@ -1,8 +1,22 @@
 {
-	"require": {
-		"php": ">=5.2.7"
-	},
-	"require-dev": {
-		"satooshi/php-coveralls": "dev-master"
-	}
+    "name": "celorodovalho/wp-envato-market",
+    "description": "WordPress Theme & Plugin management for the Envato Market.",
+    "type": "wordpress-plugin",
+    "dist": {
+      "url": "git@github.com:celorodovalho/wp-envato-market.git",
+      "type": "git"
+    },
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "Evanto",
+            "email": "evanto@evanto.com"
+        }
+    ],
+    "require": {
+	"php": ">=5.2.7"
+    },
+    "require-dev": {
+	"satooshi/php-coveralls": "dev-master"
+    }
 }
