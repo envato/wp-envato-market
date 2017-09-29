@@ -150,7 +150,7 @@ window.wp = window.wp || {};
 			$message = $( '.envato-card-' + slug ).find( '.update-now' ),
 			name = $message.data( 'name' );
 
-		$message.attr( 'aria-label', wp.envato.l10n.updatingLabel.replace( '%s', name ) );
+		$message.attr( 'aria-label', wp.envato.l10n.pluginUpdatingLabel.replace( '%s', name ) );
 
 		$message.addClass( 'updating-message' );
 		if ( $message.html() !== wp.envato.l10n.updating ) {
@@ -203,7 +203,7 @@ window.wp = window.wp || {};
 			$message = $( '.envato-card-' + slug ).find( '.update-now' ),
 			name = $message.data( 'name' );
 
-		$message.attr( 'aria-label', wp.envato.l10n.updatingLabel.replace( '%s', name ) );
+		$message.attr( 'aria-label', wp.envato.l10n.pluginUpdatingLabel.replace( '%s', name ) );
 
 		$message.addClass( 'updating-message' );
 		if ( $message.html() !== wp.envato.l10n.updating ) {
@@ -261,11 +261,11 @@ window.wp = window.wp || {};
 		versionText = $updateVersion.attr( 'aria-label' ).replace( '%s', version );
 
 		$updateMessage.addClass( 'disabled' );
-		$updateMessage.attr( 'aria-label', wp.envato.l10n.updatedLabel.replace( '%s', name ) );
+		$updateMessage.attr( 'aria-label', wp.envato.l10n.pluginUpdatedLabel.replace( '%s', name ) );
 		$updateVersion.text( versionText );
 
 		$updateMessage.removeClass( 'updating-message' ).addClass( 'updated-message' );
-		$updateMessage.text( wp.envato.l10n.updated );
+		$updateMessage.text( wp.envato.l10n.themeUpdated );
 		wp.a11y.speak( wp.envato.l10n.updatedMsg );
 		$updateColumn.addClass( 'update-complete' ).delay( 1000 ).fadeOut();
 
@@ -301,11 +301,11 @@ window.wp = window.wp || {};
 		$message = $( '.envato-card-' + response.slug ).find( '.update-now' );
 
 		name = $message.data( 'name' );
-		$message.attr( 'aria-label', wp.envato.l10n.updateFailedLabel.replace( '%s', name ) );
+		$message.attr( 'aria-label', wp.envato.l10n.pluginUpdateFailedLabel.replace( '%s', name ) );
 
 		$message.removeClass( 'updating-message' );
 		$message.html( wp.envato.l10n.updateFailed.replace( '%s', response.error ) );
-		wp.a11y.speak( wp.envato.l10n.updateFailed );
+		wp.a11y.speak( wp.envato.l10n.updateFailedShort );
 
 		/*
 		 * The lock can be released since this failure was
