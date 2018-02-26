@@ -337,7 +337,7 @@ if ( ! class_exists( 'Envato_Market_API' ) && class_exists( 'Envato_Market' ) ) 
 
 			// Set the required and tested WordPress version numbers.
 			foreach ( $plugin['attributes'] as $k => $v ) {
-				if ( 'compatible-software' === $v['name'] ) {
+				if ( ! empty( $v['name'] ) && 'compatible-software' === $v['name'] && ! empty( $v['value'] ) && is_array( $v['value'] ) ) {
 					foreach ( $v['value'] as $version ) {
 						$versions[] = str_replace( 'WordPress ', '', trim( $version ) );
 					}
