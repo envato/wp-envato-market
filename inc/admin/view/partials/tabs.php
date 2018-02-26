@@ -6,8 +6,8 @@
  * @since 1.0.0
  */
 
-$tab = isset( $_GET['tab'] ) ? sanitize_key( wp_unslash( $_GET['tab'] ) ) : '';
-$themes = envato_market()->items()->themes( 'purchased' );
+$tab     = isset( $_GET['tab'] ) ? sanitize_key( wp_unslash( $_GET['tab'] ) ) : '';
+$themes  = envato_market()->items()->themes( 'purchased' );
 $plugins = envato_market()->items()->plugins( 'purchased' );
 
 ?>

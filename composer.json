@@ -3,6 +3,7 @@
 		"php": ">=5.2.7"
 	},
 	"require-dev": {
-		"satooshi/php-coveralls": "dev-master"
+		"satooshi/php-coveralls": "^2.0",
+		"squizlabs/php_codesniffer": "^3.2"
 	}
 }

@@ -29,32 +29,24 @@ We're really excited that you are interested in contributing to the Envato Marke
 You will need [Node.js](http://nodejs.org), [Grunt](http://gruntjs.com), & [PHPUnit](https://phpunit.de/getting-started.html) installed on your system. To run the unit tests you must be developing within the WordPress Core. The simplest method to get a testing environment up is by using [Varying Vagrant Vagrants](https://github.com/Varying-Vagrant-Vagrants/VVV). However, to setup manually follow these instructions:
 
 1. [Install WordPress CLI](http://wp-cli.org/#installing)
-1. Install subversion and PHP Unit ( e.g. `apt install subversion phpunit` )
+1. Install Subversion & PHP Unit ( e.g. `apt install subversion phpunit` )
 1. Install copy of WordPress core locally (e.g. in a LAMP/MAMP stack) `wp core install`
 1. Visit WordPress install in local browser (e.g. `http://local.test/wordpress/`) and complete the WordPress installation process.
 1. Checkout this repository into the wp-content/plugin/envato-market folder (not `wp-envato-market`)
 1. Install the plugin tests `wp scaffold plugin-tests envato-market` (choose skip if prompted to overwrite files)
 1. Enter plugin directory: `cd wp-content/plugins/envato-market/`
-1. Confim grunt tasks work `grunt`
+1. Install required dev packages `npm install`
+1. Install composer packages `composer install`
+1. Confim grunt tasks work `grunt` (see below for more on grunt tasks)
 1. Install phpunit test files `bash bin/install-wp-tests.sh` (enter db credentials as required)
-1. Run phpunit tests `phpunit`
+1. Run phpunit tests `phpunit` (see below for more on phpunit tests)
+1. Install the PHP Coding Standards: `composer create-project wp-coding-standards/wpcs:dev-master --no-dev` (answer `N` to overwriting .git directory)
+1. Setup PHPCS config: `vendor/bin/phpcs --config-set installed_paths wpcs`
+1. Run PHPCS tests `vendor/bin/phpcs`
 
 
-``` bash
-$ git clone git://develop.git.wordpress.org/trunk/
-```
 
-To clone this repository
-``` bash
-$ git clone --recursive git@github.com:envato/envato-market.git envato-market
-```
-
-To install packages
-
-``` bash
-# npm install -g grunt-cli
-$ npm install
-```
+### Grunt tasks:
 
 To lint:
 

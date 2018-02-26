@@ -79,7 +79,7 @@ class Tests_Envato_Market_Admin extends WP_UnitTestCase {
 		$ref->setAccessible( true );
 		$ref->setValue( null, $mock );
 
-		$options = array(
+		$options  = array(
 			'package' => 'http://sample.org/?deferred_download=1&item_id=12345',
 		);
 		$expected = array(
@@ -232,7 +232,7 @@ class Tests_Envato_Market_Admin extends WP_UnitTestCase {
 	 */
 	function test_authorization_themes_error() {
 		envato_market()->api()->token = '12345';
-		
+
 		$mock = $this->getMockBuilder( 'Envato_Market_Admin' )
 			->setMethods( array( 'authorize_total_items' ) )
 			->disableOriginalConstructor()
@@ -353,7 +353,7 @@ class Tests_Envato_Market_Admin extends WP_UnitTestCase {
 	 */
 	function test_authorize_items_themes_error_no_download() {
 		$contents = file_get_contents( TESTS_DATA_DIR . '/themes.json' );
-		$json = json_decode( $contents, true );
+		$json     = json_decode( $contents, true );
 
 		$mock = $this->getMockBuilder( 'Envato_Market_API' )
 			->setMethods( array( 'request', 'download' ) )
@@ -367,7 +367,7 @@ class Tests_Envato_Market_Admin extends WP_UnitTestCase {
 		$mock->expects( $this->any() )
 			->method( 'download' )
 			->will( $this->returnValue( false ) );
-			
+
 		// Replace private _instance reference with mock object
 		$ref = new ReflectionProperty( 'Envato_Market_API', '_instance' );
 		$ref->setAccessible( true );

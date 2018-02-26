@@ -65,7 +65,7 @@ class Tests_Envato_Market_Items extends WP_UnitTestCase {
 
 		$ref = new ReflectionProperty( 'Envato_Market_Items', 'plugins' );
 		$ref->setAccessible( true );
-		$ref->setValue( null, $plugins ); 
+		$ref->setValue( null, $plugins );
 	}
 
 	/**
@@ -73,7 +73,7 @@ class Tests_Envato_Market_Items extends WP_UnitTestCase {
 	 */
 	function test_themes() {
 		$this->assertEmpty( $this->items->themes( 'invalid' ) );
-		
+
 		// Replace private themes reference
 		$ref = new ReflectionProperty( 'Envato_Market_Items', 'themes' );
 		$ref->setAccessible( true );
@@ -91,15 +91,15 @@ class Tests_Envato_Market_Items extends WP_UnitTestCase {
 	 * @see Envato_Market_Items::update_check()
 	 */
 	function test_update_check_themes() {
-		$url = '//api.wordpress.org/themes/update-check/1.1/';
-		$request = array(
-			'body' => array( 
+		$url                  = '//api.wordpress.org/themes/update-check/1.1/';
+		$request              = array(
+			'body' => array(
 				'themes' => '{"active":"twentyfifteen","themes":{"custom":{"Name":"Custom"},"twentyfifteen":{"Name":"Twenty Fifteen"}}}',
 			),
 		);
-		$transient_name = envato_market()->get_option_name() . '_themes';
-		$themes = get_site_transient( $transient_name );
-		$_themes = $themes;
+		$transient_name       = envato_market()->get_option_name() . '_themes';
+		$themes               = get_site_transient( $transient_name );
+		$_themes              = $themes;
 		$_themes['installed'] = array(
 			'custom' => 12345,
 		);
@@ -117,15 +117,15 @@ class Tests_Envato_Market_Items extends WP_UnitTestCase {
 	 * @see Envato_Market_Items::update_check()
 	 */
 	function test_update_check_plugins() {
-		$url = '//api.wordpress.org/plugins/update-check/1.1/';
-		$request = array(
-			'body' => array( 
+		$url                   = '//api.wordpress.org/plugins/update-check/1.1/';
+		$request               = array(
+			'body' => array(
 				'plugins' => '{"plugins":{"custom\/custom.php":{"Name":"Custom"}}}',
 			),
 		);
-		$transient_name = envato_market()->get_option_name() . '_plugins';
-		$plugins = get_site_transient( $transient_name );
-		$_plugins = $plugins;
+		$transient_name        = envato_market()->get_option_name() . '_plugins';
+		$plugins               = get_site_transient( $transient_name );
+		$_plugins              = $plugins;
 		$_plugins['installed'] = array(
 			'custom/custom.php' => 12345,
 		);
@@ -145,15 +145,15 @@ class Tests_Envato_Market_Items extends WP_UnitTestCase {
 	function test_update_themes() {
 		$_themes = array(
 			array(
-				'id' => 12345,
-				'name' => 'Twenty Fifteen',
-				'author' => 'the WordPress team',
-				'version' => '10.0.0',
-				'description' => '',
-				'url' => 'http://sample.org/twentyfifteen/',
-				'author_url' => 'http://sample.org/',
+				'id'            => 12345,
+				'name'          => 'Twenty Fifteen',
+				'author'        => 'the WordPress team',
+				'version'       => '10.0.0',
+				'description'   => '',
+				'url'           => 'http://sample.org/twentyfifteen/',
+				'author_url'    => 'http://sample.org/',
 				'thumbnail_url' => 'http://sample.org/thumb.png',
-				'rating' => '',
+				'rating'        => '',
 			),
 		);
 		$options = envato_market()->get_options();
@@ -195,7 +195,7 @@ class Tests_Envato_Market_Items extends WP_UnitTestCase {
 		$ref->setValue( null, $mock );
 
 		$transient->checked = true;
-		$transient = $this->items->update_themes( $transient );
+		$transient          = $this->items->update_themes( $transient );
 		$this->assertArrayHasKey( 'theme', $transient->response['twentyfifteen'] );
 		$this->assertArrayHasKey( 'new_version', $transient->response['twentyfifteen'] );
 		$this->assertArrayHasKey( 'url', $transient->response['twentyfifteen'] );
@@ -213,23 +213,23 @@ class Tests_Envato_Market_Items extends WP_UnitTestCase {
 	function test_update_plugins() {
 		$_plugins = array(
 			array(
-				'id' => 12345,
-				'name' => 'Envato Market',
-				'author' => 'Derek Herman',
-				'version' => '10.0.0',
-				'description' => '',
-				'url' => 'http://sample.org/custom/',
-				'author_url' => 'http://sample.org/',
-				'thumbnail_url' => 'http://sample.org/thumb.png',
-				'landscape_url' => 'http://sample.org/landscape.png',
-				'requires' => '4.2',
-				'tested' => '4.4',
+				'id'              => 12345,
+				'name'            => 'Envato Market',
+				'author'          => 'Derek Herman',
+				'version'         => '10.0.0',
+				'description'     => '',
+				'url'             => 'http://sample.org/custom/',
+				'author_url'      => 'http://sample.org/',
+				'thumbnail_url'   => 'http://sample.org/thumb.png',
+				'landscape_url'   => 'http://sample.org/landscape.png',
+				'requires'        => '4.2',
+				'tested'          => '4.4',
 				'number_of_sales' => 25000,
-				'updated_at' => '',
-				'rating' => '',
+				'updated_at'      => '',
+				'rating'          => '',
 			),
 		);
-		$options = envato_market()->get_options();
+		$options  = envato_market()->get_options();
 		if ( ! isset( $options['items'] ) ) {
 			$options['items'] = array();
 		}
@@ -288,22 +288,22 @@ class Tests_Envato_Market_Items extends WP_UnitTestCase {
 	function test_plugins_api() {
 		$_plugins = array(
 			array(
-				'id' => 12345,
-				'name' => 'Envato Market',
-				'author' => 'Derek Herman',
-				'version' => '10.0.0',
-				'description' => '',
-				'url' => 'http://sample.org/custom/',
-				'author_url' => 'http://sample.org/',
-				'thumbnail_url' => 'http://sample.org/thumb.png',
-				'landscape_url' => 'http://sample.org/landscape.png',
-				'requires' => '4.2',
-				'tested' => '4.4',
+				'id'              => 12345,
+				'name'            => 'Envato Market',
+				'author'          => 'Derek Herman',
+				'version'         => '10.0.0',
+				'description'     => '',
+				'url'             => 'http://sample.org/custom/',
+				'author_url'      => 'http://sample.org/',
+				'thumbnail_url'   => 'http://sample.org/thumb.png',
+				'landscape_url'   => 'http://sample.org/landscape.png',
+				'requires'        => '4.2',
+				'tested'          => '4.4',
 				'number_of_sales' => 25000,
-				'updated_at' => '',
-				'rating' => array(
+				'updated_at'      => '',
+				'rating'          => array(
 					'rating' => 4.79,
-					'count' => 4457,
+					'count'  => 4457,
 				),
 			),
 		);
@@ -356,95 +356,95 @@ class Tests_Envato_Market_Items extends WP_UnitTestCase {
 		$plugins = array(
 			'purchased' => array(
 				array(
-					'id' => 12345,
-					'name' => 'Envato Market',
-					'author' => 'Derek Herman',
-					'version' => '10.0.0',
-					'description' => '',
-					'url' => 'http://sample.org/custom/',
-					'author_url' => 'http://sample.org/',
-					'thumbnail_url' => 'http://sample.org/thumb.png',
-					'landscape_url' => 'http://sample.org/landscape.png',
-					'requires' => '4.2',
-					'tested' => '4.4',
+					'id'              => 12345,
+					'name'            => 'Envato Market',
+					'author'          => 'Derek Herman',
+					'version'         => '10.0.0',
+					'description'     => '',
+					'url'             => 'http://sample.org/custom/',
+					'author_url'      => 'http://sample.org/',
+					'thumbnail_url'   => 'http://sample.org/thumb.png',
+					'landscape_url'   => 'http://sample.org/landscape.png',
+					'requires'        => '4.2',
+					'tested'          => '4.4',
 					'number_of_sales' => 25000,
-					'updated_at' => '',
-					'rating' => array(
+					'updated_at'      => '',
+					'rating'          => array(
 						'rating' => 4.79,
-						'count' => 4457,
+						'count'  => 4457,
 					),
 				),
 			),
-			'active' => array(),
+			'active'    => array(),
 			'installed' => array(
 				'envato-market/envato-market.php' => array(
-					'id' => 12345,
-					'name' => 'Envato Market',
-					'author' => 'Derek Herman',
-					'version' => '10.0.0',
-					'description' => '',
-					'url' => 'http://sample.org/custom/',
-					'author_url' => 'http://sample.org/',
-					'thumbnail_url' => 'http://sample.org/thumb.png',
-					'landscape_url' => 'http://sample.org/landscape.png',
-					'requires' => '4.2',
-					'tested' => '4.4',
+					'id'              => 12345,
+					'name'            => 'Envato Market',
+					'author'          => 'Derek Herman',
+					'version'         => '10.0.0',
+					'description'     => '',
+					'url'             => 'http://sample.org/custom/',
+					'author_url'      => 'http://sample.org/',
+					'thumbnail_url'   => 'http://sample.org/thumb.png',
+					'landscape_url'   => 'http://sample.org/landscape.png',
+					'requires'        => '4.2',
+					'tested'          => '4.4',
 					'number_of_sales' => 25000,
-					'updated_at' => '',
-					'rating' => array(
+					'updated_at'      => '',
+					'rating'          => array(
 						'rating' => 4.79,
-						'count' => 4457,
+						'count'  => 4457,
 					),
 				),
 			),
-			'install' => array(),
+			'install'   => array(),
 		);
-		
+
 		$expected = array(
 			'purchased' => array(
 				array(
-					'id' => 12345,
-					'name' => 'Envato Market',
-					'author' => 'Derek Herman',
-					'version' => '10.0.0',
-					'description' => '',
-					'url' => 'http://sample.org/custom/',
-					'author_url' => 'http://sample.org/',
-					'thumbnail_url' => 'http://sample.org/thumb.png',
-					'landscape_url' => 'http://sample.org/landscape.png',
-					'requires' => '4.2',
-					'tested' => '4.4',
+					'id'              => 12345,
+					'name'            => 'Envato Market',
+					'author'          => 'Derek Herman',
+					'version'         => '10.0.0',
+					'description'     => '',
+					'url'             => 'http://sample.org/custom/',
+					'author_url'      => 'http://sample.org/',
+					'thumbnail_url'   => 'http://sample.org/thumb.png',
+					'landscape_url'   => 'http://sample.org/landscape.png',
+					'requires'        => '4.2',
+					'tested'          => '4.4',
 					'number_of_sales' => 25000,
-					'updated_at' => '',
-					'rating' => array(
+					'updated_at'      => '',
+					'rating'          => array(
 						'rating' => 4.79,
-						'count' => 4457,
+						'count'  => 4457,
 					),
 				),
 			),
-			'active' => array(
+			'active'    => array(
 				'envato-market/envato-market.php' => array(
-					'id' => 12345,
-					'name' => 'Envato Market',
-					'author' => 'Derek Herman',
-					'version' => '10.0.0',
-					'description' => '',
-					'url' => 'http://sample.org/custom/',
-					'author_url' => 'http://sample.org/',
-					'thumbnail_url' => 'http://sample.org/thumb.png',
-					'landscape_url' => 'http://sample.org/landscape.png',
-					'requires' => '4.2',
-					'tested' => '4.4',
+					'id'              => 12345,
+					'name'            => 'Envato Market',
+					'author'          => 'Derek Herman',
+					'version'         => '10.0.0',
+					'description'     => '',
+					'url'             => 'http://sample.org/custom/',
+					'author_url'      => 'http://sample.org/',
+					'thumbnail_url'   => 'http://sample.org/thumb.png',
+					'landscape_url'   => 'http://sample.org/landscape.png',
+					'requires'        => '4.2',
+					'tested'          => '4.4',
 					'number_of_sales' => 25000,
-					'updated_at' => '',
-					'rating' => array(
+					'updated_at'      => '',
+					'rating'          => array(
 						'rating' => 4.79,
-						'count' => 4457,
+						'count'  => 4457,
 					),
 				),
 			),
 			'installed' => array(),
-			'install' => array(),
+			'install'   => array(),
 		);
 
 		set_site_transient( envato_market()->get_option_name() . '_plugins', $plugins );
@@ -456,7 +456,7 @@ class Tests_Envato_Market_Items extends WP_UnitTestCase {
 		$this->assertEquals( $plugins, $this->items->plugins() );
 		$this->items->rebuild_plugins( 'envato-market/envato-market.php' );
 		$this->assertEquals( $expected, $this->items->plugins() );
-		
+
 		global $wp_current_filter;
 		$wp_current_filter[] = 'deactivated_plugin';
 		$this->items->rebuild_plugins( 'envato-market/envato-market.php' );

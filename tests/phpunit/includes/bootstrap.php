@@ -69,7 +69,7 @@ function xwp_filter_active_plugins_for_phpunit( $active_plugins ) {
 	$forced_active_plugins = array();
 	if ( file_exists( WP_CONTENT_DIR . '/themes/vip/plugins/vip-init.php' ) && defined( 'WP_TEST_VIP_QUICKSTART_ACTIVATED_PLUGINS' ) ) {
 		$forced_active_plugins = preg_split( '/\s*,\s*/', WP_TEST_VIP_QUICKSTART_ACTIVATED_PLUGINS );
-	} else if ( defined( 'WP_TEST_ACTIVATED_PLUGINS' ) ) {
+	} elseif ( defined( 'WP_TEST_ACTIVATED_PLUGINS' ) ) {
 		$forced_active_plugins = preg_split( '/\s*,\s*/', WP_TEST_ACTIVATED_PLUGINS );
 	}
 	if ( ! empty( $forced_active_plugins ) ) {

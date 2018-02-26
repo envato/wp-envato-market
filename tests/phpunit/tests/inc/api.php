@@ -197,7 +197,7 @@ class Tests_Envato_Market_API extends WP_UnitTestCase {
 	 */
 	function test_item_theme() {
 		$contents = file_get_contents( TESTS_DATA_DIR . '/theme.json' );
-		$json = json_decode( $contents, true );
+		$json     = json_decode( $contents, true );
 
 		$mock = $this->getMockBuilder( 'Envato_Market_API' )
 			->setMethods( array( 'request' ) )
@@ -220,7 +220,7 @@ class Tests_Envato_Market_API extends WP_UnitTestCase {
 	 */
 	function test_item_plugin() {
 		$contents = file_get_contents( TESTS_DATA_DIR . '/plugin.json' );
-		$json = json_decode( $contents, true );
+		$json     = json_decode( $contents, true );
 
 		$mock = $this->getMockBuilder( 'Envato_Market_API' )
 			->setMethods( array( 'request' ) )
@@ -243,7 +243,7 @@ class Tests_Envato_Market_API extends WP_UnitTestCase {
 	 */
 	function test_themes() {
 		$contents = file_get_contents( TESTS_DATA_DIR . '/themes.json' );
-		$json = json_decode( $contents, true );
+		$json     = json_decode( $contents, true );
 
 		$mock = $this->getMockBuilder( 'Envato_Market_API' )
 			->setMethods( array( 'request' ) )
@@ -255,7 +255,7 @@ class Tests_Envato_Market_API extends WP_UnitTestCase {
 			->will( $this->returnValue( $json ) );
 
 		$items = $mock->themes( 548199 );
-		$item = array_shift( $items );
+		$item  = array_shift( $items );
 		$this->assertArrayHasKey( 'id', $item );
 		$this->assertArrayHasKey( 'name', $item );
 		$this->assertArrayHasKey( 'author', $item );
@@ -267,7 +267,7 @@ class Tests_Envato_Market_API extends WP_UnitTestCase {
 	 */
 	function test_plugins() {
 		$contents = file_get_contents( TESTS_DATA_DIR . '/plugins.json' );
-		$json = json_decode( $contents, true );
+		$json     = json_decode( $contents, true );
 
 		$mock = $this->getMockBuilder( 'Envato_Market_API' )
 			->setMethods( array( 'request' ) )
@@ -279,7 +279,7 @@ class Tests_Envato_Market_API extends WP_UnitTestCase {
 			->will( $this->returnValue( $json ) );
 
 		$items = $mock->plugins( 2751380 );
-		$item = array_shift( $items );
+		$item  = array_shift( $items );
 		$this->assertArrayHasKey( 'id', $item );
 		$this->assertArrayHasKey( 'name', $item );
 		$this->assertArrayHasKey( 'author', $item );

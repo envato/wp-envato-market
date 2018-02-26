@@ -225,7 +225,7 @@ if ( ! class_exists( 'Envato_Market_Github' ) ) :
 		 * @return string
 		 */
 		public function state() {
-			$option = 'envato_market_state';
+			$option         = 'envato_market_state';
 			$active_plugins = apply_filters( 'active_plugins', get_option( 'active_plugins' ) );
 			if ( in_array( 'envato-market/envato-market.php', $active_plugins ) ) {
 				$state = 'activated';
@@ -265,8 +265,8 @@ if ( ! class_exists( 'Envato_Market_Github' ) ) :
 		 */
 		public function notice() {
 			$screen = get_current_screen();
-			$slug = 'envato-market';
-			$state = get_option( 'envato_market_state' );
+			$slug   = 'envato-market';
+			$state  = get_option( 'envato_market_state' );
 			$notice = get_option( self::AJAX_ACTION );
 
 			if ( empty( $state ) ) {
@@ -284,25 +284,29 @@ if ( ! class_exists( 'Envato_Market_Github' ) ) :
 			}
 
 			if ( 'deactivated' === $state ) {
-				$activate_url = add_query_arg( array(
-					'action'   => 'activate',
-					'plugin'   => urlencode( "$slug/$slug.php" ),
-					'_wpnonce' => urlencode( wp_create_nonce( "activate-plugin_$slug/$slug.php" ) ),
-				), self_admin_url( 'plugins.php' ) );
+				$activate_url = add_query_arg(
+					array(
+						'action'   => 'activate',
+						'plugin'   => urlencode( "$slug/$slug.php" ),
+						'_wpnonce' => urlencode( wp_create_nonce( "activate-plugin_$slug/$slug.php" ) ),
+					), self_admin_url( 'plugins.php' )
+				);
 
 				$message = sprintf(
-					esc_html__( '%sActivate the Envato Market plugin%s to get updates for your ThemeForest and CodeCanyon items.', 'envato-market' ),
+					esc_html__( '%1$sActivate the Envato Market plugin%2$s to get updates for your ThemeForest and CodeCanyon items.', 'envato-market' ),
 					'<a href="' . esc_url( $activate_url ) . '">',
 					'</a>'
 				);
 			} elseif ( 'install' === $state ) {
-				$install_url = add_query_arg( array(
-					'action' => 'install-plugin',
-					'plugin' => $slug,
-				), self_admin_url( 'update.php' ) );
+				$install_url = add_query_arg(
+					array(
+						'action' => 'install-plugin',
+						'plugin' => $slug,
+					), self_admin_url( 'update.php' )
+				);
 
 				$message = sprintf(
-					esc_html__( '%sInstall the Envato Market plugin%s to get updates for your ThemeForest and CodeCanyon items.', 'envato-market' ),
+					esc_html__( '%1$sInstall the Envato Market plugin%2$s to get updates for your ThemeForest and CodeCanyon items.', 'envato-market' ),
 					'<a href="' . esc_url( wp_nonce_url( $install_url, 'install-plugin_' . $slug ) ) . '">',
 					'</a>'
 				);
