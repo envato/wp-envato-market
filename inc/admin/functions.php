@@ -174,7 +174,8 @@ function envato_market_themes_column( $group = 'install' ) {
 					<div class="column-name">
 						<h4>
 							<a href="<?php echo esc_url( $url ); ?>"><?php echo esc_html( $name ); ?></a>
-							<span class="version" aria-label="<?php esc_attr_e( 'Version %s', 'envato-market' ); ?>"><?php echo esc_html( sprintf( __( 'Version %s', 'envato-market' ), $version ) ); ?></span>
+							<span class="version"
+								  aria-label="<?php esc_attr_e( 'Version %s', 'envato-market' ); ?>"><?php echo esc_html( sprintf( __( 'Version %s', 'envato-market' ), $version ) ); ?></span>
 						</h4>
 					</div>
 					<div class="column-description">
@@ -182,27 +183,29 @@ function envato_market_themes_column( $group = 'install' ) {
 							<?php echo wp_kses_post( wpautop( $description ) ); ?>
 						</div>
 						<p class="author">
-							<cite><?php esc_html_e( 'By', 'envato-market' ); ?> <?php echo wp_kses_post( $author_link ); ?></cite>
+							<cite><?php esc_html_e( 'By', 'envato-market' ); ?><?php echo wp_kses_post( $author_link ); ?></cite>
 						</p>
 					</div>
 					<?php if ( ! empty( $update_actions ) ) { ?>
-					<div class="column-update">
-						<?php echo implode( "\n", $update_actions ); ?>
-					</div>
+						<div class="column-update">
+							<?php echo implode( "\n", $update_actions ); ?>
+						</div>
 					<?php } ?>
 				</div>
 				<div class="envato-card-bottom">
 					<div class="column-rating">
 						<?php
-						wp_star_rating(
-							array(
-								'rating' => ( $theme['rating']['rating'] / 5 * 100 ),
-								'type'   => 'percent',
-								'number' => $theme['rating']['count'],
-							)
-						);
-?>
-						<span class="num-ratings">(<?php echo esc_html( number_format_i18n( $theme['rating']['count'] ) ); ?>)</span>
+						if ( ! empty( $theme['rating'] ) && ! empty( $theme['rating']['count'] ) ) {
+							wp_star_rating(
+								array(
+									'rating' => ( $theme['rating']['rating'] / 5 * 100 ),
+									'type'   => 'percent',
+									'number' => $theme['rating']['count'],
+								)
+							);
+							?>
+							<span class="num-ratings"><?php echo esc_html( '(' . number_format_i18n( $theme['rating']['count'] ) . ')' ); ?></span>
+						<?php } ?>
 					</div>
 					<div class="column-actions">
 						<?php echo implode( "\n", $actions ); ?>
@@ -401,7 +404,8 @@ function envato_market_plugins_column( $group = 'install' ) {
 					<div class="column-name">
 						<h4>
 							<a href="<?php echo esc_url( $url ); ?>"><?php echo esc_html( $name ); ?></a>
-							<span class="version" aria-label="<?php esc_attr_e( 'Version %s', 'envato-market' ); ?>"><?php echo esc_html( sprintf( __( 'Version %s', 'envato-market' ), ( isset( $plugins[ $slug ] ) ? $plugins[ $slug ]['Version'] : $version ) ) ); ?></span>
+							<span class="version"
+								  aria-label="<?php esc_attr_e( 'Version %s', 'envato-market' ); ?>"><?php echo esc_html( sprintf( __( 'Version %s', 'envato-market' ), ( isset( $plugins[ $slug ] ) ? $plugins[ $slug ]['Version'] : $version ) ) ); ?></span>
 						</h4>
 					</div>
 					<div class="column-description">
@@ -409,13 +413,13 @@ function envato_market_plugins_column( $group = 'install' ) {
 							<?php echo wp_kses_post( wpautop( $description ) ); ?>
 						</div>
 						<p class="author">
-							<cite><?php esc_html_e( 'By', 'envato-market' ); ?> <?php echo wp_kses_post( $author_link ); ?></cite>
+							<cite><?php esc_html_e( 'By', 'envato-market' ); ?><?php echo wp_kses_post( $author_link ); ?></cite>
 						</p>
 					</div>
 					<?php if ( ! empty( $update_actions ) ) { ?>
-					<div class="column-update">
-						<?php echo implode( "\n", $update_actions ); ?>
-					</div>
+						<div class="column-update">
+							<?php echo implode( "\n", $update_actions ); ?>
+						</div>
 					<?php } ?>
 				</div>
 				<div class="envato-card-bottom">
@@ -430,7 +434,7 @@ function envato_market_plugins_column( $group = 'install' ) {
 								)
 							);
 							?>
-							<span class="num-ratings">(<?php echo esc_html( number_format_i18n( $plugin['rating']['count'] ) ); ?>)</span>
+							<span class="num-ratings"><?php echo esc_html( '(' . number_format_i18n( $plugin['rating']['count'] ) . ')' ); ?></span>
 						<?php } ?>
 					</div>
 					<div class="column-actions">

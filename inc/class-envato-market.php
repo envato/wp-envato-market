@@ -192,8 +192,8 @@ if ( ! class_exists( 'Envato_Market' ) ) :
 		private function init_includes() {
 			require $this->plugin_path . '/inc/admin/admin.php';
 			require $this->plugin_path . '/inc/admin/functions.php';
-			require $this->plugin_path . '/inc/api.php';
-			require $this->plugin_path . '/inc/items.php';
+			require $this->plugin_path . '/inc/class-envato-market-api.php';
+			require $this->plugin_path . '/inc/class-envato-market-items.php';
 			require $this->plugin_path . '/inc/class-envato-market-github.php';
 		}
 
