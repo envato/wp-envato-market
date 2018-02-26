@@ -50,7 +50,7 @@ function envato_market_themes_column( $group = 'install' ) {
 		}
 
 		// Setup the update action links.
-		$updateActions = array();
+		$update_actions = array();
 
 		if ( true === $theme['hasUpdate'] ) {
 			$classes[] = 'update';
@@ -65,7 +65,7 @@ function envato_market_themes_column( $group = 'install' ) {
 					), self_admin_url( 'update.php' )
 				);
 
-				$updateActions['update'] = sprintf(
+				$update_actions['update'] = sprintf(
 					'<a class="update-now" href="%1$s" aria-label="%2$s" data-name="%3$s %5$s" data-slug="%4$s" data-version="%5$s">%6$s</a>',
 					wp_nonce_url( $upgrade_link, 'upgrade-theme_' . $slug ),
 					esc_attr__( 'Update %s now', 'envato-market' ),
@@ -84,7 +84,7 @@ function envato_market_themes_column( $group = 'install' ) {
 					), $url
 				);
 
-				$updateActions['details'] = sprintf(
+				$update_actions['details'] = sprintf(
 					'<a href="%1$s" class="thickbox details" title="%2$s">%3$s</a>',
 					esc_url( $details_link ),
 					esc_attr( $name ),
@@ -185,9 +185,9 @@ function envato_market_themes_column( $group = 'install' ) {
 							<cite><?php esc_html_e( 'By', 'envato-market' ); ?> <?php echo wp_kses_post( $author_link ); ?></cite>
 						</p>
 					</div>
-					<?php if ( ! empty( $updateActions ) ) { ?>
+					<?php if ( ! empty( $update_actions ) ) { ?>
 					<div class="column-update">
-						<?php echo implode( "\n", $updateActions ); ?>
+						<?php echo implode( "\n", $update_actions ); ?>
 					</div>
 					<?php } ?>
 				</div>
@@ -246,7 +246,7 @@ function envato_market_plugins_column( $group = 'install' ) {
 		}
 
 		// Setup the update action links.
-		$updateActions = array();
+		$update_actions = array();
 
 		// Check for an update.
 		if ( isset( $plugins[ $slug ] ) && version_compare( $plugins[ $slug ]['Version'], $plugin['version'], '<' ) ) {
@@ -277,7 +277,7 @@ function envato_market_plugins_column( $group = 'install' ) {
 					), self_admin_url( 'plugin-install.php' )
 				);
 
-				$updateActions['update'] = sprintf(
+				$update_actions['update'] = sprintf(
 					'<a class="update-now" href="%1$s" aria-label="%2$s" data-name="%3$s %6$s" data-plugin="%4$s" data-slug="%5$s" data-version="%6$s">%7$s</a>',
 					wp_nonce_url( $upgrade_link, 'upgrade-plugin_' . $slug ),
 					esc_attr__( 'Update %s now', 'envato-market' ),
@@ -288,7 +288,7 @@ function envato_market_plugins_column( $group = 'install' ) {
 					esc_html__( 'Update Available', 'envato-market' )
 				);
 
-				$updateActions['details'] = sprintf(
+				$update_actions['details'] = sprintf(
 					'<a href="%1$s" class="thickbox details" title="%2$s">%3$s</a>',
 					esc_url( $details_link ),
 					esc_attr( $name ),
@@ -412,24 +412,26 @@ function envato_market_plugins_column( $group = 'install' ) {
 							<cite><?php esc_html_e( 'By', 'envato-market' ); ?> <?php echo wp_kses_post( $author_link ); ?></cite>
 						</p>
 					</div>
-					<?php if ( ! empty( $updateActions ) ) { ?>
+					<?php if ( ! empty( $update_actions ) ) { ?>
 					<div class="column-update">
-						<?php echo implode( "\n", $updateActions ); ?>
+						<?php echo implode( "\n", $update_actions ); ?>
 					</div>
 					<?php } ?>
 				</div>
 				<div class="envato-card-bottom">
 					<div class="column-rating">
 						<?php
-						wp_star_rating(
-							array(
-								'rating' => ( $plugin['rating']['rating'] / 5 * 100 ),
-								'type'   => 'percent',
-								'number' => $plugin['rating']['count'],
-							)
-						);
-?>
-						<span class="num-ratings">(<?php echo esc_html( number_format_i18n( $plugin['rating']['count'] ) ); ?>)</span>
+						if ( ! empty( $plugin['rating'] ) && ! empty( $plugin['rating']['count'] ) ) {
+							wp_star_rating(
+								array(
+									'rating' => ( $plugin['rating']['rating'] / 5 * 100 ),
+									'type'   => 'percent',
+									'number' => $plugin['rating']['count'],
+								)
+							);
+							?>
+							<span class="num-ratings">(<?php echo esc_html( number_format_i18n( $plugin['rating']['count'] ) ); ?>)</span>
+						<?php } ?>
 					</div>
 					<div class="column-actions">
 						<?php echo implode( "\n", $actions ); ?>
