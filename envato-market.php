@@ -40,7 +40,7 @@ if ( ! version_compare( PHP_VERSION, '5.4', '>=' ) ) {
 } else {
 
 	/* Envato_Market Class */
-	require_once __DIR__ . 'inc/class-envato-market.php';
+	require_once ENVATO_MARKET_PATH . 'inc/class-envato-market.php';
 
 
 	if ( ! function_exists( 'envato_market' ) ) :

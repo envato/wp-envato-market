@@ -263,17 +263,38 @@ if ( ! class_exists( 'Envato_Market_API' ) && class_exists( 'Envato_Market' ) ) 
 		 * @return array A normalized array of values.
 		 */
 		public function normalize_theme( $theme ) {
-			return array(
+			$normalized_theme = array(
 				'id'            => $theme['id'],
 				'name'          => ( ! empty( $theme['wordpress_theme_metadata']['theme_name'] ) ? $theme['wordpress_theme_metadata']['theme_name'] : '' ),
 				'author'        => ( ! empty( $theme['wordpress_theme_metadata']['author_name'] ) ? $theme['wordpress_theme_metadata']['author_name'] : '' ),
 				'version'       => ( ! empty( $theme['wordpress_theme_metadata']['version'] ) ? $theme['wordpress_theme_metadata']['version'] : '' ),
-				'description'   => self::remove_non_unicode( $theme['wordpress_theme_metadata']['description'] ),
+				'description'   => self::remove_non_unicode( strip_tags( $theme['wordpress_theme_metadata']['description'] ) ),
 				'url'           => ( ! empty( $theme['url'] ) ? $theme['url'] : '' ),
 				'author_url'    => ( ! empty( $theme['author_url'] ) ? $theme['author_url'] : '' ),
 				'thumbnail_url' => ( ! empty( $theme['thumbnail_url'] ) ? $theme['thumbnail_url'] : '' ),
 				'rating'        => ( ! empty( $theme['rating'] ) ? $theme['rating'] : '' ),
+				'icon_url'      => '',
 			);
+
+			// No main thumbnail in API response, so we grab it from the preview array.
+			if ( empty( $normalized_theme['thumbnail_url'] ) && ! empty( $theme['previews'] ) && is_array( $theme['previews'] ) ) {
+				foreach ( $theme['previews'] as $possible_preview ) {
+					if ( ! empty( $possible_preview['landscape_url'] ) ) {
+						$normalized_theme['thumbnail_url'] = $possible_preview['landscape_url'];
+						break;
+					}
+				}
+			}
+			if ( empty( $normalized_theme['icon_url'] ) && ! empty( $theme['previews'] ) && is_array( $theme['previews'] ) ) {
+				foreach ( $theme['previews'] as $possible_preview ) {
+					if ( ! empty( $possible_preview['icon_url'] ) ) {
+						$normalized_theme['icon_url'] = $possible_preview['icon_url'];
+						break;
+					}
+				}
+			}
+
+			return $normalized_theme;
 		}
 
 		/**
@@ -328,12 +349,12 @@ if ( ! class_exists( 'Envato_Market_API' ) && class_exists( 'Envato_Market' ) ) 
 				}
 			}
 
-			return array(
+			$plugin_normalized = array(
 				'id'              => $plugin['id'],
 				'name'            => ( ! empty( $plugin['wordpress_plugin_metadata']['plugin_name'] ) ? $plugin['wordpress_plugin_metadata']['plugin_name'] : '' ),
 				'author'          => ( ! empty( $plugin['wordpress_plugin_metadata']['author'] ) ? $plugin['wordpress_plugin_metadata']['author'] : '' ),
 				'version'         => ( ! empty( $plugin['wordpress_plugin_metadata']['version'] ) ? $plugin['wordpress_plugin_metadata']['version'] : '' ),
-				'description'     => self::remove_non_unicode( $plugin['wordpress_plugin_metadata']['description'] ),
+				'description'     => self::remove_non_unicode( strip_tags( $plugin['wordpress_plugin_metadata']['description'] ) ),
 				'url'             => ( ! empty( $plugin['url'] ) ? $plugin['url'] : '' ),
 				'author_url'      => ( ! empty( $plugin['author_url'] ) ? $plugin['author_url'] : '' ),
 				'thumbnail_url'   => ( ! empty( $plugin['thumbnail_url'] ) ? $plugin['thumbnail_url'] : '' ),
@@ -343,7 +364,28 @@ if ( ! class_exists( 'Envato_Market_API' ) && class_exists( 'Envato_Market' ) ) 
 				'number_of_sales' => ( ! empty( $plugin['number_of_sales'] ) ? $plugin['number_of_sales'] : '' ),
 				'updated_at'      => ( ! empty( $plugin['updated_at'] ) ? $plugin['updated_at'] : '' ),
 				'rating'          => ( ! empty( $plugin['rating'] ) ? $plugin['rating'] : '' ),
+				'icon_url'        => '',
 			);
+
+			// No main thumbnail in API response, so we grab it from the preview array.
+			if ( empty( $plugin_normalized['thumbnail_url'] ) && ! empty( $plugin['previews'] ) && is_array( $plugin['previews'] ) ) {
+				foreach ( $plugin['previews'] as $possible_preview ) {
+					if ( ! empty( $possible_preview['landscape_url'] ) ) {
+						$plugin_normalized['thumbnail_url'] = $possible_preview['landscape_url'];
+						break;
+					}
+				}
+			}
+			if ( empty( $plugin_normalized['icon_url'] ) && ! empty( $plugin['previews'] ) && is_array( $plugin['previews'] ) ) {
+				foreach ( $plugin['previews'] as $possible_preview ) {
+					if ( ! empty( $possible_preview['icon_url'] ) ) {
+						$plugin_normalized['icon_url'] = $possible_preview['icon_url'];
+						break;
+					}
+				}
+			}
+
+			return $plugin_normalized;
 		}
 
 		/**

@@ -169,7 +169,7 @@ function envato_market_themes_column( $group = 'install' ) {
 			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 				<div class="envato-card-top">
 					<a href="<?php echo esc_url( $url ); ?>" class="column-icon">
-						<img src="<?php echo esc_url( $theme['thumbnail_url'] ); ?>"/>
+						<img src="<?php echo esc_url( $theme['icon_url'] ); ?>"/>
 					</a>
 					<div class="column-name">
 						<h4>
@@ -183,7 +183,10 @@ function envato_market_themes_column( $group = 'install' ) {
 							<?php echo wp_kses_post( wpautop( $description ) ); ?>
 						</div>
 						<p class="author">
-							<cite><?php esc_html_e( 'By', 'envato-market' ); ?><?php echo wp_kses_post( $author_link ); ?></cite>
+							<cite>
+								<?php esc_html_e( 'By', 'envato-market' ); ?>
+								<?php echo wp_kses_post( $author_link ); ?>
+							</cite>
 						</p>
 					</div>
 					<?php if ( ! empty( $update_actions ) ) { ?>
@@ -399,7 +402,7 @@ function envato_market_plugins_column( $group = 'install' ) {
 			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 				<div class="envato-card-top">
 					<a href="<?php echo esc_url( $url ); ?>" class="column-icon">
-						<img src="<?php echo esc_url( $plugin['thumbnail_url'] ); ?>"/>
+						<img src="<?php echo esc_url( $plugin['icon_url'] ); ?>"/>
 					</a>
 					<div class="column-name">
 						<h4>
@@ -413,7 +416,10 @@ function envato_market_plugins_column( $group = 'install' ) {
 							<?php echo wp_kses_post( wpautop( $description ) ); ?>
 						</div>
 						<p class="author">
-							<cite><?php esc_html_e( 'By', 'envato-market' ); ?><?php echo wp_kses_post( $author_link ); ?></cite>
+							<cite>
+								<?php esc_html_e( 'By', 'envato-market' ); ?>
+								<?php echo wp_kses_post( $author_link ); ?>
+							</cite>
 						</p>
 					</div>
 					<?php if ( ! empty( $update_actions ) ) { ?>
