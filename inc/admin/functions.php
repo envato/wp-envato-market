@@ -18,6 +18,8 @@ function envato_market_themes_column( $group = 'install' ) {
 		return;
 	}
 
+	print_r( $premium );
+
 	foreach ( $premium as $slug => $theme ) :
 		$name               = $theme['name'];
 		$author             = $theme['author'];

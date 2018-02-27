@@ -25,7 +25,7 @@ class Tests_Envato_Market extends WP_UnitTestCase {
 	 */
 	function setUp() {
 		parent::setUp();
-		$path              = str_replace( 'tests/phpunit/tests/', '', plugin_dir_path( __FILE__ ) ) . 'envato-market.php';
+		$path              = str_replace( 'tests/phpunit/tests/inc/', '', plugin_dir_path( __FILE__ ) ) . 'envato-market.php';
 		$this->plugin_data = get_plugin_data( $path, $markup = false, $translate = false );
 	}
 
@@ -101,14 +101,14 @@ class Tests_Envato_Market extends WP_UnitTestCase {
 	 * Check for correct version plugin URL.
 	 */
 	function test_envato_market_get_plugin_url() {
-		$this->assertEquals( str_replace( 'tests/phpunit/tests/', '', plugin_dir_url( __FILE__ ) ), envato_market()->get_plugin_url() );
+		$this->assertEquals( str_replace( 'tests/phpunit/tests/inc/', '', plugin_dir_url( __FILE__ ) ), envato_market()->get_plugin_url() );
 	}
 
 	/**
 	 * Check for correct version plugin path.
 	 */
 	function test_envato_market_get_plugin_path() {
-		$this->assertEquals( str_replace( 'tests/phpunit/tests/', '', plugin_dir_path( __FILE__ ) ), envato_market()->get_plugin_path() );
+		$this->assertEquals( str_replace( 'tests/phpunit/tests/inc/', '', plugin_dir_path( __FILE__ ) ), envato_market()->get_plugin_path() );
 	}
 
 	/**

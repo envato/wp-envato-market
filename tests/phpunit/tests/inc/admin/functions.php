@@ -37,7 +37,7 @@ class Tests_Envato_Market_Functions extends WP_UnitTestCase {
 	function test_envato_market_themes_column_active() {
 		$themes = array(
 			'active' => array(
-				array(
+				'twenty-fifteen' => array(
 					'id'            => 12345,
 					'name'          => 'Twenty Fifteen',
 					'author'        => 'the WordPress team',
@@ -75,7 +75,7 @@ class Tests_Envato_Market_Functions extends WP_UnitTestCase {
 	function test_envato_market_themes_column_installed() {
 		$themes = array(
 			'installed' => array(
-				array(
+				'twenty-fifteen' => array(
 					'id'            => 12345,
 					'name'          => 'Twenty Fifteen',
 					'author'        => 'the WordPress team',

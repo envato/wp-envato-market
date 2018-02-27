@@ -42,7 +42,7 @@ class Tests_Envato_Market_API extends WP_UnitTestCase {
 	 * Request succeeded with working token and being passed to args.
 	 */
 	function test_request_success() {
-		if ( '' !== TOKEN ) {
+		if ( defined('TOKEN') && '' !== TOKEN ) {
 			$args = array(
 				'headers' => array(
 					'Authorization' => 'Bearer ' . TOKEN,

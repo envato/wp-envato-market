@@ -287,7 +287,7 @@ class Tests_Envato_Market_Items extends WP_UnitTestCase {
 	 */
 	function test_plugins_api() {
 		$_plugins = array(
-			array(
+			'envato-market' => array(
 				'id'              => 12345,
 				'name'            => 'Envato Market',
 				'author'          => 'Derek Herman',
@@ -422,7 +422,9 @@ class Tests_Envato_Market_Items extends WP_UnitTestCase {
 					),
 				),
 			),
-			'active'    => array(
+			'active'    => array(),
+			'installed' => array(),
+			'install'   => array(
 				'envato-market/envato-market.php' => array(
 					'id'              => 12345,
 					'name'            => 'Envato Market',
@@ -441,10 +443,8 @@ class Tests_Envato_Market_Items extends WP_UnitTestCase {
 						'rating' => 4.79,
 						'count'  => 4457,
 					),
-				),
+				)
 			),
-			'installed' => array(),
-			'install'   => array(),
 		);
 
 		set_site_transient( envato_market()->get_option_name() . '_plugins', $plugins );

@@ -28,7 +28,7 @@ $_tests_dir = getenv( 'WP_TESTS_DIR' );
 
 // Travis CI & Vagrant SSH tests directory.
 if ( empty( $_tests_dir ) ) {
-	$_tests_dir = '/tmp/wordpress-tests';
+	$_tests_dir = '/tmp/wordpress-tests-lib';
 }
 
 // Relative path to Core tests directory.
@@ -54,6 +54,23 @@ foreach ( glob( $_plugin_dir . '/*.php' ) as $_plugin_file_candidate ) {
 if ( ! isset( $_plugin_file ) ) {
 	trigger_error( 'Unable to locate a file containing a plugin metadata block.', E_USER_ERROR );
 }
+
+// Setup the token.
+$_token = getenv( 'TOKEN' );
+if ( empty( $_token ) ) {
+	$path = $_plugin_dir . '/.token';
+	if ( ! file_exists( $path ) ) {
+		$_token = '';
+	} else {
+		$_token = @file_get_contents( $path );
+		if ( false === $_token ) {
+			$_token = '';
+		}
+	}
+}
+define( 'TOKEN', $_token );
+define( 'TESTS_DATA_DIR', dirname( __FILE__ ) . '/../data' );
+
 unset( $_plugin_dir, $_plugin_file_candidate, $_plugin_file_src );
 
 /**

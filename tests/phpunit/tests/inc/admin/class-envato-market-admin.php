@@ -384,8 +384,8 @@ class Tests_Envato_Market_Admin extends WP_UnitTestCase {
 	 * Render admin callback
 	 */
 	function test_render_admin_callback() {
-		do_action( 'admin_menu' );
-		do_action( 'admin_init' );
+//		do_action( 'admin_menu' );
+//		do_action( 'admin_init' );
 		ob_start();
 		$this->admin->render_admin_callback();
 		$contents = ob_get_clean();

@@ -168,7 +168,7 @@ if ( ! class_exists( 'Envato_Market' ) ) :
 		 */
 		private function init_globals() {
 			$this->data        = new stdClass();
-			$this->version     = '1.0.0-RC2';
+			$this->version     = ENVATO_MARKET_VERSION;
 			$this->slug        = 'envato-market';
 			$this->option_name = self::sanitize_key( $this->slug );
 			$this->plugin_url  = ENVATO_MARKET_URI;

@@ -64,14 +64,17 @@ if ( ! version_compare( PHP_VERSION, '5.4', '>=' ) ) {
 		}
 	endif;
 
+
 	/**
 	 * Loads the main instance of Envato_Market to prevent
 	 * the need to use globals.
 	 *
+	 * This doesn't fire the activation hook correctly if done in 'after_setup_theme' hook.
+	 *
 	 * @since 1.0.0
 	 * @return object Envato_Market
 	 */
-	add_action( 'after_setup_theme', 'envato_market', 11 );
+	envato_market();
 
 }
 
