@@ -212,7 +212,7 @@ class Tests_Envato_Market_Items extends WP_UnitTestCase {
 	 */
 	function test_update_plugins() {
 		$_plugins = array(
-			array(
+			'envato-market/envato-market.php' => array(
 				'id'              => 12345,
 				'name'            => 'Envato Market',
 				'author'          => 'Derek Herman',
@@ -257,11 +257,11 @@ class Tests_Envato_Market_Items extends WP_UnitTestCase {
 
 		$mock->expects( $this->any() )
 			->method( 'normalize_plugin' )
-			->will( $this->returnValue( $_plugins[0] ) );
+			->will( $this->returnValue( current($_plugins) ) );
 
 		$mock->expects( $this->any() )
 			->method( 'item' )
-			->will( $this->returnValue( $_plugins[0] ) );
+			->will( $this->returnValue( current($_plugins) ) );
 
 		// Replace private _instance reference with mock object
 		$ref = new ReflectionProperty( 'Envato_Market_API', '_instance' );
@@ -323,7 +323,7 @@ class Tests_Envato_Market_Items extends WP_UnitTestCase {
 
 		$mock->expects( $this->any() )
 			->method( 'normalize_plugin' )
-			->will( $this->returnValue( $_plugins[0] ) );
+			->will( $this->returnValue( current($_plugins) ) );
 
 		// Replace private _instance reference with mock object
 		$ref = new ReflectionProperty( 'Envato_Market_API', '_instance' );
@@ -356,95 +356,95 @@ class Tests_Envato_Market_Items extends WP_UnitTestCase {
 		$plugins = array(
 			'purchased' => array(
 				array(
-					'id'              => 12345,
-					'name'            => 'Envato Market',
-					'author'          => 'Derek Herman',
-					'version'         => '10.0.0',
-					'description'     => '',
-					'url'             => 'http://sample.org/custom/',
-					'author_url'      => 'http://sample.org/',
-					'thumbnail_url'   => 'http://sample.org/thumb.png',
-					'landscape_url'   => 'http://sample.org/landscape.png',
-					'requires'        => '4.2',
-					'tested'          => '4.4',
+					'id' => 12345,
+					'name' => 'Envato Market',
+					'author' => 'Derek Herman',
+					'version' => '10.0.0',
+					'description' => '',
+					'url' => 'http://sample.org/custom/',
+					'author_url' => 'http://sample.org/',
+					'thumbnail_url' => 'http://sample.org/thumb.png',
+					'landscape_url' => 'http://sample.org/landscape.png',
+					'requires' => '4.2',
+					'tested' => '4.4',
 					'number_of_sales' => 25000,
-					'updated_at'      => '',
-					'rating'          => array(
+					'updated_at' => '',
+					'rating' => array(
 						'rating' => 4.79,
-						'count'  => 4457,
+						'count' => 4457,
 					),
 				),
 			),
-			'active'    => array(),
+			'active' => array(),
 			'installed' => array(
 				'envato-market/envato-market.php' => array(
-					'id'              => 12345,
-					'name'            => 'Envato Market',
-					'author'          => 'Derek Herman',
-					'version'         => '10.0.0',
-					'description'     => '',
-					'url'             => 'http://sample.org/custom/',
-					'author_url'      => 'http://sample.org/',
-					'thumbnail_url'   => 'http://sample.org/thumb.png',
-					'landscape_url'   => 'http://sample.org/landscape.png',
-					'requires'        => '4.2',
-					'tested'          => '4.4',
+					'id' => 12345,
+					'name' => 'Envato Market',
+					'author' => 'Derek Herman',
+					'version' => '10.0.0',
+					'description' => '',
+					'url' => 'http://sample.org/custom/',
+					'author_url' => 'http://sample.org/',
+					'thumbnail_url' => 'http://sample.org/thumb.png',
+					'landscape_url' => 'http://sample.org/landscape.png',
+					'requires' => '4.2',
+					'tested' => '4.4',
 					'number_of_sales' => 25000,
-					'updated_at'      => '',
-					'rating'          => array(
+					'updated_at' => '',
+					'rating' => array(
 						'rating' => 4.79,
-						'count'  => 4457,
+						'count' => 4457,
 					),
 				),
 			),
-			'install'   => array(),
+			'install' => array(),
 		);
 
 		$expected = array(
 			'purchased' => array(
 				array(
-					'id'              => 12345,
-					'name'            => 'Envato Market',
-					'author'          => 'Derek Herman',
-					'version'         => '10.0.0',
-					'description'     => '',
-					'url'             => 'http://sample.org/custom/',
-					'author_url'      => 'http://sample.org/',
-					'thumbnail_url'   => 'http://sample.org/thumb.png',
-					'landscape_url'   => 'http://sample.org/landscape.png',
-					'requires'        => '4.2',
-					'tested'          => '4.4',
+					'id' => 12345,
+					'name' => 'Envato Market',
+					'author' => 'Derek Herman',
+					'version' => '10.0.0',
+					'description' => '',
+					'url' => 'http://sample.org/custom/',
+					'author_url' => 'http://sample.org/',
+					'thumbnail_url' => 'http://sample.org/thumb.png',
+					'landscape_url' => 'http://sample.org/landscape.png',
+					'requires' => '4.2',
+					'tested' => '4.4',
 					'number_of_sales' => 25000,
-					'updated_at'      => '',
-					'rating'          => array(
+					'updated_at' => '',
+					'rating' => array(
 						'rating' => 4.79,
-						'count'  => 4457,
+						'count' => 4457,
 					),
 				),
 			),
-			'active'    => array(),
-			'installed' => array(),
-			'install'   => array(
+			'active' => array(
 				'envato-market/envato-market.php' => array(
-					'id'              => 12345,
-					'name'            => 'Envato Market',
-					'author'          => 'Derek Herman',
-					'version'         => '10.0.0',
-					'description'     => '',
-					'url'             => 'http://sample.org/custom/',
-					'author_url'      => 'http://sample.org/',
-					'thumbnail_url'   => 'http://sample.org/thumb.png',
-					'landscape_url'   => 'http://sample.org/landscape.png',
-					'requires'        => '4.2',
-					'tested'          => '4.4',
+					'id' => 12345,
+					'name' => 'Envato Market',
+					'author' => 'Derek Herman',
+					'version' => '10.0.0',
+					'description' => '',
+					'url' => 'http://sample.org/custom/',
+					'author_url' => 'http://sample.org/',
+					'thumbnail_url' => 'http://sample.org/thumb.png',
+					'landscape_url' => 'http://sample.org/landscape.png',
+					'requires' => '4.2',
+					'tested' => '4.4',
 					'number_of_sales' => 25000,
-					'updated_at'      => '',
-					'rating'          => array(
+					'updated_at' => '',
+					'rating' => array(
 						'rating' => 4.79,
-						'count'  => 4457,
+						'count' => 4457,
 					),
-				)
+				),
 			),
+			'installed' => array(),
+			'install' => array(),
 		);
 
 		set_site_transient( envato_market()->get_option_name() . '_plugins', $plugins );

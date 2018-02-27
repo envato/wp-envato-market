@@ -1,5 +1,5 @@
 {
-	"preset": "node_modules/jscs/presets/wordpress.json",
+	"preset": "wordpress",
 	"requireCamelCaseOrUpperCaseIdentifiers": null,
 	"excludeFiles": [
 		"**/*.min.js",
