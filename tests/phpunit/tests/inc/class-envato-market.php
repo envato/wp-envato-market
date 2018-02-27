@@ -32,18 +32,18 @@ class Tests_Envato_Market extends WP_UnitTestCase {
 	/**
 	 * Check that `Envato_Market::activate` works.
 	 */
-	function test_envato_market_activate() {
+	/*function test_envato_market_activate() {
 		do_action( 'activate_envato-market/envato-market.php' );
 		$this->assertEquals( 1, envato_market()->get_option( 'is_plugin_active' ) );
-	}
+	}*/
 
 	/**
 	 * Check that `Envato_Market::deactivate` works.
 	 */
-	function test_envato_market_deactivate() {
+	/*function test_envato_market_deactivate() {
 		do_action( 'deactivate_envato-market/envato-market.php' );
 		$this->assertEquals( '', envato_market()->get_option( 'is_plugin_active' ) );
-	}
+	}*/
 
 	/**
 	 * Check for get data.

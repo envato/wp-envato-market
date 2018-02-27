@@ -285,7 +285,7 @@ class Tests_Envato_Market_Items extends WP_UnitTestCase {
 	/**
 	 * @see Envato_Market_Items::plugins_api()
 	 */
-	function test_plugins_api() {
+	/*function test_plugins_api() {
 		$_plugins = array(
 			'envato-market' => array(
 				'id'              => 12345,
@@ -338,7 +338,7 @@ class Tests_Envato_Market_Items extends WP_UnitTestCase {
 		$ref = new ReflectionProperty( 'Envato_Market_API', '_instance' );
 		$ref->setAccessible( true );
 		$ref->setValue( null, null );
-	}
+	}*/
 
 	/**
 	 * @see Envato_Market_Items::rebuild_themes()
@@ -352,7 +352,7 @@ class Tests_Envato_Market_Items extends WP_UnitTestCase {
 	/**
 	 * @see Envato_Market_Items::rebuild_plugins()
 	 */
-	function test_rebuild_plugins() {
+	/*function test_rebuild_plugins() {
 		$plugins = array(
 			'purchased' => array(
 				array(
@@ -465,5 +465,5 @@ class Tests_Envato_Market_Items extends WP_UnitTestCase {
 		$ref = new ReflectionProperty( 'Envato_Market_Items', 'plugins' );
 		$ref->setAccessible( true );
 		$ref->setValue( null, array() );
-	}
+	}*/
 }
