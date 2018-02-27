@@ -98,7 +98,7 @@
 
 	.screenshot-image {
 		text-align: right;
-	
+
 		img {
 			max-width: 100%;
 			height: auto;
@@ -137,7 +137,7 @@
 			padding: 10px;
 			padding-right: 40px;
 			position: relative;
-			
+
 			&.not-authorized {
 				border-color: #dc3232;
 			}
@@ -180,6 +180,7 @@
 	background-color: #fff;
 	border: 1px solid #dedede;
 	box-sizing: border-box;
+	margin:0 20px 0 0;
 
 	&.active {
 		border-color: #aaa;
@@ -206,7 +207,7 @@
 				font-size: 18px;
 				line-height: 1.3;
 				margin: 0 0 12px;
-				
+
 				span {
 					color: #999;
 					display: inline-block;
@@ -216,7 +217,7 @@
 				}
 			}
 		}
-		
+
 		.column-description {
 			margin-left: 100px;
 
@@ -292,7 +293,7 @@
 			.update-now {
 				display: block;
 				float: left;
-		
+
 				&:before {
 					color: #fff;
 					content: '\f463';
@@ -411,7 +412,7 @@
 
 @media screen and (min-width: 783px) {
 	.about-wrap {
-		h2.nav-tab-wrapper {	
+		h2.nav-tab-wrapper {
 			.nav-tab-active {
 				box-shadow: none;
 			}
@@ -453,7 +454,7 @@
 				clear: both;
 			}
 		}
-		
+
 		#themes,
 		#plugins {
 			margin-top: 1.618em;
@@ -468,7 +469,7 @@
 
 @media screen and (max-width: 782px) {
 	.about-wrap {
-		h2.nav-tab-wrapper {	
+		h2.nav-tab-wrapper {
 			border: none;
 			padding: 0;
 
@@ -485,7 +486,7 @@
 			.nav-tab-active:hover {
 				background: #fff;
 				border-bottom: 1px solid #ccc;
-				
+
 				&:after {
 					display: none;
 				}
@@ -512,7 +513,7 @@
 
 		.screenshot-image {
 			text-align: left;
-	
+
 			img {
 				max-width: 100%;
 			}
