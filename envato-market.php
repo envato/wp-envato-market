@@ -35,7 +35,7 @@ define( 'ENVATO_MARKET_PATH', trailingslashit( plugin_dir_path( __FILE__ ) ) );
 define( 'ENVATO_MARKET_URI', trailingslashit( plugin_dir_url( __FILE__ ) ) );
 
 
-if ( ! version_compare( PHP_VERSION, '5.5', '>=' ) ) {
+if ( ! version_compare( PHP_VERSION, '5.4', '>=' ) ) {
 	add_action( 'admin_notices', 'envato_market_fail_php_version' );
 } else {
 
@@ -82,7 +82,7 @@ if ( ! function_exists( 'envato_market_fail_php_version' ) ) {
 	 * @return void
 	 */
 	function envato_market_fail_php_version() {
-		$message      = esc_html__( 'The Envato Market plugin requires PHP version 5.5+, plugin is currently NOT ACTIVE.', 'envato-market' );
+		$message      = esc_html__( 'The Envato Market plugin requires PHP version 5.4+, plugin is currently NOT ACTIVE.', 'envato-market' );
 		$html_message = sprintf( '<div class="error">%s</div>', wpautop( $message ) );
 		echo wp_kses_post( $html_message );
 	}

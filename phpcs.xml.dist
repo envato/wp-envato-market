@@ -2,7 +2,10 @@
 <ruleset name="WordPress Coding Standards for Plugins">
 	<description>Generally-applicable sniffs for WordPress plugins</description>
 
-	<rule ref="WordPress-Core" />
+	<rule ref="WordPress-Core">
+	    <exclude name="WordPress.WP.I18n.MissingTranslatorsComment"/>
+	    <exclude name="Squiz.PHP.CommentedOutCode.Found"/>
+	</rule>
 	<rule ref="WordPress-Docs" />
 
 	<!-- Check all PHP files in directory tree by default. -->

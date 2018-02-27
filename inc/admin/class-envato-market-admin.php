@@ -428,13 +428,13 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 					</form>
 				</div>
 			</script>
-			
+
 			<script type="text/html" id="tmpl-envato-market-dialog-error">
 				<div class="notice notice-error">
 					<p>{{ data.message }}</p>
 				</div>
 			</script>
-			
+
 			<script type="text/html" id="tmpl-envato-market-card">
 				<div class="col" data-id="{{ data.id }}">
 					<div class="envato-card {{ data.type }}">
@@ -813,8 +813,8 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 			$api->download_link = envato_market()->api()->download( $plugin, $this->set_bearer_args( $plugin ) );
 
 			// Must have the upgrader & skin.
-			require envato_market()->get_plugin_path() . '/inc/admin/upgrader.php';
-			require envato_market()->get_plugin_path() . '/inc/admin/upgrader-skins.php';
+			require envato_market()->get_plugin_path() . '/inc/admin/class-envato-market-theme-upgrader.php';
+			require envato_market()->get_plugin_path() . '/inc/admin/class-envato-market-theme-installer-skin.php';
 
 			$upgrader = new Envato_Market_Plugin_Upgrader( new Envato_Market_Plugin_Installer_Skin( compact( 'title', 'url', 'nonce', 'plugin', 'api' ) ) );
 			$upgrader->install( $api->download_link );
@@ -873,8 +873,8 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 			$api->download_link = envato_market()->api()->download( $theme, $this->set_bearer_args( $theme ) );
 
 			// Must have the upgrader & skin.
-			require_once envato_market()->get_plugin_path() . '/inc/admin/upgrader.php';
-			require_once envato_market()->get_plugin_path() . '/inc/admin/upgrader-skins.php';
+			require_once envato_market()->get_plugin_path() . '/inc/admin/class-envato-market-theme-upgrader.php';
+			require_once envato_market()->get_plugin_path() . '/inc/admin/class-envato-market-theme-installer-skin.php';
 
 			$upgrader = new Envato_Market_Theme_Upgrader( new Envato_Market_Theme_Installer_Skin( compact( 'title', 'url', 'nonce', 'api' ) ) );
 			$upgrader->install( $api->download_link );

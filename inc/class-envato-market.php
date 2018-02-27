@@ -190,7 +190,7 @@ if ( ! class_exists( 'Envato_Market' ) ) :
 		 * @codeCoverageIgnore
 		 */
 		private function init_includes() {
-			require $this->plugin_path . '/inc/admin/admin.php';
+			require $this->plugin_path . '/inc/admin/class-envato-market-admin.php';
 			require $this->plugin_path . '/inc/admin/functions.php';
 			require $this->plugin_path . '/inc/class-envato-market-api.php';
 			require $this->plugin_path . '/inc/class-envato-market-items.php';
@@ -353,8 +353,10 @@ if ( ! class_exists( 'Envato_Market' ) ) :
 				if ( is_array( $data ) ) {
 					$data = self::convert_data( $data );
 				}
-				$key              = self::sanitize_key( $key );
+				$key = self::sanitize_key( $key );
+				// @codingStandardsIgnoreStart
 				$this->data->$key = $data;
+				// @codingStandardsIgnoreEnd
 			}
 		}
 

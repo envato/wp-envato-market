@@ -174,8 +174,9 @@ function envato_market_themes_column( $group = 'install' ) {
 					<div class="column-name">
 						<h4>
 							<a href="<?php echo esc_url( $url ); ?>"><?php echo esc_html( $name ); ?></a>
-							<span class="version"
-								  aria-label="<?php esc_attr_e( 'Version %s', 'envato-market' ); ?>"><?php echo esc_html( sprintf( __( 'Version %s', 'envato-market' ), $version ) ); ?></span>
+							<span class="version" aria-label="<?php esc_attr_e( 'Version %s', 'envato-market' ); ?>">
+								<?php echo esc_html( sprintf( __( 'Version %s', 'envato-market' ), $version ) ); ?>
+							</span>
 						</h4>
 					</div>
 					<div class="column-description">
@@ -407,8 +408,9 @@ function envato_market_plugins_column( $group = 'install' ) {
 					<div class="column-name">
 						<h4>
 							<a href="<?php echo esc_url( $url ); ?>"><?php echo esc_html( $name ); ?></a>
-							<span class="version"
-								  aria-label="<?php esc_attr_e( 'Version %s', 'envato-market' ); ?>"><?php echo esc_html( sprintf( __( 'Version %s', 'envato-market' ), ( isset( $plugins[ $slug ] ) ? $plugins[ $slug ]['Version'] : $version ) ) ); ?></span>
+							<span class="version" aria-label="<?php esc_attr_e( 'Version %s', 'envato-market' ); ?>">
+								<?php echo esc_html( sprintf( __( 'Version %s', 'envato-market' ), ( isset( $plugins[ $slug ] ) ? $plugins[ $slug ]['Version'] : $version ) ) ); ?>
+							</span>
 						</h4>
 					</div>
 					<div class="column-description">

@@ -4,7 +4,7 @@ We're really excited that you are interested in contributing to the Envato Marke
 
 ## Issue Reporting Guidelines
 
-- The issue list of this repo is **exclusively** for bug reports and feature requests. For simple questions, please use [Gitter](https://gitter.im/envato/envato-market).
+- The issue list of this repo is **exclusively** for bug reports and feature requests.
 - Try to search for your issue, it may have already been answered or even fixed in the `wip` (Work in Progress) branch.
 - Check if the issue is reproducible with the latest stable version. If you are using a pre-release, please indicate the specific version you are using.
 - It is **required** that you clearly describe the steps necessary to reproduce the issue you are running into. Issues without clear reproducible steps will be closed immediately.
@@ -29,7 +29,7 @@ We're really excited that you are interested in contributing to the Envato Marke
 You will need [Node.js](http://nodejs.org), [Grunt](http://gruntjs.com), & [PHPUnit](https://phpunit.de/getting-started.html) installed on your system. To run the unit tests you must be developing within the WordPress Core. The simplest method to get a testing environment up is by using [Varying Vagrant Vagrants](https://github.com/Varying-Vagrant-Vagrants/VVV). However, to setup manually follow these instructions:
 
 1. [Install WordPress CLI](http://wp-cli.org/#installing)
-1. Install Subversion & PHP Unit ( e.g. `apt install subversion phpunit` )
+1. Install Subversion & PHP Unit ( e.g. `apt install subversion phpunit libxml2-utils` )
 1. Install copy of WordPress core locally (e.g. in a LAMP/MAMP stack) `wp core install`
 1. Visit WordPress install in local browser (e.g. `http://local.test/wordpress/`) and complete the WordPress installation process.
 1. Checkout this repository into the wp-content/plugin/envato-market folder (not `wp-envato-market`)
@@ -37,12 +37,12 @@ You will need [Node.js](http://nodejs.org), [Grunt](http://gruntjs.com), & [PHPU
 1. Enter plugin directory: `cd wp-content/plugins/envato-market/`
 1. Install required dev packages `npm install`
 1. Install composer packages `composer install`
+1. Setup git hook: `./dev-lib/install-pre-commit-hook.sh`
 1. Confim grunt tasks work `grunt` (see below for more on grunt tasks)
 1. Install phpunit test files `bash bin/install-wp-tests.sh` (enter db credentials as required)
 1. Run phpunit tests `phpunit` (see below for more on phpunit tests)
 1. Install the PHP Coding Standards: `composer create-project wp-coding-standards/wpcs:dev-master --no-dev` (answer `N` to overwriting .git directory)
-1. Setup PHPCS config: `vendor/bin/phpcs --config-set installed_paths wpcs`
-1. Run PHPCS tests `vendor/bin/phpcs`
+1. Run PHPCS tests `./vendor/squizlabs/php_codesniffer/bin/phpcs`
 
 
 

@@ -1,9 +1,10 @@
 {
-	"preset": "wordpress",
+	"preset": "node_modules/jscs/presets/wordpress.json",
 	"requireCamelCaseOrUpperCaseIdentifiers": null,
 	"excludeFiles": [
-		"**/vendor/**",
 		"**/*.min.js",
-		"**/node_modules/**"
+		"**/*.jsx",
+		"**/node_modules/**",
+		"**/vendor/**"
 	]
 }
