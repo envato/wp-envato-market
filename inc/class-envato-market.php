@@ -209,10 +209,10 @@ if ( ! class_exists( 'Envato_Market' ) ) :
 		 */
 		private function init_actions() {
 			// Activate plugin.
-			register_activation_hook( ENVATO_MARKET_PATH, array( $this, 'activate' ) );
+			register_activation_hook( ENVATO_MARKET_CORE_FILE, array( $this, 'activate' ) );
 
 			// Deactivate plugin.
-			register_deactivation_hook( ENVATO_MARKET_PATH, array( $this, 'deactivate' ) );
+			register_deactivation_hook( ENVATO_MARKET_CORE_FILE, array( $this, 'deactivate' ) );
 
 			// Load the textdomain.
 			add_action( 'init', array( $this, 'load_textdomain' ) );

@@ -169,7 +169,7 @@ function envato_market_themes_column( $group = 'install' ) {
 			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 				<div class="envato-card-top">
 					<a href="<?php echo esc_url( $url ); ?>" class="column-icon">
-						<img src="<?php echo esc_url( $theme['icon_url'] ); ?>"/>
+						<img src="<?php echo esc_url( $theme['thumbnail_url'] ); ?>"/>
 					</a>
 					<div class="column-name">
 						<h4>
@@ -403,7 +403,7 @@ function envato_market_plugins_column( $group = 'install' ) {
 			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 				<div class="envato-card-top">
 					<a href="<?php echo esc_url( $url ); ?>" class="column-icon">
-						<img src="<?php echo esc_url( $plugin['icon_url'] ); ?>"/>
+						<img src="<?php echo esc_url( $plugin['thumbnail_url'] ); ?>"/>
 					</a>
 					<div class="column-name">
 						<h4>

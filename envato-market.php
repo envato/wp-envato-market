@@ -28,6 +28,9 @@ define( 'ENVATO_MARKET_DEBUG_OUTPUT', 0 );
 /* Set constant path to the plugin directory. */
 define( 'ENVATO_MARKET_SLUG', basename( plugin_dir_path( __FILE__ ) ) );
 
+/* Set constant path to the main file for activation call */
+define( 'ENVATO_MARKET_CORE_FILE', __FILE__ );
+
 /* Set constant path to the plugin directory. */
 define( 'ENVATO_MARKET_PATH', trailingslashit( plugin_dir_path( __FILE__ ) ) );
 

@@ -440,7 +440,7 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 					<div class="envato-card {{ data.type }}">
 						<div class="envato-card-top">
 							<a href="{{ data.url }}" class="column-icon">
-								<img src="{{ data.icon_url }}"/>
+								<img src="{{ data.thumbnail_url }}"/>
 							</a>
 							<div class="column-name">
 								<h4>
