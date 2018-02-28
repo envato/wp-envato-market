@@ -104,9 +104,6 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 			// Deferred Download.
 			add_action( 'upgrader_package_options', array( $this, 'maybe_deferred_download' ), 99 );
 
-			// Theme upgrade AJAX handler.
-			add_action( 'wp_ajax_upgrade-theme', array( $this, 'ajax_upgrade_theme' ) );
-
 			// Add item AJAX handler.
 			add_action( 'wp_ajax_' . self::AJAX_ACTION . '_add_item', array( $this, 'ajax_add_item' ) );
 
@@ -878,87 +875,6 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 
 			$upgrader = new Envato_Market_Theme_Upgrader( new Envato_Market_Theme_Installer_Skin( compact( 'title', 'url', 'nonce', 'api' ) ) );
 			$upgrader->install( $api->download_link );
-		}
-
-		/**
-		 * AJAX handler for upgrading a theme.
-		 *
-		 * @since 1.0.0
-		 *
-		 * @see Theme_Upgrader
-		 * @codeCoverageIgnore
-		 */
-		public function ajax_upgrade_theme() {
-			check_ajax_referer( 'updates' );
-
-			global $wp_filesystem;
-
-			$theme = urldecode( sanitize_file_name( trim( $_POST['theme'] ) ) );
-
-			$status = array(
-				'update'     => 'theme',
-				'slug'       => $theme,
-				'oldVersion' => '',
-				'newVersion' => '',
-			);
-
-			$theme_data = wp_get_theme( $theme );
-			if ( $theme_data->exists() && $theme_data->get( 'Version' ) ) {
-				$status['oldVersion'] = sprintf( __( 'Version %s', 'envato-market' ), $theme_data->get( 'Version' ) );
-			}
-
-			if ( ! current_user_can( 'update_themes' ) ) {
-				$status['error'] = __( 'You do not have sufficient permissions to update themes for this site.', 'envato-market' );
-				wp_send_json_error( $status );
-			}
-
-			include_once( ABSPATH . 'wp-admin/includes/class-wp-upgrader.php' );
-
-			$skin     = new Automatic_Upgrader_Skin();
-			$upgrader = new Theme_Upgrader( $skin );
-			$result   = $upgrader->bulk_upgrade( array( $theme ) );
-
-			if ( is_array( $result ) && empty( $result[ $theme ] ) && is_wp_error( $skin->result ) ) {
-				$result = $skin->result;
-			}
-
-			if ( is_array( $result ) && ! empty( $result[ $theme ] ) ) {
-				$theme_update_data = current( $result );
-
-				/*
-				 * If the `update_themes` site transient is empty (e.g. when you update
-				 * two themes in quick succession before the transient repopulates),
-				 * this may be the return.
-				 *
-				 * Preferably something can be done to ensure `update_themes` isn't empty.
-				 * For now, surface some sort of error here.
-				 */
-				if ( true === $theme_update_data ) {
-					wp_send_json_error( $result );
-				}
-
-				$theme_data = wp_get_theme( $result[ $theme ]['destination_name'] );
-
-				if ( $theme_data->exists() && $theme_data->get( 'Version' ) ) {
-					$status['newVersion'] = sprintf( __( 'Version %s', 'envato-market' ), $theme_data->get( 'Version' ) );
-				}
-
-				wp_send_json_success( $status );
-			} elseif ( is_wp_error( $result ) ) {
-				$status['error'] = $result->get_error_message();
-				wp_send_json_error( $status );
-
-			} elseif ( is_bool( $result ) && ! $result ) {
-				$status['errorCode'] = 'unable_to_connect_to_filesystem';
-				$status['error']     = __( 'Unable to connect to the filesystem. Please confirm your credentials.', 'envato-market' );
-
-				// Pass through the error from WP_Filesystem if one was raised.
-				if ( is_wp_error( $wp_filesystem->errors ) && $wp_filesystem->errors->get_error_code() ) {
-					$status['error'] = $wp_filesystem->errors->get_error_message();
-				}
-
-				wp_send_json_error( $status );
-			}
 		}
 
 		/**

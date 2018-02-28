@@ -257,11 +257,10 @@
 			display: block;
 			font-size: 13px;
 			font-weight: 400;
-			height: 48px;
-			line-height: 48px;
+			min-height: 48px;
+			line-height: 1;
 			padding: 0 10px;
 			position: absolute;
-			bottom: 0;
 			top: 0;
 			left: 0;
 			border-bottom: 1px solid rgba(0,0,0,0.2);
@@ -293,6 +292,7 @@
 			.update-now {
 				display: block;
 				float: left;
+				padding: 12px 0;
 
 				&:before {
 					color: #fff;
@@ -320,6 +320,7 @@
 			.details {
 				display: block;
 				float: right;
+				padding: 18px 0 8px;
 			}
 		}
 	}
