@@ -33,7 +33,6 @@ class Tests_Envato_Market_Admin extends WP_UnitTestCase {
 	function test_init_actions() {
 		$this->admin->init_actions();
 		$this->assertEquals( 99, has_action( 'upgrader_package_options', array( $this->admin, 'maybe_deferred_download' ) ) );
-		$this->assertEquals( 10, has_action( 'wp_ajax_upgrade-theme', array( $this->admin, 'ajax_upgrade_theme' ) ) );
 		$this->assertEquals( 10, has_action( 'wp_ajax_' . Envato_Market_Admin::AJAX_ACTION . '_add_item', array( $this->admin, 'ajax_add_item' ) ) );
 		$this->assertEquals( 10, has_action( 'wp_ajax_' . Envato_Market_Admin::AJAX_ACTION . '_remove_item', array( $this->admin, 'ajax_remove_item' ) ) );
 		$this->assertEquals( 11, has_action( 'init', array( $this->admin, 'maybe_delete_transients' ) ) );

@@ -175,7 +175,7 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 			$token = '';
 			$args  = array();
 			foreach ( envato_market()->get_option( 'items', array() ) as $item ) {
-				if ( $item['id'] === $id ) {
+				if ( absint( $item['id'] ) === absint( $id ) ) {
 					$token = $item['token'];
 					break;
 				}
@@ -803,7 +803,7 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 				wp_die( $msg );
 			}
 
-			$title              = sprintf( __( 'Installing Plugin: %s', 'envato-market' ), $api->name . ' ' . $api->version );
+			$title              = sprintf( __( 'Installing Plugin: %s', 'envato-market' ), esc_html( $api->name . ' ' . $api->version ) );
 			$nonce              = 'install-plugin_' . $plugin;
 			$url                = 'admin.php?page=' . envato_market()->get_slug() . '&action=install-plugin&plugin=' . urlencode( $plugin );
 			$type               = 'web'; // Install plugin type, From Web or an Upload.
@@ -863,7 +863,7 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 
 			wp_enqueue_script( 'customize-loader' );
 
-			$title              = sprintf( __( 'Installing Theme: %s', 'envato-market' ), $api->name . ' ' . $api->version );
+			$title              = sprintf( __( 'Installing Theme: %s', 'envato-market' ), esc_html( $api->name . ' ' . $api->version ) );
 			$nonce              = 'install-theme_' . $theme;
 			$url                = 'admin.php?page=' . envato_market()->get_slug() . '&action=install-theme&theme=' . urlencode( $theme );
 			$type               = 'web'; // Install theme type, From Web or an Upload.

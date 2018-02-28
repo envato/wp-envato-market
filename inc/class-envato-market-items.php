@@ -212,6 +212,7 @@ if ( ! class_exists( 'Envato_Market_Items' ) ) :
 			// Theme update request.
 			if ( false !== strpos( $url, '//api.wordpress.org/themes/update-check/1.1/' ) ) {
 
+				echo "Checking upgrade against $url <br>\n";
 				/**
 				 * Excluded theme slugs that should never ping the WordPress API.
 				 * We don't need the extra http requests for themes we know are premium.
