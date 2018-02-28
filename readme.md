@@ -4,9 +4,9 @@
 WordPress Theme & Plugin management for the Envato Market.
 
 **Contributors:** [valendesigns](https://profiles.wordpress.org/valendesigns)  
-**Requires at least:** 4.2  
-**Tested up to:** 4.5  
-**Stable tag:** 1.0.0-RC2  
+**Requires at least:** 4.9  
+**Tested up to:** 4.9.4  
+**Stable tag:** 2.0.0  
 **License:** [GPLv2 or later](http://www.gnu.org/licenses/gpl-2.0.html)  
 **Website:** https://envato.github.io/wp-envato-market/  
 
@@ -20,9 +20,16 @@ You can add a global token to connect all your items from your account, and/or c
 
 ## Installation ##
 
-The latest version of the Envato Market plugin can be [**downloaded**](http://envato.github.io/wp-envato-market/dist/envato-market.zip) from the `gh-pages` branch as a WordPress installable package. **DO NOT** click the Github "Download ZIP" button, this plugin is meant to be installed in the WordPress `plugins` directory as `envato-market` and Github will not package the plugin correctly.
+The latest version of the Envato Market plugin ZIP file can be [**downloaded**](https://envato.github.io/wp-envato-market/dist/envato-market.zip) from https://envato.github.io/wp-envato-market/
 
 Installing the Envato Market plugin.
+
+1. Download the `envato-market.zip` to your computer.
+1. Login to WordPress and go to the 'Plugins' menu.
+1. Click 'Add New' and upload the `envato-market.zip` file, then activate.
+1. Click the 'Envato Market' menu in WordPress and connect to the API.
+
+Alternatively you can manually install the item via FTP
 
 1. Download the `envato-market.zip` and unpack the archive.
 1. Upload `envato-market` to the `/wp-content/plugins/` directory.
