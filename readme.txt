@@ -1,6 +1,6 @@
 === Envato Market ===
-Website: https://envato.github.io/wp-envato-market/
-Contributors: valendesigns
+Website: https://envato.com/market-plugin/
+Contributors: valendesigns, dtbaker, aaronrutley
 Requires at least: 4.9
 Tested up to: 4.9.4
 Stable tag: 2.0.0

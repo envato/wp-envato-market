@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name: Envato Market
- * Plugin URI: http://envato.github.io/wp-envato-market/
+ * Plugin URI: https://envato.com/market-plugin/
  * Description: WordPress Theme & Plugin management for the Envato Market.
  * Version: 2.0.0
  * Author: Envato
- * Author URI: https://github.com/envato/wp-envato-market
+ * Author URI: https://envato.com
  * Requires at least: 4.9
  * Tested up to: 4.9.4
  * Text Domain: envato-market
