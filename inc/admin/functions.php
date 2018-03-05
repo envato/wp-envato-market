@@ -34,7 +34,6 @@ function envato_market_themes_column( $group = 'install' ) {
 				$author      = $get_theme->get( 'Author' );
 				$version     = $get_theme->get( 'Version' );
 				$description = $get_theme->get( 'Description' );
-				$url         = $get_theme->get( 'ThemeURI' );
 				$author_url  = $get_theme->get( 'AuthorURI' );
 				if ( version_compare( $version, $theme['version'], '<' ) ) {
 					$theme['hasUpdate'] = true;
@@ -75,18 +74,9 @@ function envato_market_themes_column( $group = 'install' ) {
 					esc_html__( 'Update Available', 'envato-market' )
 				);
 
-				// Details link.
-				$details_link = add_query_arg(
-					array(
-						'TB_iframe' => 'true',
-						'width'     => 640,
-						'height'    => 662,
-					), $url
-				);
-
 				$update_actions['details'] = sprintf(
-					'<a href="%1$s" class="thickbox details" title="%2$s">%3$s</a>',
-					esc_url( $details_link ),
+					'<a href="%1$s" class="details" title="%2$s" target="_blank">%3$s</a>',
+					esc_url( $url ),
 					esc_attr( $name ),
 					sprintf(
 						__( 'View version %1$s details.', 'envato-market' ),
