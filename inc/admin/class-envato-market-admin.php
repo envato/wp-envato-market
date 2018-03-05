@@ -104,6 +104,9 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 			// Deferred Download.
 			add_action( 'upgrader_package_options', array( $this, 'maybe_deferred_download' ), 99 );
 
+			// Add pre download filter to help with 3rd party plugin integration.
+			add_filter( 'upgrader_pre_download', array( $this, 'upgrader_pre_download' ), 2, 4 );
+
 			// Add item AJAX handler.
 			add_action( 'wp_ajax_' . self::AJAX_ACTION . '_add_item', array( $this, 'ajax_add_item' ) );
 
@@ -151,7 +154,7 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 		 *     @type array  $hook_extra                  Extra hook arguments.
 		 * }
 		 */
-		function maybe_deferred_download( $options ) {
+		public function maybe_deferred_download( $options ) {
 			$package = $options['package'];
 			if ( false !== strrpos( $package, 'deferred_download' ) && false !== strrpos( $package, 'item_id' ) ) {
 				parse_str( parse_url( $package, PHP_URL_QUERY ), $vars );
@@ -161,6 +164,32 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 				}
 			}
 			return $options;
+		}
+
+		/**
+		 * We want to stop certain popular 3rd party scripts from blocking the update process by
+		 * adjusting the plugin name slightly so the 3rd party plugin checks stop.
+		 *
+		 * Currently works for: Visual Composer.
+		 *
+		 * @since 2.0.0
+		 *
+		 * @param string $reply     Package URL.
+		 * @param string $package   Package URL.
+		 * @param object $updater   Updater Object.
+		 * @return string $reply    New Package URL.
+		 */
+		public function upgrader_pre_download( $reply, $package, $updater ) {
+			if ( strpos( $package, 'marketplace.envato.com/short-dl' ) !== false ) {
+				if ( isset( $updater->skin->plugin_info ) && ! empty( $updater->skin->plugin_info['Name'] ) ) {
+					$updater->skin->plugin_info['Name'] = $updater->skin->plugin_info['Name'] . '.';
+				} else {
+					$updater->skin->plugin_info = array(
+						'Name' => 'Name',
+					);
+				}
+			}
+			return $reply;
 		}
 
 		/**
