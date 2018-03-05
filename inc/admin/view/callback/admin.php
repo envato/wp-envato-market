@@ -17,7 +17,7 @@ if ( isset( $_GET['action'] ) ) {
 } else {
 	add_thickbox();
 	?>
-	<div class="wrap about-wrap">
+	<div class="wrap about-wrap full-width-layout">
 		<?php Envato_Market_Admin::render_intro_partial(); ?>
 		<?php Envato_Market_Admin::render_tabs_partial(); ?>
 		<form method="POST" action="options.php">

@@ -93,7 +93,7 @@
 	}
 
 	.col {
-		margin-bottom: 4.799999999%;
+		margin-bottom: 20px;
 	}
 
 	.screenshot-image {
@@ -453,6 +453,10 @@
 
 			.col-1 {
 				clear: both;
+			}
+
+			.col-2 {
+				float: right;
 			}
 		}
 
