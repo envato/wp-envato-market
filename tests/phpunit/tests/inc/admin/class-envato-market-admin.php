@@ -388,7 +388,7 @@ class Tests_Envato_Market_Admin extends WP_UnitTestCase {
 		ob_start();
 		$this->admin->render_admin_callback();
 		$contents = ob_get_clean();
-		$this->assertContains( '<div class="wrap about-wrap">', $contents );
+		$this->assertContains( '<div class="wrap about-wrap full-width-layout">', $contents );
 		$this->assertContains( '<form method="POST" action="options.php"', $contents );
 	}
 
