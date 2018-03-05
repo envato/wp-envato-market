@@ -40,6 +40,8 @@ define( 'ENVATO_MARKET_URI', trailingslashit( plugin_dir_url( __FILE__ ) ) );
 
 if ( ! version_compare( PHP_VERSION, '5.4', '>=' ) ) {
 	add_action( 'admin_notices', 'envato_market_fail_php_version' );
+} elseif ( ENVATO_MARKET_SLUG !== 'envato-market' ) {
+	add_action( 'admin_notices', 'envato_market_fail_installation_method' );
 } else {
 
 	/* Envato_Market Class */
@@ -83,13 +85,32 @@ if ( ! function_exists( 'envato_market_fail_php_version' ) ) {
 	/**
 	 * Show in WP Dashboard notice about the plugin is not activated.
 	 *
-	 * @since 1.0.0
+	 * @since 2.0.0
 	 *
 	 * @return void
 	 */
 	function envato_market_fail_php_version() {
-		$message      = esc_html__( 'The Envato Market plugin requires PHP version 5.4+, plugin is currently NOT ACTIVE.', 'envato-market' );
-		$html_message = sprintf( '<div class="error">%s</div>', wpautop( $message ) );
+		$message      = esc_html__( 'The Envato Market plugin requires PHP version 5.4+, plugin is currently NOT ACTIVE. Please contact the hosting provider to upgrade the version of PHP.', 'envato-market' );
+		$html_message = sprintf( '<div class="notice notice-error">%s</div>', wpautop( $message ) );
+		echo wp_kses_post( $html_message );
+	}
+}
+
+
+
+if ( ! function_exists( 'envato_market_fail_installation_method' ) ) {
+
+	/**
+	 * The plugin needs to be installed into the `envato-market/` folder otherwise it will not work correctly.
+	 * This alert will display if someone has installed it into the incorrect folder (i.e. github download zip).
+	 *
+	 * @since 2.0.0
+	 *
+	 * @return void
+	 */
+	function envato_market_fail_installation_method() {
+		$message      = sprintf( esc_html__( 'Envato Market plugin is not installed correctly. Please delete this plugin and get the correct zip file from %s.', 'envato-market' ), '<a href="https://envato.com/market-plugin/" target="_blank">https://envato.com/market-plugin/</a>' );
+		$html_message = sprintf( '<div class="notice notice-error">%s</div>', wpautop( $message ) );
 		echo wp_kses_post( $html_message );
 	}
 }
