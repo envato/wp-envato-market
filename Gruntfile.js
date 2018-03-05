@@ -181,7 +181,11 @@ module.exports = function( grunt ) {
 					'!readme.md',
 					'!sass/**',
 					'!tests/**',
-					'!vendor/**'
+					'!bin/**',
+					'!vendor/**',
+					'!package-lock.json',
+					'!phpcs.xml.dist',
+					'!composer.lock'
 				],
 				dest: 'dist/<%= pkg.name %>',
 				expand: true,
