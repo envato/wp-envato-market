@@ -28,3 +28,5 @@ Installing the Envato Market plugin.
 == Contributing ==
 
 **Pull requests are welcome.** Please review the [guidelines for contributing](https://github.com/envato/wp-envato-market/blob/master/contributing.md) and [code of conduct](https://github.com/envato/wp-envato-market/blob/master/code_of_conduct.md) before contributing to this repository.
+
+Testing build.
