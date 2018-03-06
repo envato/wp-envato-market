@@ -20,7 +20,7 @@ You can add a global token to connect all your items from your account, and/or c
 
 ## Installation ##
 
-The latest version of the Envato Market plugin ZIP file can be [**downloaded**](https://envato.github.io/wp-envato-market/dist/envato-market.zip) from https://envato.github.io/wp-envato-market/
+The latest version of the Envato Market plugin ZIP file can be [**downloaded**](https://envato.github.io/wp-envato-market/dist/envato-market.zip) from https://envato.com/market-plugin/
 
 Installing the Envato Market plugin.
 
