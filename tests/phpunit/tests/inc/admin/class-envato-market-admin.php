@@ -440,7 +440,7 @@ class Tests_Envato_Market_Admin extends WP_UnitTestCase {
 		ob_start();
 		$this->admin->render_intro_partial();
 		$contents = ob_get_clean();
-		$this->assertContains( '<h1 class="about-title"><strong>Envato Market</strong> <sup>' . envato_market()->get_version() . '</sup></h1>', $contents );
+		$this->assertContains( '<p>Welcome!</p>', $contents );
 	}
 
 	/**
