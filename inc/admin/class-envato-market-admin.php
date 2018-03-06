@@ -38,7 +38,7 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 		 *
 		 * Ensures only one instance of this class exists in memory at any one time.
 		 *
-		 * @see Envato_Market_Admin()
+		 * @see  Envato_Market_Admin()
 		 * @uses Envato_Market_Admin::init_actions() Setup hooks and actions.
 		 *
 		 * @since 1.0.0
@@ -145,13 +145,13 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 		 * @param array $options {
 		 *     Options used by the upgrader.
 		 *
-		 *     @type string $package                     Package for update.
-		 *     @type string $destination                 Update location.
-		 *     @type bool   $clear_destination           Clear the destination resource.
-		 *     @type bool   $clear_working               Clear the working resource.
-		 *     @type bool   $abort_if_destination_exists Abort if the Destination directory exists.
-		 *     @type bool   $is_multi                    Whether the upgrader is running multiple times.
-		 *     @type array  $hook_extra                  Extra hook arguments.
+		 * @type string $package Package for update.
+		 * @type string $destination Update location.
+		 * @type bool   $clear_destination Clear the destination resource.
+		 * @type bool   $clear_working Clear the working resource.
+		 * @type bool   $abort_if_destination_exists Abort if the Destination directory exists.
+		 * @type bool   $is_multi Whether the upgrader is running multiple times.
+		 * @type array  $hook_extra Extra hook arguments.
 		 * }
 		 */
 		public function maybe_deferred_download( $options ) {
@@ -163,6 +163,7 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 					$options['package'] = envato_market()->api()->download( $vars['item_id'], $args );
 				}
 			}
+
 			return $options;
 		}
 
@@ -174,9 +175,10 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 		 *
 		 * @since 2.0.0
 		 *
-		 * @param string $reply     Package URL.
-		 * @param string $package   Package URL.
-		 * @param object $updater   Updater Object.
+		 * @param string $reply Package URL.
+		 * @param string $package Package URL.
+		 * @param object $updater Updater Object.
+		 *
 		 * @return string $reply    New Package URL.
 		 */
 		public function upgrader_pre_download( $reply, $package, $updater ) {
@@ -189,6 +191,7 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 					);
 				}
 			}
+
 			return $reply;
 		}
 
@@ -198,6 +201,7 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 		 * @since 1.0.0
 		 *
 		 * @param int $id The item ID.
+		 *
 		 * @return array
 		 */
 		public function set_bearer_args( $id ) {
@@ -216,6 +220,7 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 					),
 				);
 			}
+
 			return $args;
 		}
 
@@ -234,6 +239,12 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 				}
 
 				self::delete_transients();
+			} elseif ( ! get_option( envato_market()->get_option_name() . '_installed_version', 0 ) || version_compare( envato_market()->get_version(), get_option( envato_market()->get_option_name() . '_installed_version', 0 ), '<' ) ) {
+
+				// When the plugin updates we want to delete transients.
+				update_option( envato_market()->get_option_name() . '_installed_version', envato_market()->get_version() );
+				self::delete_transients();
+
 			}
 		}
 
@@ -344,7 +355,12 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 		 * @since 1.0.0
 		 */
 		public function add_menu_page() {
-			$page = add_menu_page( __( 'Envato Market', 'envato-market' ), __( 'Envato Market', 'envato-market' ), 'manage_options', envato_market()->get_slug(), array( $this, 'render_admin_callback' ) );
+			$page = add_menu_page(
+				__( 'Envato Market', 'envato-market' ), __( 'Envato Market', 'envato-market' ), 'manage_options', envato_market()->get_slug(), array(
+					$this,
+					'render_admin_callback',
+				)
+			);
 
 			// Enqueue admin CSS.
 			add_action( 'admin_print_styles-' . $page, array( $this, 'admin_enqueue_style' ) );
@@ -377,8 +393,21 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 			$version    = envato_market()->get_version();
 			$plugin_url = envato_market()->get_plugin_url();
 
-			wp_enqueue_script( $slug, $plugin_url . 'js/envato-market' . $min . '.js', array( 'jquery', 'jquery-ui-dialog', 'wp-util' ), $version, true );
-			wp_enqueue_script( $slug . '-updates', $plugin_url . 'js/updates' . $min . '.js', array( 'jquery', 'updates', 'wp-a11y', 'wp-util' ), $version, true );
+			wp_enqueue_script(
+				$slug, $plugin_url . 'js/envato-market' . $min . '.js', array(
+					'jquery',
+					'jquery-ui-dialog',
+					'wp-util',
+				), $version, true
+			);
+			wp_enqueue_script(
+				$slug . '-updates', $plugin_url . 'js/updates' . $min . '.js', array(
+					'jquery',
+					'updates',
+					'wp-a11y',
+					'wp-util',
+				), $version, true
+			);
 
 			// Script data array.
 			$exports = array(
@@ -436,12 +465,12 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 					<form>
 						<fieldset>
 							<label for="token"><?php esc_html_e( 'Token', 'envato-market' ); ?></label>
-							<input type="text" name="token" class="widefat" value="" />
+							<input type="text" name="token" class="widefat" value=""/>
 							<p class="description"><?php esc_html_e( 'Enter the Envato API Personal Token.', 'envato-market' ); ?></p>
 							<label for="id"><?php esc_html_e( 'Item ID', 'envato-market' ); ?></label>
-							<input type="text" name="id" class="widefat" value="" />
+							<input type="text" name="id" class="widefat" value=""/>
 							<p class="description"><?php esc_html_e( 'Enter the Envato Item ID.', 'envato-market' ); ?></p>
-							<input type="submit" tabindex="-1" style="position:absolute; top:-5000px" />
+							<input type="submit" tabindex="-1" style="position:absolute; top:-5000px"/>
 						</fieldset>
 					</form>
 				</div>
@@ -736,6 +765,7 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 		 * @since 1.0.0
 		 *
 		 * @param string $type The filter type, either 'themes' or 'plugins'. Default 'themes'.
+		 *
 		 * @return bool|null
 		 */
 		public function authorize_items( $type = 'themes' ) {
