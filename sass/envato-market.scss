@@ -184,7 +184,7 @@
 	background-color: #fff;
 	border: 1px solid #dedede;
 	box-sizing: border-box;
-	margin:0 20px 0 0;
+	margin:0;
 
 	&.active {
 		border-color: #aaa;
@@ -464,6 +464,16 @@
 			}
 		}
 
+		.two-col .col {
+			width: 49% !important;
+			min-width: 49% !important;
+			max-width: 49% !important;
+		}
+
+		.two-col .col:nth-child(even) {
+			float: right !important;
+		}
+
 		#themes,
 		#plugins {
 			margin-top: 1.618em;
@@ -502,8 +512,10 @@
 			}
 		}
 
+		.two-col .col,
 		.col {
 			width: 100% !important;
+			max-width: 100% !important;
 			margin-right: 0 !important;
 		}
 
