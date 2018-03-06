@@ -189,6 +189,9 @@
   box-sizing: border-box;
   margin: 0;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 
   &.active {
     border-color: #aaa;
@@ -198,6 +201,7 @@
     min-height: 140px;
     padding: 20px;
     position: relative;
+    flex-grow: 1;
 
     .column-icon {
       height: 80px;
