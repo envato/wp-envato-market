@@ -399,7 +399,7 @@ class Tests_Envato_Market_Admin extends WP_UnitTestCase {
 		ob_start();
 		$this->admin->render_oauth_section_callback();
 		$contents = ob_get_clean();
-		$this->assertContains( '<a href="https://build.envato.com/create-token/?purchase:download=t&purchase:verify=t&purchase:list=t" target="_blank">generate a personal token</a>', $contents );
+		$this->assertContains( 'Generate an Envato API Personal Token by <a href="https://build.envato.com/create-token/?purchase:download=t&purchase:verify=t&purchase:list=t" target="_blank">clicking this link</a>', $contents );
 	}
 
 	/**
@@ -460,7 +460,7 @@ class Tests_Envato_Market_Admin extends WP_UnitTestCase {
 		ob_start();
 		$this->admin->render_settings_panel_partial();
 		$contents = ob_get_clean();
-		$this->assertContains( '<div id="settings" class="two-col panel">', $contents );
+		$this->assertContains( '<div id="settings" class="panel">', $contents );
 	}
 
 	/**
