@@ -266,22 +266,14 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 				return;
 			}
 			// @codeCoverageIgnoreEnd
-			$index = 0;
-
 			foreach ( (array) $wp_settings_sections[ $page ] as $section ) {
 				// @codeCoverageIgnoreStart
 				if ( ! isset( $wp_settings_fields ) || ! isset( $wp_settings_fields[ $page ] ) || ! isset( $wp_settings_fields[ $page ][ $section['id'] ] ) ) {
 					continue;
 				}
 				// @codeCoverageIgnoreEnd
-				$index++;
-
 				// Set the column class.
-				$class = 'col col-' . $index;
-				if ( $columns === $index ) {
-					$class .= ' last-feature';
-					$index  = 0;
-				}
+				$class = 'envato-market-block';
 				?>
 				<div class="<?php echo esc_attr( $class ); ?>">
 					<?php
@@ -462,7 +454,7 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 			</script>
 
 			<script type="text/html" id="tmpl-envato-market-card">
-				<div class="col" data-id="{{ data.id }}">
+				<div class="envato-market-block" data-id="{{ data.id }}">
 					<div class="envato-card {{ data.type }}">
 						<div class="envato-card-top">
 							<a href="{{ data.url }}" class="column-icon">
@@ -509,7 +501,7 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 			// OAuth section.
 			add_settings_section(
 				envato_market()->get_option_name() . '_oauth_section',
-				__( 'Global OAuth Personal Token', 'envato-market' ),
+				__( 'Activate Envato API Connection', 'envato-market' ),
 				array( $this, 'render_oauth_section_callback' ),
 				envato_market()->get_slug()
 			);
@@ -526,7 +518,7 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 			// Items section.
 			add_settings_section(
 				envato_market()->get_option_name() . '_items_section',
-				__( 'Single Use OAuth Personal Tokens', 'envato-market' ),
+				__( 'Single Item Tokens (Advanced)', 'envato-market' ),
 				array( $this, 'render_items_section_callback' ),
 				envato_market()->get_slug()
 			);

@@ -32,7 +32,6 @@
         self.addItem();
         self.removeItem();
         self.tabbedNav();
-        self.addReadmore();
 
         $( '.envato-card' ).on( 'click', 'a.thickbox', function() {
           tb_click.call( this );
@@ -40,20 +39,6 @@
           self.cache.$window.trigger( 'resize' );
           return false;
         });
-      });
-    },
-
-    addReadmore: function() {
-      $( '.envato-card .envato-card-top .column-description .description' ).each(function() {
-        if ( 15 < parseInt( $.trim( $( this ).html() ).split( /[\s\.\(\),]+/ ).length, 10 ) ) {
-          $( this ).addClass( 'closed' ).after( '<a href="#" class="read-more closed">&hellip;</a>' );
-        }
-      });
-
-      $( '.envato-card' ).on( 'click', 'a.read-more', function( event ) {
-        event.preventDefault();
-        $( this ).prev( '.description' ).toggleClass( 'closed' );
-        $( this ).toggleClass( 'closed' );
       });
     },
 
