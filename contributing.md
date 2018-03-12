@@ -29,38 +29,54 @@ We're really excited that you are interested in contributing to the Envato Marke
 #### Install VaryingVagrantVagrants
 
 1. Install Vagrant/VirtualBox/Plugins by following [these instructions](https://varyingvagrantvagrants.org/docs/en-US/installation/software-requirements/) then:
-1. `git clone -b master git://github.com/Varying-Vagrant-Vagrants/VVV.git envato-market-vvv`
-1. `cd envato-market-vvv`
-1. create a file called `vvv-custom.yml` containing this:
-    ```
-    sites:
-      envato-market:
-        repo: https://github.com/Varying-Vagrant-Vagrants/custom-site-template.git
-        hosts:
-          - envato-market.test
-
-    utilities:
-      core:
-        - memcached-admin
-        - opcache-status
-        - phpmyadmin
-        - webgrind
-    ```
+1. `git clone -b master git://github.com/Varying-Vagrant-Vagrants/VVV.git ~/vagrant-local/`
+1. `cd ~/vagrant-local/`
 1. `vagrant up` (can take 30-60mins first time)
-1. Test you can access `http://envato-market.test` from your browser.
+1. Test you can access `http://src.wordpress-develop.test/` from your browser.
 1. Note: If you see `phpcs not found` or composer errors during setup it means you need a Github token, try running a manual provision to get prompted for a Github token: `vagrant ssh` then once connected run `sudo /vagrant/provision/provision.sh` and follow the prompts.
 
-#### Setup the WordPress plugin for development.
+#### Setup a new WordPress site for local development.
+
+1. `cd ~/vagrant-local/`
+1. `cp vvv-config.yml vvv-custom.yml`
+1. edit `vvv-custom.yml` and add a new entry under `sites:` like this:
+    ```
+     envato-market:
+        repo: https://github.com/dtbaker/vvv.envato-market.test.git
+        hosts:
+          - vvv.envato-market.test
+    ```
+1. `vagrant reload --provision`
+1. Confirm you can access the new site here: `http://vvv.envato-market.test/`
+1. Confirm you can login here: `http://vvv.envato-market.test/wp-admin/` (default login is dev/dev)
+
+
+
+1. `cd ~/vagrant-local/www/`
+1. `git clone --recursive git@github.com:dtbaker/vvv.envato-market.test.git envato-market`
+1. `cd envato-market`
+1. `vagrant reload --provision`
+1. Test you can now access `http://vvv.envato-market.test`
+
+#### Confirm tests run via VVV
+
+1. `cd ~/vagrant-local/www/envato-market/docroot/wp-content/plugins/envato-market/`
+1. `grunt phpunit`
+
+#### Make changes:
+
+1. Make changes to the github repository at `~/vagrant-local/www/envato-market/docroot/wp-content/plugins/envato-market/`
+1. Test changes via `http://vvv.envato-market.test`
+
 
 1. Ensure the site directory exists: `www/envato-market/public_html/wp-content/`
-1. Clone the `develop` branch of this plugin: `git clone -b develop git://github.com/envato/wp-envato-market.git www/envato-market/public_html/wp-content/plugins/envato-market/`
+1. Clone the `develop` branch of this plugin: `git clone -b develop --recurse-submodules git://github.com/envato/wp-envato-market.git www/envato-market/public_html/wp-content/plugins/envato-market/`
 1. `cd www/envato-market/public_html/wp-content/plugins/envato-market/`
 1. `composer install`
 1. `npm install`
+1. Setup git hook: `./dev-lib/install-pre-commit-hook.sh`
 1. Login to local development `http://envato-market.test/wp-admin/` ( default is admin/password )
 1. Enable Envato Market plugin through WordPress UI
-
-#### Confirm tests run via VVV
 
 
 
