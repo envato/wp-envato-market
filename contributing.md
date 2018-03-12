@@ -28,45 +28,45 @@ We're really excited that you are interested in contributing to the Envato Marke
 
 #### Install VaryingVagrantVagrants
 
-1. Install Vagrant/VirtualBox/Plugins by following [these instructions](https://varyingvagrantvagrants.org/docs/en-US/installation/software-requirements/) then:
-1. `git clone -b master git://github.com/Varying-Vagrant-Vagrants/VVV.git ~/vagrant-local/`
-1. `cd ~/vagrant-local/`
-1. `vagrant up` (can take 30-60mins first time)
-1. Test you can access `http://src.wordpress-develop.test/` from your browser.
-1. Note: If you see `phpcs not found` or composer errors during setup it means you need a Github token, try running a manual provision to get prompted for a Github token: `vagrant ssh` then once connected run `sudo /vagrant/provision/provision.sh` and follow the prompts.
+- Install Vagrant/VirtualBox/Plugins by following [these instructions](https://varyingvagrantvagrants.org/docs/en-US/installation/software-requirements/) then:
+- `git clone -b master git://github.com/Varying-Vagrant-Vagrants/VVV.git ~/vagrant-local/`
+- `cd ~/vagrant-local/`
+- `vagrant up` (can take 30-60mins first time)
+- Test you can access `http://src.wordpress-develop.test/` from your browser.
+- Note: If you see `phpcs not found` or composer errors during setup it means you need a Github token, try running a manual provision to get prompted for a Github token: `vagrant ssh` then once connected run `sudo /vagrant/provision/provision.sh` and follow the prompts.
 
 #### Setup a new WordPress site for local development.
 
-1. `cd ~/vagrant-local/`
-1. `cp vvv-config.yml vvv-custom.yml`
-1. edit `vvv-custom.yml` and add a new entry under `sites:` like this:
+- `cd ~/vagrant-local/`
+- `cp vvv-config.yml vvv-custom.yml`
+- edit `vvv-custom.yml` and add a new entry under `sites:` like this:
     ```
      envato-market:
         repo: https://github.com/dtbaker/vvv.envato-market.test.git
         hosts:
           - vvv.envato-market.test
     ```
-1. `vagrant reload --provision`
-1. Confirm you can access the new site here: `http://vvv.envato-market.test/`
-1. Confirm you can login here: `http://vvv.envato-market.test/wp-admin/` (default login is dev/dev)
-1. Confirm the WordPress plugin is activated.
+- `vagrant reload --provision`
+- Confirm you can access the new site here: `http://vvv.envato-market.test/`
+- Confirm you can login here: `http://vvv.envato-market.test/wp-admin/` (default login is dev/dev)
+- Confirm the WordPress plugin is activated.
 
 #### Confirm grunt works:
 
-1. `cd ~/vagrant-local/www/envato-market/docroot/wp-content/plugins/envato-market/`
-1. `grunt`
-1. Note: If you receive any 'node rebuild' error, try running `npm rebuild`
+- `cd ~/vagrant-local/www/envato-market/docroot/wp-content/plugins/envato-market/`
+- `grunt`
+- Note: If you receive any 'node rebuild' error, try running `npm rebuild`
 
 #### Confirm tests run via VVV
 
-1. `cd ~/vagrant-local/www/envato-market/docroot/wp-content/plugins/envato-market/`
-1. `grunt phpunit`
+- `cd ~/vagrant-local/www/envato-market/docroot/wp-content/plugins/envato-market/`
+- `grunt phpunit`
 
 #### Make changes:
 
-1. Make changes to the github repository at `~/vagrant-local/www/envato-market/docroot/wp-content/plugins/envato-market/`
-1. Test changes via `http://vvv.envato-market.test`
-1. Commit changes to a new branch and make a pull request against the `develop` branch.
+- Make changes to the github repository at `~/vagrant-local/www/envato-market/docroot/wp-content/plugins/envato-market/`
+- Test changes via `http://vvv.envato-market.test`
+- Commit changes to a new branch and make a pull request against the `develop` branch.
 
 
 ## Grunt tasks:
