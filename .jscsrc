@@ -3,7 +3,6 @@
 	"requireCamelCaseOrUpperCaseIdentifiers": null,
 	"excludeFiles": [
 		"**/*.min.js",
-		"**/*.jsx",
 		"**/node_modules/**",
 		"**/vendor/**"
 	]
