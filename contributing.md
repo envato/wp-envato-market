@@ -49,14 +49,13 @@ We're really excited that you are interested in contributing to the Envato Marke
 1. `vagrant reload --provision`
 1. Confirm you can access the new site here: `http://vvv.envato-market.test/`
 1. Confirm you can login here: `http://vvv.envato-market.test/wp-admin/` (default login is dev/dev)
+1. Confirm the WordPress plugin is activated.
 
+#### Confirm grunt works:
 
-
-1. `cd ~/vagrant-local/www/`
-1. `git clone --recursive git@github.com:dtbaker/vvv.envato-market.test.git envato-market`
-1. `cd envato-market`
-1. `vagrant reload --provision`
-1. Test you can now access `http://vvv.envato-market.test`
+1. `cd ~/vagrant-local/www/envato-market/docroot/wp-content/plugins/envato-market/`
+1. `grunt`
+1. Note: If you receive any 'node rebuild' error, try running `npm rebuild`
 
 #### Confirm tests run via VVV
 
@@ -67,43 +66,10 @@ We're really excited that you are interested in contributing to the Envato Marke
 
 1. Make changes to the github repository at `~/vagrant-local/www/envato-market/docroot/wp-content/plugins/envato-market/`
 1. Test changes via `http://vvv.envato-market.test`
+1. Commit changes to a new branch and make a pull request against the `develop` branch.
 
 
-1. Ensure the site directory exists: `www/envato-market/public_html/wp-content/`
-1. Clone the `develop` branch of this plugin: `git clone -b develop --recurse-submodules git://github.com/envato/wp-envato-market.git www/envato-market/public_html/wp-content/plugins/envato-market/`
-1. `cd www/envato-market/public_html/wp-content/plugins/envato-market/`
-1. `composer install`
-1. `npm install`
-1. Setup git hook: `./dev-lib/install-pre-commit-hook.sh`
-1. Login to local development `http://envato-market.test/wp-admin/` ( default is admin/password )
-1. Enable Envato Market plugin through WordPress UI
-
-
-
-
-#### Install VaryingVagrantVagrants
-
-You will need [Node.js](http://nodejs.org), [Grunt](http://gruntjs.com), & [PHPUnit](https://phpunit.de/getting-started.html) installed on your system. To run the unit tests you must be developing within the WordPress Core. The simplest method to get a testing environment up is by using [Varying Vagrant Vagrants](https://github.com/Varying-Vagrant-Vagrants/VVV). However, to setup manually follow these instructions:
-
-1. [Install WordPress CLI](http://wp-cli.org/#installing)
-1. Install Subversion & PHP Unit ( e.g. `apt install subversion phpunit libxml2-utils` )
-1. Install copy of WordPress core locally (e.g. in a LAMP/MAMP stack) `wp core install`
-1. Visit WordPress install in local browser (e.g. `http://local.test/wordpress/`) and complete the WordPress installation process.
-1. Checkout this repository into the wp-content/plugin/envato-market folder (not `wp-envato-market`)
-1. Install the plugin tests `wp scaffold plugin-tests envato-market` (choose skip if prompted to overwrite files)
-1. Enter plugin directory: `cd wp-content/plugins/envato-market/`
-1. Install required dev packages `npm install`
-1. Install composer packages `composer install`
-1. Setup git hook: `./dev-lib/install-pre-commit-hook.sh`
-1. Confim grunt tasks work `grunt` (see below for more on grunt tasks)
-1. Install phpunit test files `bash bin/install-wp-tests.sh` (enter db credentials as required)
-1. Run phpunit tests `phpunit` (see below for more on phpunit tests)
-1. Install the PHP Coding Standards: `composer create-project wp-coding-standards/wpcs:dev-master --no-dev` (answer `N` to overwriting .git directory)
-1. Run PHPCS tests `./vendor/squizlabs/php_codesniffer/bin/phpcs`
-
-
-
-### Grunt tasks:
+## Grunt tasks:
 
 To lint:
 
@@ -137,7 +103,7 @@ $ grunt makepot
 
 The default task (simply running `grunt`) will do the following: `jshint -> css -> uglify`.
 
-### PHPUnit Testing
+## PHPUnit Testing
 
 Run tests:
 
