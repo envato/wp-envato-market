@@ -44,9 +44,14 @@ if ( ! version_compare( PHP_VERSION, '5.4', '>=' ) ) {
 	add_action( 'admin_notices', 'envato_market_fail_installation_method' );
 } else {
 
+	if ( ! function_exists( 'is_plugin_active_for_network' ) ) {
+		// Makes sure the plugin is defined before trying to use it
+		require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+	}
+	define("ENVATO_MARKET_NETWORK_ACTIVATED", is_plugin_active_for_network( ENVATO_MARKET_SLUG . '/envato-market.php'));
+
 	/* Envato_Market Class */
 	require_once ENVATO_MARKET_PATH . 'inc/class-envato-market.php';
-
 
 	if ( ! function_exists( 'envato_market' ) ) :
 		/**

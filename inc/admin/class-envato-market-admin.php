@@ -133,6 +133,12 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 
 			// Set the API values.
 			add_action( 'current_screen', array( $this, 'set_items' ) );
+
+			// When network enabled:
+			add_action( 'network_admin_menu', array( $this, 'add_menu_page' ) );
+
+			// Ability to make use of the Settings API when in multisite mode.
+			add_action( 'network_admin_edit_envato_market_network_settings', array( $this, 'save_network_settings') );
 		}
 
 		/**
@@ -239,10 +245,10 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 				}
 
 				self::delete_transients();
-			} elseif ( ! get_option( envato_market()->get_option_name() . '_installed_version', 0 ) || version_compare( envato_market()->get_version(), get_option( envato_market()->get_option_name() . '_installed_version', 0 ), '<' ) ) {
+			} elseif ( ! envato_market()->get_option( 'installed_version', 0 ) || version_compare( envato_market()->get_version(), envato_market()->get_option( 'installed_version', 0 ), '<' ) ) {
 
 				// When the plugin updates we want to delete transients.
-				update_option( envato_market()->get_option_name() . '_installed_version', envato_market()->get_version() );
+				envato_market()->set_option( 'installed_version', envato_market()->get_version() );
 				self::delete_transients();
 
 			}
@@ -355,6 +361,12 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 		 * @since 1.0.0
 		 */
 		public function add_menu_page() {
+
+			if( ENVATO_MARKET_NETWORK_ACTIVATED && ! is_super_admin() ){
+				// we do not want to show a menu item for people who do not have permission.
+				return;
+			}
+
 			$page = add_menu_page(
 				__( 'Envato Market', 'envato-market' ), __( 'Envato Market', 'envato-market' ), 'manage_options', envato_market()->get_slug(), array(
 					$this,
@@ -569,7 +581,7 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 		 * @codeCoverageIgnore
 		 */
 		public function maybe_redirect() {
-			if ( 'toplevel_page_' . envato_market()->get_slug() === get_current_screen()->id ) {
+			if ( $this->are_we_on_settings_page() ) {
 
 				if ( ! empty( $_GET['action'] ) && 'install-theme' === $_GET['action'] && ! empty( $_GET['enabled'] ) ) {
 					wp_safe_redirect( esc_url( envato_market()->get_page_url() ) );
@@ -584,7 +596,8 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 		 * @since 1.0.0
 		 */
 		public function add_notices() {
-			if ( 'toplevel_page_' . envato_market()->get_slug() === get_current_screen()->id ) {
+
+			if ( $this->are_we_on_settings_page() ) {
 
 				// @codeCoverageIgnoreStart
 				if ( isset( $_GET['authorization'] ) && 'check' === $_GET['authorization'] ) {
@@ -625,7 +638,8 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 
 					// Update the saved data so the notice disappears on the next page load.
 					unset( $option['notices'] );
-					update_option( envato_market()->get_option_name(), $option );
+
+					envato_market()->set_options( $option );
 				}
 			}
 		}
@@ -636,10 +650,20 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 		 * @since 1.0.0
 		 */
 		public function set_items() {
-			if ( 'toplevel_page_' . envato_market()->get_slug() === get_current_screen()->id ) {
+			if ( $this->are_we_on_settings_page() ) {
 				envato_market()->items()->set_themes();
 				envato_market()->items()->set_plugins();
 			}
+		}
+
+		/**
+		 * Check if we're on the settings page.
+		 *
+		 * @since 2.0.0
+		 * @access private
+		 */
+		private function are_we_on_settings_page() {
+			return 'toplevel_page_' . envato_market()->get_slug() === get_current_screen()->id || 'toplevel_page_' . envato_market()->get_slug() .'-network' === get_current_screen()->id;
 		}
 
 		/**
@@ -737,7 +761,7 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 
 			// Set the option array.
 			if ( isset( $option['notices'] ) ) {
-				update_option( envato_market()->get_option_name(), $option );
+				envato_market()->set_options( $option );
 			}
 		}
 
@@ -989,7 +1013,7 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 
 				$options['items'][] = $response;
 
-				update_option( envato_market()->get_option_name(), $options );
+				envato_market()->set_options( $options );
 
 				// Rebuild the theme cache.
 				if ( 'theme' === $type ) {
@@ -1058,7 +1082,7 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 			}
 			$options['items'] = array_values( $options['items'] );
 
-			update_option( envato_market()->get_option_name(), $options );
+			envato_market()->set_options( $options );
 
 			// Rebuild the theme cache.
 			if ( 'theme' === $type ) {
@@ -1206,6 +1230,30 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 		 */
 		public function render_error_single_use_notice() {
 			require( envato_market()->get_plugin_path() . 'inc/admin/view/notice/error-single-use.php' );
+		}
+
+		/**
+		 * Use the Settings API when in network mode.
+		 *
+		 * This allows us to make use of the same WordPress Settings API when displaying the menu item in network mode.
+		 *
+		 * @since 2.0.0
+		 */
+		public function save_network_settings() {
+			check_admin_referer( envato_market()->get_slug() . '-options');
+
+			global $new_whitelist_options;
+			$options = $new_whitelist_options[ envato_market()->get_slug() ];
+
+			foreach ($options as $option) {
+				if (isset($_POST[$option])) {
+					update_site_option($option, $_POST[$option]);
+				} else {
+					delete_site_option($option);
+				}
+			}
+			wp_redirect( envato_market()->get_page_url() );
+			exit;
 		}
 	}
 
