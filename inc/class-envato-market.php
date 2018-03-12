@@ -317,7 +317,7 @@ if ( ! class_exists( 'Envato_Market' ) ) :
 		 *
 		 * @since 2.0.0
 		 *
-		 * @param mixed  $options Option data.
+		 * @param mixed $options Option data.
 		 */
 		public function set_options( $options ) {
 			ENVATO_MARKET_NETWORK_ACTIVATED ? update_site_option( $this->option_name, $options ) : update_option( $this->option_name, $options );

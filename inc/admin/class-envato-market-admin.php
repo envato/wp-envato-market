@@ -134,11 +134,11 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 			// Set the API values.
 			add_action( 'current_screen', array( $this, 'set_items' ) );
 
-			// When network enabled:
+			// When network enabled, add the network options menu.
 			add_action( 'network_admin_menu', array( $this, 'add_menu_page' ) );
 
 			// Ability to make use of the Settings API when in multisite mode.
-			add_action( 'network_admin_edit_envato_market_network_settings', array( $this, 'save_network_settings') );
+			add_action( 'network_admin_edit_envato_market_network_settings', array( $this, 'save_network_settings' ) );
 		}
 
 		/**
@@ -362,7 +362,7 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 		 */
 		public function add_menu_page() {
 
-			if( ENVATO_MARKET_NETWORK_ACTIVATED && ! is_super_admin() ){
+			if ( ENVATO_MARKET_NETWORK_ACTIVATED && ! is_super_admin() ) {
 				// we do not want to show a menu item for people who do not have permission.
 				return;
 			}
@@ -663,7 +663,7 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 		 * @access private
 		 */
 		private function are_we_on_settings_page() {
-			return 'toplevel_page_' . envato_market()->get_slug() === get_current_screen()->id || 'toplevel_page_' . envato_market()->get_slug() .'-network' === get_current_screen()->id;
+			return 'toplevel_page_' . envato_market()->get_slug() === get_current_screen()->id || 'toplevel_page_' . envato_market()->get_slug() . '-network' === get_current_screen()->id;
 		}
 
 		/**
@@ -1240,16 +1240,16 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 		 * @since 2.0.0
 		 */
 		public function save_network_settings() {
-			check_admin_referer( envato_market()->get_slug() . '-options');
+			check_admin_referer( envato_market()->get_slug() . '-options' );
 
 			global $new_whitelist_options;
 			$options = $new_whitelist_options[ envato_market()->get_slug() ];
 
-			foreach ($options as $option) {
-				if (isset($_POST[$option])) {
-					update_site_option($option, $_POST[$option]);
+			foreach ( $options as $option ) {
+				if ( isset( $_POST[ $option ] ) ) {
+					update_site_option( $option, $_POST[ $option ] );
 				} else {
-					delete_site_option($option);
+					delete_site_option( $option );
 				}
 			}
 			wp_redirect( envato_market()->get_page_url() );
