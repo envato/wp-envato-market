@@ -220,7 +220,7 @@ module.exports = function( grunt ) {
 
 		// VVV (Varying Vagrant Vagrants) Paths
 		vvv: {
-			'plugin': '/srv/www/wordpress-develop/src/wp-content/plugins/<%= pkg.name %>',
+			'plugin': '/srv/www/envato-market/public_html/wp-content/plugins/<%= pkg.name %>',
 			'coverage': '/srv/www/default/coverage/<%= pkg.name %>'
 		},
 
@@ -234,7 +234,7 @@ module.exports = function( grunt ) {
 				command: 'cd ./dev-lib && ./generate-markdown-readme' // Genrate the readme.md
 			},
 			phpunit: {
-				command: 'phpunit' // 'vagrant ssh -c "cd <%= vvv.plugin %> && phpunit"'
+				command: 'vagrant ssh -c "cd <%= vvv.plugin %> && phpunit"'
 			},
 			phpunit_c: {
 				command: 'vagrant ssh -c "cd <%= vvv.plugin %> && phpunit --coverage-html <%= vvv.coverage %>"'

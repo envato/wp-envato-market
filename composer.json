@@ -17,9 +17,6 @@
     "php": ">=5.4.0"
   },
   "require-dev": {
-    "satooshi/php-coveralls": "^1.0",
-    "wp-coding-standards/wpcs": "*",
-    "wimg/php-compatibility": "*",
-    "dealerdirect/phpcodesniffer-composer-installer": "^0.4.4"
+    "satooshi/php-coveralls": "^1.0"
   }
 }
