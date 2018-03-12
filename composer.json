@@ -1,8 +1,22 @@
 {
-	"require": {
-		"php": ">=5.2.7"
-	},
-	"require-dev": {
-		"satooshi/php-coveralls": "dev-master"
-	}
+  "name": "envato/wp-envato-market",
+  "description": "WordPress Theme & Plugin management for the Envato Market.",
+  "type": "wordpress-plugin",
+  "dist": {
+    "url": "git@github.com:envato/wp-envato-market.git",
+    "type": "git"
+  },
+  "license": "GPL",
+  "authors": [
+    {
+      "name": "Envato",
+      "homepage": "https://envato.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.4.0"
+  },
+  "require-dev": {
+    "satooshi/php-coveralls": "^1.0"
+  }
 }

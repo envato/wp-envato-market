@@ -10,9 +10,11 @@ $token = envato_market()->get_option( 'token' );
 $items = envato_market()->get_option( 'items', array() );
 
 ?>
-<div id="settings" class="two-col panel">
-	<?php settings_fields( envato_market()->get_slug() ); ?>
-	<?php Envato_Market_Admin::do_settings_sections( envato_market()->get_slug(), 2 ); ?>
+<div id="settings" class="panel">
+	<div class="envato-market-blocks">
+		<?php settings_fields( envato_market()->get_slug() ); ?>
+		<?php Envato_Market_Admin::do_settings_sections( envato_market()->get_slug(), 2 ); ?>
+	</div>
 	<p class="submit">
 		<input type="submit" name="submit" id="submit" class="button button-primary" value="<?php esc_html_e( 'Save Changes', 'envato-market' ); ?>" />
 		<?php if ( ( '' !== $token || ! empty( $items ) ) && 10 !== has_action( 'admin_notices', array( $this, 'error_notice' ) ) ) { ?>

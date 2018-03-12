@@ -64,7 +64,7 @@ class Tests_Envato_Market_Github extends WP_UnitTestCase {
 
 		$response = $this->github->api_check();
 		$this->assertFalse( $response );
-		
+
 		$ref = new ReflectionProperty( 'Envato_Market_Github', 'api_url' );
 		$ref->setAccessible( true );
 		$ref->setValue( null, 'http://envato.github.io/wp-envato-market/dist/update-check.json' );
@@ -74,9 +74,9 @@ class Tests_Envato_Market_Github extends WP_UnitTestCase {
 	 * @see Envato_Market_Github::plugins_api()
 	 */
 	function test_plugins_api() {
-		$api = false;
+		$api    = false;
 		$action = 'update';
-		$args = new stdClass();
+		$args   = new stdClass();
 		$this->assertFalse( $this->github->plugins_api( $api, $action, $args ) );
 		$args->slug = 'envato-market';
 		$this->assertObjectHasAttribute( 'slug', $this->github->plugins_api( $api, $action, $args ) );
@@ -114,11 +114,11 @@ class Tests_Envato_Market_Github extends WP_UnitTestCase {
 	 * @see Envato_Market_Github::update_plugins()
 	 */
 	function test_update_plugins() {
-		$transient = new stdClass();
-		$api = new stdClass();
-		$api->name = 'Envato Market';
-		$api->slug = 'envato-market';
-		$api->version = '10.0.0';
+		$transient          = new stdClass();
+		$api                = new stdClass();
+		$api->name          = 'Envato Market';
+		$api->slug          = 'envato-market';
+		$api->version       = '10.0.0';
 		$api->download_link = 'https://envato.github.io/wp-envato-market/dist/envato-market.zip';
 
 		$this->assertEquals( $transient, $this->github->update_plugins( $transient ) );

@@ -33,7 +33,6 @@ class Tests_Envato_Market_Admin extends WP_UnitTestCase {
 	function test_init_actions() {
 		$this->admin->init_actions();
 		$this->assertEquals( 99, has_action( 'upgrader_package_options', array( $this->admin, 'maybe_deferred_download' ) ) );
-		$this->assertEquals( 10, has_action( 'wp_ajax_upgrade-theme', array( $this->admin, 'ajax_upgrade_theme' ) ) );
 		$this->assertEquals( 10, has_action( 'wp_ajax_' . Envato_Market_Admin::AJAX_ACTION . '_add_item', array( $this->admin, 'ajax_add_item' ) ) );
 		$this->assertEquals( 10, has_action( 'wp_ajax_' . Envato_Market_Admin::AJAX_ACTION . '_remove_item', array( $this->admin, 'ajax_remove_item' ) ) );
 		$this->assertEquals( 11, has_action( 'init', array( $this->admin, 'maybe_delete_transients' ) ) );
@@ -79,7 +78,7 @@ class Tests_Envato_Market_Admin extends WP_UnitTestCase {
 		$ref->setAccessible( true );
 		$ref->setValue( null, $mock );
 
-		$options = array(
+		$options  = array(
 			'package' => 'http://sample.org/?deferred_download=1&item_id=12345',
 		);
 		$expected = array(
@@ -232,7 +231,7 @@ class Tests_Envato_Market_Admin extends WP_UnitTestCase {
 	 */
 	function test_authorization_themes_error() {
 		envato_market()->api()->token = '12345';
-		
+
 		$mock = $this->getMockBuilder( 'Envato_Market_Admin' )
 			->setMethods( array( 'authorize_total_items' ) )
 			->disableOriginalConstructor()
@@ -353,7 +352,7 @@ class Tests_Envato_Market_Admin extends WP_UnitTestCase {
 	 */
 	function test_authorize_items_themes_error_no_download() {
 		$contents = file_get_contents( TESTS_DATA_DIR . '/themes.json' );
-		$json = json_decode( $contents, true );
+		$json     = json_decode( $contents, true );
 
 		$mock = $this->getMockBuilder( 'Envato_Market_API' )
 			->setMethods( array( 'request', 'download' ) )
@@ -367,7 +366,7 @@ class Tests_Envato_Market_Admin extends WP_UnitTestCase {
 		$mock->expects( $this->any() )
 			->method( 'download' )
 			->will( $this->returnValue( false ) );
-			
+
 		// Replace private _instance reference with mock object
 		$ref = new ReflectionProperty( 'Envato_Market_API', '_instance' );
 		$ref->setAccessible( true );
@@ -384,12 +383,12 @@ class Tests_Envato_Market_Admin extends WP_UnitTestCase {
 	 * Render admin callback
 	 */
 	function test_render_admin_callback() {
-		do_action( 'admin_menu' );
-		do_action( 'admin_init' );
+//		do_action( 'admin_menu' );
+//		do_action( 'admin_init' );
 		ob_start();
 		$this->admin->render_admin_callback();
 		$contents = ob_get_clean();
-		$this->assertContains( '<div class="wrap about-wrap">', $contents );
+		$this->assertContains( '<div class="wrap about-wrap full-width-layout">', $contents );
 		$this->assertContains( '<form method="POST" action="options.php"', $contents );
 	}
 
@@ -400,7 +399,7 @@ class Tests_Envato_Market_Admin extends WP_UnitTestCase {
 		ob_start();
 		$this->admin->render_oauth_section_callback();
 		$contents = ob_get_clean();
-		$this->assertContains( '<a href="https://build.envato.com/create-token/?purchase:download=t&purchase:verify=t&purchase:list=t" target="_blank">generate a personal token</a>', $contents );
+		$this->assertContains( 'Generate an Envato API Personal Token by <a href="https://build.envato.com/create-token/?purchase:download=t&purchase:verify=t&purchase:list=t" target="_blank">clicking this link</a>', $contents );
 	}
 
 	/**
@@ -441,7 +440,7 @@ class Tests_Envato_Market_Admin extends WP_UnitTestCase {
 		ob_start();
 		$this->admin->render_intro_partial();
 		$contents = ob_get_clean();
-		$this->assertContains( '<h1 class="about-title"><strong>Envato Market</strong> <sup>' . envato_market()->get_version() . '</sup></h1>', $contents );
+		$this->assertContains( '<p>Welcome!</p>', $contents );
 	}
 
 	/**
@@ -461,7 +460,7 @@ class Tests_Envato_Market_Admin extends WP_UnitTestCase {
 		ob_start();
 		$this->admin->render_settings_panel_partial();
 		$contents = ob_get_clean();
-		$this->assertContains( '<div id="settings" class="two-col panel">', $contents );
+		$this->assertContains( '<div id="settings" class="panel">', $contents );
 	}
 
 	/**

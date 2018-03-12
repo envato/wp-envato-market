@@ -123,12 +123,12 @@ if ( ! class_exists( 'Envato_Market_Items' ) ) :
 			add_filter( 'http_request_args', array( $this, 'update_check' ), 5, 2 );
 
 			// Inject plugin updates into the response array.
-			add_filter( 'pre_set_site_transient_update_plugins', array( $this, 'update_plugins' ) );
-			add_filter( 'pre_set_transient_update_plugins', array( $this, 'update_plugins' ) );
+			add_filter( 'pre_set_site_transient_update_plugins', array( $this, 'update_plugins' ), 5, 1 );
+			add_filter( 'pre_set_transient_update_plugins', array( $this, 'update_plugins' ), 5, 1 );
 
 			// Inject theme updates into the response array.
-			add_filter( 'pre_set_site_transient_update_themes', array( $this, 'update_themes' ) );
-			add_filter( 'pre_set_transient_update_themes', array( $this, 'update_themes' ) );
+			add_filter( 'pre_set_site_transient_update_themes', array( $this, 'update_themes' ), 5, 1 );
+			add_filter( 'pre_set_transient_update_themes', array( $this, 'update_themes' ), 5, 1 );
 
 			// Inject plugin information into the API calls.
 			add_filter( 'plugins_api', array( $this, 'plugins_api' ), 10, 3 );
@@ -299,11 +299,11 @@ if ( ! class_exists( 'Envato_Market_Items' ) ) :
 
 			// Process premium plugin updates.
 			$installed = array_merge( self::$plugins['active'], self::$plugins['installed'] );
-			$plugins = self::wp_plugins();
+			$plugins   = self::wp_plugins();
 
 			foreach ( $installed as $plugin => $premium ) {
 				if ( isset( $plugins[ $plugin ] ) && version_compare( $plugins[ $plugin ]['Version'], $premium['version'], '<' ) ) {
-					$_plugin = array(
+					$_plugin                        = array(
 						'slug'        => dirname( $plugin ),
 						'plugin'      => $plugin,
 						'new_version' => $premium['version'],
@@ -335,23 +335,23 @@ if ( ! class_exists( 'Envato_Market_Items' ) ) :
 				$installed = array_merge( self::$plugins['active'], self::$plugins['installed'] );
 				foreach ( $installed as $slug => $plugin ) {
 					if ( dirname( $slug ) === $args->slug ) {
-						$response = new stdClass();
-						$response->slug = $args->slug;
-						$response->plugin = $slug;
-						$response->plugin_name = $plugin['name'];
-						$response->name = $plugin['name'];
-						$response->version = $plugin['version'];
-						$response->author = $plugin['author'];
-						$response->homepage = $plugin['url'];
-						$response->requires = $plugin['requires'];
-						$response->tested = $plugin['tested'];
-						$response->downloaded = $plugin['number_of_sales'];
-						$response->last_updated = $plugin['updated_at'];
-						$response->sections = array( 'description' => $plugin['description'] );
+						$response                 = new stdClass();
+						$response->slug           = $args->slug;
+						$response->plugin         = $slug;
+						$response->plugin_name    = $plugin['name'];
+						$response->name           = $plugin['name'];
+						$response->version        = $plugin['version'];
+						$response->author         = $plugin['author'];
+						$response->homepage       = $plugin['url'];
+						$response->requires       = $plugin['requires'];
+						$response->tested         = $plugin['tested'];
+						$response->downloaded     = $plugin['number_of_sales'];
+						$response->last_updated   = $plugin['updated_at'];
+						$response->sections       = array( 'description' => $plugin['description'] );
 						$response->banners['low'] = $plugin['landscape_url'];
-						$response->rating = $plugin['rating']['rating'] / 5 * 100;
-						$response->num_ratings = $plugin['rating']['count'];
-						$response->download_link = envato_market()->api()->deferred_download( $plugin['id'] );
+						$response->rating         = ! empty( $plugin['rating'] ) && ! empty( $plugin['rating']['rating'] ) ? $plugin['rating']['rating'] / 5 * 100 : 0;
+						$response->num_ratings    = ! empty( $plugin['rating'] ) && ! empty( $plugin['rating']['count'] ) ? $plugin['rating']['count'] : 0;
+						$response->download_link  = envato_market()->api()->deferred_download( $plugin['id'] );
 						break;
 					}
 				}
@@ -383,7 +383,7 @@ if ( ! class_exists( 'Envato_Market_Items' ) ) :
 								'Authorization' => 'Bearer ' . $item['token'],
 							),
 						);
-						$request = envato_market()->api()->item( $item['id'], $request_args );
+						$request      = envato_market()->api()->item( $item['id'], $request_args );
 						if ( false !== $request ) {
 							$themes[] = $request;
 						}
@@ -419,7 +419,7 @@ if ( ! class_exists( 'Envato_Market_Items' ) ) :
 								'Authorization' => 'Bearer ' . $item['token'],
 							),
 						);
-						$request = envato_market()->api()->item( $item['id'], $request_args );
+						$request      = envato_market()->api()->item( $item['id'], $request_args );
 						if ( false !== $request ) {
 							$plugins[] = $request;
 						}
@@ -454,7 +454,12 @@ if ( ! class_exists( 'Envato_Market_Items' ) ) :
 		 */
 		public function rebuild_plugins( $plugin ) {
 			$remove = ( 'deactivated_plugin' === current_filter() ) ? true : false;
-			self::set_plugins( false, true, array( 'plugin' => $plugin, 'remove' => $remove ) );
+			self::set_plugins(
+				false, true, array(
+					'plugin' => $plugin,
+					'remove' => $remove,
+				)
+			);
 		}
 
 		/**

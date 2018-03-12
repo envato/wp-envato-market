@@ -1,25 +1,40 @@
-# Copyright (C) 2016 Derek Herman
+# Copyright (C) 2018 Envato
 # This file is distributed under the same license as the Envato Market package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Envato Market 1.0.0-RC2\n"
+"Project-Id-Version: Envato Market 2.0.0\n"
 "Report-Msgid-Bugs-To: Envato Support Team <support@envato.com>\n"
-"POT-Creation-Date: 2016-04-12 09:11:38+00:00\n"
+"POT-Creation-Date: 2018-03-06 04:38:03+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2018-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Envato Support Team <support@envato.com>\n"
 "Language-Team: Envato Support Team <support@envato.com>\n"
-"X-Generator: grunt-wp-i18n 0.5.3\n"
+"X-Generator: grunt-wp-i18n1.0.1\n"
 
-#: envato-market.php:157 envato-market.php:167 inc/admin/admin.php:77
-#: inc/admin/admin.php:87 inc/api.php:80 inc/api.php:90 inc/github.php:87
-#: inc/github.php:97 inc/items.php:100 inc/items.php:110
+#: envato-market.php:93
+msgid ""
+"The Envato Market plugin requires PHP version 5.4+, plugin is currently NOT "
+"ACTIVE. Please contact the hosting provider to upgrade the version of PHP."
+msgstr ""
+
+#: envato-market.php:112
+msgid ""
+"Envato Market plugin is not installed correctly. Please delete this plugin "
+"and get the correct zip file from %s."
+msgstr ""
+
+#: inc/admin/class-envato-market-admin.php:77
+#: inc/admin/class-envato-market-admin.php:87
+#: inc/class-envato-market-api.php:80 inc/class-envato-market-api.php:90
+#: inc/class-envato-market-github.php:87 inc/class-envato-market-github.php:97
+#: inc/class-envato-market-items.php:100 inc/class-envato-market-items.php:110
+#: inc/class-envato-market.php:149 inc/class-envato-market.php:159
 msgid "Cheatin&#8217; huh?"
 msgstr ""
 
-#: inc/admin/admin.php:207
+#: inc/admin/class-envato-market-admin.php:233
 msgid "You do not have sufficient permissions to delete transients."
 msgstr ""
 
@@ -27,260 +42,274 @@ msgstr ""
 msgid "Envato Market"
 msgstr ""
 
-#: inc/admin/admin.php:370
+#: inc/admin/class-envato-market-admin.php:388
 msgid "Save"
 msgstr ""
 
-#: inc/admin/admin.php:371
+#: inc/admin/class-envato-market-admin.php:389
 msgid "Remove"
 msgstr ""
 
-#: inc/admin/admin.php:372
+#: inc/admin/class-envato-market-admin.php:390
 msgid "Cancel"
 msgstr ""
 
-#: inc/admin/admin.php:373
+#: inc/admin/class-envato-market-admin.php:391
 msgid "An unknown error occurred. Try again."
 msgstr ""
 
-#: inc/admin/admin.php:393 inc/admin/view/partials/settings.php:19
+#: inc/admin/class-envato-market-admin.php:411
+#: inc/admin/view/partials/settings.php:21
 msgid "Test API Connection"
 msgstr ""
 
-#: inc/admin/admin.php:398 inc/admin/view/callback/setting/items.php:22
+#: inc/admin/class-envato-market-admin.php:416
+#: inc/admin/view/callback/setting/items.php:22
 msgid "ID"
 msgstr ""
 
-#: inc/admin/admin.php:400 inc/admin/functions.php:307
+#: inc/admin/class-envato-market-admin.php:418 inc/admin/functions.php:329
 #: inc/admin/view/callback/setting/items.php:24
 msgid "Delete"
 msgstr ""
 
-#: inc/admin/admin.php:411
+#: inc/admin/class-envato-market-admin.php:429
 msgid "Remove Item"
 msgstr ""
 
-#: inc/admin/admin.php:412
+#: inc/admin/class-envato-market-admin.php:430
 msgid ""
 "You are about to remove the connection between the Envato Market API and "
 "this item. You cannot undo this action."
 msgstr ""
 
-#: inc/admin/admin.php:417 inc/admin/view/callback/setting/items.php:37
+#: inc/admin/class-envato-market-admin.php:435
+#: inc/admin/view/callback/setting/items.php:37
 msgid "Add Item"
 msgstr ""
 
-#: inc/admin/admin.php:420 inc/admin/admin.php:494
+#: inc/admin/class-envato-market-admin.php:438
+#: inc/admin/class-envato-market-admin.php:512
 msgid "Token"
 msgstr ""
 
-#: inc/admin/admin.php:422
+#: inc/admin/class-envato-market-admin.php:440
 msgid "Enter the Envato API Personal Token."
 msgstr ""
 
-#: inc/admin/admin.php:423
+#: inc/admin/class-envato-market-admin.php:441
 msgid "Item ID"
 msgstr ""
 
-#: inc/admin/admin.php:425
+#: inc/admin/class-envato-market-admin.php:443
 msgid "Enter the Envato Item ID."
 msgstr ""
 
-#: inc/admin/admin.php:448 inc/admin/admin.php:907 inc/admin/admin.php:943
-#: inc/admin/functions.php:169 inc/admin/functions.php:375
+#: inc/admin/class-envato-market-admin.php:466 inc/admin/functions.php:167
+#: inc/admin/functions.php:168 inc/admin/functions.php:401
+#: inc/admin/functions.php:402
 msgid "Version %s"
 msgstr ""
 
-#: inc/admin/admin.php:448
+#: inc/admin/class-envato-market-admin.php:466
 msgid "Version"
 msgstr ""
 
-#: inc/admin/admin.php:456 inc/admin/functions.php:177
-#: inc/admin/functions.php:383
+#: inc/admin/class-envato-market-admin.php:474 inc/admin/functions.php:178
+#: inc/admin/functions.php:412
 msgid "By"
 msgstr ""
 
-#: inc/admin/admin.php:463 inc/admin/admin.php:464 inc/admin/functions.php:150
-#: inc/admin/functions.php:356
+#: inc/admin/class-envato-market-admin.php:481
+#: inc/admin/class-envato-market-admin.php:482 inc/admin/functions.php:148
+#: inc/admin/functions.php:382
 msgid "Install"
 msgstr ""
 
-#: inc/admin/admin.php:486
-msgid "Global OAuth Personal Token"
+#: inc/admin/class-envato-market-admin.php:504
+msgid "Activate Envato API Connection"
 msgstr ""
 
-#: inc/admin/admin.php:503
-msgid "Single Use OAuth Personal Tokens"
+#: inc/admin/class-envato-market-admin.php:521
+msgid "Single Item Tokens (Advanced)"
 msgstr ""
 
-#: inc/admin/admin.php:511
+#: inc/admin/class-envato-market-admin.php:529
 msgid "Envato Market Items"
 msgstr ""
 
-#: inc/admin/admin.php:777 inc/admin/admin.php:802
+#: inc/admin/class-envato-market-admin.php:795
+#: inc/admin/class-envato-market-admin.php:820
 msgid "Installing Plugin..."
 msgstr ""
 
-#: inc/admin/admin.php:778
+#: inc/admin/class-envato-market-admin.php:796
 msgid "You do not have sufficient permissions to install plugins on this site."
 msgstr ""
 
-#: inc/admin/admin.php:779 inc/admin/admin.php:804 inc/admin/admin.php:862
-#: inc/admin/upgrader-skins.php:118
+#: inc/admin/class-envato-market-admin.php:797
+#: inc/admin/class-envato-market-admin.php:822
+#: inc/admin/class-envato-market-admin.php:880
+#: inc/admin/class-envato-market-theme-installer-skin.php:120
 msgid "Return to Plugin Installer"
 msgstr ""
 
-#: inc/admin/admin.php:803 inc/admin/admin.php:861
+#: inc/admin/class-envato-market-admin.php:821
+#: inc/admin/class-envato-market-admin.php:879
 msgid "An error occurred, please check that the item ID is correct."
 msgstr ""
 
-#: inc/admin/admin.php:809
+#: inc/admin/class-envato-market-admin.php:827
 msgid "Installing Plugin: %s"
 msgstr ""
 
-#: inc/admin/admin.php:835 inc/admin/admin.php:860
+#: inc/admin/class-envato-market-admin.php:853
+#: inc/admin/class-envato-market-admin.php:878
 msgid "Installing Theme..."
 msgstr ""
 
-#: inc/admin/admin.php:836
+#: inc/admin/class-envato-market-admin.php:854
 msgid "You do not have sufficient permissions to install themes on this site."
 msgstr ""
 
-#: inc/admin/admin.php:837 inc/admin/upgrader-skins.php:68
+#: inc/admin/class-envato-market-admin.php:855
+#: inc/admin/class-envato-market-theme-installer-skin.php:70
 msgid "Return to Theme Installer"
 msgstr ""
 
-#: inc/admin/admin.php:869
+#: inc/admin/class-envato-market-admin.php:887
 msgid "Installing Theme: %s"
 msgstr ""
 
-#: inc/admin/admin.php:911
-msgid "You do not have sufficient permissions to update themes for this site."
-msgstr ""
-
-#: inc/admin/admin.php:953
-msgid "Unable to connect to the filesystem. Please confirm your credentials."
-msgstr ""
-
-#: inc/admin/admin.php:978
+#: inc/admin/class-envato-market-admin.php:915
 msgid "The Token is missing."
 msgstr ""
 
-#: inc/admin/admin.php:980 inc/admin/admin.php:1075
+#: inc/admin/class-envato-market-admin.php:917
+#: inc/admin/class-envato-market-admin.php:1016
 msgid "The Item ID is missing."
 msgstr ""
 
-#: inc/admin/admin.php:991
+#: inc/admin/class-envato-market-admin.php:928
 msgid "The Token or Item ID is incorrect."
 msgstr ""
 
-#: inc/admin/admin.php:995
+#: inc/admin/class-envato-market-admin.php:932
 msgid "The item cannot be downloaded."
 msgstr ""
 
-#: inc/admin/admin.php:1058
+#: inc/admin/class-envato-market-admin.php:999
 msgid "An unknown error occurred."
 msgstr ""
 
-#: inc/admin/functions.php:69 inc/admin/functions.php:262
-msgid "Update %s now"
-msgstr ""
-
-#: inc/admin/functions.php:73 inc/admin/functions.php:267
-msgid "Update Available"
-msgstr ""
-
-#: inc/admin/functions.php:88 inc/admin/functions.php:275
-msgid "View version %1$s details."
-msgstr ""
-
-#: inc/admin/functions.php:103
-msgid "Customize"
-msgstr ""
-
-#: inc/admin/functions.php:103
-msgid "Customize &#8220;%s&#8221;"
-msgstr ""
-
-#: inc/admin/functions.php:113 inc/admin/upgrader-skins.php:58
-msgid "Site Enable"
-msgstr ""
-
-#: inc/admin/functions.php:113
-msgid "Site Enable &#8220;%s&#8221;"
-msgstr ""
-
-#: inc/admin/functions.php:117 inc/admin/upgrader-skins.php:62
-msgid "Network Enable"
-msgstr ""
-
-#: inc/admin/functions.php:117
-msgid "Network Enable &#8220;%s&#8221;"
-msgstr ""
-
-#: inc/admin/functions.php:130 inc/admin/functions.php:321
-#: inc/admin/upgrader-skins.php:66
-msgid "Activate"
-msgstr ""
-
-#: inc/admin/functions.php:130 inc/admin/upgrader-skins.php:66
-msgid "Activate &#8220;%s&#8221;"
-msgstr ""
-
-#: inc/admin/functions.php:137 inc/admin/upgrader-skins.php:53
+#: inc/admin/class-envato-market-theme-installer-skin.php:55
+#: inc/admin/functions.php:133
 msgid "Live Preview"
 msgstr ""
 
-#: inc/admin/functions.php:137 inc/admin/upgrader-skins.php:53
+#: inc/admin/class-envato-market-theme-installer-skin.php:55
+#: inc/admin/functions.php:133
 msgid "Live Preview &#8220;%s&#8221;"
 msgstr ""
 
-#: inc/admin/functions.php:151 inc/admin/functions.php:357
-msgid "Install %s"
+#: inc/admin/class-envato-market-theme-installer-skin.php:60
+#: inc/admin/functions.php:107
+msgid "Site Enable"
 msgstr ""
 
-#: inc/admin/functions.php:294
-msgid "Deactivate"
+#: inc/admin/class-envato-market-theme-installer-skin.php:64
+#: inc/admin/functions.php:111
+msgid "Network Enable"
 msgstr ""
 
-#: inc/admin/functions.php:295
-msgid "Deactivate %s"
+#: inc/admin/class-envato-market-theme-installer-skin.php:68
+#: inc/admin/functions.php:126 inc/admin/functions.php:345
+msgid "Activate"
 msgstr ""
 
-#: inc/admin/functions.php:308
-msgid "Delete %s"
+#: inc/admin/class-envato-market-theme-installer-skin.php:68
+#: inc/admin/functions.php:126
+msgid "Activate &#8220;%s&#8221;"
 msgstr ""
 
-#: inc/admin/functions.php:322
-msgid "Activate %s"
-msgstr ""
-
-#: inc/admin/functions.php:332 inc/admin/upgrader-skins.php:110
-msgid "Site Activate"
-msgstr ""
-
-#: inc/admin/functions.php:333
-msgid "Site Activate %s"
-msgstr ""
-
-#: inc/admin/functions.php:340 inc/admin/upgrader-skins.php:114
-msgid "Network Activate"
-msgstr ""
-
-#: inc/admin/functions.php:341
-msgid "Network Activate %s"
-msgstr ""
-
-#: inc/admin/upgrader-skins.php:103
+#: inc/admin/class-envato-market-theme-installer-skin.php:105
 msgid "Activate Plugin"
 msgstr ""
 
-#: inc/admin/upgrader.php:34 inc/admin/upgrader.php:72
+#: inc/admin/class-envato-market-theme-installer-skin.php:112
+#: inc/admin/functions.php:356
+msgid "Site Activate"
+msgstr ""
+
+#: inc/admin/class-envato-market-theme-installer-skin.php:116
+#: inc/admin/functions.php:364
+msgid "Network Activate"
+msgstr ""
+
+#: inc/admin/class-envato-market-theme-upgrader.php:34
+#: inc/admin/class-envato-market-theme-upgrader.php:72
 msgid "Downloading the Envato Market upgrade package&#8230;"
 msgstr ""
 
-#: inc/admin/upgrader.php:45 inc/admin/upgrader.php:83
+#: inc/admin/class-envato-market-theme-upgrader.php:45
+#: inc/admin/class-envato-market-theme-upgrader.php:83
 msgid "Downloading the Envato Market install package&#8230;"
+msgstr ""
+
+#: inc/admin/functions.php:70 inc/admin/functions.php:280
+msgid "Update %s now"
+msgstr ""
+
+#: inc/admin/functions.php:74 inc/admin/functions.php:285
+msgid "Update Available"
+msgstr ""
+
+#: inc/admin/functions.php:82 inc/admin/functions.php:293
+msgid "View version %1$s details."
+msgstr ""
+
+#: inc/admin/functions.php:97
+msgid "Customize"
+msgstr ""
+
+#: inc/admin/functions.php:97
+msgid "Customize &#8220;%s&#8221;"
+msgstr ""
+
+#: inc/admin/functions.php:107
+msgid "Site Enable &#8220;%s&#8221;"
+msgstr ""
+
+#: inc/admin/functions.php:111
+msgid "Network Enable &#8220;%s&#8221;"
+msgstr ""
+
+#: inc/admin/functions.php:149 inc/admin/functions.php:383
+msgid "Install %s"
+msgstr ""
+
+#: inc/admin/functions.php:314
+msgid "Deactivate"
+msgstr ""
+
+#: inc/admin/functions.php:315
+msgid "Deactivate %s"
+msgstr ""
+
+#: inc/admin/functions.php:330
+msgid "Delete %s"
+msgstr ""
+
+#: inc/admin/functions.php:346
+msgid "Activate %s"
+msgstr ""
+
+#: inc/admin/functions.php:357
+msgid "Site Activate %s"
+msgstr ""
+
+#: inc/admin/functions.php:365
+msgid "Network Activate %s"
 msgstr ""
 
 #: inc/admin/view/callback/section/items.php:10
@@ -295,20 +324,34 @@ msgstr ""
 msgid "Warning: These tokens can be revoked by the account holder at any time."
 msgstr ""
 
-#: inc/admin/view/callback/section/oauth.php:10
+#: inc/admin/view/callback/section/oauth.php:12
 msgid ""
-"OAuth is a protocol that lets external apps request authorization to "
-"private details in a user's Envato Market account without entering their "
-"password. This is preferred over Basic Authentication because tokens can be "
-"limited to specific types of data, and can be revoked by users at any time."
+"This area enables WordPress Theme &amp; Plugin updates from Envato Market. "
+"Read more about how this process works at %s. Please follow the steps below:"
 msgstr ""
 
 #: inc/admin/view/callback/section/oauth.php:12
-msgid "You will need to %s, and then insert it below."
+msgid "envato.com"
 msgstr ""
 
-#: inc/admin/view/callback/section/oauth.php:12
-msgid "generate a personal token"
+#: inc/admin/view/callback/section/oauth.php:15
+msgid "Generate an Envato API Personal Token by %s."
+msgstr ""
+
+#: inc/admin/view/callback/section/oauth.php:15
+msgid "clicking this link"
+msgstr ""
+
+#: inc/admin/view/callback/section/oauth.php:16
+msgid "Copy the token into the box below."
+msgstr ""
+
+#: inc/admin/view/callback/section/oauth.php:17
+msgid "Click the \"Save Changes\" button."
+msgstr ""
+
+#: inc/admin/view/callback/section/oauth.php:18
+msgid "A list of purchased Themes &amp; Plugins from Envato Market will appear."
 msgstr ""
 
 #: inc/admin/view/callback/setting/token.php:12
@@ -355,22 +398,10 @@ msgid ""
 msgstr ""
 
 #: inc/admin/view/partials/intro.php:15
-msgid ""
-"You can add a global token to connect all your items from your account, "
-"and/or connect directly with a specific item using a singe-use token & item "
-"ID. When the global token and single-use token are set for the same item, "
-"the single-use token will be used to communicate with the API."
+msgid "Find out more at %1$senvato.com%2$s."
 msgstr ""
 
-#: inc/admin/view/partials/intro.php:16
-msgid "Development of this plugin is done on %sGitHub%s. Pull requests welcome."
-msgstr ""
-
-#: inc/admin/view/partials/intro.php:19
-msgid "Active Theme"
-msgstr ""
-
-#: inc/admin/view/partials/settings.php:17
+#: inc/admin/view/partials/settings.php:19
 msgid "Save Changes"
 msgstr ""
 
@@ -386,28 +417,28 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: inc/api.php:128
+#: inc/class-envato-market-api.php:128
 msgid "An API token is required."
 msgstr ""
 
-#: inc/api.php:141 inc/api.php:145
+#: inc/class-envato-market-api.php:141 inc/class-envato-market-api.php:145
 msgid "An unknown API error occurred."
 msgstr ""
 
-#: inc/github.php:294
+#: inc/class-envato-market-github.php:296
 msgid ""
-"%sActivate the Envato Market plugin%s to get updates for your ThemeForest "
-"and CodeCanyon items."
+"%1$sActivate the Envato Market plugin%2$s to get updates for your "
+"ThemeForest and CodeCanyon items."
 msgstr ""
 
-#: inc/github.php:305
+#: inc/class-envato-market-github.php:309
 msgid ""
-"%sInstall the Envato Market plugin%s to get updates for your ThemeForest "
-"and CodeCanyon items."
+"%1$sInstall the Envato Market plugin%2$s to get updates for your "
+"ThemeForest and CodeCanyon items."
 msgstr ""
 
 #. Plugin URI of the plugin/theme
-msgid "http://envato.github.io/wp-envato-market/"
+msgid "https://envato.com/market-plugin/"
 msgstr ""
 
 #. Description of the plugin/theme
@@ -415,9 +446,9 @@ msgid "WordPress Theme & Plugin management for the Envato Market."
 msgstr ""
 
 #. Author of the plugin/theme
-msgid "Derek Herman"
+msgid "Envato"
 msgstr ""
 
 #. Author URI of the plugin/theme
-msgid "https://valendesigns.com/"
+msgid "https://envato.com"
 msgstr ""

@@ -1,20 +1,31 @@
 sudo: false
+dist: precise
 
-language: php
- 
+notifications:
+  email:
+    on_success: never
+    on_failure: change
+
+cache:
+  directories:
+    - node_modules
+    - vendor
+    - $HOME/phpunit-bin
+
+language:
+  - php
+
 php:
   - 5.4
-  - 5.5
-  - 5.6
-  - 7.0
+  - 7.2
 
 env:
   - WP_VERSION=latest WP_MULTISITE=0
-  - WP_VERSION=latest WP_MULTISITE=1
 
 install:
   - export DEV_LIB_PATH=dev-lib
   - if [ ! -e "$DEV_LIB_PATH" ] && [ -L .travis.yml ]; then export DEV_LIB_PATH=$( dirname $( readlink .travis.yml ) ); fi
+  - if [ ! -e "$DEV_LIB_PATH" ]; then git clone https://github.com/xwp/wp-dev-lib.git $DEV_LIB_PATH; fi
   - source $DEV_LIB_PATH/travis.install.sh
 
 script:

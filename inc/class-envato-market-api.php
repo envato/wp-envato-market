@@ -117,11 +117,11 @@ if ( ! class_exists( 'Envato_Market_API' ) && class_exists( 'Envato_Market' ) ) 
 			$defaults = array(
 				'headers' => array(
 					'Authorization' => 'Bearer ' . $this->token,
-					'User-Agent' => 'WordPress - Envato Market ' . envato_market()->get_version(),
+					'User-Agent'    => 'WordPress - Envato Market ' . envato_market()->get_version(),
 				),
 				'timeout' => 20,
 			);
-			$args = wp_parse_args( $args, $defaults );
+			$args     = wp_parse_args( $args, $defaults );
 
 			$token = trim( str_replace( 'Bearer', '', $args['headers']['Authorization'] ) );
 			if ( empty( $token ) ) {
@@ -163,7 +163,7 @@ if ( ! class_exists( 'Envato_Market_API' ) && class_exists( 'Envato_Market' ) ) 
 
 			$args = array(
 				'deferred_download' => true,
-				'item_id' => $id,
+				'item_id'           => $id,
 			);
 			return add_query_arg( $args, esc_url( envato_market()->get_page_url() ) );
 		}
@@ -182,7 +182,7 @@ if ( ! class_exists( 'Envato_Market_API' ) && class_exists( 'Envato_Market' ) ) 
 				return false;
 			}
 
-			$url = 'https://api.envato.com/v2/market/buyer/download?item_id=' . $id . '&shorten_url=true';
+			$url      = 'https://api.envato.com/v2/market/buyer/download?item_id=' . $id . '&shorten_url=true';
 			$response = $this->request( $url, $args );
 
 			// @todo Find out which errors could be returned & handle them in the UI.
@@ -211,7 +211,7 @@ if ( ! class_exists( 'Envato_Market_API' ) && class_exists( 'Envato_Market' ) ) 
 		 * @return array The HTTP response.
 		 */
 		public function item( $id, $args = array() ) {
-			$url = 'https://api.envato.com/v2/market/catalog/item?id=' . $id;
+			$url      = 'https://api.envato.com/v2/market/catalog/item?id=' . $id;
 			$response = $this->request( $url, $args );
 
 			if ( is_wp_error( $response ) || empty( $response ) ) {
@@ -240,7 +240,7 @@ if ( ! class_exists( 'Envato_Market_API' ) && class_exists( 'Envato_Market' ) ) 
 		public function themes( $args = array() ) {
 			$themes = array();
 
-			$url = 'https://api.envato.com/v2/market/buyer/list-purchases?filter_by=wordpress-themes';
+			$url      = 'https://api.envato.com/v2/market/buyer/list-purchases?filter_by=wordpress-themes';
 			$response = $this->request( $url, $args );
 
 			if ( is_wp_error( $response ) || empty( $response ) || empty( $response['results'] ) ) {
@@ -263,17 +263,38 @@ if ( ! class_exists( 'Envato_Market_API' ) && class_exists( 'Envato_Market' ) ) 
 		 * @return array A normalized array of values.
 		 */
 		public function normalize_theme( $theme ) {
-			return array(
-				'id' => $theme['id'],
-				'name' => ( ! empty( $theme['wordpress_theme_metadata']['theme_name'] ) ? $theme['wordpress_theme_metadata']['theme_name'] : '' ),
-				'author' => ( ! empty( $theme['wordpress_theme_metadata']['author_name'] ) ? $theme['wordpress_theme_metadata']['author_name'] : '' ),
-				'version' => ( ! empty( $theme['wordpress_theme_metadata']['version'] ) ? $theme['wordpress_theme_metadata']['version'] : '' ),
-				'description' => self::remove_non_unicode( $theme['wordpress_theme_metadata']['description'] ),
-				'url' => ( ! empty( $theme['url'] ) ? $theme['url'] : '' ),
-				'author_url' => ( ! empty( $theme['author_url'] ) ? $theme['author_url'] : '' ),
+			$normalized_theme = array(
+				'id'            => $theme['id'],
+				'name'          => ( ! empty( $theme['wordpress_theme_metadata']['theme_name'] ) ? $theme['wordpress_theme_metadata']['theme_name'] : '' ),
+				'author'        => ( ! empty( $theme['wordpress_theme_metadata']['author_name'] ) ? $theme['wordpress_theme_metadata']['author_name'] : '' ),
+				'version'       => ( ! empty( $theme['wordpress_theme_metadata']['version'] ) ? $theme['wordpress_theme_metadata']['version'] : '' ),
+				'description'   => self::remove_non_unicode( strip_tags( $theme['wordpress_theme_metadata']['description'] ) ),
+				'url'           => ( ! empty( $theme['url'] ) ? $theme['url'] : '' ),
+				'author_url'    => ( ! empty( $theme['author_url'] ) ? $theme['author_url'] : '' ),
 				'thumbnail_url' => ( ! empty( $theme['thumbnail_url'] ) ? $theme['thumbnail_url'] : '' ),
-				'rating' => ( ! empty( $theme['rating'] ) ? $theme['rating'] : '' ),
+				'rating'        => ( ! empty( $theme['rating'] ) ? $theme['rating'] : '' ),
+				'landscape_url' => '',
 			);
+
+			// No main thumbnail in API response, so we grab it from the preview array.
+			if ( empty( $normalized_theme['thumbnail_url'] ) && ! empty( $theme['previews'] ) && is_array( $theme['previews'] ) ) {
+				foreach ( $theme['previews'] as $possible_preview ) {
+					if ( ! empty( $possible_preview['landscape_url'] ) ) {
+						$normalized_theme['landscape_url'] = $possible_preview['landscape_url'];
+						break;
+					}
+				}
+			}
+			if ( empty( $normalized_theme['thumbnail_url'] ) && ! empty( $theme['previews'] ) && is_array( $theme['previews'] ) ) {
+				foreach ( $theme['previews'] as $possible_preview ) {
+					if ( ! empty( $possible_preview['icon_url'] ) ) {
+						$normalized_theme['thumbnail_url'] = $possible_preview['icon_url'];
+						break;
+					}
+				}
+			}
+
+			return $normalized_theme;
 		}
 
 		/**
@@ -287,7 +308,7 @@ if ( ! class_exists( 'Envato_Market_API' ) && class_exists( 'Envato_Market' ) ) 
 		public function plugins( $args = array() ) {
 			$plugins = array();
 
-			$url = 'https://api.envato.com/v2/market/buyer/list-purchases?filter_by=wordpress-plugins';
+			$url      = 'https://api.envato.com/v2/market/buyer/list-purchases?filter_by=wordpress-plugins';
 			$response = $this->request( $url, $args );
 
 			if ( is_wp_error( $response ) || empty( $response ) || empty( $response['results'] ) ) {
@@ -311,39 +332,59 @@ if ( ! class_exists( 'Envato_Market_API' ) && class_exists( 'Envato_Market' ) ) 
 		 */
 		public function normalize_plugin( $plugin ) {
 			$requires = null;
-			$tested = null;
+			$tested   = null;
 			$versions = array();
 
 			// Set the required and tested WordPress version numbers.
 			foreach ( $plugin['attributes'] as $k => $v ) {
-				if ( 'compatible-software' === $v['name'] ) {
+				if ( ! empty( $v['name'] ) && 'compatible-software' === $v['name'] && ! empty( $v['value'] ) && is_array( $v['value'] ) ) {
 					foreach ( $v['value'] as $version ) {
 						$versions[] = str_replace( 'WordPress ', '', trim( $version ) );
 					}
 					if ( ! empty( $versions ) ) {
 						$requires = $versions[ count( $versions ) - 1 ];
-						$tested = $versions[0];
+						$tested   = $versions[0];
 					}
 					break;
 				}
 			}
 
-			return array(
-				'id' => $plugin['id'],
-				'name' => ( ! empty( $plugin['wordpress_plugin_metadata']['plugin_name'] ) ? $plugin['wordpress_plugin_metadata']['plugin_name'] : '' ),
-				'author' => ( ! empty( $plugin['wordpress_plugin_metadata']['author'] ) ? $plugin['wordpress_plugin_metadata']['author'] : '' ),
-				'version' => ( ! empty( $plugin['wordpress_plugin_metadata']['version'] ) ? $plugin['wordpress_plugin_metadata']['version'] : '' ),
-				'description' => self::remove_non_unicode( $plugin['wordpress_plugin_metadata']['description'] ),
-				'url' => ( ! empty( $plugin['url'] ) ? $plugin['url'] : '' ),
-				'author_url' => ( ! empty( $plugin['author_url'] ) ? $plugin['author_url'] : '' ),
-				'thumbnail_url' => ( ! empty( $plugin['thumbnail_url'] ) ? $plugin['thumbnail_url'] : '' ),
-				'landscape_url' => ( ! empty( $plugin['previews']['landscape_preview']['landscape_url'] ) ? $plugin['previews']['landscape_preview']['landscape_url'] : '' ),
-				'requires' => $requires,
-				'tested' => $tested,
+			$plugin_normalized = array(
+				'id'              => $plugin['id'],
+				'name'            => ( ! empty( $plugin['wordpress_plugin_metadata']['plugin_name'] ) ? $plugin['wordpress_plugin_metadata']['plugin_name'] : '' ),
+				'author'          => ( ! empty( $plugin['wordpress_plugin_metadata']['author'] ) ? $plugin['wordpress_plugin_metadata']['author'] : '' ),
+				'version'         => ( ! empty( $plugin['wordpress_plugin_metadata']['version'] ) ? $plugin['wordpress_plugin_metadata']['version'] : '' ),
+				'description'     => self::remove_non_unicode( strip_tags( $plugin['wordpress_plugin_metadata']['description'] ) ),
+				'url'             => ( ! empty( $plugin['url'] ) ? $plugin['url'] : '' ),
+				'author_url'      => ( ! empty( $plugin['author_url'] ) ? $plugin['author_url'] : '' ),
+				'thumbnail_url'   => ( ! empty( $plugin['thumbnail_url'] ) ? $plugin['thumbnail_url'] : '' ),
+				'landscape_url'   => ( ! empty( $plugin['previews']['landscape_preview']['landscape_url'] ) ? $plugin['previews']['landscape_preview']['landscape_url'] : '' ),
+				'requires'        => $requires,
+				'tested'          => $tested,
 				'number_of_sales' => ( ! empty( $plugin['number_of_sales'] ) ? $plugin['number_of_sales'] : '' ),
-				'updated_at' => ( ! empty( $plugin['updated_at'] ) ? $plugin['updated_at'] : '' ),
-				'rating' => ( ! empty( $plugin['rating'] ) ? $plugin['rating'] : '' ),
+				'updated_at'      => ( ! empty( $plugin['updated_at'] ) ? $plugin['updated_at'] : '' ),
+				'rating'          => ( ! empty( $plugin['rating'] ) ? $plugin['rating'] : '' ),
 			);
+
+			// No main thumbnail in API response, so we grab it from the preview array.
+			if ( empty( $plugin_normalized['landscape_url'] ) && ! empty( $plugin['previews'] ) && is_array( $plugin['previews'] ) ) {
+				foreach ( $plugin['previews'] as $possible_preview ) {
+					if ( ! empty( $possible_preview['landscape_url'] ) ) {
+						$plugin_normalized['landscape_url'] = $possible_preview['landscape_url'];
+						break;
+					}
+				}
+			}
+			if ( empty( $plugin_normalized['thumbnail_url'] ) && ! empty( $plugin['previews'] ) && is_array( $plugin['previews'] ) ) {
+				foreach ( $plugin['previews'] as $possible_preview ) {
+					if ( ! empty( $possible_preview['icon_url'] ) ) {
+						$plugin_normalized['thumbnail_url'] = $possible_preview['icon_url'];
+						break;
+					}
+				}
+			}
+
+			return $plugin_normalized;
 		}
 
 		/**

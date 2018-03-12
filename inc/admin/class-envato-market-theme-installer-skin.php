@@ -40,11 +40,13 @@ if ( ! class_exists( 'Envato_Market_Theme_Installer_Skin' ) ) :
 			$stylesheet = $this->upgrader->result['destination_name'];
 			$template   = $theme_info->get_template();
 
-			$activate_link = add_query_arg( array(
-				'action'     => 'activate',
-				'template'   => urlencode( $template ),
-				'stylesheet' => urlencode( $stylesheet ),
-			), admin_url( 'themes.php' ) );
+			$activate_link = add_query_arg(
+				array(
+					'action'     => 'activate',
+					'template'   => urlencode( $template ),
+					'stylesheet' => urlencode( $stylesheet ),
+				), admin_url( 'themes.php' )
+			);
 			$activate_link = wp_nonce_url( $activate_link, 'switch-theme_' . $stylesheet );
 
 			$install_actions = array();
@@ -96,7 +98,7 @@ if ( ! class_exists( 'Envato_Market_Plugin_Installer_Skin' ) ) :
 		 * @since 1.0.0
 		 */
 		public function after() {
-			$plugin_file = $this->upgrader->plugin_info();
+			$plugin_file     = $this->upgrader->plugin_info();
 			$install_actions = array();
 
 			if ( current_user_can( 'activate_plugins' ) ) {

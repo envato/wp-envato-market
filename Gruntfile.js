@@ -181,7 +181,11 @@ module.exports = function( grunt ) {
 					'!readme.md',
 					'!sass/**',
 					'!tests/**',
-					'!vendor/**'
+					'!bin/**',
+					'!vendor/**',
+					'!package-lock.json',
+					'!phpcs.xml.dist',
+					'!composer.lock'
 				],
 				dest: 'dist/<%= pkg.name %>',
 				expand: true,
@@ -216,7 +220,7 @@ module.exports = function( grunt ) {
 
 		// VVV (Varying Vagrant Vagrants) Paths
 		vvv: {
-			'plugin': '/srv/www/wordpress-develop/src/wp-content/plugins/<%= pkg.name %>',
+			'plugin': '/srv/www/envato-market/docroot/wp-content/plugins/<%= pkg.name %>',
 			'coverage': '/srv/www/default/coverage/<%= pkg.name %>'
 		},
 
@@ -227,14 +231,23 @@ module.exports = function( grunt ) {
 				stderr: true
 			},
 			readme: {
-				command: 'cd ./dev-lib && ./generate-markdown-readme' // Genrate the readme.md
+				command: 'cd ./dev-lib && ./generate-markdown-readme' // Generate the readme.md
 			},
 			phpunit: {
 				command: 'vagrant ssh -c "cd <%= vvv.plugin %> && phpunit"'
 			},
 			phpunit_c: {
 				command: 'vagrant ssh -c "cd <%= vvv.plugin %> && phpunit --coverage-html <%= vvv.coverage %>"'
-			}
+			},
+            phpcs: {
+                command: 'vagrant ssh -c "cd <%= vvv.plugin %> && phpcs"'
+            },
+            phpcbf: {
+                command: 'vagrant ssh -c "cd <%= vvv.plugin %> && phpcbf"'
+            },
+            precommit: {
+                command: 'vagrant ssh -c "cd <%= vvv.plugin %> && DEV_LIB_SKIP="xmllint" ./dev-lib/pre-commit"'
+            }
 		}
 
 	});
@@ -276,6 +289,18 @@ module.exports = function( grunt ) {
 
 	grunt.registerTask( 'phpunit_c', [
 		'shell:phpunit_c'
+	] );
+
+	grunt.registerTask( 'phpcs', [
+		'shell:phpcs'
+	] );
+
+	grunt.registerTask( 'phpcbf', [
+		'shell:phpcbf'
+	] );
+
+	grunt.registerTask( 'precommit', [
+		'shell:precommit'
 	] );
 
 	grunt.registerTask( 'dev', [

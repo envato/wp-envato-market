@@ -99,10 +99,10 @@ window.wp = window.wp || {};
 	 */
 	wp.envato.decrementCount = function( upgradeType ) {
 		var count,
-			pluginCount,
-			$adminBarUpdateCount = $( '#wp-admin-bar-updates .ab-label' ),
-			$dashboardNavMenuUpdateCount = $( 'a[href="update-core.php"] .update-plugins' ),
-			$pluginsMenuItem = $( '#menu-plugins' );
+				pluginCount,
+				$adminBarUpdateCount = $( '#wp-admin-bar-updates .ab-label' ),
+				$dashboardNavMenuUpdateCount = $( 'a[href="update-core.php"] .update-plugins' ),
+				$pluginsMenuItem = $( '#menu-plugins' );
 
 		count = $adminBarUpdateCount.text();
 		count = parseInt( count, 10 ) - 1;
@@ -112,9 +112,9 @@ window.wp = window.wp || {};
 		$( '#wp-admin-bar-updates .ab-item' ).removeAttr( 'title' );
 		$adminBarUpdateCount.text( count );
 
-		$dashboardNavMenuUpdateCount.each( function( index, elem ) {
+		$dashboardNavMenuUpdateCount.each(function( index, elem ) {
 			elem.className = elem.className.replace( /count-\d+/, 'count-' + count );
-		} );
+		});
 		$dashboardNavMenuUpdateCount.removeAttr( 'title' );
 		$dashboardNavMenuUpdateCount.find( '.update-count' ).text( count );
 
@@ -125,9 +125,9 @@ window.wp = window.wp || {};
 				return;
 			}
 			$pluginsMenuItem.find( '.plugin-count' ).text( pluginCount );
-			$pluginsMenuItem.find( '.update-plugins' ).each( function( index, elem ) {
+			$pluginsMenuItem.find( '.update-plugins' ).each(function( index, elem ) {
 				elem.className = elem.className.replace( /count-\d+/, 'count-' + pluginCount );
-			} );
+			});
 
 			if ( pluginCount > 0 ) {
 				$( '.subsubsub .upgrade .count' ).text( '(' + pluginCount + ')' );
@@ -147,10 +147,10 @@ window.wp = window.wp || {};
 	 */
 	wp.envato.updatePlugin = function( plugin, slug ) {
 		var data,
-			$message = $( '.envato-card-' + slug ).find( '.update-now' ),
-			name = $message.data( 'name' );
+				$message = $( '.envato-card-' + slug ).find( '.update-now' ),
+				name = $message.data( 'data-name' );
 
-		$message.attr( 'aria-label', wp.envato.l10n.updatingLabel.replace( '%s', name ) );
+		$message.attr( 'aria-label', wp.envato.l10n.updating.replace( '%s', name ) );
 
 		$message.addClass( 'updating-message' );
 		if ( $message.html() !== wp.envato.l10n.updating ) {
@@ -161,33 +161,33 @@ window.wp = window.wp || {};
 		wp.a11y.speak( wp.envato.l10n.updatingMsg );
 
 		if ( wp.envato.updateLock ) {
-			wp.envato.updateQueue.push( {
+			wp.envato.updateQueue.push({
 				type: 'update-plugin',
 				data: {
 					plugin: plugin,
 					slug: slug
 				}
-			} );
+			});
 			return;
 		}
 
 		wp.envato.updateLock = true;
 
 		data = {
-			_ajax_nonce:     wp.envato.ajaxNonce,
-			plugin:          plugin,
-			slug:            slug,
-			username:        wp.envato.filesystemCredentials.ftp.username,
-			password:        wp.envato.filesystemCredentials.ftp.password,
-			hostname:        wp.envato.filesystemCredentials.ftp.hostname,
+			_ajax_nonce: wp.envato.ajaxNonce,
+			plugin: plugin,
+			slug: slug,
+			username: wp.envato.filesystemCredentials.ftp.username,
+			password: wp.envato.filesystemCredentials.ftp.password,
+			hostname: wp.envato.filesystemCredentials.ftp.hostname,
 			connection_type: wp.envato.filesystemCredentials.ftp.connectionType,
-			public_key:      wp.envato.filesystemCredentials.ssh.publicKey,
-			private_key:     wp.envato.filesystemCredentials.ssh.privateKey
+			public_key: wp.envato.filesystemCredentials.ssh.publicKey,
+			private_key: wp.envato.filesystemCredentials.ssh.privateKey
 		};
 
 		wp.ajax.post( 'update-plugin', data )
-			.done( wp.envato.updateSuccess )
-			.fail( wp.envato.updateError );
+				.done( wp.envato.updateSuccess )
+				.fail( wp.envato.updateError );
 	};
 
 	/**
@@ -200,10 +200,10 @@ window.wp = window.wp || {};
 	 */
 	wp.envato.updateTheme = function( slug ) {
 		var data,
-			$message = $( '.envato-card-' + slug ).find( '.update-now' ),
-			name = $message.data( 'name' );
+				$message = $( '.envato-card-' + slug ).find( '.update-now' ),
+				name = $message.data( 'data-name' );
 
-		$message.attr( 'aria-label', wp.envato.l10n.updatingLabel.replace( '%s', name ) );
+		$message.attr( 'aria-label', wp.envato.l10n.updating.replace( '%s', name ) );
 
 		$message.addClass( 'updating-message' );
 		if ( $message.html() !== wp.envato.l10n.updating ) {
@@ -214,31 +214,32 @@ window.wp = window.wp || {};
 		wp.a11y.speak( wp.envato.l10n.updatingMsg );
 
 		if ( wp.envato.updateLock ) {
-			wp.envato.updateQueue.push( {
-				type: 'upgrade-theme',
+			wp.envato.updateQueue.push({
+				type: 'update-theme',
 				data: {
 					theme: slug
 				}
-			} );
+			});
 			return;
 		}
 
 		wp.envato.updateLock = true;
 
 		data = {
-			_ajax_nonce:     wp.envato.ajaxNonce,
-			theme:           slug,
-			username:        wp.envato.filesystemCredentials.ftp.username,
-			password:        wp.envato.filesystemCredentials.ftp.password,
-			hostname:        wp.envato.filesystemCredentials.ftp.hostname,
+			_ajax_nonce: wp.envato.ajaxNonce,
+			theme: slug,
+			slug: slug,
+			username: wp.envato.filesystemCredentials.ftp.username,
+			password: wp.envato.filesystemCredentials.ftp.password,
+			hostname: wp.envato.filesystemCredentials.ftp.hostname,
 			connection_type: wp.envato.filesystemCredentials.ftp.connectionType,
-			public_key:      wp.envato.filesystemCredentials.ssh.publicKey,
-			private_key:     wp.envato.filesystemCredentials.ssh.privateKey
+			public_key: wp.envato.filesystemCredentials.ssh.publicKey,
+			private_key: wp.envato.filesystemCredentials.ssh.privateKey
 		};
 
-		wp.ajax.post( 'upgrade-theme', data )
-			.done( wp.envato.updateSuccess )
-			.fail( wp.envato.updateError );
+		wp.ajax.post( 'update-theme', data )
+				.done( wp.envato.updateSuccess )
+				.fail( wp.envato.updateError );
 	};
 
 	/**
@@ -261,7 +262,7 @@ window.wp = window.wp || {};
 		versionText = $updateVersion.attr( 'aria-label' ).replace( '%s', version );
 
 		$updateMessage.addClass( 'disabled' );
-		$updateMessage.attr( 'aria-label', wp.envato.l10n.updatedLabel.replace( '%s', name ) );
+		$updateMessage.attr( 'aria-label', wp.envato.l10n.updatedMsg.replace( '%s', name ) );
 		$updateVersion.text( versionText );
 
 		$updateMessage.removeClass( 'updating-message' ).addClass( 'updated-message' );
@@ -300,11 +301,11 @@ window.wp = window.wp || {};
 		}
 		$message = $( '.envato-card-' + response.slug ).find( '.update-now' );
 
-		name = $message.data( 'name' );
-		$message.attr( 'aria-label', wp.envato.l10n.updateFailedLabel.replace( '%s', name ) );
+		name = $message.data( 'data-name' );
+		$message.attr( 'aria-label', wp.envato.l10n.updateFailed.replace( '%s', name ) );
 
 		$message.removeClass( 'updating-message' );
-		$message.html( wp.envato.l10n.updateFailed.replace( '%s', response.error ) );
+		$message.html( wp.envato.l10n.updateFailed.replace( '%s', typeof 'undefined' !== response.errorMessage ? response.errorMessage : response.error ) );
 		wp.a11y.speak( wp.envato.l10n.updateFailed );
 
 		/*
@@ -339,7 +340,7 @@ window.wp = window.wp || {};
 	 * @since 1.0.0
 	 */
 	wp.envato.credentialError = function( response, type ) {
-		wp.envato.updateQueue.push( {
+		wp.envato.updateQueue.push({
 			'type': type,
 			'data': {
 
@@ -348,7 +349,7 @@ window.wp = window.wp || {};
 				plugin: response.plugin,
 				slug: response.slug
 			}
-		} );
+		});
 		wp.envato.showErrorInCredentialsForm( response.error );
 		wp.envato.requestFilesystemCredentials();
 	};
@@ -449,8 +450,8 @@ window.wp = window.wp || {};
 
 		slug = wp.envato.updateQueue[0].data.slug,
 
-		// Remove the lock, and clear the queue
-		wp.envato.updateLock = false;
+				// Remove the lock, and clear the queue
+				wp.envato.updateLock = false;
 		wp.envato.updateQueue = [];
 
 		wp.envato.requestForCredentialsModalClose();
@@ -475,7 +476,7 @@ window.wp = window.wp || {};
 		}
 	};
 
-	$( document ).ready( function() {
+	$( document ).ready(function() {
 		/*
 		 * Check whether a user needs to submit filesystem credentials based on whether
 		 * the form was output on the page server-side.
@@ -524,7 +525,7 @@ window.wp = window.wp || {};
 			}
 
 			wp.envato.updatePlugin( $button.data( 'plugin' ), $button.data( 'slug' ) );
-		} );
+		});
 
 		// Click handler for theme updates.
 		$( '.envato-card.theme' ).on( 'click', '.update-now', function( e ) {
@@ -536,14 +537,14 @@ window.wp = window.wp || {};
 			}
 
 			wp.envato.updateTheme( $button.data( 'slug' ) );
-		} );
+		});
 
 		// @todo
 		$( '#plugin_update_from_iframe' ).on( 'click', function( e ) {
-			var target,	data;
+			var target, data;
 
 			target = window.parent === window ? null : window.parent,
-			$.support.postMessage = !! window.postMessage;
+					$.support.postMessage = !! window.postMessage;
 
 			if ( false === $.support.postMessage || null === target || window.parent.location.pathname.indexOf( 'update-core.php' ) !== -1 ) {
 				return;
@@ -558,13 +559,13 @@ window.wp = window.wp || {};
 
 			target.postMessage( JSON.stringify( data ), window.location.origin );
 		});
-	} );
+	});
 
 	$( window ).on( 'message', function( e ) {
 		var event = e.originalEvent,
-			message,
-			loc = document.location,
-			expectedOrigin = loc.protocol + '//' + loc.hostname;
+				message,
+				loc = document.location,
+				expectedOrigin = loc.protocol + '//' + loc.hostname;
 
 		if ( event.origin !== expectedOrigin ) {
 			return;
@@ -572,21 +573,33 @@ window.wp = window.wp || {};
 
 		message = $.parseJSON( event.data );
 
-		if ( 'undefined' === typeof message.action ) {
-			return;
+		try {
+			if ( 'undefined' === typeof message.action ) {
+				return;
+			}
+		}
+		catch ( error ) {
+
 		}
 
-		switch ( message.action ){
-			case 'decrementUpdateCount' :
-				wp.envato.decrementCount( message.upgradeType );
-				break;
-			case 'updatePlugin' :
-				tb_remove();
-				$( '.envato-card-' + message.slug ).find( 'h4 a' ).focus();
-				$( '.envato-card-' + message.slug ).find( '[data-slug="' + message.slug + '"]' ).trigger( 'click' );
-				break;
+		try {
+			switch ( message.action ) {
+				case 'decrementUpdateCount' :
+					wp.envato.decrementCount( message.upgradeType );
+					break;
+				case 'updatePlugin' :
+					tb_remove();
+					$( '.envato-card-' + message.slug ).find( 'h4 a' ).focus();
+					$( '.envato-card-' + message.slug ).find( '[data-slug="' + message.slug + '"]' ).trigger( 'click' );
+					break;
+				default:
+			}
 		}
-	} );
+		catch ( error ) {
+
+		}
+
+	});
 
 	$( window ).on( 'beforeunload', wp.envato.beforeunload );
 
