@@ -51,6 +51,7 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 				self::$_instance = new self();
 				self::$_instance->init_actions();
 			}
+
 			return self::$_instance;
 		}
 
@@ -133,7 +134,33 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 
 			// Set the API values.
 			add_action( 'current_screen', array( $this, 'set_items' ) );
+
+			// Hook to verify the API token before saving it.
+			add_filter( 'pre_update_option_' . envato_market()->get_option_name(), array(
+				$this,
+				'check_api_token_before_saving'
+			), 9, 3 );
 		}
+
+		/**
+		 * This runs before we save the Envato Market options array.
+		 * If the token has changed then we set a transient so we can do the update check.
+		 *
+		 * @since 2.0.1
+		 *
+		 * @param array $value The option to save.
+		 * @param array $old_value The old option value.
+		 * @param array $option Serialized option value.
+		 *
+		 * @return array $value The updated option value.
+		 */
+		public function check_api_token_before_saving( $value, $old_value, $option ) {
+			if ( ! empty( $value['token'] ) && ( empty( $old_value['token'] ) || $old_value['token'] != $value['token'] ) ) {
+				set_site_transient( envato_market()->get_option_name() . '_check_token', $value['token'], HOUR_IN_SECONDS );
+			}
+			return $value;
+		}
+
 
 		/**
 		 * Defers building the API download url until the last responsible moment to limit file requests.
@@ -395,18 +422,18 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 
 			wp_enqueue_script(
 				$slug, $plugin_url . 'js/envato-market' . $min . '.js', array(
-					'jquery',
-					'jquery-ui-dialog',
-					'wp-util',
-				), $version, true
+				'jquery',
+				'jquery-ui-dialog',
+				'wp-util',
+			), $version, true
 			);
 			wp_enqueue_script(
 				$slug . '-updates', $plugin_url . 'js/updates' . $min . '.js', array(
-					'jquery',
-					'updates',
-					'wp-a11y',
-					'wp-util',
-				), $version, true
+				'jquery',
+				'updates',
+				'wp-a11y',
+				'wp-util',
+			), $version, true
 			);
 
 			// Script data array.
@@ -437,7 +464,10 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 		public function render_templates() {
 			?>
 			<script type="text/html" id="tmpl-envato-market-auth-check-button">
-				<a href="<?php echo esc_url( add_query_arg( array( 'authorization' => 'check' ), envato_market()->get_page_url() ) ); ?>" class="button button-secondary auth-check-button" style="margin:0 5px"><?php esc_html_e( 'Test API Connection', 'envato-market' ); ?></a>
+				<a
+					href="<?php echo esc_url( add_query_arg( array( 'authorization' => 'check' ), envato_market()->get_page_url() ) ); ?>"
+					class="button button-secondary auth-check-button"
+					style="margin:0 5px"><?php esc_html_e( 'Test API Connection', 'envato-market' ); ?></a>
 			</script>
 
 			<script type="text/html" id="tmpl-envato-market-item">
@@ -446,11 +476,21 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 					<button class="item-delete dashicons dashicons-dismiss">
 						<span class="screen-reader-text"><?php esc_html_e( 'Delete', 'envato-market' ); ?></span>
 					</button>
-					<input type="hidden" name="<?php echo esc_attr( envato_market()->get_option_name() ); ?>[items][{{ data.key }}][name]" value="{{ data.name }}" />
-					<input type="hidden" name="<?php echo esc_attr( envato_market()->get_option_name() ); ?>[items][{{ data.key }}][token]" value="{{ data.token }}" />
-					<input type="hidden" name="<?php echo esc_attr( envato_market()->get_option_name() ); ?>[items][{{ data.key }}][id]" value="{{ data.id }}" />
-					<input type="hidden" name="<?php echo esc_attr( envato_market()->get_option_name() ); ?>[items][{{ data.key }}][type]" value="{{ data.type }}" />
-					<input type="hidden" name="<?php echo esc_attr( envato_market()->get_option_name() ); ?>[items][{{ data.key }}][authorized]" value="{{ data.authorized }}" />
+					<input type="hidden"
+					       name="<?php echo esc_attr( envato_market()->get_option_name() ); ?>[items][{{ data.key }}][name]"
+					       value="{{ data.name }}"/>
+					<input type="hidden"
+					       name="<?php echo esc_attr( envato_market()->get_option_name() ); ?>[items][{{ data.key }}][token]"
+					       value="{{ data.token }}"/>
+					<input type="hidden"
+					       name="<?php echo esc_attr( envato_market()->get_option_name() ); ?>[items][{{ data.key }}][id]"
+					       value="{{ data.id }}"/>
+					<input type="hidden"
+					       name="<?php echo esc_attr( envato_market()->get_option_name() ); ?>[items][{{ data.key }}][type]"
+					       value="{{ data.type }}"/>
+					<input type="hidden"
+					       name="<?php echo esc_attr( envato_market()->get_option_name() ); ?>[items][{{ data.key }}][authorized]"
+					       value="{{ data.authorized }}"/>
 				</li>
 			</script>
 
@@ -492,7 +532,9 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 							<div class="column-name">
 								<h4>
 									<a href="{{ data.url }}">{{ data.name }}</a>
-									<span class="version" aria-label="<?php esc_attr_e( 'Version %s', 'envato-market' ); ?>"><?php esc_html_e( 'Version', 'envato-market' ); ?> {{ data.version }}</span>
+									<span class="version"
+									      aria-label="<?php esc_attr_e( 'Version %s', 'envato-market' ); ?>"><?php esc_html_e( 'Version', 'envato-market' ); ?>
+										{{ data.version }}</span>
 								</h4>
 							</div>
 							<div class="column-description">
@@ -508,7 +550,8 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 							<div class="column-actions">
 								<a href="{{{ data.install }}}" class="button button-primary">
 									<span aria-hidden="true"><?php esc_html_e( 'Install', 'envato-market' ); ?></span>
-									<span class="screen-reader-text"><?php esc_html_e( 'Install', 'envato-market' ); ?> {{ data.name }}</span>
+									<span class="screen-reader-text"><?php esc_html_e( 'Install', 'envato-market' ); ?>
+										{{ data.name }}</span>
 								</a>
 							</div>
 						</div>
@@ -587,7 +630,8 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 			if ( 'toplevel_page_' . envato_market()->get_slug() === get_current_screen()->id ) {
 
 				// @codeCoverageIgnoreStart
-				if ( isset( $_GET['authorization'] ) && 'check' === $_GET['authorization'] ) {
+				if ( get_site_transient( envato_market()->get_option_name() . '_check_token' ) || ( isset( $_GET['authorization'] ) && 'check' === $_GET['authorization'] ) ) {
+					delete_site_transient( envato_market()->get_option_name() . '_check_token' );
 					self::authorization_redirect();
 				}
 				// @codeCoverageIgnoreEnd
@@ -616,6 +660,16 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 					// Show error notice.
 					if ( in_array( 'error', $option['notices'] ) ) {
 						add_action( 'admin_notices', array( $this, 'render_error_notice' ) );
+					}
+
+					// Show invalid permissions error notice.
+					if ( in_array( 'error-too-many-permissions', $option['notices'] ) ) {
+						add_action( 'admin_notices', array( $this, 'render_error_too_many_permissions' ) );
+					}
+
+					// Show invalid permissions error notice.
+					if ( in_array( 'error-missing-permissions', $option['notices'] ) ) {
+						add_action( 'admin_notices', array( $this, 'render_error_missing_permissions' ) );
 					}
 
 					// Show single-use error notice.
@@ -663,41 +717,28 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 		public function authorization() {
 			// Get the option array.
 			$option = envato_market()->get_options();
+			$option['notices'] = array();
 
 			// Check for global token.
 			if ( envato_market()->get_option( 'token' ) || envato_market()->api()->token ) {
-				$failed            = false;
-				$option['notices'] = array();
 
-				if ( 'error' === $this->authorize_total_items() ) {
-					$failed = true;
-				}
+				$scope_check = $this->authorize_token_permissions();
 
-				if ( false === $failed ) {
-					$themes_notice = $this->authorize_themes();
-					if ( 'success-no-themes' === $themes_notice ) {
-						$themes_empty = true;
-					} elseif ( 'error' === $themes_notice ) {
-						$failed = true;
-					}
-				}
-
-				if ( false === $failed ) {
-					$plugins_notice = $this->authorize_plugins();
-					if ( 'success-no-plugins' === $plugins_notice ) {
-						$plugins_empty = true;
-					} elseif ( 'error' === $plugins_notice ) {
-						$failed = true;
-					}
-				}
-
-				if ( true === $failed ) {
+				if ( 'error' === $this->authorize_total_items() || 'error' === $scope_check ) {
 					$option['notices'][] = 'error';
-				} else {
-					if ( false === $failed && isset( $themes_empty ) && isset( $plugins_empty ) ) {
-						$option['notices'][] = 'success-no-items';
-					} else {
-						$option['notices'][] = 'success';
+				}else{
+					if( 'missing-permissions' == $scope_check ){
+						$option['notices'][] = 'error-missing-permissions';
+					}else if( 'too-many-permissions' === $scope_check ){
+						$option['notices'][] = 'error-too-many-permissions';
+					}else {
+						$themes_notice  = $this->authorize_themes();
+						$plugins_notice = $this->authorize_plugins();
+						if ( 'error' === $themes_notice || 'error' === $plugins_notice ) {
+							$option['notices'][] = 'error';
+						} else if ( 'success-no-themes' === $themes_notice && 'success-no-plugins' === $plugins_notice ) {
+							$option['notices'][] = 'success-no-items';
+						}
 					}
 				}
 			}
@@ -735,10 +776,7 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 				}
 			}
 
-			// Set the option array.
-			if ( isset( $option['notices'] ) ) {
-				update_option( envato_market()->get_option_name(), $option );
-			}
+			update_option( envato_market()->get_option_name(), $option );
 		}
 
 		/**
@@ -756,6 +794,48 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 				$notice = 'error';
 			}
 
+			return $notice;
+		}
+
+		/**
+		 * Check that themes are authorized.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @return bool
+		 */
+		public function authorize_token_permissions() {
+			$response = envato_market()->api()->request( 'https://api.envato.com/whoami' );
+			$notice   = 'success';
+
+			if ( is_wp_error( $response ) || !isset( $response['scopes']) || !is_array($response['scopes']) ) {
+				$notice = 'error';
+			}else{
+
+				$minimum_scopes = array(
+					'purchase:download',
+					'purchase:list',
+					'purchase:verify',
+				);
+				$maximum_scopes = array(
+					'default',
+					'purchase:download',
+					'purchase:list',
+					'purchase:verify',
+				);
+				foreach($minimum_scopes as $required_scope){
+					if(!in_array($required_scope, $response['scopes'])){
+						// The scope minimum required scope doesn't exist.
+						$notice = 'missing-permissions';
+					}
+				}
+				foreach($response['scopes'] as $scope){
+					if(!in_array($scope, $maximum_scopes)){
+						// The available scope is outside our maximum bounds.
+						$notice = 'too-many-permissions';
+					}
+				}
+			}
 			return $notice;
 		}
 
@@ -1197,6 +1277,24 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 		 */
 		public function render_error_notice() {
 			require( envato_market()->get_plugin_path() . 'inc/admin/view/notice/error.php' );
+		}
+
+		/**
+		 * Permission error notice.
+		 *
+		 * @since 2.0.1
+		 */
+		public function render_error_too_many_permissions() {
+			require( envato_market()->get_plugin_path() . 'inc/admin/view/notice/error-too-many-permissions.php' );
+		}
+
+		/**
+		 * Permission error notice.
+		 *
+		 * @since 2.0.1
+		 */
+		public function render_error_missing_permissions() {
+			require( envato_market()->get_plugin_path() . 'inc/admin/view/notice/error-missing-permissions.php' );
 		}
 
 		/**
