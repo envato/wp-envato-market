@@ -722,25 +722,27 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 			// Check for global token.
 			if ( envato_market()->get_option( 'token' ) || envato_market()->api()->token ) {
 
+				$notice = 'success';
 				$scope_check = $this->authorize_token_permissions();
 
 				if ( 'error' === $this->authorize_total_items() || 'error' === $scope_check ) {
-					$option['notices'][] = 'error';
+					$notice = 'error';
 				}else{
 					if( 'missing-permissions' == $scope_check ){
-						$option['notices'][] = 'error-missing-permissions';
+						$notice = 'error-missing-permissions';
 					}else if( 'too-many-permissions' === $scope_check ){
-						$option['notices'][] = 'error-too-many-permissions';
+						$notice = 'error-too-many-permissions';
 					}else {
 						$themes_notice  = $this->authorize_themes();
 						$plugins_notice = $this->authorize_plugins();
 						if ( 'error' === $themes_notice || 'error' === $plugins_notice ) {
-							$option['notices'][] = 'error';
+							$notice = 'error';
 						} else if ( 'success-no-themes' === $themes_notice && 'success-no-plugins' === $plugins_notice ) {
-							$option['notices'][] = 'success-no-items';
+							$notice = 'success-no-items';
 						}
 					}
 				}
+				$option['notices'][] = $notice;
 			}
 
 			// Check for single-use token.
@@ -797,6 +799,22 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 			return $notice;
 		}
 
+
+		/**
+		 * Get the required API permissions for this plugin to work.
+		 *
+		 * @single 2.0.1
+		 *
+		 * @return array
+		 */
+		public function get_required_permissions(){
+			return apply_filters( 'envato/market/required_permissions', array(
+				'purchase:download' => 'Download your purchased items',
+				'purchase:list' => 'List purchases you\'ve made',
+				'purchase:verify' => 'Verify purchases you\'ve made',
+			) );
+		}
+
 		/**
 		 * Check that themes are authorized.
 		 *
@@ -812,25 +830,17 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 				$notice = 'error';
 			}else{
 
-				$minimum_scopes = array(
-					'purchase:download',
-					'purchase:list',
-					'purchase:verify',
-				);
-				$maximum_scopes = array(
-					'default',
-					'purchase:download',
-					'purchase:list',
-					'purchase:verify',
-				);
-				foreach($minimum_scopes as $required_scope){
+				$minimum_scopes = $this->get_required_permissions();
+				$maximum_scopes = array( 'default' => 'Default' ) + $minimum_scopes;
+
+				foreach($minimum_scopes as $required_scope => $required_scope_name){
 					if(!in_array($required_scope, $response['scopes'])){
 						// The scope minimum required scope doesn't exist.
 						$notice = 'missing-permissions';
 					}
 				}
 				foreach($response['scopes'] as $scope){
-					if(!in_array($scope, $maximum_scopes)){
+					if(!isset($maximum_scopes[$scope])){
 						// The available scope is outside our maximum bounds.
 						$notice = 'too-many-permissions';
 					}

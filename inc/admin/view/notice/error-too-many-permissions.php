@@ -8,5 +8,5 @@
 
 ?>
 <div class="notice notice-error is-dismissible">
-	<p><?php esc_html_e( 'Too many Personal Token permissions enabled. Please ensure only "Download your purchased items", "List purchases you\'ve made" and "Verify purchases you\'ve made" are enabled.', 'envato-market' ); ?></p>
+	<p><?php esc_html_e( sprintf( 'Too many Personal Token permissions. Please ensure only %s permissions are enabled.', sprintf('"%s"', implode('","', $this->get_required_permissions() ) ) ), 'envato-market' ); ?></p>
 </div>
