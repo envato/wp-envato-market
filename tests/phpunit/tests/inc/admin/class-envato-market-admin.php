@@ -407,7 +407,7 @@ class Tests_Envato_Market_Admin extends WP_UnitTestCase {
 		ob_start();
 		$this->admin->render_oauth_section_callback();
 		$contents = ob_get_clean();
-		$this->assertContains( 'Generate an Envato API Personal Token by <a href="https://build.envato.com/create-token/?purchase:download=t&purchase:verify=t&purchase:list=t" target="_blank">clicking this link</a>', $contents );
+		$this->assertContains( 'Generate an Envato API Personal Token by <a href="' . envato_market()->admin()->get_generate_token_url() . '" target="_blank">clicking this link</a>', $contents );
 	}
 
 	/**

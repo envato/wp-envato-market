@@ -822,9 +822,26 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 		public function get_required_permissions() {
 			return apply_filters(
 				'envato_market_required_permissions', array(
-					'default' => 'View and search Envato sites',
+					'default'           => 'View and search Envato sites',
 					'purchase:download' => 'Download your purchased items',
 					'purchase:list'     => 'List purchases you\'ve made',
+				)
+			);
+		}
+
+		/**
+		 * Return the URL a user needs to click to generate a personal token.
+		 *
+		 * @single 2.0.1
+		 *
+		 * @return string The full URL to request a token.
+		 */
+		public function get_generate_token_url() {
+			return 'https://build.envato.com/create-token/?' . implode(
+				'&', array_map(
+					function( $val ) {
+						return $val . '=t';
+					}, array_keys( $this->get_required_permissions() )
 				)
 			);
 		}
