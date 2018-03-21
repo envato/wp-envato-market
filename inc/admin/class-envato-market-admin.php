@@ -822,9 +822,9 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 		public function get_required_permissions() {
 			return apply_filters(
 				'envato_market_required_permissions', array(
+					'default' => 'View and search Envato sites',
 					'purchase:download' => 'Download your purchased items',
 					'purchase:list'     => 'List purchases you\'ve made',
-					'purchase:verify'   => 'Verify purchases you\'ve made',
 				)
 			);
 		}
