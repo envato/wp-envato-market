@@ -275,12 +275,16 @@ class Tests_Envato_Market_Admin extends WP_UnitTestCase {
 		envato_market()->api()->token = '12345';
 
 		$mock = $this->getMockBuilder( 'Envato_Market_Admin' )
-			->setMethods( array( 'authorize_total_items', 'authorize_themes', 'authorize_plugins' ) )
+			->setMethods( array( 'authorize_total_items', 'authorize_token_permissions', 'authorize_themes', 'authorize_plugins' ) )
 			->disableOriginalConstructor()
 			->getMock();
 
 		$mock->expects( $this->any() )
 			->method( 'authorize_total_items' )
+			->will( $this->returnValue( 'success' ) );
+
+		$mock->expects( $this->any() )
+			->method( 'authorize_token_permissions' )
 			->will( $this->returnValue( 'success' ) );
 
 		$mock->expects( $this->any() )
@@ -302,12 +306,16 @@ class Tests_Envato_Market_Admin extends WP_UnitTestCase {
 		envato_market()->api()->token = '12345';
 
 		$mock = $this->getMockBuilder( 'Envato_Market_Admin' )
-			->setMethods( array( 'authorize_total_items', 'authorize_themes', 'authorize_plugins' ) )
+			->setMethods( array( 'authorize_total_items', 'authorize_token_permissions', 'authorize_themes', 'authorize_plugins' ) )
 			->disableOriginalConstructor()
 			->getMock();
 
 		$mock->expects( $this->any() )
 			->method( 'authorize_total_items' )
+			->will( $this->returnValue( 'success' ) );
+
+		$mock->expects( $this->any() )
+			->method( 'authorize_token_permissions' )
 			->will( $this->returnValue( 'success' ) );
 
 		$mock->expects( $this->any() )
