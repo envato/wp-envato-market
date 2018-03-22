@@ -642,37 +642,37 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 
 					// Show succes notice.
 					if ( in_array( 'success', $option['notices'] ) ) {
-						add_action( 'admin_notices', array( $this, 'render_success_notice' ) );
+						add_action( ( ENVATO_MARKET_NETWORK_ACTIVATED ? 'network_' : '' ) . 'admin_notices', array( $this, 'render_success_notice' ) );
 					}
 
 					// Show succes no-items notice.
 					if ( in_array( 'success-no-items', $option['notices'] ) ) {
-						add_action( 'admin_notices', array( $this, 'render_success_no_items_notice' ) );
+						add_action( ( ENVATO_MARKET_NETWORK_ACTIVATED ? 'network_' : '' ) . 'admin_notices', array( $this, 'render_success_no_items_notice' ) );
 					}
 
 					// Show single-use succes notice.
 					if ( in_array( 'success-single-use', $option['notices'] ) ) {
-						add_action( 'admin_notices', array( $this, 'render_success_single_use_notice' ) );
+						add_action( ( ENVATO_MARKET_NETWORK_ACTIVATED ? 'network_' : '' ) . 'admin_notices', array( $this, 'render_success_single_use_notice' ) );
 					}
 
 					// Show error notice.
 					if ( in_array( 'error', $option['notices'] ) ) {
-						add_action( 'admin_notices', array( $this, 'render_error_notice' ) );
+						add_action( ( ENVATO_MARKET_NETWORK_ACTIVATED ? 'network_' : '' ) . 'admin_notices', array( $this, 'render_error_notice' ) );
 					}
 
 					// Show invalid permissions error notice.
 					if ( in_array( 'error-too-many-permissions', $option['notices'] ) ) {
-						add_action( 'admin_notices', array( $this, 'render_error_too_many_permissions' ) );
+						add_action( ( ENVATO_MARKET_NETWORK_ACTIVATED ? 'network_' : '' ) . 'admin_notices', array( $this, 'render_error_too_many_permissions' ) );
 					}
 
 					// Show invalid permissions error notice.
 					if ( in_array( 'error-missing-permissions', $option['notices'] ) ) {
-						add_action( 'admin_notices', array( $this, 'render_error_missing_permissions' ) );
+						add_action( ( ENVATO_MARKET_NETWORK_ACTIVATED ? 'network_' : '' ) . 'admin_notices', array( $this, 'render_error_missing_permissions' ) );
 					}
 
 					// Show single-use error notice.
 					if ( in_array( 'error-single-use', $option['notices'] ) ) {
-						add_action( 'admin_notices', array( $this, 'render_error_single_use_notice' ) );
+						add_action( ( ENVATO_MARKET_NETWORK_ACTIVATED ? 'network_' : '' ) . 'admin_notices', array( $this, 'render_error_single_use_notice' ) );
 					}
 
 					// Update the saved data so the notice disappears on the next page load.
