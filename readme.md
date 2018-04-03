@@ -6,11 +6,11 @@ WordPress Theme & Plugin management for the Envato Market.
 **Contributors:** [valendesigns](https://profiles.wordpress.org/valendesigns), [dtbaker](https://profiles.wordpress.org/dtbaker), [aaronrutley](https://profiles.wordpress.org/aaronrutley)  
 **Requires at least:** 4.9  
 **Tested up to:** 4.9.4  
-**Stable tag:** 2.0.0  
+**Stable tag:** 2.0.1
 **License:** [GPLv2 or later](http://www.gnu.org/licenses/gpl-2.0.html)  
 **Website:** https://envato.com/market-plugin/  
 
-[![Build Status](https://travis-ci.org/envato/wp-envato-market.svg?branch=master)](https://travis-ci.org/envato/wp-envato-market) [![Coverage Status](https://coveralls.io/repos/envato/wp-envato-market/badge.svg?branch=master)](https://coveralls.io/github/envato/wp-envato-market) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.svg)](http://gruntjs.com) [![devDependency Status](https://david-dm.org/envato/wp-envato-market/dev-status.svg)](https://david-dm.org/envato/wp-envato-market?type=dev) 
+[![Build Status](https://travis-ci.org/envato/wp-envato-market.svg?branch=master)](https://travis-ci.org/envato/wp-envato-market) [![Coverage Status](https://coveralls.io/repos/envato/wp-envato-market/badge.svg?branch=master)](https://coveralls.io/github/envato/wp-envato-market) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.svg)](http://gruntjs.com) [![devDependency Status](https://david-dm.org/envato/wp-envato-market/dev-status.svg)](https://david-dm.org/envato/wp-envato-market?type=dev)
 
 ## Description ##
 
@@ -41,6 +41,11 @@ Alternatively you can manually install the item via FTP
 **Pull requests are welcome.** Please review the [guidelines for contributing](https://github.com/envato/wp-envato-market/blob/master/contributing.md) and [code of conduct](https://github.com/envato/wp-envato-market/blob/master/code_of_conduct.md) before contributing to this repository.
 
 ## Change Log ##
+
+### v2.0.1
+- Multisite Support
+- Reverting to http
+- Improved token generation feature
 
 #### v2.0.0
 - Various bug fixes

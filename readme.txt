@@ -3,7 +3,7 @@ Website: https://envato.com/market-plugin/
 Contributors: valendesigns, dtbaker, aaronrutley
 Requires at least: 4.9
 Tested up to: 4.9.4
-Stable tag: 2.0.0
+Stable tag: 2.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,11 @@ Alternatively you can manually install the item via FTP
 
 
 == Change Log ==
+
+### v2.0.1
+- Multisite Support
+- Reverting to http
+- Improved token generation feature
 
 #### v2.0.0
 - Various bug fixes
