@@ -36,6 +36,13 @@ Alternatively you can manually install the item via FTP
 1. Activate the plugin through the 'Plugins' menu in WordPress.
 1. Click the 'Envato Market' menu in WordPress and connect to the API.
 
+**required token permissions:**
+
+* View and search Envato sites [*default*]
+* Download your purchased items
+* List purchases you've made
+* Verify purchases you've made
+
 ## Contributing ##
 
 **Pull requests are welcome.** Please review the [guidelines for contributing](https://github.com/envato/wp-envato-market/blob/master/contributing.md) and [code of conduct](https://github.com/envato/wp-envato-market/blob/master/code_of_conduct.md) before contributing to this repository.
