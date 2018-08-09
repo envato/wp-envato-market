@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Envato Market 2.0.1\n"
 "Report-Msgid-Bugs-To: Envato Support Team <support@envato.com>\n"
-"POT-Creation-Date: 2018-08-09 01:58:47+00:00\n"
+"POT-Creation-Date: 2018-08-09 02:45:44+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -25,8 +25,8 @@ msgid ""
 "and get the correct zip file from %s."
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:77
-#: inc/admin/class-envato-market-admin.php:87
+#: inc/admin/class-envato-market-admin.php:78
+#: inc/admin/class-envato-market-admin.php:88
 #: inc/class-envato-market-api.php:80 inc/class-envato-market-api.php:90
 #: inc/class-envato-market-github.php:87 inc/class-envato-market-github.php:97
 #: inc/class-envato-market-items.php:100 inc/class-envato-market-items.php:110
@@ -34,7 +34,7 @@ msgstr ""
 msgid "Cheatin&#8217; huh?"
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:272
+#: inc/admin/class-envato-market-admin.php:274
 msgid "You do not have sufficient permissions to delete transients."
 msgstr ""
 
@@ -42,163 +42,163 @@ msgstr ""
 msgid "Envato Market"
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:457
+#: inc/admin/class-envato-market-admin.php:459
 msgid "Save"
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:458
+#: inc/admin/class-envato-market-admin.php:460
 msgid "Remove"
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:459
+#: inc/admin/class-envato-market-admin.php:461
 msgid "Cancel"
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:460
+#: inc/admin/class-envato-market-admin.php:462
 msgid "An unknown error occurred. Try again."
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:480
+#: inc/admin/class-envato-market-admin.php:485
 #: inc/admin/view/partials/settings.php:21
 msgid "Test API Connection"
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:485
+#: inc/admin/class-envato-market-admin.php:490
 #: inc/admin/view/callback/setting/items.php:22
 msgid "ID"
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:487 inc/admin/functions.php:324
+#: inc/admin/class-envato-market-admin.php:493 inc/admin/functions.php:324
 #: inc/admin/view/callback/setting/items.php:24
 msgid "Delete"
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:498
+#: inc/admin/class-envato-market-admin.php:514
 msgid "Remove Item"
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:499
+#: inc/admin/class-envato-market-admin.php:515
 msgid ""
 "You are about to remove the connection between the Envato Market API and "
 "this item. You cannot undo this action."
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:504
+#: inc/admin/class-envato-market-admin.php:520
 #: inc/admin/view/callback/setting/items.php:37
 msgid "Add Item"
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:507
-#: inc/admin/class-envato-market-admin.php:581
+#: inc/admin/class-envato-market-admin.php:523
+#: inc/admin/class-envato-market-admin.php:600
 msgid "Token"
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:509
+#: inc/admin/class-envato-market-admin.php:526
 msgid "Enter the Envato API Personal Token."
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:510
+#: inc/admin/class-envato-market-admin.php:527
 msgid "Item ID"
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:512
+#: inc/admin/class-envato-market-admin.php:529
 msgid "Enter the Envato Item ID."
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:535 inc/admin/functions.php:162
+#: inc/admin/class-envato-market-admin.php:553 inc/admin/functions.php:162
 #: inc/admin/functions.php:163 inc/admin/functions.php:388
 #: inc/admin/functions.php:389
 msgid "Version %s"
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:535
+#: inc/admin/class-envato-market-admin.php:553
 msgid "Version"
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:543 inc/admin/functions.php:173
+#: inc/admin/class-envato-market-admin.php:562 inc/admin/functions.php:173
 #: inc/admin/functions.php:399
 msgid "By"
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:550
-#: inc/admin/class-envato-market-admin.php:551 inc/admin/functions.php:143
+#: inc/admin/class-envato-market-admin.php:569
+#: inc/admin/class-envato-market-admin.php:570 inc/admin/functions.php:143
 #: inc/admin/functions.php:369
 msgid "Install"
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:573
+#: inc/admin/class-envato-market-admin.php:592
 msgid "Activate Envato API Connection"
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:590
+#: inc/admin/class-envato-market-admin.php:609
 msgid "Single Item Tokens (Advanced)"
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:598
+#: inc/admin/class-envato-market-admin.php:617
 msgid "Envato Market Items"
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:946
-#: inc/admin/class-envato-market-admin.php:971
+#: inc/admin/class-envato-market-admin.php:979
+#: inc/admin/class-envato-market-admin.php:1004
 msgid "Installing Plugin..."
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:947
+#: inc/admin/class-envato-market-admin.php:980
 msgid "You do not have sufficient permissions to install plugins on this site."
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:948
-#: inc/admin/class-envato-market-admin.php:973
-#: inc/admin/class-envato-market-admin.php:1031
+#: inc/admin/class-envato-market-admin.php:981
+#: inc/admin/class-envato-market-admin.php:1006
+#: inc/admin/class-envato-market-admin.php:1064
 #: inc/admin/class-envato-market-theme-installer-skin.php:112
 msgid "Return to Plugin Installer"
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:972
-#: inc/admin/class-envato-market-admin.php:1030
+#: inc/admin/class-envato-market-admin.php:1005
+#: inc/admin/class-envato-market-admin.php:1063
 msgid "An error occurred, please check that the item ID is correct."
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:978
+#: inc/admin/class-envato-market-admin.php:1011
 msgid "Installing Plugin: %s"
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:1004
-#: inc/admin/class-envato-market-admin.php:1029
+#: inc/admin/class-envato-market-admin.php:1037
+#: inc/admin/class-envato-market-admin.php:1062
 msgid "Installing Theme..."
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:1005
+#: inc/admin/class-envato-market-admin.php:1038
 msgid "You do not have sufficient permissions to install themes on this site."
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:1006
+#: inc/admin/class-envato-market-admin.php:1039
 #: inc/admin/class-envato-market-theme-installer-skin.php:66
 msgid "Return to Theme Installer"
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:1038
+#: inc/admin/class-envato-market-admin.php:1071
 msgid "Installing Theme: %s"
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:1066
+#: inc/admin/class-envato-market-admin.php:1099
 msgid "The Token is missing."
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:1068
-#: inc/admin/class-envato-market-admin.php:1167
+#: inc/admin/class-envato-market-admin.php:1101
+#: inc/admin/class-envato-market-admin.php:1200
 msgid "The Item ID is missing."
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:1079
+#: inc/admin/class-envato-market-admin.php:1112
 msgid "The Token or Item ID is incorrect."
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:1083
+#: inc/admin/class-envato-market-admin.php:1116
 msgid "The item cannot be downloaded."
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:1150
+#: inc/admin/class-envato-market-admin.php:1183
 msgid "An unknown error occurred."
 msgstr ""
 
@@ -340,24 +340,20 @@ msgstr ""
 msgid "Enter your Envato API Personal Token."
 msgstr ""
 
-#: inc/admin/view/notice/error-missing-permissions.php:11
+#: inc/admin/view/notice/error-permissions.php:11
 msgid ""
-"Not enough Personal Token permissions. Please ensure %s permissions are "
-"enabled."
+"Incorrect token permissions, please generate another token or fix the "
+"permissions on the existing token."
+msgstr ""
+
+#: inc/admin/view/notice/error-permissions.php:12
+msgid "Please ensure only the following permissions are enabled: "
 msgstr ""
 
 #: inc/admin/view/notice/error-single-use.php:11
 msgid ""
 "One or more Single Use OAuth Personal Tokens could not be verified and "
 "should be removed."
-msgstr ""
-
-#: inc/admin/view/notice/error-too-many-permissions.php:11
-msgid "Incorrect token permissions, please generate another token."
-msgstr ""
-
-#: inc/admin/view/notice/error-too-many-permissions.php:12
-msgid "Please ensure only the following %s permissions are enabled."
 msgstr ""
 
 #: inc/admin/view/notice/error.php:11
