@@ -41,7 +41,6 @@ Required token permissions:
 * View and search Envato sites (default)
 * Download your purchased items
 * List purchases you've made
-* Verify purchases you've made
 
 ## Contributing ##
 
