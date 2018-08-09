@@ -661,13 +661,8 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 					}
 
 					// Show invalid permissions error notice.
-					if ( in_array( 'error-too-many-permissions', $option['notices'] ) ) {
-						add_action( ( ENVATO_MARKET_NETWORK_ACTIVATED ? 'network_' : '' ) . 'admin_notices', array( $this, 'render_error_too_many_permissions' ) );
-					}
-
-					// Show invalid permissions error notice.
-					if ( in_array( 'error-missing-permissions', $option['notices'] ) ) {
-						add_action( ( ENVATO_MARKET_NETWORK_ACTIVATED ? 'network_' : '' ) . 'admin_notices', array( $this, 'render_error_missing_permissions' ) );
+					if ( in_array( 'error-permissions', $option['notices'] ) ) {
+						add_action( ( ENVATO_MARKET_NETWORK_ACTIVATED ? 'network_' : '' ) . 'admin_notices', array( $this, 'render_error_permissions' ) );
 					}
 
 					// Show single-use error notice.
@@ -738,9 +733,9 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 					$notice = 'error';
 				} else {
 					if ( 'missing-permissions' == $scope_check ) {
-						$notice = 'error-missing-permissions';
+						$notice = 'error-permissions';
 					} elseif ( 'too-many-permissions' === $scope_check ) {
-						$notice = 'error-too-many-permissions';
+						$notice = 'error-permissions';
 					} else {
 						$themes_notice  = $this->authorize_themes();
 						$plugins_notice = $this->authorize_plugins();
@@ -1325,17 +1320,8 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 		 *
 		 * @since 2.0.1
 		 */
-		public function render_error_too_many_permissions() {
-			require( envato_market()->get_plugin_path() . 'inc/admin/view/notice/error-too-many-permissions.php' );
-		}
-
-		/**
-		 * Permission error notice.
-		 *
-		 * @since 2.0.1
-		 */
-		public function render_error_missing_permissions() {
-			require( envato_market()->get_plugin_path() . 'inc/admin/view/notice/error-missing-permissions.php' );
+		public function render_error_permissions() {
+			require( envato_market()->get_plugin_path() . 'inc/admin/view/notice/error-permissions.php' );
 		}
 
 		/**
