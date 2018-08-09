@@ -112,6 +112,7 @@ module.exports = function( grunt ) {
 				options: {
 					potFilename: '<%= pkg.name %>.pot',
 					exclude: [
+						'docs/.*', // Exclude docs directory
 						'dist/<%= pkg.name %>/.*' // Exclude deploy directory
 					],
 					processPot: function( pot ) {
@@ -172,6 +173,7 @@ module.exports = function( grunt ) {
 					'!contributing.md',
 					'!dev-lib/**',
 					'!dist/**',
+					'!docs/**',
 					'!Gruntfile.js',
 					'!node_modules/**',
 					'!npm-debug.log',
@@ -197,7 +199,7 @@ module.exports = function( grunt ) {
 		compress: {
 			deploy: {
 				options: {
-					archive: 'dist/<%= pkg.name %>.zip',
+					archive: 'docs/dist/<%= pkg.name %>.zip',
 					mode: 'zip'
 				},
 				files: [ {
