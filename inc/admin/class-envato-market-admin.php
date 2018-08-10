@@ -1299,6 +1299,16 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 			require( envato_market()->get_plugin_path() . 'inc/admin/view/partials/settings.php' );
 		}
 
+
+		/**
+		 * Help panel
+		 *
+		 * @since 2.0.1
+		 */
+		public function render_help_panel_partial() {
+			require( envato_market()->get_plugin_path() . 'inc/admin/view/partials/help.php' );
+		}
+
 		/**
 		 * Themes panel
 		 *

@@ -24,6 +24,7 @@ if ( isset( $_GET['action'] ) ) {
 			<?php Envato_Market_Admin::render_themes_panel_partial(); ?>
 			<?php Envato_Market_Admin::render_plugins_panel_partial(); ?>
 			<?php Envato_Market_Admin::render_settings_panel_partial(); ?>
+			<?php Envato_Market_Admin::render_help_panel_partial(); ?>
 		</form>
 	</div>
 	<?php
