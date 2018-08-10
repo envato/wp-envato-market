@@ -707,6 +707,14 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 						) );
 					}
 
+					// Show missing zip notice.
+					if ( in_array( 'missing-package-zip', $option['notices'] ) ) {
+						add_action( ( ENVATO_MARKET_NETWORK_ACTIVATED ? 'network_' : '' ) . 'admin_notices', array(
+							$this,
+							'render_error_missing_zip'
+						) );
+					}
+
 					// Update the saved data so the notice disappears on the next page load.
 					unset( $option['notices'] );
 
@@ -1379,6 +1387,15 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 		 */
 		public function render_error_single_use_notice() {
 			require( envato_market()->get_plugin_path() . 'inc/admin/view/notice/error-single-use.php' );
+		}
+
+		/**
+		 * Error single-use notice.
+		 *
+		 * @since 2.0.1
+		 */
+		public function render_error_missing_zip() {
+			require( envato_market()->get_plugin_path() . 'inc/admin/view/notice/error-missing-zip.php' );
 		}
 
 		/**

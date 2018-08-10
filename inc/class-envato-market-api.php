@@ -198,6 +198,14 @@ if ( ! class_exists( 'Envato_Market_API' ) && class_exists( 'Envato_Market' ) ) 
 				return $response['wordpress_plugin'];
 			}
 
+			// Missing a WordPress theme and plugin, report an error.
+			$option = envato_market()->get_options();
+			if ( ! isset( $option['notices'] ) ) {
+				$option['notices'] = [];
+			}
+			$option['notices'][] = 'missing-package-zip';
+			envato_market()->set_options( $option );
+
 			return false;
 		}
 
