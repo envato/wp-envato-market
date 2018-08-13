@@ -660,7 +660,7 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 					self::delete_transients();
 
 					// Show succes notice.
-					if ( in_array( 'success', $option['notices'] ) ) {
+					if ( isset( $option['notices']['success'] ) ) {
 						add_action( ( ENVATO_MARKET_NETWORK_ACTIVATED ? 'network_' : '' ) . 'admin_notices', array(
 							$this,
 							'render_success_notice'
@@ -668,7 +668,7 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 					}
 
 					// Show succes no-items notice.
-					if ( in_array( 'success-no-items', $option['notices'] ) ) {
+					if ( isset( $option['notices']['success-no-items'] ) ) {
 						add_action( ( ENVATO_MARKET_NETWORK_ACTIVATED ? 'network_' : '' ) . 'admin_notices', array(
 							$this,
 							'render_success_no_items_notice'
@@ -676,7 +676,7 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 					}
 
 					// Show single-use succes notice.
-					if ( in_array( 'success-single-use', $option['notices'] ) ) {
+					if ( isset( $option['notices']['success-single-use'] ) ) {
 						add_action( ( ENVATO_MARKET_NETWORK_ACTIVATED ? 'network_' : '' ) . 'admin_notices', array(
 							$this,
 							'render_success_single_use_notice'
@@ -684,7 +684,7 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 					}
 
 					// Show error notice.
-					if ( in_array( 'error', $option['notices'] ) ) {
+					if ( isset( $option['notices']['error'] ) ) {
 						add_action( ( ENVATO_MARKET_NETWORK_ACTIVATED ? 'network_' : '' ) . 'admin_notices', array(
 							$this,
 							'render_error_notice'
@@ -692,7 +692,7 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 					}
 
 					// Show invalid permissions error notice.
-					if ( in_array( 'error-permissions', $option['notices'] ) ) {
+					if ( isset( $option['notices']['error-permissions'] ) ) {
 						add_action( ( ENVATO_MARKET_NETWORK_ACTIVATED ? 'network_' : '' ) . 'admin_notices', array(
 							$this,
 							'render_error_permissions'
@@ -700,7 +700,7 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 					}
 
 					// Show single-use error notice.
-					if ( in_array( 'error-single-use', $option['notices'] ) ) {
+					if ( isset( $option['notices']['error-single-use'] ) ) {
 						add_action( ( ENVATO_MARKET_NETWORK_ACTIVATED ? 'network_' : '' ) . 'admin_notices', array(
 							$this,
 							'render_error_single_use_notice'
@@ -708,10 +708,18 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 					}
 
 					// Show missing zip notice.
-					if ( in_array( 'missing-package-zip', $option['notices'] ) ) {
+					if ( isset( $option['notices']['missing-package-zip'] ) ) {
 						add_action( ( ENVATO_MARKET_NETWORK_ACTIVATED ? 'network_' : '' ) . 'admin_notices', array(
 							$this,
 							'render_error_missing_zip'
+						) );
+					}
+
+					// Show missing http connection error.
+					if ( isset( $option['notices']['http_error'] ) ) {
+						add_action( ( ENVATO_MARKET_NETWORK_ACTIVATED ? 'network_' : '' ) . 'admin_notices', array(
+							$this,
+							'render_error_http'
 						) );
 					}
 
@@ -774,7 +782,9 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 				$notice      = 'success';
 				$scope_check = $this->authorize_token_permissions();
 
-				if ( 'error' === $this->authorize_total_items() || 'error' === $scope_check ) {
+				if ( 'http_error' === $scope_check ) {
+					$notice = 'http_error';
+				} elseif ( 'error' === $this->authorize_total_items() || 'error' === $scope_check ) {
 					$notice = 'error';
 				} else {
 					if ( 'missing-permissions' == $scope_check ) {
@@ -791,7 +801,7 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 						}
 					}
 				}
-				$option['notices'][] = $notice;
+				$option['notices'][ $notice ] = true;
 			}
 
 			// Check for single-use token.
@@ -821,14 +831,14 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 				}
 
 				if ( true === $failed ) {
-					$option['notices'][] = 'error-single-use';
+					$option['notices']['error-single-use'] = true;
 				} else {
-					$option['notices'][] = 'success-single-use';
+					$option['notices']['success-single-use'] = true;
 				}
 			}
 
 			// Set the option array.
-			if ( isset( $option['notices'] ) ) {
+			if ( ! empty( $option['notices'] ) ) {
 				envato_market()->set_options( $option );
 			}
 		}
@@ -897,7 +907,9 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 			$response = envato_market()->api()->request( 'https://api.envato.com/whoami' );
 			$notice   = 'success';
 
-			if ( is_wp_error( $response ) || ! isset( $response['scopes'] ) || ! is_array( $response['scopes'] ) ) {
+			if ( is_wp_error( $response ) && ( $response->get_error_code() === 'http_error' || $response->get_error_code() == 500 ) ) {
+				$notice = 'http_error';
+			} elseif ( is_wp_error( $response ) || ! isset( $response['scopes'] ) || ! is_array( $response['scopes'] ) ) {
 				$notice = 'error';
 			} else {
 
@@ -1390,12 +1402,21 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 		}
 
 		/**
-		 * Error single-use notice.
+		 * Error missing zip.
 		 *
 		 * @since 2.0.1
 		 */
 		public function render_error_missing_zip() {
 			require( envato_market()->get_plugin_path() . 'inc/admin/view/notice/error-missing-zip.php' );
+		}
+
+		/**
+		 * Error http
+		 *
+		 * @since 2.0.1
+		 */
+		public function render_error_http() {
+			require( envato_market()->get_plugin_path() . 'inc/admin/view/notice/error-http.php' );
 		}
 
 		/**
