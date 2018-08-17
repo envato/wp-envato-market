@@ -103,7 +103,7 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 			}
 			// @codeCoverageIgnoreEnd
 			// Deferred Download.
-			add_action( 'upgrader_package_options', array( $this, 'maybe_deferred_download' ), 99 );
+			add_action( 'upgrader_package_options', array( $this, 'maybe_deferred_download' ), 9 );
 
 			// Add pre download filter to help with 3rd party plugin integration.
 			add_filter( 'upgrader_pre_download', array( $this, 'upgrader_pre_download' ), 2, 4 );
