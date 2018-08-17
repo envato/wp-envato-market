@@ -184,17 +184,26 @@ function envato_market_themes_column( $group = 'install' ) {
 				<div class="envato-card-bottom">
 					<div class="column-rating">
 						<?php
-						if ( ! empty( $theme['rating'] ) && ! empty( $theme['rating']['count'] ) ) {
-							wp_star_rating(
-								array(
-									'rating' => ( $theme['rating']['rating'] / 5 * 100 ),
-									'type'   => 'percent',
-									'number' => $theme['rating']['count'],
-								)
-							);
-							?>
-							<span class="num-ratings"><?php echo esc_html( '(' . number_format_i18n( $theme['rating']['count'] ) . ')' ); ?></span>
-						<?php } ?>
+						if ( ! empty( $theme['rating'] ) ) {
+							if( is_array($theme['rating']) && ! empty( $theme['rating']['count'] )) {
+							  wp_star_rating(
+								  array(
+									  'rating' => ( $theme['rating']['rating'] / 5 * 100 ),
+									  'type'   => 'percent',
+									  'number' => $theme['rating']['count'],
+								  )
+							  );
+						  }else{
+							  wp_star_rating(
+								  array(
+									  'rating' => ( $theme['rating'] / 5 * 100 ),
+									  'type'   => 'percent',
+										  'number' => $theme['num_ratings'],
+								  )
+							  );
+							}
+						}
+						?>
 					</div>
 					<div class="column-actions">
 						<?php echo implode( "\n", $actions ); ?>
@@ -410,17 +419,26 @@ function envato_market_plugins_column( $group = 'install' ) {
 				<div class="envato-card-bottom">
 					<div class="column-rating">
 						<?php
-						if ( ! empty( $plugin['rating'] ) && ! empty( $plugin['rating']['count'] ) ) {
-							wp_star_rating(
-								array(
-									'rating' => ( $plugin['rating']['rating'] / 5 * 100 ),
-									'type'   => 'percent',
-									'number' => $plugin['rating']['count'],
-								)
-							);
-							?>
-							<span class="num-ratings"><?php echo esc_html( '(' . number_format_i18n( $plugin['rating']['count'] ) . ')' ); ?></span>
-						<?php } ?>
+						if ( ! empty( $plugin['rating'] ) ) {
+							if( is_array($plugin['rating']) && ! empty( $plugin['rating']['count'] )) {
+								wp_star_rating(
+									array(
+										'rating' => ( $plugin['rating']['rating'] / 5 * 100 ),
+										'type'   => 'percent',
+										'number' => $plugin['rating']['count'],
+									)
+								);
+							}else{
+								wp_star_rating(
+									array(
+										'rating' => ( $plugin['rating'] / 5 * 100 ),
+										'type'   => 'percent',
+										'number' => $plugin['num_ratings'],
+									)
+								);
+							}
+						}
+					?>
 					</div>
 					<div class="column-actions">
 						<?php echo implode( "\n", $actions ); ?>
