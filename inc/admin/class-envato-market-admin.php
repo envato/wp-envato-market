@@ -136,12 +136,8 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 			add_action( 'current_screen', array( $this, 'set_items' ) );
 
 			// Hook to verify the API token before saving it.
-			add_filter(
-				'pre_update_option_' . envato_market()->get_option_name(), array(
-				$this,
-				'check_api_token_before_saving',
-			), 9, 3
-			);
+			add_filter( 'pre_update_option_' . envato_market()->get_option_name(), array( $this, 'check_api_token_before_saving', ), 9, 3 );
+			add_filter( 'pre_update_site_option_' . envato_market()->get_option_name(), array( $this, 'check_api_token_before_saving', ), 9, 3 );
 
 			// When network enabled, add the network options menu.
 			add_action( 'network_admin_menu', array( $this, 'add_menu_page' ) );
