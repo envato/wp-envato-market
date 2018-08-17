@@ -173,13 +173,9 @@ if ( ! class_exists( 'Envato_Market' ) ) :
 			$this->option_name = self::sanitize_key( $this->slug );
 			$this->plugin_url  = ENVATO_MARKET_URI;
 			$this->plugin_path = ENVATO_MARKET_PATH;
-			$this->page_url    = admin_url( 'admin.php?page=' . $this->slug );
+			$this->page_url    = ENVATO_MARKET_NETWORK_ACTIVATED ? network_admin_url( 'admin.php?page=' . $this->slug ) : admin_url( 'admin.php?page=' . $this->slug );
 			$this->data->admin = true;
 
-			// Set the current version for the Github updater to use.
-			if ( version_compare( get_option( 'envato_market_version' ), $this->version, '<' ) ) {
-				update_option( 'envato_market_version', $this->version );
-			}
 		}
 
 		/**
@@ -304,16 +300,27 @@ if ( ! class_exists( 'Envato_Market' ) ) :
 		 * Set option value.
 		 *
 		 * @since 1.0.0
-		 * @access private
 		 *
 		 * @param string $name Option name.
 		 * @param mixed  $option Option data.
 		 */
-		private function set_option( $name, $option ) {
+		public function set_option( $name, $option ) {
 			$options          = self::get_options();
 			$name             = self::sanitize_key( $name );
 			$options[ $name ] = esc_html( $option );
-			update_option( $this->option_name, $options );
+			$this->set_options( $options );
+		}
+
+
+		/**
+		 * Set option.
+		 *
+		 * @since 2.0.0
+		 *
+		 * @param mixed $options Option data.
+		 */
+		public function set_options( $options ) {
+			ENVATO_MARKET_NETWORK_ACTIVATED ? update_site_option( $this->option_name, $options ) : update_option( $this->option_name, $options );
 		}
 
 		/**
@@ -322,7 +329,7 @@ if ( ! class_exists( 'Envato_Market' ) ) :
 		 * @since 1.0.0
 		 */
 		public function get_options() {
-			return get_option( $this->option_name, array() );
+			return ENVATO_MARKET_NETWORK_ACTIVATED ? get_site_option( $this->option_name, array() ) : get_option( $this->option_name, array() );
 		}
 
 		/**

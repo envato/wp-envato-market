@@ -41,7 +41,7 @@ if ( ! class_exists( 'Envato_Market_Github' ) ) :
 		 *
 		 * @var string
 		 */
-		private static $api_url = 'https://envato.github.io/wp-envato-market/dist/update-check.json';
+		private static $api_url = 'http://envato.github.io/wp-envato-market/dist/update-check.json';
 
 		/**
 		 * The Envato_Market_Items Instance
@@ -228,14 +228,14 @@ if ( ! class_exists( 'Envato_Market_Github' ) ) :
 			$option         = 'envato_market_state';
 			$active_plugins = apply_filters( 'active_plugins', get_option( 'active_plugins' ) );
 			// We also have to check network activated plugins. Otherwise this plugin won't update on multisite.
-			$active_sitewide_plugins = get_option( 'active_sitewide_plugins' );
+			$active_sitewide_plugins = get_site_option( 'active_sitewide_plugins' );
 			if ( ! is_array( $active_plugins ) ) {
 				$active_plugins = array();
 			}
 			if ( ! is_array( $active_sitewide_plugins ) ) {
 				$active_sitewide_plugins = array();
 			}
-			$active_plugins = array_merge( $active_plugins, $active_sitewide_plugins );
+			$active_plugins = array_merge( $active_plugins, array_keys( $active_sitewide_plugins ) );
 			if ( in_array( 'envato-market/envato-market.php', $active_plugins ) ) {
 				$state = 'activated';
 				update_option( $option, $state );

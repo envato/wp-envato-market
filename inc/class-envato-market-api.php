@@ -111,7 +111,7 @@ if ( ! class_exists( 'Envato_Market_API' ) && class_exists( 'Envato_Market' ) ) 
 		 *
 		 * @param  string $url API request URL, including the request method, parameters, & file type.
 		 * @param  array  $args The arguments passed to `wp_remote_get`.
-		 * @return array  The HTTP response.
+		 * @return array|WP_Error  The HTTP response.
 		 */
 		public function request( $url, $args = array() ) {
 			$defaults = array(
@@ -119,7 +119,7 @@ if ( ! class_exists( 'Envato_Market_API' ) && class_exists( 'Envato_Market' ) ) 
 					'Authorization' => 'Bearer ' . $this->token,
 					'User-Agent'    => 'WordPress - Envato Market ' . envato_market()->get_version(),
 				),
-				'timeout' => 20,
+				'timeout' => 14,
 			);
 			$args     = wp_parse_args( $args, $defaults );
 
@@ -134,6 +134,17 @@ if ( ! class_exists( 'Envato_Market_API' ) && class_exists( 'Envato_Market' ) ) 
 			// Check the response code.
 			$response_code    = wp_remote_retrieve_response_code( $response );
 			$response_message = wp_remote_retrieve_response_message( $response );
+
+			if ( ! empty( $response->errors ) && isset( $response->errors['http_request_failed'] ) ) {
+				// API connectivity issue, inject notice into transient with more details.
+				$option = envato_market()->get_options();
+				if ( empty( $option['notices'] ) ) {
+					$option['notices'] = [];
+				}
+				$option['notices']['http_error'] = current( $response->errors['http_request_failed'] );
+				envato_market()->set_options( $option );
+				return new WP_Error( 'http_error', esc_html( current( $response->errors['http_request_failed'] ) ) );
+			}
 
 			if ( 200 !== $response_code && ! empty( $response_message ) ) {
 				return new WP_Error( $response_code, $response_message );
@@ -197,6 +208,14 @@ if ( ! class_exists( 'Envato_Market_API' ) && class_exists( 'Envato_Market' ) ) 
 			if ( ! empty( $response['wordpress_plugin'] ) ) {
 				return $response['wordpress_plugin'];
 			}
+
+			// Missing a WordPress theme and plugin, report an error.
+			$option = envato_market()->get_options();
+			if ( ! isset( $option['notices'] ) ) {
+				$option['notices'] = [];
+			}
+			$option['notices']['missing-package-zip'] = true;
+			envato_market()->set_options( $option );
 
 			return false;
 		}

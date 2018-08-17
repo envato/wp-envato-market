@@ -1,0 +1,33 @@
+{
+	"name": "Envato Market",
+	"slug": "envato-market",
+	"version": "2.0.1",
+	"author": "<a href=\"https://envato.com/market-plugin/\">Envato</a>",
+	"author_profile": "https://envato.com/market-plugin/",
+	"contributors": {
+		"valendesigns": "//profiles.wordpress.org/valendesigns",
+		"dtbaker": "//profiles.wordpress.org/dtbaker",
+		"aaronrutley": "//profiles.wordpress.org/aaronrutley"
+	},
+	"requires": "4.9",
+	"tested": "4.9.8",
+	"compatibility": {},
+	"rating": 0,
+	"num_ratings": "0",
+	"ratings": {},
+	"downloaded": 0,
+	"last_updated": "",
+	"added": "",
+	"homepage": "https://envato.com/market-plugin/",
+	"sections": {
+		"description": "WordPress Theme & Plugin management for the Envato Market."
+	},
+	"short_description": "WordPress Theme & Plugin management for the Envato Market.",
+	"download_link": "http://envato.github.io/wp-envato-market/dist/envato-market.zip",
+	"tags": {},
+	"donate_link": "",
+	"banners": {
+		"low": "https://envato.github.io/wp-envato-market/dist/banner-772x250.jpg",
+		"high": "https://envato.github.io/wp-envato-market/dist/banner-1544x500.jpg"
+	}
+}

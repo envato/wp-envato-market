@@ -167,7 +167,7 @@ class Tests_Envato_Market_Items extends WP_UnitTestCase {
 			'type'       => 'theme',
 			'authorized' => 'success',
 		);
-		update_option( envato_market()->get_option_name(), $options );
+		envato_market()->set_options( $options );
 		$transient = new stdClass();
 
 		$this->assertEquals( $transient, $this->items->update_themes( $transient ) );
@@ -240,7 +240,7 @@ class Tests_Envato_Market_Items extends WP_UnitTestCase {
 			'type'       => 'plugin',
 			'authorized' => 'success',
 		);
-		update_option( envato_market()->get_option_name(), $options );
+		envato_market()->set_options( $options );
 
 		$transient = new stdClass();
 

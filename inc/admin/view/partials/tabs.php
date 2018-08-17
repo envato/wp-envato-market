@@ -43,5 +43,8 @@ $plugins = envato_market()->items()->plugins( 'purchased' );
 
 	// Settings tab.
 	echo '<a href="#settings" class="nav-tab ' . esc_attr( 'settings' === $tab || empty( $tab ) ? 'nav-tab-active' : '' ) . '">' . esc_html__( 'Settings', 'envato-market' ) . '</a>';
+
+	// Help tab.
+	echo '<a href="#help" class="nav-tab ' . esc_attr( 'help' === $tab ? 'nav-tab-active' : '' ) . '">' . esc_html__( 'Help', 'envato-market' ) . '</a>';
 	?>
 </h2>

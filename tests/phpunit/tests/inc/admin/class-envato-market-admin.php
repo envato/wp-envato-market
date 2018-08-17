@@ -90,7 +90,7 @@ class Tests_Envato_Market_Admin extends WP_UnitTestCase {
 		$ref->setAccessible( true );
 		$ref->setValue( null, null );
 
-		update_option( envato_market()->get_option_name(), $options );
+		envato_market()->set_options( $options );
 	}
 
 	/**
@@ -122,7 +122,7 @@ class Tests_Envato_Market_Admin extends WP_UnitTestCase {
 		$this->assertEquals( $expected, $this->admin->set_bearer_args( 12345 ) );
 		$this->assertEquals( array(), $this->admin->set_bearer_args( 12346 ) );
 
-		update_option( envato_market()->get_option_name(), $options );
+		envato_market()->set_options( $options );
 	}
 
 	/**
@@ -156,7 +156,7 @@ class Tests_Envato_Market_Admin extends WP_UnitTestCase {
 	 * Check authorization success notice
 	 */
 	function test_add_notices_success() {
-		update_option( envato_market()->get_option_name(), array( 'notices' => array( 'success' ) ) );
+		envato_market()->set_options( array( 'notices' => array( 'success' ) ) );
 		set_current_screen( 'toplevel_page_' . envato_market()->get_slug() );
 		$this->admin->add_notices();
 		ob_start();
@@ -169,7 +169,7 @@ class Tests_Envato_Market_Admin extends WP_UnitTestCase {
 	 * Check authorization success no-items notice
 	 */
 	function test_add_notices_success_no_items() {
-		update_option( envato_market()->get_option_name(), array( 'notices' => array( 'success-no-items' ) ) );
+		envato_market()->set_options( array( 'notices' => array( 'success-no-items' ) ) );
 		set_current_screen( 'toplevel_page_' . envato_market()->get_slug() );
 		$this->admin->add_notices();
 		ob_start();
@@ -182,7 +182,7 @@ class Tests_Envato_Market_Admin extends WP_UnitTestCase {
 	 * Check authorization success single-use notice
 	 */
 	function test_add_notices_success_single_use() {
-		update_option( envato_market()->get_option_name(), array( 'notices' => array( 'success-single-use' ) ) );
+		envato_market()->set_options( array( 'notices' => array( 'success-single-use' ) ) );
 		set_current_screen( 'toplevel_page_' . envato_market()->get_slug() );
 		$this->admin->add_notices();
 		ob_start();
@@ -195,7 +195,7 @@ class Tests_Envato_Market_Admin extends WP_UnitTestCase {
 	 * Check authorization error notice
 	 */
 	function test_add_notices_error() {
-		update_option( envato_market()->get_option_name(), array( 'notices' => array( 'error' ) ) );
+		envato_market()->set_options( array( 'notices' => array( 'error' ) ) );
 		set_current_screen( 'toplevel_page_' . envato_market()->get_slug() );
 		$this->admin->add_notices();
 		ob_start();
@@ -208,7 +208,7 @@ class Tests_Envato_Market_Admin extends WP_UnitTestCase {
 	 * Check authorization error single-use notice
 	 */
 	function test_add_notices_error_single_use() {
-		update_option( envato_market()->get_option_name(), array( 'notices' => array( 'error-single-use' ) ) );
+		envato_market()->set_options( array( 'notices' => array( 'error-single-use' ) ) );
 		set_current_screen( 'toplevel_page_' . envato_market()->get_slug() );
 		$this->admin->add_notices();
 		ob_start();
@@ -275,12 +275,16 @@ class Tests_Envato_Market_Admin extends WP_UnitTestCase {
 		envato_market()->api()->token = '12345';
 
 		$mock = $this->getMockBuilder( 'Envato_Market_Admin' )
-			->setMethods( array( 'authorize_total_items', 'authorize_themes', 'authorize_plugins' ) )
+			->setMethods( array( 'authorize_total_items', 'authorize_token_permissions', 'authorize_themes', 'authorize_plugins' ) )
 			->disableOriginalConstructor()
 			->getMock();
 
 		$mock->expects( $this->any() )
 			->method( 'authorize_total_items' )
+			->will( $this->returnValue( 'success' ) );
+
+		$mock->expects( $this->any() )
+			->method( 'authorize_token_permissions' )
 			->will( $this->returnValue( 'success' ) );
 
 		$mock->expects( $this->any() )
@@ -302,12 +306,16 @@ class Tests_Envato_Market_Admin extends WP_UnitTestCase {
 		envato_market()->api()->token = '12345';
 
 		$mock = $this->getMockBuilder( 'Envato_Market_Admin' )
-			->setMethods( array( 'authorize_total_items', 'authorize_themes', 'authorize_plugins' ) )
+			->setMethods( array( 'authorize_total_items', 'authorize_token_permissions', 'authorize_themes', 'authorize_plugins' ) )
 			->disableOriginalConstructor()
 			->getMock();
 
 		$mock->expects( $this->any() )
 			->method( 'authorize_total_items' )
+			->will( $this->returnValue( 'success' ) );
+
+		$mock->expects( $this->any() )
+			->method( 'authorize_token_permissions' )
 			->will( $this->returnValue( 'success' ) );
 
 		$mock->expects( $this->any() )
@@ -389,7 +397,7 @@ class Tests_Envato_Market_Admin extends WP_UnitTestCase {
 		$this->admin->render_admin_callback();
 		$contents = ob_get_clean();
 		$this->assertContains( '<div class="wrap about-wrap full-width-layout">', $contents );
-		$this->assertContains( '<form method="POST" action="options.php"', $contents );
+		$this->assertContains( '<form method="POST" action="' . esc_url( admin_url( 'options.php' ) ) . '"', $contents );
 	}
 
 	/**
@@ -399,7 +407,7 @@ class Tests_Envato_Market_Admin extends WP_UnitTestCase {
 		ob_start();
 		$this->admin->render_oauth_section_callback();
 		$contents = ob_get_clean();
-		$this->assertContains( 'Generate an Envato API Personal Token by <a href="https://build.envato.com/create-token/?purchase:download=t&purchase:verify=t&purchase:list=t" target="_blank">clicking this link</a>', $contents );
+		$this->assertContains( 'Generate an Envato API Personal Token by <a href="' . envato_market()->admin()->get_generate_token_url() . '" target="_blank">clicking this link</a>', $contents );
 	}
 
 	/**
