@@ -42,15 +42,17 @@ Required token permissions:
 * Download your purchased items
 * List purchases you've made
 
-## Contributing ##
+## Support ##
 
-**Pull requests are welcome.** Please review the [guidelines for contributing](https://github.com/envato/wp-envato-market/blob/master/contributing.md) and [code of conduct](https://github.com/envato/wp-envato-market/blob/master/code_of_conduct.md) before contributing to this repository.
+Please see https://envato.com/market-plugin/ for more details.
 
 ## Change Log ##
 
 ### v2.0.1
-- Multisite Support
-- Reverting to http
+- Token permission checks
+- Fix for showing missing ratings
+- Multisite/Network mode support
+- Fix self-update check
 - Improved token generation feature
 
 #### v2.0.0
