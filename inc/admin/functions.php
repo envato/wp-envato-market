@@ -198,7 +198,6 @@ function envato_market_themes_column( $group = 'install' ) {
 								  array(
 									  'rating' => ( $theme['rating'] / 5 * 100 ),
 									  'type'   => 'percent',
-										  'number' => $theme['num_ratings'],
 								  )
 							  );
 							}
@@ -433,7 +432,6 @@ function envato_market_plugins_column( $group = 'install' ) {
 									array(
 										'rating' => ( $plugin['rating'] / 5 * 100 ),
 										'type'   => 'percent',
-										'number' => $plugin['num_ratings'],
 									)
 								);
 							}
