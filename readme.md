@@ -5,7 +5,7 @@ WordPress Theme & Plugin management for the Envato Market.
 
 **Contributors:** [valendesigns](https://profiles.wordpress.org/valendesigns), [dtbaker](https://profiles.wordpress.org/dtbaker), [aaronrutley](https://profiles.wordpress.org/aaronrutley)  
 **Requires at least:** 4.9  
-**Tested up to:** 4.9.4  
+**Tested up to:** 5.0.1  
 **Stable tag:** 2.0.1  
 **License:** [GPLv2 or later](http://www.gnu.org/licenses/gpl-2.0.html)  
 **Website:** https://envato.com/market-plugin/  

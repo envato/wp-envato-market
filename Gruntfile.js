@@ -313,6 +313,10 @@ module.exports = function( grunt ) {
 	] );
 
 	grunt.registerTask( 'deploy', [
+    'default',
+    'makepot',
+    'readme',
+    // 'phpunit'
 		'copy',
 		'compress',
 		'clean'

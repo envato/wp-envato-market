@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Envato Market 2.0.1\n"
 "Report-Msgid-Bugs-To: Envato Support Team <support@envato.com>\n"
-"POT-Creation-Date: 2018-08-17 02:47:16+00:00\n"
+"POT-Creation-Date: 2018-12-14 03:05:56+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -68,7 +68,7 @@ msgstr ""
 msgid "ID"
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:489 inc/admin/functions.php:333
+#: inc/admin/class-envato-market-admin.php:489 inc/admin/functions.php:332
 #: inc/admin/view/callback/setting/items.php:24
 msgid "Delete"
 msgstr ""
@@ -106,8 +106,8 @@ msgid "Enter the Envato Item ID."
 msgstr ""
 
 #: inc/admin/class-envato-market-admin.php:549 inc/admin/functions.php:162
-#: inc/admin/functions.php:163 inc/admin/functions.php:397
-#: inc/admin/functions.php:398
+#: inc/admin/functions.php:163 inc/admin/functions.php:396
+#: inc/admin/functions.php:397
 msgid "Version %s"
 msgstr ""
 
@@ -116,13 +116,13 @@ msgid "Version"
 msgstr ""
 
 #: inc/admin/class-envato-market-admin.php:558 inc/admin/functions.php:173
-#: inc/admin/functions.php:408
+#: inc/admin/functions.php:407
 msgid "By"
 msgstr ""
 
 #: inc/admin/class-envato-market-admin.php:565
 #: inc/admin/class-envato-market-admin.php:566 inc/admin/functions.php:143
-#: inc/admin/functions.php:378
+#: inc/admin/functions.php:377
 msgid "Install"
 msgstr ""
 
@@ -218,7 +218,7 @@ msgid "Network Enable"
 msgstr ""
 
 #: inc/admin/class-envato-market-theme-installer-skin.php:64
-#: inc/admin/functions.php:121 inc/admin/functions.php:349
+#: inc/admin/functions.php:121 inc/admin/functions.php:348
 msgid "Activate"
 msgstr ""
 
@@ -232,7 +232,7 @@ msgid "Activate Plugin"
 msgstr ""
 
 #: inc/admin/class-envato-market-theme-installer-skin.php:108
-#: inc/admin/functions.php:360
+#: inc/admin/functions.php:359
 msgid "Network Activate"
 msgstr ""
 
@@ -246,15 +246,15 @@ msgstr ""
 msgid "Downloading the Envato Market install package&#8230;"
 msgstr ""
 
-#: inc/admin/functions.php:70 inc/admin/functions.php:284
+#: inc/admin/functions.php:70 inc/admin/functions.php:283
 msgid "Update %s now"
 msgstr ""
 
-#: inc/admin/functions.php:74 inc/admin/functions.php:289
+#: inc/admin/functions.php:74 inc/admin/functions.php:288
 msgid "Update Available"
 msgstr ""
 
-#: inc/admin/functions.php:82 inc/admin/functions.php:297
+#: inc/admin/functions.php:82 inc/admin/functions.php:296
 msgid "View version %1$s details."
 msgstr ""
 
@@ -270,27 +270,27 @@ msgstr ""
 msgid "Network Enable &#8220;%s&#8221;"
 msgstr ""
 
-#: inc/admin/functions.php:144 inc/admin/functions.php:379
+#: inc/admin/functions.php:144 inc/admin/functions.php:378
 msgid "Install %s"
 msgstr ""
 
-#: inc/admin/functions.php:318
+#: inc/admin/functions.php:317
 msgid "Deactivate"
 msgstr ""
 
-#: inc/admin/functions.php:319
+#: inc/admin/functions.php:318
 msgid "Deactivate %s"
 msgstr ""
 
-#: inc/admin/functions.php:334
+#: inc/admin/functions.php:333
 msgid "Delete %s"
 msgstr ""
 
-#: inc/admin/functions.php:350
+#: inc/admin/functions.php:349
 msgid "Activate %s"
 msgstr ""
 
-#: inc/admin/functions.php:361
+#: inc/admin/functions.php:360
 msgid "Network Activate %s"
 msgstr ""
 
