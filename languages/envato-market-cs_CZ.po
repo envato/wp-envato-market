@@ -1,0 +1,503 @@
+# Copyright (C) 2018 Envato
+# This file is distributed under the same license as the Envato Market package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Envato Market 2.0.1\n"
+"Report-Msgid-Bugs-To: Envato Support Team <support@envato.com>\n"
+"POT-Creation-Date: 2018-12-14 03:05:56+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2018-12-19 20:26+0100\n"
+"Language-Team: Envato Support Team <support@envato.com>\n"
+"X-Generator: Poedit 2.2\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
+"Language: cs_CZ\n"
+
+#: envato-market.php:98
+msgid ""
+"The Envato Market plugin requires PHP version 5.4+, plugin is currently NOT "
+"ACTIVE. Please contact the hosting provider to upgrade the version of PHP."
+msgstr ""
+"Envato Market plugin vyžaduje PHP verze 5.4 +, plugin je aktuálně "
+"DEAKTIVOVÁN. Chcete-li upgradovat verzi PHP, obraťte se na poskytovatele "
+"vašeho hostingu."
+
+#: envato-market.php:117
+msgid ""
+"Envato Market plugin is not installed correctly. Please delete this plugin "
+"and get the correct zip file from %s."
+msgstr ""
+"Plugin Envato Market není správně nainstalován. Odstraňte prosím tento "
+"plugin a stáhněte správný soubor zip z adresy %s."
+
+#: inc/admin/class-envato-market-admin.php:78
+#: inc/admin/class-envato-market-admin.php:88
+#: inc/class-envato-market-api.php:80 inc/class-envato-market-api.php:90
+#: inc/class-envato-market-github.php:87 inc/class-envato-market-github.php:97
+#: inc/class-envato-market-items.php:100 inc/class-envato-market-items.php:110
+#: inc/class-envato-market.php:149 inc/class-envato-market.php:159
+msgid "Cheatin&#8217; huh?"
+msgstr "Nepodvádíte?"
+
+#: inc/admin/class-envato-market-admin.php:270
+msgid "You do not have sufficient permissions to delete transients."
+msgstr "Nemáte dostatečná oprávnění k odstranění transients."
+
+#. Plugin Name of the plugin/theme
+msgid "Envato Market"
+msgstr "Envato Market"
+
+#: inc/admin/class-envato-market-admin.php:455
+msgid "Save"
+msgstr "Uložit"
+
+#: inc/admin/class-envato-market-admin.php:456
+msgid "Remove"
+msgstr "Odstranit"
+
+#: inc/admin/class-envato-market-admin.php:457
+msgid "Cancel"
+msgstr "Zrušit"
+
+#: inc/admin/class-envato-market-admin.php:458
+msgid "An unknown error occurred. Try again."
+msgstr "Došlo k neznámé chybě. Zkuste to znovu."
+
+#: inc/admin/class-envato-market-admin.php:481
+#: inc/admin/view/partials/settings.php:21
+msgid "Test API Connection"
+msgstr "Otestovat připojení k API rozhraní"
+
+#: inc/admin/class-envato-market-admin.php:486
+#: inc/admin/view/callback/setting/items.php:22
+msgid "ID"
+msgstr "ID"
+
+#: inc/admin/class-envato-market-admin.php:489 inc/admin/functions.php:332
+#: inc/admin/view/callback/setting/items.php:24
+msgid "Delete"
+msgstr "Smazat"
+
+#: inc/admin/class-envato-market-admin.php:510
+msgid "Remove Item"
+msgstr "Odstranit položku"
+
+#: inc/admin/class-envato-market-admin.php:511
+msgid ""
+"You are about to remove the connection between the Envato Market API and "
+"this item. You cannot undo this action."
+msgstr ""
+"Chystáte se odstranit spojení mezi Envato Market API a touto položkou. Tuto "
+"akci nelze vrátit zpět."
+
+#: inc/admin/class-envato-market-admin.php:516
+#: inc/admin/view/callback/setting/items.php:37
+msgid "Add Item"
+msgstr "Přidat položku"
+
+#: inc/admin/class-envato-market-admin.php:519
+#: inc/admin/class-envato-market-admin.php:596
+msgid "Token"
+msgstr "Token"
+
+#: inc/admin/class-envato-market-admin.php:522
+msgid "Enter the Envato API Personal Token."
+msgstr "Zadejte osobní token Envato API."
+
+#: inc/admin/class-envato-market-admin.php:523
+msgid "Item ID"
+msgstr "ID položky"
+
+#: inc/admin/class-envato-market-admin.php:525
+msgid "Enter the Envato Item ID."
+msgstr "Zadejte ID Envato položky."
+
+#: inc/admin/class-envato-market-admin.php:549 inc/admin/functions.php:162
+#: inc/admin/functions.php:163 inc/admin/functions.php:396
+#: inc/admin/functions.php:397
+msgid "Version %s"
+msgstr "Verze %s"
+
+#: inc/admin/class-envato-market-admin.php:549
+msgid "Version"
+msgstr "Verze"
+
+#: inc/admin/class-envato-market-admin.php:558 inc/admin/functions.php:173
+#: inc/admin/functions.php:407
+msgid "By"
+msgstr "Autor:"
+
+#: inc/admin/class-envato-market-admin.php:565
+#: inc/admin/class-envato-market-admin.php:566 inc/admin/functions.php:143
+#: inc/admin/functions.php:377
+msgid "Install"
+msgstr "Instalovat"
+
+#: inc/admin/class-envato-market-admin.php:588
+msgid "Activate Envato API Connection"
+msgstr "Aktivace připojení k rozhraní Envato API"
+
+#: inc/admin/class-envato-market-admin.php:605
+msgid "Single Item Tokens (Advanced)"
+msgstr "Tokeny jedné položky (pokročilé)"
+
+#: inc/admin/class-envato-market-admin.php:613
+msgid "Envato Market Items"
+msgstr "Položky Envato Market"
+
+#: inc/admin/class-envato-market-admin.php:995
+#: inc/admin/class-envato-market-admin.php:1020
+msgid "Installing Plugin..."
+msgstr "Instalace pluginu..."
+
+#: inc/admin/class-envato-market-admin.php:996
+msgid "You do not have sufficient permissions to install plugins on this site."
+msgstr "Nemáte dostatečná oprávnění k instalaci pluginů na tomto webu."
+
+#: inc/admin/class-envato-market-admin.php:997
+#: inc/admin/class-envato-market-admin.php:1022
+#: inc/admin/class-envato-market-admin.php:1080
+#: inc/admin/class-envato-market-theme-installer-skin.php:112
+msgid "Return to Plugin Installer"
+msgstr "Zpět na instalaci pluginů"
+
+#: inc/admin/class-envato-market-admin.php:1021
+#: inc/admin/class-envato-market-admin.php:1079
+msgid "An error occurred, please check that the item ID is correct."
+msgstr "Nastala chyba, zkontrolujte správnost ID položky."
+
+#: inc/admin/class-envato-market-admin.php:1027
+msgid "Installing Plugin: %s"
+msgstr "Instalace pluginu: %s"
+
+#: inc/admin/class-envato-market-admin.php:1053
+#: inc/admin/class-envato-market-admin.php:1078
+msgid "Installing Theme..."
+msgstr "Instalace šablony..."
+
+#: inc/admin/class-envato-market-admin.php:1054
+msgid "You do not have sufficient permissions to install themes on this site."
+msgstr "Nemáte dostatečná oprávnění k instalaci šablon na tomto webu."
+
+#: inc/admin/class-envato-market-admin.php:1055
+#: inc/admin/class-envato-market-theme-installer-skin.php:66
+msgid "Return to Theme Installer"
+msgstr "Zpět na instalaci šablon"
+
+#: inc/admin/class-envato-market-admin.php:1087
+msgid "Installing Theme: %s"
+msgstr "Instalace šablony: %s"
+
+#: inc/admin/class-envato-market-admin.php:1115
+msgid "The Token is missing."
+msgstr "Chybí token."
+
+#: inc/admin/class-envato-market-admin.php:1117
+#: inc/admin/class-envato-market-admin.php:1216
+msgid "The Item ID is missing."
+msgstr "Chybí ID položky."
+
+#: inc/admin/class-envato-market-admin.php:1128
+msgid "The Token or Item ID is incorrect."
+msgstr "Token nebo ID položky je nesprávné."
+
+#: inc/admin/class-envato-market-admin.php:1132
+msgid "The item cannot be downloaded."
+msgstr "Položku nelze stáhnout."
+
+#: inc/admin/class-envato-market-admin.php:1199
+msgid "An unknown error occurred."
+msgstr "Vyskytla se neznámá chyba."
+
+#: inc/admin/class-envato-market-theme-installer-skin.php:55
+#: inc/admin/functions.php:128
+msgid "Live Preview"
+msgstr "Aktuální náhled"
+
+#: inc/admin/class-envato-market-theme-installer-skin.php:55
+#: inc/admin/functions.php:128
+msgid "Live Preview &#8220;%s&#8221;"
+msgstr "Aktuální náhled &#8222;%s&#8220;"
+
+#: inc/admin/class-envato-market-theme-installer-skin.php:60
+#: inc/admin/functions.php:106
+msgid "Network Enable"
+msgstr "Povolit v síti webů"
+
+#: inc/admin/class-envato-market-theme-installer-skin.php:64
+#: inc/admin/functions.php:121 inc/admin/functions.php:348
+msgid "Activate"
+msgstr "Aktivovat"
+
+#: inc/admin/class-envato-market-theme-installer-skin.php:64
+#: inc/admin/functions.php:121
+msgid "Activate &#8220;%s&#8221;"
+msgstr "Aktivovat &#8222;%s&#8220;"
+
+#: inc/admin/class-envato-market-theme-installer-skin.php:101
+msgid "Activate Plugin"
+msgstr "Aktivovat plugin"
+
+#: inc/admin/class-envato-market-theme-installer-skin.php:108
+#: inc/admin/functions.php:359
+msgid "Network Activate"
+msgstr "Aktivovat v síti webů"
+
+#: inc/admin/class-envato-market-theme-upgrader.php:34
+#: inc/admin/class-envato-market-theme-upgrader.php:72
+msgid "Downloading the Envato Market upgrade package&#8230;"
+msgstr "Stahování aktualizace pluginu Envato Marketu&#8230;"
+
+#: inc/admin/class-envato-market-theme-upgrader.php:45
+#: inc/admin/class-envato-market-theme-upgrader.php:83
+msgid "Downloading the Envato Market install package&#8230;"
+msgstr "Stahování instalačního balíčku pro Envato Marketu&#8230;"
+
+#: inc/admin/functions.php:70 inc/admin/functions.php:283
+msgid "Update %s now"
+msgstr "Aktualizovat %s"
+
+#: inc/admin/functions.php:74 inc/admin/functions.php:288
+msgid "Update Available"
+msgstr "Aktualizace je k dispozici"
+
+#: inc/admin/functions.php:82 inc/admin/functions.php:296
+msgid "View version %1$s details."
+msgstr "Zobrazit podrobnosti verze %1$s."
+
+#: inc/admin/functions.php:97
+msgid "Customize"
+msgstr "Přizpůsobit"
+
+#: inc/admin/functions.php:97
+msgid "Customize &#8220;%s&#8221;"
+msgstr "Přizpůsobit &#8222;%s&#8220;"
+
+#: inc/admin/functions.php:106
+msgid "Network Enable &#8220;%s&#8221;"
+msgstr "Povolit v síti webů &#8222;%s&#8220;"
+
+#: inc/admin/functions.php:144 inc/admin/functions.php:378
+msgid "Install %s"
+msgstr "Instalovat %s"
+
+#: inc/admin/functions.php:317
+msgid "Deactivate"
+msgstr "Deaktivovat"
+
+#: inc/admin/functions.php:318
+msgid "Deactivate %s"
+msgstr "Deaktivovat %s"
+
+#: inc/admin/functions.php:333
+msgid "Delete %s"
+msgstr "Smazat %s"
+
+#: inc/admin/functions.php:349
+msgid "Activate %s"
+msgstr "Aktivovat %s"
+
+#: inc/admin/functions.php:360
+msgid "Network Activate %s"
+msgstr "Aktivovat %s v síti webů"
+
+#: inc/admin/view/callback/section/items.php:10
+msgid ""
+"Add Envato Market themes & plugins using multiple OAuth tokens. This is "
+"especially useful when an item has been purchased on behalf of a third-"
+"party. This works similarly to the global OAuth Personal Token, but for "
+"individual items and additionally requires the Envato Market item ID."
+msgstr ""
+"Přidejte pluginy a šablony z Envato Marketu pomocí OAuth tokenů. Tato "
+"možnost je vhodná zejména v případě, že byla položka zakoupena třetí "
+"stranou. Tento způsob funguje podobně jako globální OAuth osobní token, ale "
+"jen pro jednotlivé položky a navíc vyžaduje Envato Market ID položky."
+
+#: inc/admin/view/callback/section/items.php:12
+msgid "Warning: These tokens can be revoked by the account holder at any time."
+msgstr "Varování: Tyto tokeny může držitel účtu kdykoli odvolat."
+
+#: inc/admin/view/callback/section/oauth.php:12
+msgid ""
+"This area enables WordPress Theme &amp; Plugin updates from Envato Market. "
+"Read more about how this process works at %s. Please follow the steps below:"
+msgstr ""
+"Tato oblast umožňuje WordPress šablonám a pluginům aktualizovat přímo z "
+"Envato Marketu. Přečtěte si další informace o tom, jak tento proces funguje "
+"na %s. Postupujte následovně:"
+
+#: inc/admin/view/callback/section/oauth.php:12
+msgid "envato.com"
+msgstr "envato.com"
+
+#: inc/admin/view/callback/section/oauth.php:15
+msgid "Generate an Envato API Personal Token by %s."
+msgstr "Vygenerujte Envato API osobní token (Personal Token) %s."
+
+#: inc/admin/view/callback/section/oauth.php:15
+msgid "clicking this link"
+msgstr "kliknutím na tento odkaz"
+
+#: inc/admin/view/callback/section/oauth.php:16
+msgid "Copy the token into the box below."
+msgstr "Zkopírujte token do pole níže."
+
+#: inc/admin/view/callback/section/oauth.php:17
+msgid "Click the \"Save Changes\" button."
+msgstr "Klikněte na tlačítko „Uložit změny“."
+
+#: inc/admin/view/callback/section/oauth.php:18
+msgid ""
+"A list of purchased Themes &amp; Plugins from Envato Market will appear."
+msgstr "Zobrazí se seznam zakoupených šablon a pluginů z Envato Marketu."
+
+#: inc/admin/view/callback/setting/token.php:12
+msgid "Enter your Envato API Personal Token."
+msgstr "Zadejte svůj osobní Envato API token."
+
+#: inc/admin/view/notice/error-http.php:11
+msgid ""
+"Failed to connect to the Envato API. Please try again and if the issue "
+"persists contact the hosting providier to ask: \"Please un-block PHP "
+"connections from WordPress to api.envato.com\"."
+msgstr ""
+"Připojení k Envato API se nezdařilo. Zkuste to prosím znovu. Pokud problém "
+"přetrvává kontaktujte hosting s následující zprávou: \"Odblokujte prosím PHP "
+"připojení z mého WordPressu k api.envato.com\"."
+
+#: inc/admin/view/notice/error-missing-zip.php:11
+msgid ""
+"Failed to locate the package file for this item. Please contact the item "
+"author for support, or install/upgrade the item manually from the %s."
+msgstr ""
+"Vyhledání souboru balíčku pro tuto položku se nezdařilo. Pro technickou "
+"podporu se obraťte se na autora položky, nebo nainstalujte/aktualizujte tuto "
+"položku ručně z %s."
+
+#: inc/admin/view/notice/error-permissions.php:11
+msgid ""
+"Incorrect token permissions, please generate another token or fix the "
+"permissions on the existing token."
+msgstr ""
+"Nesprávná oprávnění tokenu, vytvořte jiný token nebo opravte oprávnění pro "
+"existující token."
+
+#: inc/admin/view/notice/error-permissions.php:12
+msgid "Please ensure only the following permissions are enabled: "
+msgstr "Zkontrolujte, zda jsou povolena pouze následující oprávnění: "
+
+#: inc/admin/view/notice/error-single-use.php:11
+msgid ""
+"One or more Single Use OAuth Personal Tokens could not be verified and "
+"should be removed."
+msgstr ""
+"Jeden nebo více osobních jednorázových OAuth tokenů nelze ověřit a měly by "
+"být odebrány."
+
+#: inc/admin/view/notice/error.php:11
+msgid ""
+"The OAuth Personal Token could not be verified. Please check that the Token "
+"has been entered correctly and has the minimum required permissions."
+msgstr ""
+"Osobní token OAuth nelze ověřit. Ujistěte se, zda byl token zadán správně a "
+"zda má minimální požadovaná oprávnění."
+
+#: inc/admin/view/notice/success-no-items.php:11
+msgid ""
+"Your OAuth Personal Token has been verified. However, there are no WordPress "
+"downloadable items in your account."
+msgstr ""
+"Váš osobní token OAuth byl ověřen. Nicméně, nejsou k dispozici žádné "
+"WordPress položky ke stažení z vašeho účtu."
+
+#: inc/admin/view/notice/success-single-use.php:11
+msgid "All Single Use OAuth Personal Tokens have been verified."
+msgstr "Všechny osobní OAuth jednorázové tokeny byly ověřeny."
+
+#: inc/admin/view/notice/success.php:11
+msgid "Your OAuth Personal Token has been verified."
+msgstr "Váš osobní token OAuth byl ověřen."
+
+#: inc/admin/view/partials/intro.php:13
+msgid "Welcome!"
+msgstr "Vítejte,"
+
+#: inc/admin/view/partials/intro.php:14
+msgid ""
+"This plugin can install WordPress themes and plugins purchased from "
+"ThemeForest & CodeCanyon by connecting with the Envato Market API using a "
+"secure OAuth personal token. Once your themes & plugins are installed "
+"WordPress will periodically check for updates, so keeping your items up to "
+"date is as simple as a few clicks."
+msgstr ""
+"tento plugin může instalovat WordPress šablony a pluginy nakoupené z "
+"ThemeForest a Codecanyon prostřednictvím Envato Market API pomocí bezpečného "
+"OAuth osobního tokenu. Jakmile nainstalujete své šablony a pluginy, "
+"WordPress bude pravidelně kontrolovat jejich nové verze, a jejich "
+"aktualizace vás bude stát jen pár kliknutí."
+
+#: inc/admin/view/partials/intro.php:15
+msgid "Find out more at %1$senvato.com%2$s."
+msgstr "Další informace naleznete na %1$senvato.com%2$s."
+
+#: inc/admin/view/partials/settings.php:19
+msgid "Save Changes"
+msgstr "Uložit změny"
+
+#: inc/admin/view/partials/tabs.php:28
+msgid "Themes"
+msgstr "Šablony"
+
+#: inc/admin/view/partials/tabs.php:42
+msgid "Plugins"
+msgstr "Pluginy"
+
+#: inc/admin/view/partials/tabs.php:45
+msgid "Settings"
+msgstr "Nastavení"
+
+#: inc/admin/view/partials/tabs.php:48
+msgid "Help"
+msgstr "Nápověda"
+
+#: inc/class-envato-market-api.php:128
+msgid "An API token is required."
+msgstr "Je požadován token API."
+
+#: inc/class-envato-market-api.php:152 inc/class-envato-market-api.php:156
+msgid "An unknown API error occurred."
+msgstr "Došlo k neznámé chybě rozhraní API."
+
+#: inc/class-envato-market-github.php:305
+msgid ""
+"%1$sActivate the Envato Market plugin%2$s to get updates for your "
+"ThemeForest and CodeCanyon items."
+msgstr ""
+"%1$sAktivujte si Envato Market plugin%2$s pro snadné získání aktualizací pro "
+"vaše nakoupené položky z ThemeForest a CodeCanyon."
+
+#: inc/class-envato-market-github.php:318
+msgid ""
+"%1$sInstall the Envato Market plugin%2$s to get updates for your ThemeForest "
+"and CodeCanyon items."
+msgstr ""
+"%1$sNainstalujte si Envato Market plugin%2$s pro snadné získání aktualizací "
+"pro vaše nakoupené položky z ThemeForest a CodeCanyon."
+
+#. Plugin URI of the plugin/theme
+msgid "https://envato.com/market-plugin/"
+msgstr "https://envato.com/market-plugin/"
+
+#. Description of the plugin/theme
+msgid "WordPress Theme & Plugin management for the Envato Market."
+msgstr "Správa WordPress šablon a pluginů pro Envato Market."
+
+#. Author of the plugin/theme
+msgid "Envato"
+msgstr "Envato"
+
+#. Author URI of the plugin/theme
+msgid "https://envato.com"
+msgstr "https://envato.com"
