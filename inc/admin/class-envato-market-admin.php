@@ -857,7 +857,7 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 		 *
 		 */
 		public function authorize_total_items() {
-			$response = envato_market()->api()->request( 'https://api.envato.com/v1/market/total-items.json2' );
+			$response = envato_market()->api()->request( 'https://api.envato.com/v1/market/total-items.json' );
 			$notice   = 'success';
 
 			if ( is_wp_error( $response ) ) {

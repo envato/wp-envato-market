@@ -49,7 +49,7 @@ Please see https://envato.com/market-plugin/ for more details.
 ## Change Log ##
 
 ### v2.0.2
-- Debug tool
+- Better error messages during API connectivity
 
 ### v2.0.1
 - Token permission checks
