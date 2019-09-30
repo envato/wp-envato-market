@@ -8,5 +8,5 @@
 
 ?>
 <div class="notice notice-error is-dismissible">
-	<p><?php esc_html_e( 'Failed to connect to the Envato API. Please try again and if the issue persists contact the hosting providier to ask: "Please un-block PHP connections from WordPress to api.envato.com".', 'envato-market' ); ?></p>
+	<p><?php esc_html_e( 'Failed to connect to the Envato API. Please contact the hosting providier with this message: "The Envato Market WordPress plugin requires TLS version 1.2 or above, please confirm if this hosting account supports TLS version 1.2 and allows connections from WordPress to the host api.envato.com".', 'envato-market' ); ?></p>
 </div>
