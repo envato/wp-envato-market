@@ -3,7 +3,7 @@
  * Plugin Name: Envato Market
  * Plugin URI: https://envato.com/market-plugin/
  * Description: WordPress Theme & Plugin management for the Envato Market.
- * Version: 2.0.1
+ * Version: 2.0.2
  * Author: Envato
  * Author URI: https://envato.com
  * Requires at least: 4.9
@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 /* Set plugin version constant. */
-define( 'ENVATO_MARKET_VERSION', '2.0.1' );
+define( 'ENVATO_MARKET_VERSION', '2.0.2' );
 
 /* Debug output control. */
 define( 'ENVATO_MARKET_DEBUG_OUTPUT', 0 );

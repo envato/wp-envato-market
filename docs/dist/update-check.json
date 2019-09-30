@@ -1,7 +1,7 @@
 {
 	"name": "Envato Market",
 	"slug": "envato-market",
-	"version": "2.0.1",
+	"version": "2.0.2",
 	"author": "<a href=\"https://envato.com/market-plugin/\">Envato</a>",
 	"author_profile": "https://envato.com/market-plugin/",
 	"contributors": {
@@ -10,7 +10,7 @@
 		"aaronrutley": "//profiles.wordpress.org/aaronrutley"
 	},
 	"requires": "4.9",
-	"tested": "5.1",
+	"tested": "5.2",
 	"compatibility": {},
 	"rating": 0,
 	"num_ratings": "0",
