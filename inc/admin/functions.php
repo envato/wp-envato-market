@@ -191,7 +191,7 @@ function envato_market_themes_column( $group = 'install' ) {
 							if ( is_array( $theme['rating'] ) && ! empty( $theme['rating']['count'] ) ) {
 								wp_star_rating(
 									array(
-										'rating' => ( $theme['rating']['rating'] / 5 * 100 ),
+										'rating' => $theme['rating']['count'] > 0 ? ( $theme['rating']['rating'] / 5 * 100 ) : 0,
 										'type'   => 'percent',
 										'number' => $theme['rating']['count'],
 									)
@@ -199,7 +199,7 @@ function envato_market_themes_column( $group = 'install' ) {
 							} else {
 								wp_star_rating(
 									array(
-										'rating' => ( $theme['rating'] / 5 * 100 ),
+										'rating' => $theme['rating'] > 0 ? ( $theme['rating'] / 5 * 100 ) : 0,
 										'type'   => 'percent',
 									)
 								);
@@ -431,7 +431,7 @@ function envato_market_plugins_column( $group = 'install' ) {
 							if ( is_array( $plugin['rating'] ) && ! empty( $plugin['rating']['count'] ) ) {
 								wp_star_rating(
 									array(
-										'rating' => ( $plugin['rating']['rating'] / 5 * 100 ),
+										'rating' => $plugin['rating']['rating'] > 0 ? ( $plugin['rating']['rating'] / 5 * 100 ) : 0,
 										'type'   => 'percent',
 										'number' => $plugin['rating']['count'],
 									)
@@ -439,7 +439,7 @@ function envato_market_plugins_column( $group = 'install' ) {
 							} else {
 								wp_star_rating(
 									array(
-										'rating' => ( $plugin['rating'] / 5 * 100 ),
+										'rating' => $plugin['rating'] > 0 ? ( $plugin['rating'] / 5 * 100 ) : 0,
 										'type'   => 'percent',
 									)
 								);

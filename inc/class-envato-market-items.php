@@ -349,7 +349,7 @@ if ( ! class_exists( 'Envato_Market_Items' ) ) :
 						$response->last_updated   = $plugin['updated_at'];
 						$response->sections       = array( 'description' => $plugin['description'] );
 						$response->banners['low'] = $plugin['landscape_url'];
-						$response->rating         = ! empty( $plugin['rating'] ) && ! empty( $plugin['rating']['rating'] ) ? $plugin['rating']['rating'] / 5 * 100 : 0;
+						$response->rating         = ! empty( $plugin['rating'] ) && ! empty( $plugin['rating']['rating'] ) && $plugin['rating']['rating'] > 0 ? $plugin['rating']['rating'] / 5 * 100 : 0;
 						$response->num_ratings    = ! empty( $plugin['rating'] ) && ! empty( $plugin['rating']['count'] ) ? $plugin['rating']['count'] : 0;
 						$response->download_link  = envato_market()->api()->deferred_download( $plugin['id'] );
 						break;

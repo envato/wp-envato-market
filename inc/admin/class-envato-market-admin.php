@@ -610,7 +610,7 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 			// OAuth section.
 			add_settings_section(
 				envato_market()->get_option_name() . '_oauth_section',
-				__( 'Activate Envato API Connection', 'envato-market' ),
+				__( 'Getting Started (Simple)', 'envato-market' ),
 				array( $this, 'render_oauth_section_callback' ),
 				envato_market()->get_slug()
 			);

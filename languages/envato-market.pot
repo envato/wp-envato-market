@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Envato Market 2.0.3\n"
 "Report-Msgid-Bugs-To: Envato Support Team <support@envato.com>\n"
-"POT-Creation-Date: 2019-10-07 03:20:15+00:00\n"
+"POT-Creation-Date: 2019-10-07 06:05:16+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -131,7 +131,7 @@ msgid "Install"
 msgstr ""
 
 #: inc/admin/class-envato-market-admin.php:613
-msgid "Activate Envato API Connection"
+msgid "Getting Started (Simple)"
 msgstr ""
 
 #: inc/admin/class-envato-market-admin.php:630
@@ -313,7 +313,7 @@ msgstr ""
 #: inc/admin/view/callback/section/oauth.php:12
 msgid ""
 "This area enables WordPress Theme &amp; Plugin updates from Envato Market. "
-"Read more about how this process works at %s. Please follow the steps below:"
+"Read more about how this process works at %s."
 msgstr ""
 
 #: inc/admin/view/callback/section/oauth.php:12
@@ -321,22 +321,46 @@ msgid "envato.com"
 msgstr ""
 
 #: inc/admin/view/callback/section/oauth.php:15
-msgid "Generate an Envato API Personal Token by %s."
-msgstr ""
-
-#: inc/admin/view/callback/section/oauth.php:15
-msgid "clicking this link"
-msgstr ""
-
-#: inc/admin/view/callback/section/oauth.php:16
-msgid "Copy the token into the box below."
-msgstr ""
-
-#: inc/admin/view/callback/section/oauth.php:17
-msgid "Click the \"Save Changes\" button."
+msgid "Please follow the steps below:"
 msgstr ""
 
 #: inc/admin/view/callback/section/oauth.php:18
+msgid "Generate an Envato API Personal Token by %s."
+msgstr ""
+
+#: inc/admin/view/callback/section/oauth.php:18
+msgid "clicking this link"
+msgstr ""
+
+#: inc/admin/view/callback/section/oauth.php:19
+msgid "Name the token eg “My WordPress site”."
+msgstr ""
+
+#: inc/admin/view/callback/section/oauth.php:20
+msgid "Ensure the following permissions are enabled:"
+msgstr ""
+
+#: inc/admin/view/callback/section/oauth.php:22
+msgid "View and search Envato sites"
+msgstr ""
+
+#: inc/admin/view/callback/section/oauth.php:23
+msgid "Download your purchased items"
+msgstr ""
+
+#: inc/admin/view/callback/section/oauth.php:24
+msgid "List purchases you've made"
+msgstr ""
+
+#: inc/admin/view/callback/section/oauth.php:27
+msgid "Copy the token into the box below."
+msgstr ""
+
+#: inc/admin/view/callback/section/oauth.php:28
+msgid "Click the \"Save Changes\" button."
+msgstr ""
+
+#: inc/admin/view/callback/section/oauth.php:29
 msgid "A list of purchased Themes &amp; Plugins from Envato Market will appear."
 msgstr ""
 
