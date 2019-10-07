@@ -20,7 +20,7 @@
 				<li>Confirm the latest version of the <a href="https://envato.com/market-plugin/" target="_blank">Envato Market</a> plugin is installed.</li>
 				<li>Check with the hosting provider to ensure the API connection to <code>api.envato.com</code> is not blocked.</li>
 				<li>Check with the item author to confirm the Theme or Plugin is compatible with the Envato Market plugin.</li>
-				<li>Confirm a valid API token has been generated from the <a href="<?php echo envato_market()->admin()->get_generate_token_url();?>" target="_blank">build.envato.com</a> website.</li>
+				<li>Confirm a valid API token has been generated from the <a href="<?php echo envato_market()->admin()->get_generate_token_url(); ?>" target="_blank">build.envato.com</a> website.</li>
 				<li>Confirm your Envato account is still active and the items are still visible from <a href="https://themeforest.net/downloads" target="_blank">your downloads page</a>.</li>
 				<li>If this still doesn't solve the issue, please send us an email to <a href="mailto:marketpluginsupport@envato.com">marketpluginsupport@envato.com</a>. We may ask for your Envato username, the item you are trying to install/update, and some temporary WordPress login details so we can debug any issues. </li>
 			</ol>

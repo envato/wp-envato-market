@@ -45,7 +45,8 @@ if ( ! class_exists( 'Envato_Market_Theme_Installer_Skin' ) ) :
 					'action'     => 'activate',
 					'template'   => urlencode( $template ),
 					'stylesheet' => urlencode( $stylesheet ),
-				), admin_url( 'themes.php' )
+				),
+				admin_url( 'themes.php' )
 			);
 			$activate_link = wp_nonce_url( $activate_link, 'switch-theme_' . $stylesheet );
 

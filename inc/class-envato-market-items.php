@@ -455,7 +455,9 @@ if ( ! class_exists( 'Envato_Market_Items' ) ) :
 		public function rebuild_plugins( $plugin ) {
 			$remove = ( 'deactivated_plugin' === current_filter() ) ? true : false;
 			self::set_plugins(
-				false, true, array(
+				false,
+				true,
+				array(
 					'plugin' => $plugin,
 					'remove' => $remove,
 				)
