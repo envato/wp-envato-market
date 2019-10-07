@@ -298,7 +298,8 @@ if ( ! class_exists( 'Envato_Market_Github' ) ) :
 						'action'   => 'activate',
 						'plugin'   => urlencode( "$slug/$slug.php" ),
 						'_wpnonce' => urlencode( wp_create_nonce( "activate-plugin_$slug/$slug.php" ) ),
-					), self_admin_url( 'plugins.php' )
+					),
+					self_admin_url( 'plugins.php' )
 				);
 
 				$message = sprintf(
@@ -311,7 +312,8 @@ if ( ! class_exists( 'Envato_Market_Github' ) ) :
 					array(
 						'action' => 'install-plugin',
 						'plugin' => $slug,
-					), self_admin_url( 'update.php' )
+					),
+					self_admin_url( 'update.php' )
 				);
 
 				$message = sprintf(

@@ -128,12 +128,20 @@ if ( ! class_exists( 'Envato_Market_API' ) && class_exists( 'Envato_Market' ) ) 
 				return new WP_Error( 'api_token_error', __( 'An API token is required.', 'envato-market' ) );
 			}
 
+			$debugging_information = [
+				'request_url' => $url,
+			];
+
 			// Make an API request.
 			$response = wp_remote_get( esc_url_raw( $url ), $args );
 
 			// Check the response code.
 			$response_code    = wp_remote_retrieve_response_code( $response );
 			$response_message = wp_remote_retrieve_response_message( $response );
+
+			$debugging_information['response_code']   = $response_code;
+			$debugging_information['response_cf_ray'] = wp_remote_retrieve_header( $response, 'cf-ray' );
+			$debugging_information['response_server'] = wp_remote_retrieve_header( $response, 'server' );
 
 			if ( ! empty( $response->errors ) && isset( $response->errors['http_request_failed'] ) ) {
 				// API connectivity issue, inject notice into transient with more details.
@@ -143,17 +151,17 @@ if ( ! class_exists( 'Envato_Market_API' ) && class_exists( 'Envato_Market' ) ) 
 				}
 				$option['notices']['http_error'] = current( $response->errors['http_request_failed'] );
 				envato_market()->set_options( $option );
-				return new WP_Error( 'http_error', esc_html( current( $response->errors['http_request_failed'] ) ) );
+				return new WP_Error( 'http_error', esc_html( current( $response->errors['http_request_failed'] ) ), $debugging_information );
 			}
 
 			if ( 200 !== $response_code && ! empty( $response_message ) ) {
-				return new WP_Error( $response_code, $response_message );
+				return new WP_Error( $response_code, $response_message, $debugging_information );
 			} elseif ( 200 !== $response_code ) {
-				return new WP_Error( $response_code, __( 'An unknown API error occurred.', 'envato-market' ) );
+				return new WP_Error( $response_code, __( 'An unknown API error occurred.', 'envato-market' ), $debugging_information );
 			} else {
 				$return = json_decode( wp_remote_retrieve_body( $response ), true );
 				if ( null === $return ) {
-					return new WP_Error( 'api_error', __( 'An unknown API error occurred.', 'envato-market' ) );
+					return new WP_Error( 'api_error', __( 'An unknown API error occurred.', 'envato-market' ), $debugging_information );
 				}
 				return $return;
 			}
