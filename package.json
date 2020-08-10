@@ -7,6 +7,9 @@
 		"type": "git",
 		"url": "https://github.com/envato/wp-envato-market.git"
 	},
+	"scripts": {
+		"deploy": "grunt deploy"
+	},
 	"author": "Envato",
 	"license": "GPL-2.0+",
 	"devDependencies": {
