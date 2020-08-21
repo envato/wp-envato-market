@@ -16,15 +16,6 @@ window.wp = window.wp || {};
 	wp.envato.ajaxNonce = window._wpUpdatesSettings.ajax_nonce;
 
 	/**
-	 * Localized strings.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @var object
-	 */
-	wp.envato.l10n = window._wpUpdatesSettings.l10n;
-
-	/**
 	 * Whether filesystem credentials need to be requested from the user.
 	 *
 	 * @since 1.0.0
@@ -148,17 +139,17 @@ window.wp = window.wp || {};
 	wp.envato.updatePlugin = function( plugin, slug ) {
 		var data,
 				$message = $( '.envato-card-' + slug ).find( '.update-now' ),
-				name = $message.data( 'data-name' );
+				name = $message.data( 'name' );
 
-		$message.attr( 'aria-label', wp.envato.l10n.updating.replace( '%s', name ) );
+		var updatingMessage = wp.i18n.sprintf( wp.i18n.__( 'Updating %s...', 'envato-market' ), name );
+		$message.attr( 'aria-label', updatingMessage );
 
 		$message.addClass( 'updating-message' );
-		if ( $message.html() !== wp.envato.l10n.updating ) {
+		if ( $message.html() !== updatingMessage ) {
 			$message.data( 'originaltext', $message.html() );
 		}
 
-		$message.text( wp.envato.l10n.updating );
-		wp.a11y.speak( wp.envato.l10n.updatingMsg );
+		$message.text( updatingMessage );
 
 		if ( wp.envato.updateLock ) {
 			wp.envato.updateQueue.push({
@@ -201,17 +192,17 @@ window.wp = window.wp || {};
 	wp.envato.updateTheme = function( slug ) {
 		var data,
 				$message = $( '.envato-card-' + slug ).find( '.update-now' ),
-				name = $message.data( 'data-name' );
+				name = $message.data( 'name' );
 
-		$message.attr( 'aria-label', wp.envato.l10n.updating.replace( '%s', name ) );
+		var updatingMessage = wp.i18n.sprintf( wp.i18n.__( 'Updating %s...', 'envato-market' ), name );
+		$message.attr( 'aria-label', updatingMessage );
 
 		$message.addClass( 'updating-message' );
-		if ( $message.html() !== wp.envato.l10n.updating ) {
+		if ( $message.html() !== updatingMessage ) {
 			$message.data( 'originaltext', $message.html() );
 		}
 
-		$message.text( wp.envato.l10n.updating );
-		wp.a11y.speak( wp.envato.l10n.updatingMsg );
+		$message.text( updatingMessage );
 
 		if ( wp.envato.updateLock ) {
 			wp.envato.updateQueue.push({
@@ -262,12 +253,14 @@ window.wp = window.wp || {};
 		versionText = $updateVersion.attr( 'aria-label' ).replace( '%s', version );
 
 		$updateMessage.addClass( 'disabled' );
-		$updateMessage.attr( 'aria-label', wp.envato.l10n.updatedMsg.replace( '%s', name ) );
+
+		var updateMessage = wp.i18n.sprintf( wp.i18n.__( 'Updating %s...', 'envato-market' ), name );
+		$updateMessage.attr( 'aria-label', updateMessage );
 		$updateVersion.text( versionText );
 
 		$updateMessage.removeClass( 'updating-message' ).addClass( 'updated-message' );
-		$updateMessage.text( wp.envato.l10n.updated );
-		wp.a11y.speak( wp.envato.l10n.updatedMsg );
+		$updateMessage.text( wp.i18n.__( 'Updated!', 'envato-market' ) );
+		wp.a11y.speak( updateMessage );
 		$updateColumn.addClass( 'update-complete' ).delay( 1000 ).fadeOut();
 
 		wp.envato.decrementCount( 'plugin' );
@@ -301,12 +294,11 @@ window.wp = window.wp || {};
 		}
 		$message = $( '.envato-card-' + response.slug ).find( '.update-now' );
 
-		name = $message.data( 'data-name' );
-		$message.attr( 'aria-label', wp.envato.l10n.updateFailed.replace( '%s', name ) );
+		name = $message.data( 'name' );
+		$message.attr( 'aria-label',  wp.i18n.__( 'Updating failed', 'envato-market' ) );
 
 		$message.removeClass( 'updating-message' );
-		$message.html( wp.envato.l10n.updateFailed.replace( '%s', typeof 'undefined' !== response.errorMessage ? response.errorMessage : response.error ) );
-		wp.a11y.speak( wp.envato.l10n.updateFailed );
+		$message.html( wp.i18n.sprintf( wp.i18n.__( 'Updating failed %s...', 'envato-market' ),  typeof 'undefined' !== response.errorMessage ? response.errorMessage : response.error ) );
 
 		/*
 		 * The lock can be released since this failure was
@@ -459,7 +451,6 @@ window.wp = window.wp || {};
 
 		$message.removeClass( 'updating-message' );
 		$message.html( $message.data( 'originaltext' ) );
-		wp.a11y.speak( wp.envato.l10n.updateCancel );
 	};
 	/**
 	 * Potentially add an AYS to a user attempting to leave the page
@@ -472,7 +463,7 @@ window.wp = window.wp || {};
 
 	wp.envato.beforeunload = function() {
 		if ( wp.envato.updateLock ) {
-			return wp.envato.l10n.beforeunload;
+			return wp.i18n.__( 'Update in progress, really leave?', 'envato-market' );
 		}
 	};
 
@@ -571,32 +562,37 @@ window.wp = window.wp || {};
 			return;
 		}
 
-		message = $.parseJSON( event.data );
+		if(event.data) {
 
-		try {
-			if ( 'undefined' === typeof message.action ) {
-				return;
+			try {
+				message = $.parseJSON(event.data);
+			} catch (error) {
+				message = event.data;
 			}
-		}
-		catch ( error ) {
 
-		}
+			try {
+				if ('undefined' === typeof message.action) {
+					return;
+				}
+			} catch (error) {
 
-		try {
-			switch ( message.action ) {
-				case 'decrementUpdateCount' :
-					wp.envato.decrementCount( message.upgradeType );
-					break;
-				case 'updatePlugin' :
-					tb_remove();
-					$( '.envato-card-' + message.slug ).find( 'h4 a' ).focus();
-					$( '.envato-card-' + message.slug ).find( '[data-slug="' + message.slug + '"]' ).trigger( 'click' );
-					break;
-				default:
 			}
-		}
-		catch ( error ) {
 
+			try {
+				switch (message.action) {
+					case 'decrementUpdateCount' :
+						wp.envato.decrementCount(message.upgradeType);
+						break;
+					case 'updatePlugin' :
+						tb_remove();
+						$('.envato-card-' + message.slug).find('h4 a').focus();
+						$('.envato-card-' + message.slug).find('[data-slug="' + message.slug + '"]').trigger('click');
+						break;
+					default:
+				}
+			} catch (error) {
+
+			}
 		}
 
 	});
