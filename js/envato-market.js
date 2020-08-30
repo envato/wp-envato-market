@@ -12,38 +12,25 @@
     cache: {},
 
     init: function() {
-      this.cacheElements();
       this.bindEvents();
-    },
-
-    cacheElements: function() {
-      this.cache = {
-        $window: $( window ),
-        $document: $( document )
-      };
     },
 
     bindEvents: function() {
       var self = this;
 
-      self.cache.$window.on( 'resize', $.proxy( self.tbPosition, self ) );
+      self.addItem();
+      self.removeItem();
+      self.tabbedNav();
 
-      self.cache.$document.on( 'ready', function() {
-        self.addItem();
-        self.removeItem();
-        self.tabbedNav();
-
-        $( '.envato-card' ).on( 'click', 'a.thickbox', function() {
-          tb_click.call( this );
-          $( '#TB_title' ).css({ 'background-color': '#23282d', 'color': '#cfcfcf' });
-          self.cache.$window.trigger( 'resize' );
-          return false;
-        });
+      $( document ).on( 'click', '.envato-card a.thickbox', function() {
+        tb_click.call( this );
+        $( '#TB_title' ).css({ 'background-color': '#23282d', 'color': '#cfcfcf' });
+        return false;
       });
     },
 
     addItem: function() {
-      $( '.add-envato-market-item' ).on( 'click', function( event ) {
+      $( document ).on( 'click', '.add-envato-market-item', function( event ) {
         var id = 'envato-market-dialog-form';
         event.preventDefault();
 
@@ -130,7 +117,7 @@
     },
 
     removeItem: function() {
-      $( '#envato-market-items' ).on( 'click', '.item-delete', function( event ) {
+      $( document ).on( 'click', '#envato-market-items .item-delete', function( event ) {
         var self = this, id = 'envato-market-dialog-remove';
         event.preventDefault();
 
@@ -216,21 +203,11 @@
       // Hide all panels
       $( 'div.panel', $wrap ).hide();
 
-      this.cache.$window.on( 'load', function() {
-        var tab = self.getParameterByName( 'tab' ),
-          hashTab = window.location.hash.substr( 1 );
-
-        if ( tab ) {
-          $( '.nav-tab-wrapper a[href="#' + tab + '"]', $wrap ).click();
-        } else if ( hashTab ) {
-          $( '.nav-tab-wrapper a[href="#' + hashTab + '"]', $wrap ).click();
-        } else {
-          $( 'div.panel:not(.hidden)', $wrap ).first().show();
-        }
-      });
+      var tab = self.getParameterByName( 'tab' ),
+        hashTab = window.location.hash.substr( 1 );
 
       // Listen for the click event.
-      $( '.nav-tab-wrapper a', $wrap ).on( 'click', function() {
+      $( document, $wrap ).on( 'click', '.nav-tab-wrapper a', function() {
 
         // Deactivate and hide all tabs & panels.
         $( '.nav-tab-wrapper a', $wrap ).removeClass( 'nav-tab-active' );
@@ -242,6 +219,15 @@
 
         return false;
       });
+
+      if ( tab ) {
+        $( '.nav-tab-wrapper a[href="#' + tab + '"]', $wrap ).click();
+      } else if ( hashTab ) {
+        $( '.nav-tab-wrapper a[href="#' + hashTab + '"]', $wrap ).click();
+      } else {
+        $( 'div.panel:not(.hidden)', $wrap ).first().show();
+      }
+
     },
 
     getParameterByName: function( name ) {
@@ -250,48 +236,12 @@
       regex = new RegExp( '[\\?&]' + name + '=([^&#]*)' );
       results = regex.exec( location.search );
       return null === results ? '' : decodeURIComponent( results[1].replace( /\+/g, ' ' ) );
-    },
-
-    tbPosition: function() {
-      var $tbWindow = $( '#TB_window' ),
-        $tbFrame = $( '#TB_iframeContent' ),
-        windowWidth = this.cache.$window.width(),
-        newHeight = this.cache.$window.height() - ( ( 792 < windowWidth ) ? 90 : 50 ),
-        newWidth = ( 792 < windowWidth ) ? 772 : windowWidth - 20;
-
-      if ( $tbWindow.size() ) {
-        $tbWindow
-          .width( newWidth )
-          .height( newHeight )
-          .css({ 'margin-left': '-' + parseInt( ( newWidth / 2 ), 10 ) + 'px' });
-
-        $tbFrame.width( newWidth ).height( newHeight );
-
-        if ( 'undefined' !== typeof document.body.style.maxWidth ) {
-          $tbWindow.css({
-            'top': ( 792 < windowWidth ? 30 : 10 ) + 'px',
-            'margin-top': '0'
-          });
-        }
-      }
-
-      return $( 'a.thickbox' ).each(function() {
-        var href = $( this ).attr( 'href' );
-
-        if ( ! href ) {
-          return;
-        }
-
-        href = href.replace( /&width=[0-9]+/g, '' );
-        href = href.replace( /&height=[0-9]+/g, '' );
-        href = href + '&width=' + newWidth + '&height=' + newHeight;
-
-        $( this ).attr( 'href', href );
-      });
     }
 
   };
 
-  envatoMarket.init();
+  $( window ).on('load', function() {
+    envatoMarket.init();
+  });
 
 })( jQuery );
