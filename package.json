@@ -30,7 +30,7 @@
 		"jscs": "^3.0.7",
 		"jshint": "^2.9.6",
 		"node-bourbon": "~4.2.3",
-		"node-sass": "~4.7.2",
+		"node-sass": "~4.13.1",
 		"susy": "^3.0.5"
 	}
 }
