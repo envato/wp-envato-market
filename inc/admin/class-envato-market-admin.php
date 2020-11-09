@@ -114,6 +114,9 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 			// Remove item AJAX handler.
 			add_action( 'wp_ajax_' . self::AJAX_ACTION . '_remove_item', array( $this, 'ajax_remove_item' ) );
 
+			// Health check AJAX handler
+			add_action( 'wp_ajax_' . self::AJAX_ACTION . '_healthcheck', array( $this, 'ajax_healthcheck' ) );
+
 			// Maybe delete the site transients.
 			add_action( 'init', array( $this, 'maybe_delete_transients' ), 11 );
 
@@ -1306,6 +1309,26 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 			}
 
 			wp_send_json_success();
+		}
+
+		/**
+		 * AJAX handler for performing a healthcheck of the current website.
+		 *
+		 * @since 1.0.0
+		 * @codeCoverageIgnore
+		 */
+		public function ajax_healthcheck() {
+			if ( ! check_ajax_referer( self::AJAX_ACTION, 'nonce', false ) ) {
+				status_header( 400 );
+				wp_send_json_error( 'bad_nonce' );
+			} elseif ( 'POST' !== $_SERVER['REQUEST_METHOD'] ) {
+				status_header( 405 );
+				wp_send_json_error( 'bad_method' );
+			}
+
+			wp_send_json_success( array(
+				'html' => 'test!'
+			) );
 		}
 
 		/**
