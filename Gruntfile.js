@@ -1,4 +1,6 @@
 /* jshint node:true */
+var sass = require('node-sass');
+
 module.exports = function( grunt ) {
 	'use strict';
 
@@ -40,6 +42,7 @@ module.exports = function( grunt ) {
 		// Compile all .scss files.
 		sass: {
 			options: {
+				implementation: sass,
 				require: 'susy',
 				sourcemap: 'none',
 				includePaths: require( 'node-bourbon' ).includePaths
