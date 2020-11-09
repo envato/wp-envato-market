@@ -191,7 +191,7 @@ if ( ! class_exists( 'Envato_Market_Items' ) ) :
 		 */
 		public function wp_plugins( $flush = false ) {
 			if ( empty( self::$wp_plugins ) || true === $flush ) {
-				wp_cache_flush();
+				wp_cache_set( 'plugins', false, 'plugins' );
 				self::$wp_plugins = get_plugins();
 			}
 
