@@ -1,7 +1,7 @@
 {
 	"name": "Envato Market",
 	"slug": "envato-market",
-	"version": "2.0.5",
+	"version": "2.0.6",
 	"author": "<a href=\"https://envato.com/market-plugin/\">Envato</a>",
 	"author_profile": "https://envato.com/market-plugin/",
 	"contributors": {
@@ -23,7 +23,7 @@
 	"homepage": "https://envato.com/market-plugin/",
 	"sections": {
 		"description": "WordPress Theme & Plugin management for the Envato Market.",
-		"changelog": "<h4>v2.0.5</h4><ul><li>Fix javascript compatibility with broken jQuery in 3rd party themes/plugins</li></ul>"
+		"changelog": "<h4>v2.0.6</h4><ul><li>Add health check information to help diagnose common plugin issues</li></ul><h4>v2.0.5</h4><ul><li>Fix javascript compatibility with broken jQuery in 3rd party themes/plugins</li></ul>"
 	},
 	"short_description": "WordPress Theme & Plugin management for the Envato Market.",
 	"download_link": "http://envato.github.io/wp-envato-market/dist/envato-market.zip",
