@@ -1352,7 +1352,7 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 			  $limits['memory_limit'] = [
 				  'title'   => 'PHP Memory Limit',
 				  'ok'      => $memory_limit_ok,
-				  'message' => $memory_limit_ok ? "is ok at ${memory_limit_in_mb}." : "${memory_limit_in_mb} may be too small. If you are having issues please set your PHP memory limit to at least 256MB - or ask your hosting provider to do this if you're unsure."
+				  'message' => $memory_limit_ok ? "is ok at ${memory_limit_in_mb}." : "${memory_limit_in_mb} may be too small. If you are having issues please set your PHP memory limit to at least 256M - or ask your hosting provider to do this if you're unsure."
 			  ];
 		  } catch ( \Exception $e ) {
 			  $limits['memory_limit'] = [
