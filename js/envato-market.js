@@ -252,8 +252,19 @@
         });
 
         request.done(function( response ) {
-          if( response && response.html ) {
-            $healthcheckOutput.html(response.html);
+          if( response && response.limits ) {
+            var $healthcheckUL = $( '<ul></ul>' );
+            var limits = Object.keys( response.limits );
+            for( var i = 0; i < limits.length; i++ ) {
+              var $healcheckLI = $( '<li></li>' );
+              var healthCheckItem = response.limits[limits[i]];
+              $healcheckLI.addClass( healthCheckItem.ok ? 'healthcheck-ok' : 'healthcheck-error' );
+              $healcheckLI.attr( 'data-limit', limits[i] );
+              $healcheckLI.append( '<span class="healthcheck-item-title">' + healthCheckItem.title + '</span>' );
+              $healcheckLI.append( '<span class="healthcheck-item-message">' + healthCheckItem.message + '</span>' );
+              $healthcheckUL.append( $healcheckLI );
+            }
+            $healthcheckOutput.html( $healthcheckUL );
           }else{
             window.console.log( response );
             $healthcheckOutput.text('Health check failed to load. Please check console for errors.');
