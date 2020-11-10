@@ -41,7 +41,7 @@ if ( ! class_exists( 'Envato_Market_Github' ) ) :
 		 *
 		 * @var string
 		 */
-		private static $api_url = 'http://envato.github.io/wp-envato-market/dist/update-check.json';
+		private static $api_url = 'https://envato.github.io/wp-envato-market/dist/update-check.json';
 
 		/**
 		 * The Envato_Market_Items Instance
