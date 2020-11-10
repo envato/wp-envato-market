@@ -217,7 +217,7 @@
         $( this ).addClass( 'nav-tab-active' );
         $( 'div' + $( this ).attr( 'href' ), $wrap ).show();
 
-        self.maybeLoadHelthcheck();
+        self.maybeLoadhealthcheck();
 
         return false;
       });
@@ -240,11 +240,11 @@
       return null === results ? '' : decodeURIComponent( results[1].replace( /\+/g, ' ' ) );
     },
 
-    maybeLoadHelthcheck: function() {
+    maybeLoadhealthcheck: function() {
       // We only load the health check ajax call when the envato-market-healthcheck div is visible on the page.
-      var $healthcheckOutput = $( '.envato-market-healthcheck' );
-      if( $healthcheckOutput.is( ':visible') ) {
-        $healthcheckOutput.text('Loading...');
+      var $healthCheckOutput = $( '.envato-market-healthcheck' );
+      if( $healthCheckOutput.is( ':visible') ) {
+        $healthCheckOutput.text('Loading...');
 
         // Use our existing wp.ajax.post pattern from above to call the healthcheck API endpoint
         var request = wp.ajax.post( _envatoMarket.action + '_healthcheck', {
@@ -253,27 +253,27 @@
 
         request.done(function( response ) {
           if( response && response.limits ) {
-            var $healthcheckUL = $( '<ul></ul>' );
+            var $healthCheckUL = $( '<ul></ul>' );
             var limits = Object.keys( response.limits );
             for( var i = 0; i < limits.length; i++ ) {
-              var $healcheckLI = $( '<li></li>' );
+              var $healthCheckLI = $( '<li></li>' );
               var healthCheckItem = response.limits[limits[i]];
-              $healcheckLI.addClass( healthCheckItem.ok ? 'healthcheck-ok' : 'healthcheck-error' );
-              $healcheckLI.attr( 'data-limit', limits[i] );
-              $healcheckLI.append( '<span class="healthcheck-item-title">' + healthCheckItem.title + '</span>' );
-              $healcheckLI.append( '<span class="healthcheck-item-message">' + healthCheckItem.message + '</span>' );
-              $healthcheckUL.append( $healcheckLI );
+              $healthCheckLI.addClass( healthCheckItem.ok ? 'healthcheck-ok' : 'healthcheck-error' );
+              $healthCheckLI.attr( 'data-limit', limits[i] );
+              $healthCheckLI.append( '<span class="healthcheck-item-title">' + healthCheckItem.title + '</span>' );
+              $healthCheckLI.append( '<span class="healthcheck-item-message">' + healthCheckItem.message + '</span>' );
+              $healthCheckUL.append( $healthCheckLI );
             }
-            $healthcheckOutput.html( $healthcheckUL );
+            $healthCheckOutput.html( $healthCheckUL );
           }else{
             window.console.log( response );
-            $healthcheckOutput.text('Health check failed to load. Please check console for errors.');
+            $healthCheckOutput.text('Health check failed to load. Please check console for errors.');
           }
         });
 
         request.fail(function( response ) {
           window.console.log( response );
-          $healthcheckOutput.text('Health check failed to load. Please check console for errors.');
+          $healthCheckOutput.text('Health check failed to load. Please check console for errors.');
         });
       }
     }
