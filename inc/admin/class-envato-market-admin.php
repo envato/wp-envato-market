@@ -1373,7 +1373,7 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 			  $limits['upload'] = [
 				  'ok'      => $upload_max_filesize_ok,
 				  'title'   => 'PHP Upload Limits',
-				  'message' => $upload_max_filesize_ok ? "is ok at '$upload_max_filesize_in_mb'." : "$upload_max_filesize_in_mb may be too small. If you are having issues please set your PHP upload limits to at least ${upload_size_desired}M - or ask your hosting provider to do this if you're unsure.",
+				  'message' => $upload_max_filesize_ok ? "is ok at $upload_max_filesize_in_mb." : "$upload_max_filesize_in_mb may be too small. If you are having issues please set your PHP upload limits to at least ${upload_size_desired}M - or ask your hosting provider to do this if you're unsure.",
 			  ];
 		  } catch ( \Exception $e ) {
 			  $limits['upload'] = [
@@ -1392,7 +1392,7 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 			  $limits['max_input_vars'] = [
 				  'ok'      => $max_input_vars_ok,
 				  'title'   => 'PHP Max Input Vars',
-				  'message' => $max_input_vars_ok ? "is ok at '$max_input_vars'." : "$max_input_vars may be too small. If you are having issues please set your PHP max input vars to at least $max_input_vars_desired - or ask your hosting provider to do this if you're unsure.",
+				  'message' => $max_input_vars_ok ? "is ok at $max_input_vars." : "$max_input_vars may be too small. If you are having issues please set your PHP max input vars to at least $max_input_vars_desired - or ask your hosting provider to do this if you're unsure.",
 			  ];
 		  } catch ( \Exception $e ) {
 			  $limits['max_input_vars'] = [
@@ -1479,7 +1479,7 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 				  'title'   => 'Envato API Authentication',
 				  'message' => "Not currently authenticated with the Envato API. Please add your API token. " . $response->get_error_message(),
 			  ];
-		  } elseif ( isset( $response['scopes'] ) || ! is_array( $response['scopes'] ) ) {
+		  } elseif ( ! isset( $response['scopes'] ) ) {
 			  $limits['authentication'] = [
 				  'ok'      => false,
 				  'title'   => 'Envato API Authentication',
