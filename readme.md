@@ -6,7 +6,7 @@ WordPress Theme & Plugin management for the Envato Market.
 **Contributors:** [valendesigns](https://profiles.wordpress.org/valendesigns), [dtbaker](https://profiles.wordpress.org/dtbaker), [aaronrutley](https://profiles.wordpress.org/aaronrutley)  
 **Requires at least:** 5.1  
 **Tested up to:** 5.5  
-**Stable tag:** 2.0.5  
+**Stable tag:** 2.0.6  
 **License:** [GPLv2 or later](http://www.gnu.org/licenses/gpl-2.0.html)  
 **Website:** https://envato.com/market-plugin/  
 
@@ -47,6 +47,9 @@ Required token permissions:
 Please see https://envato.com/market-plugin/ for more details.
 
 ## Change Log ##
+
+### v2.0.6
+- Add health check information to help diagnose common plugin issues
 
 ### v2.0.5
 - Fix javascript compatibility with broken jQuery in 3rd party themes/plugins

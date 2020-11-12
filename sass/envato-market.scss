@@ -529,3 +529,49 @@
     }
   }
 }
+
+
+.healthcheck-item {
+  padding: 0 0 14px 25px;
+  position: relative;
+
+  &::before {
+    position: absolute;
+    opacity: 0.7;
+    font-family: dashicons;
+    font-size: 16px;
+    vertical-align: bottom;
+    left: 0;
+  }
+}
+
+.healthcheck-ok {
+  @extend .healthcheck-item;
+
+  &::before {
+    content: '\f12a';
+    color: #80b341;
+  }
+}
+
+.healthcheck-error {
+  @extend .healthcheck-item;
+
+  &::before {
+    content: '\f153';
+    color: #ef3962;
+  }
+
+  .limitTitle {
+    color: #ef3962;
+  }
+}
+
+.healthcheck-item-title {
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.healthcheck-item-message {
+  margin-left: 5px;
+}

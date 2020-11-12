@@ -2,16 +2,16 @@
 # This file is distributed under the same license as the Envato Market package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Envato Market 2.0.5\n"
+"Project-Id-Version: Envato Market 2.0.6\n"
 "Report-Msgid-Bugs-To: Envato Support Team <support@envato.com>\n"
-"POT-Creation-Date: 2020-08-30 11:10:52+00:00\n"
+"POT-Creation-Date: 2020-11-10 23:06:53+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "PO-Revision-Date: 2020-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Envato Support Team <support@envato.com>\n"
 "Language-Team: Envato Support Team <support@envato.com>\n"
-"X-Generator: grunt-wp-i18n1.0.2\n"
+"X-Generator: grunt-wp-i18n 1.0.3\n"
 
 #: api-test/inc/EnvatoDebug.php:57 api-test/inc/EnvatoDebug.php:58
 msgid "Envato Debug"
@@ -38,7 +38,7 @@ msgstr ""
 msgid "Cheatin&#8217; huh?"
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:282
+#: inc/admin/class-envato-market-admin.php:285
 msgid "You do not have sufficient permissions to delete transients."
 msgstr ""
 
@@ -46,163 +46,163 @@ msgstr ""
 msgid "Envato Market"
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:480
+#: inc/admin/class-envato-market-admin.php:483
 msgid "Save"
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:481
+#: inc/admin/class-envato-market-admin.php:484
 msgid "Remove"
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:482
+#: inc/admin/class-envato-market-admin.php:485
 msgid "Cancel"
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:483
+#: inc/admin/class-envato-market-admin.php:486
 msgid "An unknown error occurred. Try again."
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:506
+#: inc/admin/class-envato-market-admin.php:509
 #: inc/admin/view/partials/settings.php:21
 msgid "Test API Connection"
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:511
+#: inc/admin/class-envato-market-admin.php:514
 #: inc/admin/view/callback/setting/items.php:22
 msgid "ID"
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:514 inc/admin/functions.php:339
+#: inc/admin/class-envato-market-admin.php:517 inc/admin/functions.php:339
 #: inc/admin/view/callback/setting/items.php:24
 msgid "Delete"
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:535
+#: inc/admin/class-envato-market-admin.php:538
 msgid "Remove Item"
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:536
+#: inc/admin/class-envato-market-admin.php:539
 msgid ""
 "You are about to remove the connection between the Envato Market API and "
 "this item. You cannot undo this action."
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:541
+#: inc/admin/class-envato-market-admin.php:544
 #: inc/admin/view/callback/setting/items.php:37
 msgid "Add Item"
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:544
-#: inc/admin/class-envato-market-admin.php:621
+#: inc/admin/class-envato-market-admin.php:547
+#: inc/admin/class-envato-market-admin.php:624
 msgid "Token"
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:547
+#: inc/admin/class-envato-market-admin.php:550
 msgid "Enter the Envato API Personal Token."
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:548
+#: inc/admin/class-envato-market-admin.php:551
 msgid "Item ID"
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:550
+#: inc/admin/class-envato-market-admin.php:553
 msgid "Enter the Envato Item ID."
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:574 inc/admin/functions.php:165
+#: inc/admin/class-envato-market-admin.php:577 inc/admin/functions.php:165
 #: inc/admin/functions.php:166 inc/admin/functions.php:405
 #: inc/admin/functions.php:406
 msgid "Version %s"
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:574
+#: inc/admin/class-envato-market-admin.php:577
 msgid "Version"
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:583 inc/admin/functions.php:176
+#: inc/admin/class-envato-market-admin.php:586 inc/admin/functions.php:176
 #: inc/admin/functions.php:416
 msgid "By"
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:590
-#: inc/admin/class-envato-market-admin.php:591 inc/admin/functions.php:146
+#: inc/admin/class-envato-market-admin.php:593
+#: inc/admin/class-envato-market-admin.php:594 inc/admin/functions.php:146
 #: inc/admin/functions.php:386
 msgid "Install"
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:613
+#: inc/admin/class-envato-market-admin.php:616
 msgid "Getting Started (Simple)"
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:630
+#: inc/admin/class-envato-market-admin.php:633
 msgid "Single Item Tokens (Advanced)"
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:638
+#: inc/admin/class-envato-market-admin.php:641
 msgid "Envato Market Items"
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:1058
-#: inc/admin/class-envato-market-admin.php:1083
+#: inc/admin/class-envato-market-admin.php:1061
+#: inc/admin/class-envato-market-admin.php:1086
 msgid "Installing Plugin..."
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:1059
+#: inc/admin/class-envato-market-admin.php:1062
 msgid "You do not have sufficient permissions to install plugins on this site."
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:1060
-#: inc/admin/class-envato-market-admin.php:1085
-#: inc/admin/class-envato-market-admin.php:1143
+#: inc/admin/class-envato-market-admin.php:1063
+#: inc/admin/class-envato-market-admin.php:1088
+#: inc/admin/class-envato-market-admin.php:1146
 #: inc/admin/class-envato-market-theme-installer-skin.php:113
 msgid "Return to Plugin Installer"
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:1084
-#: inc/admin/class-envato-market-admin.php:1142
+#: inc/admin/class-envato-market-admin.php:1087
+#: inc/admin/class-envato-market-admin.php:1145
 msgid "An error occurred, please check that the item ID is correct."
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:1090
+#: inc/admin/class-envato-market-admin.php:1093
 msgid "Installing Plugin: %s"
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:1116
-#: inc/admin/class-envato-market-admin.php:1141
+#: inc/admin/class-envato-market-admin.php:1119
+#: inc/admin/class-envato-market-admin.php:1144
 msgid "Installing Theme..."
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:1117
+#: inc/admin/class-envato-market-admin.php:1120
 msgid "You do not have sufficient permissions to install themes on this site."
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:1118
+#: inc/admin/class-envato-market-admin.php:1121
 #: inc/admin/class-envato-market-theme-installer-skin.php:67
 msgid "Return to Theme Installer"
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:1150
+#: inc/admin/class-envato-market-admin.php:1153
 msgid "Installing Theme: %s"
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:1178
+#: inc/admin/class-envato-market-admin.php:1181
 msgid "The Token is missing."
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:1180
-#: inc/admin/class-envato-market-admin.php:1281
+#: inc/admin/class-envato-market-admin.php:1183
+#: inc/admin/class-envato-market-admin.php:1284
 msgid "The Item ID is missing."
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:1191
+#: inc/admin/class-envato-market-admin.php:1194
 msgid "The Token or Item ID is incorrect."
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:1195
+#: inc/admin/class-envato-market-admin.php:1198
 msgid "The item cannot be downloaded."
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:1264
+#: inc/admin/class-envato-market-admin.php:1267
 msgid "An unknown error occurred."
 msgstr ""
 

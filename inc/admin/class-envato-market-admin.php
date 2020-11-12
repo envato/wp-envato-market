@@ -114,6 +114,9 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 			// Remove item AJAX handler.
 			add_action( 'wp_ajax_' . self::AJAX_ACTION . '_remove_item', array( $this, 'ajax_remove_item' ) );
 
+			// Health check AJAX handler
+			add_action( 'wp_ajax_' . self::AJAX_ACTION . '_healthcheck', array( $this, 'ajax_healthcheck' ) );
+
 			// Maybe delete the site transients.
 			add_action( 'init', array( $this, 'maybe_delete_transients' ), 11 );
 
@@ -1309,6 +1312,259 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 		}
 
 		/**
+		 * AJAX handler for performing a healthcheck of the current website.
+		 *
+		 * @since 2.0.6
+		 * @codeCoverageIgnore
+		 */
+		public function ajax_healthcheck() {
+			if ( ! check_ajax_referer( self::AJAX_ACTION, 'nonce', false ) ) {
+				status_header( 400 );
+				wp_send_json_error( 'bad_nonce' );
+			} elseif ( 'POST' !== $_SERVER['REQUEST_METHOD'] ) {
+				status_header( 405 );
+				wp_send_json_error( 'bad_method' );
+			}
+
+			$limits = $this->get_server_limits();
+
+			wp_send_json_success( array(
+				'limits' => $limits
+			) );
+		}
+
+	  /**
+	   * AJAX handler for performing a healthcheck of the current website.
+	   *
+	   * @since 2.0.6
+	   * @codeCoverageIgnore
+	   */
+	  public function get_server_limits() {
+		  $limits = [];
+
+		  // Check memory limit is > 256 M
+		  try {
+			  $memory_limit         = wp_convert_hr_to_bytes( ini_get( 'memory_limit' ) );
+			  $memory_limit_desired = 256;
+			  $memory_limit_ok      = $memory_limit < 0 || $memory_limit >= $memory_limit_desired * 1024 * 1024;
+			  $memory_limit_in_mb   = $memory_limit < 0 ? 'Unlimited' : floor( $memory_limit / ( 1024 * 1024 ) ) . 'M';
+
+			  $limits['memory_limit'] = [
+				  'title'   => 'PHP Memory Limit',
+				  'ok'      => $memory_limit_ok,
+				  'message' => $memory_limit_ok ? "is ok at ${memory_limit_in_mb}." : "${memory_limit_in_mb} may be too small. If you are having issues please set your PHP memory limit to at least 256M - or ask your hosting provider to do this if you're unsure."
+			  ];
+		  } catch ( \Exception $e ) {
+			  $limits['memory_limit'] = [
+				  'title'   => 'PHP Memory Limit',
+				  'ok'      => false,
+				  'message' => 'Failed to check memory limit. If you are having issues please ask hosting provider to raise the memory limit for you.'
+			  ];
+		  }
+
+		  // Check upload size.
+		  try {
+			  $upload_size_desired = 80;
+
+			  $upload_max_filesize       = wp_max_upload_size();
+			  $upload_max_filesize_ok    = $upload_max_filesize < 0 || $upload_max_filesize >= $upload_size_desired * 1024 * 1024;
+			  $upload_max_filesize_in_mb = $upload_max_filesize < 0 ? 'Unlimited' : floor( $upload_max_filesize / ( 1024 * 1024 ) ) . 'M';
+
+			  $limits['upload'] = [
+				  'ok'      => $upload_max_filesize_ok,
+				  'title'   => 'PHP Upload Limits',
+				  'message' => $upload_max_filesize_ok ? "is ok at $upload_max_filesize_in_mb." : "$upload_max_filesize_in_mb may be too small. If you are having issues please set your PHP upload limits to at least ${upload_size_desired}M - or ask your hosting provider to do this if you're unsure.",
+			  ];
+		  } catch ( \Exception $e ) {
+			  $limits['upload'] = [
+				  'title'   => 'PHP Upload Limits',
+				  'ok'      => false,
+				  'message' => 'Failed to check upload limit. If you are having issues please ask hosting provider to raise the upload limit for you.'
+			  ];
+		  }
+
+		  // Check max_input_vars.
+		  try {
+			  $max_input_vars         = ini_get( 'max_input_vars' );
+			  $max_input_vars_desired = 1000;
+			  $max_input_vars_ok      = $max_input_vars < 0 || $max_input_vars >= $max_input_vars_desired;
+
+			  $limits['max_input_vars'] = [
+				  'ok'      => $max_input_vars_ok,
+				  'title'   => 'PHP Max Input Vars',
+				  'message' => $max_input_vars_ok ? "is ok at $max_input_vars." : "$max_input_vars may be too small. If you are having issues please set your PHP max input vars to at least $max_input_vars_desired - or ask your hosting provider to do this if you're unsure.",
+			  ];
+		  } catch ( \Exception $e ) {
+			  $limits['max_input_vars'] = [
+				  'title'   => 'PHP Max Input Vars',
+				  'ok'      => false,
+				  'message' => 'Failed to check input vars limit. If you are having issues please ask hosting provider to raise the input vars limit for you.'
+			  ];
+		  }
+
+		  // Check max_execution_time.
+		  try {
+			  $max_execution_time         = ini_get( 'max_execution_time' );
+			  $max_execution_time_desired = 60;
+			  $max_execution_time_ok      = $max_execution_time <= 0 || $max_execution_time >= $max_execution_time_desired;
+
+			  $limits['max_execution_time'] = [
+				  'ok'      => $max_execution_time_ok,
+				  'title'   => 'PHP Execution Time',
+				  'message' => $max_execution_time_ok ? "PHP execution time limit is ok at ${max_execution_time}." : "$max_execution_time is too small. Please set your PHP max execution time to at least $max_execution_time_desired - or ask your hosting provider to do this if you're unsure.",
+			  ];
+		  } catch ( \Exception $e ) {
+			  $limits['max_execution_time'] = [
+				  'title'   => 'PHP Execution Time',
+				  'ok'      => false,
+				  'message' => 'Failed to check PHP execution time limit. Please ask hosting provider to raise this limit for you.'
+			  ];
+		  }
+
+		  // Check various hostname connectivity.
+		  $hosts_to_check = array(
+			  array(
+				  'hostname' => 'envato.github.io',
+				  'url'      => 'https://envato.github.io/wp-envato-market/dist/update-check.json',
+				  'title'    => 'Plugin Update API',
+			  ),
+			  array(
+				  'hostname' => 'api.envato.com',
+				  'url'      => 'https://api.envato.com/ping',
+				  'title'    => 'Envato Market API',
+			  ),
+			  array(
+				  'hostname' => 'marketplace.envato.com',
+				  'url'      => 'https://marketplace.envato.com/robots.txt',
+				  'title'    => 'Download API',
+			  ),
+		  );
+
+		  foreach ( $hosts_to_check as $host ) {
+			  try {
+				  $response      = wp_remote_get( $host['url'], [
+					  'user-agent' => 'WordPress - Envato Market ' . envato_market()->get_version(),
+					  'timeout'    => 5,
+				  ] );
+				  $response_code = wp_remote_retrieve_response_code( $response );
+				  if ( $response && ! is_wp_error( $response ) && $response_code === 200 ) {
+					  $limits[ $host['hostname'] ] = [
+						  'ok'      => true,
+						  'title'   => $host['title'],
+						  'message' => 'Connected ok.',
+					  ];
+				  } else {
+					  $limits[ $host['hostname'] ] = [
+						  'ok'      => false,
+						  'title'   => $host['title'],
+						  'message' => "Connection failed. Status '$response_code'. Please ensure PHP is allowed to connect to the host '" . $host['hostname'] . "' - or ask your hosting provider to do this if you’re unsure. " . ( is_wp_error( $response ) ? $response->get_error_message() : '' ),
+					  ];
+				  }
+			  } catch ( \Exception $e ) {
+				  $limits[ $host['hostname'] ] = [
+					  'ok'      => true,
+					  'title'   => $host['title'],
+					  'message' => "Connection failed. Please contact the hosting provider and ensure PHP is allowed to connect to the host '" . $host['hostname'] . "'. " . $e->getMessage(),
+				  ];
+			  }
+		  }
+
+
+		  // Check authenticated API request
+		  $response = envato_market()->api()->request( 'https://api.envato.com/whoami' );
+
+		  if ( is_wp_error( $response ) ) {
+			  $limits['authentication'] = [
+				  'ok'      => false,
+				  'title'   => 'Envato API Authentication',
+				  'message' => "Not currently authenticated with the Envato API. Please add your API token. " . $response->get_error_message(),
+			  ];
+		  } elseif ( ! isset( $response['scopes'] ) ) {
+			  $limits['authentication'] = [
+				  'ok'      => false,
+				  'title'   => 'Envato API Authentication',
+				  'message' => "Missing API permissions. Please re-create your Envato API token with the correct permissions. ",
+			  ];
+		  } else {
+			  $minimum_scopes    = $this->get_required_permissions();
+			  $maximum_scopes    = array( 'default' => 'Default' ) + $minimum_scopes;
+			  $missing_scopes    = array();
+			  $additional_scopes = array();
+			  foreach ( $minimum_scopes as $required_scope => $required_scope_name ) {
+				  if ( ! in_array( $required_scope, $response['scopes'] ) ) {
+					  // The scope minimum required scope doesn't exist.
+					  $missing_scopes [] = $required_scope;
+				  }
+			  }
+			  foreach ( $response['scopes'] as $scope ) {
+				  if ( ! isset( $maximum_scopes[ $scope ] ) ) {
+					  // The available scope is outside our maximum bounds.
+					  $additional_scopes [] = $scope;
+				  }
+			  }
+			  $limits['authentication'] = [
+				  'ok'      => true,
+				  'title'   => 'Envato API Authentication',
+				  'message' => "Authenticated successfully with correct scopes: " . implode( ', ', $response['scopes'] ),
+			  ];
+		  }
+
+		  $debug_enabled      = defined( 'WP_DEBUG' ) && WP_DEBUG;
+		  $limits['wp_debug'] = [
+			  'ok'      => ! $debug_enabled,
+			  'title'   => 'WP Debug',
+			  'message' => $debug_enabled ? 'If you’re on a production website, it’s best to set WP_DEBUG to false, please ask your hosting provider to do this if you’re unsure.' : 'WP Debug is disabled, all ok.',
+		  ];
+
+		  $zip_archive_installed = class_exists( '\ZipArchive' );
+		  $limits['zip_archive'] = [
+			  'ok'      => $zip_archive_installed,
+			  'title'   => 'ZipArchive Support',
+			  'message' => $zip_archive_installed ? 'ZipArchive is available.' : 'ZipArchive is not available. If you have issues installing or updating items please ask your hosting provider to enable ZipArchive.',
+		  ];
+
+
+		  $php_version_ok        = version_compare( PHP_VERSION, '7.0', '>=' );
+		  $limits['php_version'] = [
+			  'ok'      => $php_version_ok,
+			  'title'   => 'PHP Version',
+			  'message' => $php_version_ok ? 'PHP version is ok at ' . PHP_VERSION . '.' : 'Please ask the hosting provider to upgrade your PHP version to at least 7.0 or above.',
+		  ];
+
+		  require_once( ABSPATH . 'wp-admin/includes/file.php' );
+		  $current_filesystem_method = get_filesystem_method();
+		  if ( $current_filesystem_method !== 'direct' ) {
+			  $limits['filesystem_method'] = [
+				  'ok'      => false,
+				  'title'   => 'WordPress Filesystem',
+				  'message' => 'Please enable WordPress FS_METHOD direct - or ask your hosting provider to do this if you’re unsure.',
+			  ];
+		  }
+
+		  $wp_upload_dir                 = wp_upload_dir();
+		  $upload_base_dir               = $wp_upload_dir['basedir'];
+		  $upload_base_dir_writable      = is_writable( $upload_base_dir );
+		  $limits['wp_content_writable'] = [
+			  'ok'      => $upload_base_dir_writable,
+			  'title'   => 'WordPress File Permissions',
+			  'message' => $upload_base_dir_writable ? 'is ok.' : 'Please set correct WordPress PHP write permissions for the wp-content directory - or ask your hosting provider to do this if you’re unsure.',
+		  ];
+
+		  $active_plugins    = get_option( 'active_plugins' );
+		  $active_plugins_ok = count( $active_plugins ) < 15;
+		  if ( ! $active_plugins_ok ) {
+			  $limits['active_plugins'] = [
+				  'ok'      => false,
+				  'title'   => 'Active Plugins',
+				  'message' => 'Please try to reduce the number of active plugins on your WordPress site, as this will slow things down.',
+			  ];
+		  }
+
+		  return $limits;
+	  }
+
+
+	  /**
 		 * Admin page callback.
 		 *
 		 * @since 1.0.0

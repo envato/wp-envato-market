@@ -67,7 +67,7 @@ class Tests_Envato_Market_Github extends WP_UnitTestCase {
 
 		$ref = new ReflectionProperty( 'Envato_Market_Github', 'api_url' );
 		$ref->setAccessible( true );
-		$ref->setValue( null, 'http://envato.github.io/wp-envato-market/dist/update-check.json' );
+		$ref->setValue( null, 'https://envato.github.io/wp-envato-market/dist/update-check.json' );
 	}
 
 	/**

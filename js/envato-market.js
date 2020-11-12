@@ -217,6 +217,8 @@
         $( this ).addClass( 'nav-tab-active' );
         $( 'div' + $( this ).attr( 'href' ), $wrap ).show();
 
+        self.maybeLoadhealthcheck();
+
         return false;
       });
 
@@ -236,6 +238,44 @@
       regex = new RegExp( '[\\?&]' + name + '=([^&#]*)' );
       results = regex.exec( location.search );
       return null === results ? '' : decodeURIComponent( results[1].replace( /\+/g, ' ' ) );
+    },
+
+    maybeLoadhealthcheck: function() {
+      // We only load the health check ajax call when the envato-market-healthcheck div is visible on the page.
+      var $healthCheckOutput = $( '.envato-market-healthcheck' );
+      if( $healthCheckOutput.is( ':visible') ) {
+        $healthCheckOutput.text('Loading...');
+
+        // Use our existing wp.ajax.post pattern from above to call the healthcheck API endpoint
+        var request = wp.ajax.post( _envatoMarket.action + '_healthcheck', {
+          nonce: _envatoMarket.nonce
+        });
+
+        request.done(function( response ) {
+          if( response && response.limits ) {
+            var $healthCheckUL = $( '<ul></ul>' );
+            var limits = Object.keys( response.limits );
+            for( var i = 0; i < limits.length; i++ ) {
+              var $healthCheckLI = $( '<li></li>' );
+              var healthCheckItem = response.limits[limits[i]];
+              $healthCheckLI.addClass( healthCheckItem.ok ? 'healthcheck-ok' : 'healthcheck-error' );
+              $healthCheckLI.attr( 'data-limit', limits[i] );
+              $healthCheckLI.append( '<span class="healthcheck-item-title">' + healthCheckItem.title + '</span>' );
+              $healthCheckLI.append( '<span class="healthcheck-item-message">' + healthCheckItem.message + '</span>' );
+              $healthCheckUL.append( $healthCheckLI );
+            }
+            $healthCheckOutput.html( $healthCheckUL );
+          }else{
+            window.console.log( response );
+            $healthCheckOutput.text('Health check failed to load. Please check console for errors.');
+          }
+        });
+
+        request.fail(function( response ) {
+          window.console.log( response );
+          $healthCheckOutput.text('Health check failed to load. Please check console for errors.');
+        });
+      }
     }
 
   };

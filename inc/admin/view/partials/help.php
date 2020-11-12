@@ -32,6 +32,10 @@
 			</ol>
 		</div>
 		<div class="envato-market-block">
+			<h3>Health Check:</h3>
+			<div class="envato-market-healthcheck">
+				Problem starting healthcheck. Please check javascript console for errors.
+			</div>
 			<h3>Support:</h3>
 			<p>The Envato Market plugin is maintained - we ensure it works best on the latest version of WordPress and on a modern hosting platform, however we can’t guarantee it’ll work on all WordPress sites or hosting environments.</p>
 			<p>If you’ve tried all the troubleshooting steps and you’re still unable to get the Envato Market plugin to work on your site/hosting, at this time, our advice is to remove the Envato Market plugin and instead visit the Downloads section of ThemeForest/CodeCanyon to download the latest version of your items.</p>
