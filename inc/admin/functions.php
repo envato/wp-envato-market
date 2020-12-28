@@ -197,12 +197,15 @@ function envato_market_themes_column( $group = 'install' ) {
 									)
 								);
 							} else {
-								wp_star_rating(
-									array(
-										'rating' => $theme['rating'] > 0 ? ( $theme['rating'] / 5 * 100 ) : 0,
-										'type'   => 'percent',
-									)
-								);
+								if( !is_array($theme['rating']) ){
+									$theme['rating'] = (int) $theme['rating'];
+									wp_star_rating(
+										array(
+											'rating' => $theme['rating'] > 0 ? ( $theme['rating'] / 5 * 100 ) : 0,
+											'type'   => 'percent',
+										)
+									);
+								}
 							}
 						}
 						?>
