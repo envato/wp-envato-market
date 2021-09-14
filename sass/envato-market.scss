@@ -59,7 +59,7 @@
     }
   }
 
-  .notice {
+  .notice:not(.hidden) {
     display: block !important;
     margin-top: 15px;
     margin-bottom: 0;
