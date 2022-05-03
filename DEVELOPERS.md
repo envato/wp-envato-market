@@ -18,7 +18,7 @@ To release a new version we have to update these two files, the steps for doing 
 1. Update the changelog in these files:
     1. `readme.txt` add a new changelog entry for version number
     1. `docs/dist/update-check.json` add a changelog entry like: `<h4>v2.0.7</h4><ul><li>Fix global notice hidden bug</li></ul>`
-1. Update the "tested up to" tag in `envato-market.php` e.g. `Tested up to: 5.8`
+1. Update the "tested up to" tag in `envato-market.php` e.g. `Tested up to: 5.9`
 1. Commit the changes ^^
 1. Run the build script:
     1. `npm install`
