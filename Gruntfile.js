@@ -193,7 +193,8 @@ module.exports = function( grunt ) {
 					'!vendor/**',
 					'!package-lock.json',
 					'!phpcs.xml.dist',
-					'!composer.lock'
+					'!composer.lock',
+					'!DEVELOPERS.md'
 				],
 				dest: 'dist/<%= pkg.name %>',
 				expand: true,
