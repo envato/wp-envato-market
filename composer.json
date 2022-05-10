@@ -2,11 +2,7 @@
   "name": "envato/wp-envato-market",
   "description": "WordPress Theme & Plugin management for the Envato Market.",
   "type": "wordpress-plugin",
-  "dist": {
-    "url": "git@github.com:envato/wp-envato-market.git",
-    "type": "git"
-  },
-  "license": "GPL",
+  "license": "GPL-2.0-or-later",
   "authors": [
     {
       "name": "Envato",
