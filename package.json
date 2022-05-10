@@ -28,7 +28,7 @@
 		"grunt-shell": "~3.0.1",
 		"grunt-wp-i18n": "^1.0.3",
 		"jscs": "^3.0.7",
-		"jshint": "^2.12.0",
+		"jshint": "^2.13.4",
 		"node-bourbon": "~4.2.8",
 		"node-sass": "^5.0.0",
 		"susy": "^3.0.6"
