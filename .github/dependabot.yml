@@ -1,0 +1,18 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "19:00"
+  labels:
+  - dependabot
+  versioning-strategy: increase
+- package-ecosystem: composer
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "19:00"
+  labels:
+  - dependabot
+  versioning-strategy: increase
