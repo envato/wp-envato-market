@@ -13,7 +13,7 @@
 	"author": "Envato",
 	"license": "GPL-2.0+",
 	"devDependencies": {
-		"grunt": "^1.3.0",
+		"grunt": "^1.5.3",
 		"grunt-checktextdomain": "~1.0.1",
 		"grunt-cli": "^1.3.2",
 		"grunt-contrib-clean": "~2.0.0",
