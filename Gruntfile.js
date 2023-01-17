@@ -1,4 +1,3 @@
-/* jshint node:true */
 var sass = require('node-sass');
 
 module.exports = function( grunt ) {
@@ -8,12 +7,9 @@ module.exports = function( grunt ) {
 
 		pkg: grunt.file.readJSON( 'package.json' ),
 
-		// JavaScript linting with JSHint.
-		jshint: {
-			options: {
-				jshintrc: '.jshintrc'
-			},
-			all: [
+		// JavaScript linting with eslint.
+		eslint: {
+			target: [
 				'Gruntfile.js',
 				'js/*.js',
 				'!js/*.min.js'
@@ -43,7 +39,6 @@ module.exports = function( grunt ) {
 		sass: {
 			options: {
 				implementation: sass,
-				require: 'susy',
 				sourcemap: 'none',
 				includePaths: require( 'node-bourbon' ).includePaths
 			},
@@ -177,7 +172,6 @@ module.exports = function( grunt ) {
 					'!CodeSniffer.conf',
 					'!phpc*',
 					'!api-test/**',
-					'!dev-lib/**',
 					'!dist/**',
 					'!docs/**',
 					'!Gruntfile.js',
@@ -239,30 +233,24 @@ module.exports = function( grunt ) {
 				stdout: true,
 				stderr: true
 			},
-			readme: {
-				command: 'cd ./dev-lib && ./generate-markdown-readme' // Generate the readme.md
-			},
 			phpunit: {
 				command: 'vagrant ssh -c "cd <%= vvv.plugin %> && phpunit"'
 			},
 			phpunit_c: {
 				command: 'vagrant ssh -c "cd <%= vvv.plugin %> && phpunit --coverage-html <%= vvv.coverage %>"'
 			},
-            phpcs: {
-                command: 'vagrant ssh -c "cd <%= vvv.plugin %> && phpcs"'
-            },
-            phpcbf: {
-                command: 'vagrant ssh -c "cd <%= vvv.plugin %> && phpcbf"'
-            },
-            precommit: {
-                command: 'vagrant ssh -c "cd <%= vvv.plugin %> && DEV_LIB_SKIP="xmllint" ./dev-lib/pre-commit"'
-            }
+			phpcs: {
+				command: 'vagrant ssh -c "cd <%= vvv.plugin %> && phpcs"'
+			},
+			phpcbf: {
+				command: 'vagrant ssh -c "cd <%= vvv.plugin %> && phpcbf"'
+			}
 		}
 
 	});
 
 	// Load tasks
-	grunt.loadNpmTasks( 'grunt-contrib-jshint' );
+	grunt.loadNpmTasks( 'grunt-eslint' );
 	grunt.loadNpmTasks( 'grunt-contrib-uglify' );
 	grunt.loadNpmTasks( 'grunt-sass' );
 	grunt.loadNpmTasks( 'grunt-rtlcss' );
@@ -277,7 +265,7 @@ module.exports = function( grunt ) {
 
 	// Register tasks
 	grunt.registerTask( 'default', [
-		'jshint',
+		'eslint',
 		'css',
 		'uglify'
 	] );
@@ -286,10 +274,6 @@ module.exports = function( grunt ) {
 		'sass',
 		'rtlcss',
 		'cssmin'
-	] );
-
-	grunt.registerTask( 'readme', [
-		'shell:readme'
 	] );
 
 	grunt.registerTask( 'phpunit', [
@@ -308,22 +292,16 @@ module.exports = function( grunt ) {
 		'shell:phpcbf'
 	] );
 
-	grunt.registerTask( 'precommit', [
-		'shell:precommit'
-	] );
-
 	grunt.registerTask( 'dev', [
 		'default',
 		'makepot',
-		'readme',
 		'phpunit'
 	] );
 
 	grunt.registerTask( 'deploy', [
-    'default',
-    'makepot',
-    'readme',
-    // 'phpunit'
+		'default',
+		'makepot',
+		// 'phpunit'
 		'copy',
 		'compress',
 		'clean'

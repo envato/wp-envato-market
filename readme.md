@@ -5,12 +5,10 @@ WordPress Theme & Plugin management for the Envato Market.
 
 **Contributors:** [valendesigns](https://profiles.wordpress.org/valendesigns), [dtbaker](https://profiles.wordpress.org/dtbaker), [aaronrutley](https://profiles.wordpress.org/aaronrutley)  
 **Requires at least:** 5.1  
-**Tested up to:** 5.5  
-**Stable tag:** 2.0.7  
+**Tested up to:** 6.1 
+**Stable tag:** 2.0.8  
 **License:** [GPLv2 or later](http://www.gnu.org/licenses/gpl-2.0.html)  
-**Website:** https://envato.com/market-plugin/  
-
-[![Build Status](https://travis-ci.org/envato/wp-envato-market.svg?branch=master)](https://travis-ci.org/envato/wp-envato-market) [![Coverage Status](https://coveralls.io/repos/envato/wp-envato-market/badge.svg?branch=master)](https://coveralls.io/github/envato/wp-envato-market) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.svg)](http://gruntjs.com) [![devDependency Status](https://david-dm.org/envato/wp-envato-market/dev-status.svg)](https://david-dm.org/envato/wp-envato-market?type=dev) 
+**Website:** https://www.envato.com/lp/market-plugin/
 
 ## Description ##
 
@@ -20,7 +18,7 @@ You can add a global token to connect all your items from your account, and/or c
 
 ## Installation ##
 
-The latest version of the Envato Market plugin ZIP file can be [**downloaded**](https://envato.github.io/wp-envato-market/dist/envato-market.zip) from https://envato.com/market-plugin/
+The latest version of the Envato Market plugin ZIP file can be [**downloaded**](https://envato.github.io/wp-envato-market/dist/envato-market.zip) from https://www.envato.com/lp/market-plugin/
 
 Installing the Envato Market plugin.
 
@@ -44,9 +42,13 @@ Required token permissions:
 
 ## Support ##
 
-Please see https://envato.com/market-plugin/ for more details.
+Please see https://www.envato.com/lp/market-plugin/ for more details.
 
 ## Change Log ##
+
+### v2.0.8
+- Ensure WordPress 6.1 compatibility
+- Fix blank page bug when items had no reviews
 
 ### v2.0.7
 - Fix global notice hidden bug
