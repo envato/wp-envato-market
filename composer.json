@@ -13,6 +13,6 @@
     "php": ">=5.4.0"
   },
   "require-dev": {
-    "satooshi/php-coveralls": "^1.1"
+    "php-coveralls/php-coveralls": "^2.5"
   }
 }
