@@ -8,7 +8,7 @@ WordPress Theme & Plugin management for the Envato Market.
 **Tested up to:** 5.5  
 **Stable tag:** 2.0.7  
 **License:** [GPLv2 or later](http://www.gnu.org/licenses/gpl-2.0.html)  
-**Website:** https://envato.com/market-plugin/  
+**Website:** https://www.envato.com/lp/market-plugin/
 
 ## Description ##
 
@@ -18,7 +18,7 @@ You can add a global token to connect all your items from your account, and/or c
 
 ## Installation ##
 
-The latest version of the Envato Market plugin ZIP file can be [**downloaded**](https://envato.github.io/wp-envato-market/dist/envato-market.zip) from https://envato.com/market-plugin/
+The latest version of the Envato Market plugin ZIP file can be [**downloaded**](https://envato.github.io/wp-envato-market/dist/envato-market.zip) from https://www.envato.com/lp/market-plugin/
 
 Installing the Envato Market plugin.
 
@@ -42,7 +42,7 @@ Required token permissions:
 
 ## Support ##
 
-Please see https://envato.com/market-plugin/ for more details.
+Please see https://www.envato.com/lp/market-plugin/ for more details.
 
 ## Change Log ##
 

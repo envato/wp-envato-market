@@ -238,9 +238,6 @@ module.exports = function( grunt ) {
 				stdout: true,
 				stderr: true
 			},
-			readme: {
-				command: 'cd ./dev-lib && ./generate-markdown-readme' // Generate the readme.md
-			},
 			phpunit: {
 				command: 'vagrant ssh -c "cd <%= vvv.plugin %> && phpunit"'
 			},
@@ -284,10 +281,6 @@ module.exports = function( grunt ) {
 		'cssmin'
 	] );
 
-	grunt.registerTask( 'readme', [
-		'shell:readme'
-	] );
-
 	grunt.registerTask( 'phpunit', [
 		'shell:phpunit'
 	] );
@@ -304,21 +297,15 @@ module.exports = function( grunt ) {
 		'shell:phpcbf'
 	] );
 
-	grunt.registerTask( 'precommit', [
-		'shell:precommit'
-	] );
-
 	grunt.registerTask( 'dev', [
 		'default',
 		'makepot',
-		'readme',
 		'phpunit'
 	] );
 
 	grunt.registerTask( 'deploy', [
     'default',
     'makepot',
-    'readme',
     // 'phpunit'
 		'copy',
 		'compress',
