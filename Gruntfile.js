@@ -110,7 +110,8 @@ module.exports = function( grunt ) {
 				options: {
 					potFilename: '<%= pkg.name %>.pot',
 					exclude: [
-
+						'docs/.*', // Exclude docs directory
+						'dist/<%= pkg.name %>/.*' // Exclude deploy directory
 					],
 					processPot: function( pot ) {
 						pot.headers['project-id-version'];
