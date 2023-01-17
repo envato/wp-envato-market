@@ -188,12 +188,14 @@ function envato_market_themes_column( $group = 'install' ) {
 					<div class="column-rating">
 						<?php
 						if ( ! empty( $theme['rating'] ) ) {
-							if ( is_array( $theme['rating'] ) && ! empty( $theme['rating']['count'] ) ) {
+							if ( is_array( $theme['rating'] ) ) {
+							    $count = ! empty( $theme['rating']['count'] ) ? $theme['rating']['count'] : 0;
+							    $rating = ! empty( $theme['rating']['rating'] ) ? (int) $theme['rating']['rating'] : 0;
 								wp_star_rating(
 									array(
-										'rating' => $theme['rating']['count'] > 0 ? ( $theme['rating']['rating'] / 5 * 100 ) : 0,
+										'rating' => $count > 0 ? ( $rating / 5 * 100 ) : 0,
 										'type'   => 'percent',
-										'number' => $theme['rating']['count'],
+										'number' => $count,
 									)
 								);
 							} else {
