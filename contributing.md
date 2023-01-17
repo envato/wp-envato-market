@@ -118,5 +118,3 @@ $ phpunit --coverage-html /tmp/report
 ```
 
 To run the Envato API integration unit tests, you will need to create a `.token` file in the root of the plugin directory with your OAuth Personal Token saved to it. The `.token` file is added to `.gitignore` so it will not be tracked, and you should never try to commit it to the repository.
-
-Travis CI will run the unit tests and perform sniffs against the WordPress Coding Standards whenever you push changes to your PR. Tests are required to pass successfully for a merge to be considered.

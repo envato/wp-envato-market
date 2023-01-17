@@ -10,8 +10,6 @@ WordPress Theme & Plugin management for the Envato Market.
 **License:** [GPLv2 or later](http://www.gnu.org/licenses/gpl-2.0.html)  
 **Website:** https://envato.com/market-plugin/  
 
-[![Build Status](https://travis-ci.org/envato/wp-envato-market.svg?branch=master)](https://travis-ci.org/envato/wp-envato-market) [![Coverage Status](https://coveralls.io/repos/envato/wp-envato-market/badge.svg?branch=master)](https://coveralls.io/github/envato/wp-envato-market) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.svg)](http://gruntjs.com) [![devDependency Status](https://david-dm.org/envato/wp-envato-market/dev-status.svg)](https://david-dm.org/envato/wp-envato-market?type=dev) 
-
 ## Description ##
 
 The Envato Market plugin can install WordPress themes and plugins purchased from ThemeForest & CodeCanyon by connecting with the Envato Market API using a secure OAuth personal token. Once your themes & plugins are installed WordPress will periodically check for updates, so keeping your items up to date is as simple as a few clicks.

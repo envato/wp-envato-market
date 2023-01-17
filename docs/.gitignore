@@ -10,9 +10,6 @@ npm-debug.log
 # API Token
 .token
 
-# Build tools
-/dev-lib/
-
 # Composer
 composer.lock
 /vendor/

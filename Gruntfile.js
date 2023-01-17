@@ -177,7 +177,6 @@ module.exports = function( grunt ) {
 					'!CodeSniffer.conf',
 					'!phpc*',
 					'!api-test/**',
-					'!dev-lib/**',
 					'!dist/**',
 					'!docs/**',
 					'!Gruntfile.js',
@@ -253,9 +252,6 @@ module.exports = function( grunt ) {
             },
             phpcbf: {
                 command: 'vagrant ssh -c "cd <%= vvv.plugin %> && phpcbf"'
-            },
-            precommit: {
-                command: 'vagrant ssh -c "cd <%= vvv.plugin %> && DEV_LIB_SKIP="xmllint" ./dev-lib/pre-commit"'
             }
 		}
 
