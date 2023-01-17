@@ -48,6 +48,7 @@ Please see https://www.envato.com/lp/market-plugin/ for more details.
 
 ### v2.0.8
 - Ensure WordPress 6.1 compatibility
+- Fix blank page bug when items had no reviews
 
 ### v2.0.7
 - Fix global notice hidden bug
