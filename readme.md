@@ -5,8 +5,8 @@ WordPress Theme & Plugin management for the Envato Market.
 
 **Contributors:** [valendesigns](https://profiles.wordpress.org/valendesigns), [dtbaker](https://profiles.wordpress.org/dtbaker), [aaronrutley](https://profiles.wordpress.org/aaronrutley)  
 **Requires at least:** 5.1  
-**Tested up to:** 5.5  
-**Stable tag:** 2.0.7  
+**Tested up to:** 6.1 
+**Stable tag:** 2.0.8  
 **License:** [GPLv2 or later](http://www.gnu.org/licenses/gpl-2.0.html)  
 **Website:** https://www.envato.com/lp/market-plugin/
 
@@ -45,6 +45,9 @@ Required token permissions:
 Please see https://www.envato.com/lp/market-plugin/ for more details.
 
 ## Change Log ##
+
+### v2.0.8
+- Ensure WordPress 6.1 compatibility
 
 ### v2.0.7
 - Fix global notice hidden bug
