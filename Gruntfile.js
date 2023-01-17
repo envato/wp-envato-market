@@ -1,4 +1,3 @@
-/* jshint node:true */
 var sass = require('node-sass');
 
 module.exports = function( grunt ) {
@@ -8,12 +7,9 @@ module.exports = function( grunt ) {
 
 		pkg: grunt.file.readJSON( 'package.json' ),
 
-		// JavaScript linting with JSHint.
-		jshint: {
-			options: {
-				jshintrc: '.jshintrc'
-			},
-			all: [
+		// JavaScript linting with eslint.
+		eslint: {
+			target: [
 				'Gruntfile.js',
 				'js/*.js',
 				'!js/*.min.js'
@@ -43,7 +39,6 @@ module.exports = function( grunt ) {
 		sass: {
 			options: {
 				implementation: sass,
-				require: 'susy',
 				sourcemap: 'none',
 				includePaths: require( 'node-bourbon' ).includePaths
 			},
@@ -115,8 +110,7 @@ module.exports = function( grunt ) {
 				options: {
 					potFilename: '<%= pkg.name %>.pot',
 					exclude: [
-						'docs/.*', // Exclude docs directory
-						'dist/<%= pkg.name %>/.*' // Exclude deploy directory
+
 					],
 					processPot: function( pot ) {
 						pot.headers['project-id-version'];
@@ -244,18 +238,18 @@ module.exports = function( grunt ) {
 			phpunit_c: {
 				command: 'vagrant ssh -c "cd <%= vvv.plugin %> && phpunit --coverage-html <%= vvv.coverage %>"'
 			},
-            phpcs: {
-                command: 'vagrant ssh -c "cd <%= vvv.plugin %> && phpcs"'
-            },
-            phpcbf: {
-                command: 'vagrant ssh -c "cd <%= vvv.plugin %> && phpcbf"'
-            }
+			phpcs: {
+				command: 'vagrant ssh -c "cd <%= vvv.plugin %> && phpcs"'
+			},
+			phpcbf: {
+				command: 'vagrant ssh -c "cd <%= vvv.plugin %> && phpcbf"'
+			}
 		}
 
 	});
 
 	// Load tasks
-	grunt.loadNpmTasks( 'grunt-contrib-jshint' );
+	grunt.loadNpmTasks( 'grunt-eslint' );
 	grunt.loadNpmTasks( 'grunt-contrib-uglify' );
 	grunt.loadNpmTasks( 'grunt-sass' );
 	grunt.loadNpmTasks( 'grunt-rtlcss' );
@@ -270,7 +264,7 @@ module.exports = function( grunt ) {
 
 	// Register tasks
 	grunt.registerTask( 'default', [
-		'jshint',
+		'eslint',
 		'css',
 		'uglify'
 	] );
@@ -304,9 +298,9 @@ module.exports = function( grunt ) {
 	] );
 
 	grunt.registerTask( 'deploy', [
-    'default',
-    'makepot',
-    // 'phpunit'
+		'default',
+		'makepot',
+		// 'phpunit'
 		'copy',
 		'compress',
 		'clean'

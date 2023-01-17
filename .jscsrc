@@ -1,9 +1,0 @@
-{
-	"preset": "wordpress",
-	"requireCamelCaseOrUpperCaseIdentifiers": null,
-	"excludeFiles": [
-		"**/*.min.js",
-		"**/node_modules/**",
-		"**/vendor/**"
-	]
-}

@@ -74,7 +74,7 @@ We're really excited that you are interested in contributing to the Envato Marke
 To lint:
 
 ``` bash
-$ grunt jshint
+$ grunt eslint
 ```
 
 To compile Sass:
@@ -101,7 +101,7 @@ To create a pot file:
 $ grunt makepot
 ```
 
-The default task (simply running `grunt`) will do the following: `jshint -> css -> uglify`.
+The default task (simply running `grunt`) will do the following: `eslint -> css -> uglify`.
 
 ## PHPUnit Testing
 
