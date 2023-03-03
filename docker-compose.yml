@@ -1,0 +1,40 @@
+services:
+  db:
+    image: mariadb:10.6.4-focal
+    command: '--default-authentication-plugin=mysql_native_password'
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=somewordpress
+      - MYSQL_DATABASE=wordpress
+      - MYSQL_USER=wordpress
+      - MYSQL_PASSWORD=wordpress
+    expose:
+      - 3306
+      - 33060
+  wordpress:
+    image: wordpress:latest
+    volumes:
+      - wp_data:/var/www/html
+      - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+      - ./inc/:/var/www/html/wp-content/plugins/envato-market/inc/
+    ports:
+      - 8080:80
+    restart: always
+    extra_hosts:
+      - "themeforest.test:host-gateway"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+      WP_ENVIRONMENT_TYPE: development
+      WORDPRESS_CONFIG_EXTRA: |
+        define('ENVATO_API_DOMAIN', "${ENVATO_API_DOMAIN}");
+        define('ENVATO_API_HEADERS', ${ENVATO_API_HEADERS});
+        define('MONOLITH_API_PATHS', ${MONOLITH_API_PATHS});
+        define( 'WP_DEBUG', true );
+volumes:
+  db_data:
+  wp_data:
