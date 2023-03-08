@@ -175,13 +175,12 @@ if ( ! class_exists( 'Envato_Market' ) ) :
 			$this->plugin_path = ENVATO_MARKET_PATH;
 			$this->page_url    = ENVATO_MARKET_NETWORK_ACTIVATED ? network_admin_url( 'admin.php?page=' . $this->slug ) : admin_url( 'admin.php?page=' . $this->slug );
 			$this->data->admin = true;
-
-			if ( wp_get_environment_type() === 'production' ) {
-				$this->envato_api_domain = 'https://api.envato.com';
-				$this->envato_api_headers = [ 'Authorization' => 'Bearer ' . $this->get_option( 'token' ) ];
-			} else {
+			if ( defined('ENVATO_LOCAL_DEVELOPMENT') ) {
 				$this->envato_api_domain = ENVATO_API_DOMAIN;
 				$this->envato_api_headers = ENVATO_API_HEADERS;
+			} else {
+				$this->envato_api_headers = [ 'Authorization' => 'Bearer ' . $this->get_option( 'token' ) ];
+				$this->envato_api_domain = 'https://api.envato.com';
 			}
 		}
 

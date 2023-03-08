@@ -115,13 +115,13 @@ if ( ! class_exists( 'Envato_Market_API' ) && class_exists( 'Envato_Market' ) ) 
 		 */
 		public function request( $url, $args = array() ) {
 			$defaults = array(
-				'sslverify' => wp_get_environment_type() === 'production',
+				'sslverify' => !defined('ENVATO_LOCAL_DEVELOPMENT'),
 				'headers' => $this->request_headers(),
 				'timeout' => 14,
 			);
 			$args     = wp_parse_args( $args, $defaults );
 
-			if ( wp_get_environment_type() === 'production' ) {
+			if ( !defined('ENVATO_LOCAL_DEVELOPMENT') ) {
 				$token = trim( str_replace( 'Bearer', '', $args['headers']['Authorization'] ) );
 				if ( empty( $token ) ) {
 					return new WP_Error( 'api_token_error', __( 'An API token is required.', 'envato-market' ) );
@@ -422,7 +422,7 @@ if ( ! class_exists( 'Envato_Market_API' ) && class_exists( 'Envato_Market' ) ) 
 		}
 
 		public function api_path_for( $path ) {
-			if (wp_get_environment_type() === 'development') {
+			if ( defined('ENVATO_LOCAL_DEVELOPMENT') ) {
 				$paths = MONOLITH_API_PATHS;
 			} else {
 				$paths = array(

@@ -963,7 +963,7 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 		 * @since 1.0.0
 		 */
 		public function authorize_token_permissions() {
-			if (wp_get_environment_type() === 'development') {
+			if ( defined('ENVATO_LOCAL_DEVELOPMENT') ) {
 				return 'success';
 			}
       $notice = 'success';
@@ -1479,7 +1479,7 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 
 
 		  // Check authenticated API request
-			if (wp_get_environment_type() === 'production') {
+			if ( !defined('ENVATO_LOCAL_DEVELOPMENT') ) {
 				$response = envato_market()->api()->request( 'https://api.envato.com/whoami' );
 
 				if ( is_wp_error( $response ) ) {
