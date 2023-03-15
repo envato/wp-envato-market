@@ -17,3 +17,4 @@ composer.lock
 
 # local envs
 .env
+.envrc
