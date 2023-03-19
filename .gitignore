@@ -14,3 +14,7 @@ npm-debug.log
 # Composer
 composer.lock
 /vendor/
+
+# local envs
+.env
+.envrc

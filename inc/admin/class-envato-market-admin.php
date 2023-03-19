@@ -901,7 +901,10 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 		 * @since 1.0.0
 		 */
 		public function authorize_total_items() {
-			$response = envato_market()->api()->request( 'https://api.envato.com/v1/market/total-items.json' );
+			$domain = envato_market()->get_envato_api_domain();
+			$path = envato_market()->api()->api_path_for('total-items');
+			$url = $domain . $path;
+			$response = envato_market()->api()->request( $url );
 			$notice   = 'success';
 
 			if ( is_wp_error( $response ) ) {
@@ -960,8 +963,11 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 		 * @since 1.0.0
 		 */
 		public function authorize_token_permissions() {
+			if ( defined('ENVATO_LOCAL_DEVELOPMENT') ) {
+				return 'success';
+			}
+      $notice = 'success';
 			$response = envato_market()->api()->request( 'https://api.envato.com/whoami' );
-			$notice   = 'success';
 
 			if ( is_wp_error( $response ) && ( $response->get_error_code() === 'http_error' || $response->get_error_code() == 500 ) ) {
 				$this->store_additional_error_debug_information( 'An error occured checking token permissions', $response->get_error_message(), $response->get_error_data() );
@@ -1002,7 +1008,9 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 		 * @since 1.0.0
 		 */
 		public function authorize_items( $type = 'themes' ) {
-			$api_url  = 'https://api.envato.com/v2/market/buyer/list-purchases?filter_by=wordpress-' . $type;
+			$domain = envato_market()->get_envato_api_domain();
+			$path = envato_market()->api()->api_path_for('list-purchases');
+			$api_url      = $domain . $path . '?filter_by=wordpress-' . $type;
 			$response = envato_market()->api()->request( $api_url );
 			$notice   = 'success';
 
@@ -1471,43 +1479,45 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 
 
 		  // Check authenticated API request
-		  $response = envato_market()->api()->request( 'https://api.envato.com/whoami' );
+			if ( !defined('ENVATO_LOCAL_DEVELOPMENT') ) {
+				$response = envato_market()->api()->request( 'https://api.envato.com/whoami' );
 
-		  if ( is_wp_error( $response ) ) {
-			  $limits['authentication'] = [
-				  'ok'      => false,
-				  'title'   => 'Envato API Authentication',
-				  'message' => "Not currently authenticated with the Envato API. Please add your API token. " . $response->get_error_message(),
-			  ];
-		  } elseif ( ! isset( $response['scopes'] ) ) {
-			  $limits['authentication'] = [
-				  'ok'      => false,
-				  'title'   => 'Envato API Authentication',
-				  'message' => "Missing API permissions. Please re-create your Envato API token with the correct permissions. ",
-			  ];
-		  } else {
-			  $minimum_scopes    = $this->get_required_permissions();
-			  $maximum_scopes    = array( 'default' => 'Default' ) + $minimum_scopes;
-			  $missing_scopes    = array();
-			  $additional_scopes = array();
-			  foreach ( $minimum_scopes as $required_scope => $required_scope_name ) {
-				  if ( ! in_array( $required_scope, $response['scopes'] ) ) {
-					  // The scope minimum required scope doesn't exist.
-					  $missing_scopes [] = $required_scope;
-				  }
-			  }
-			  foreach ( $response['scopes'] as $scope ) {
-				  if ( ! isset( $maximum_scopes[ $scope ] ) ) {
-					  // The available scope is outside our maximum bounds.
-					  $additional_scopes [] = $scope;
-				  }
-			  }
-			  $limits['authentication'] = [
-				  'ok'      => true,
-				  'title'   => 'Envato API Authentication',
-				  'message' => "Authenticated successfully with correct scopes: " . implode( ', ', $response['scopes'] ),
-			  ];
-		  }
+				if ( is_wp_error( $response ) ) {
+					$limits['authentication'] = [
+						'ok'      => false,
+						'title'   => 'Envato API Authentication',
+						'message' => "Not currently authenticated with the Envato API. Please add your API token. " . $response->get_error_message(),
+					];
+				} elseif ( ! isset( $response['scopes'] ) ) {
+					$limits['authentication'] = [
+						'ok'      => false,
+						'title'   => 'Envato API Authentication',
+						'message' => "Missing API permissions. Please re-create your Envato API token with the correct permissions. ",
+					];
+				} else {
+					$minimum_scopes    = $this->get_required_permissions();
+					$maximum_scopes    = array( 'default' => 'Default' ) + $minimum_scopes;
+					$missing_scopes    = array();
+					$additional_scopes = array();
+					foreach ( $minimum_scopes as $required_scope => $required_scope_name ) {
+						if ( ! in_array( $required_scope, $response['scopes'] ) ) {
+							// The scope minimum required scope doesn't exist.
+							$missing_scopes [] = $required_scope;
+						}
+					}
+					foreach ( $response['scopes'] as $scope ) {
+						if ( ! isset( $maximum_scopes[ $scope ] ) ) {
+							// The available scope is outside our maximum bounds.
+							$additional_scopes [] = $scope;
+						}
+					}
+					$limits['authentication'] = [
+						'ok'      => true,
+						'title'   => 'Envato API Authentication',
+						'message' => "Authenticated successfully with correct scopes: " . implode( ', ', $response['scopes'] ),
+					];
+				}
+			}
 
 		  $debug_enabled      = defined( 'WP_DEBUG' ) && WP_DEBUG;
 		  $limits['wp_debug'] = [

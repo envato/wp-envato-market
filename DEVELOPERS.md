@@ -29,3 +29,6 @@ To release a new version we have to update these two files, the steps for doing 
 1. Get approval and merge the PR
 1. Publish a new github release https://github.com/envato/wp-envato-market/releases/new to match the new version number.
 1. The update will now be live for everyone
+
+### For local testing and development, see the market wiki page for the Envato WordPress Plugin, under the systems menu
+
