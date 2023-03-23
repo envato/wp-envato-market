@@ -40,7 +40,7 @@ services:
     volumes:
       - wp_data:/var/www/html
       - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
-      - ./inc/:/var/www/html/wp-content/plugins/envato-market/inc/
+      - ./:/var/www/html/wp-content/plugins/envato-market/
     ports:
       - 8080:80
     restart: always
