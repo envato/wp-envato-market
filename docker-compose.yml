@@ -13,6 +13,28 @@ services:
     expose:
       - 3306
       - 33060
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USER --password=$$MYSQL_PASSWORD
+      start_period: 5s
+      interval: 5s
+      timeout: 5s
+      retries: 55
+  wpcli:
+    image: wordpress:cli
+    depends_on:
+      wordpress:
+        condition: service_started
+      db:
+        condition: service_healthy
+    user: www-data:www-data
+    command: wp core install --url=localhost:8080 --title=WPDev --admin_user=dev --admin_password=dev --admin_email=admin@example.com
+    volumes:
+      - wp_data:/var/www/html
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
   wordpress:
     image: wordpress:latest
     volumes:
