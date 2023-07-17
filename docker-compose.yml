@@ -14,11 +14,11 @@ services:
       - 3306
       - 33060
   wordpress:
-    image: wordpress:latest
+    image: wordpress:6.2.2-php8.2-apache
     volumes:
       - wp_data:/var/www/html
       - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
-      - ./inc/:/var/www/html/wp-content/plugins/envato-market/inc/
+      - ./:/var/www/html/wp-content/plugins/envato-market/
     ports:
       - 8080:80
     restart: always
@@ -30,9 +30,9 @@ services:
       WORDPRESS_DB_PASSWORD: wordpress
       WORDPRESS_DB_NAME: wordpress
       WORDPRESS_CONFIG_EXTRA: |
-        define('ENVATO_API_DOMAIN', "${ENVATO_API_DOMAIN}");
-        define('ENVATO_API_HEADERS', ${ENVATO_API_HEADERS});
-        define('MONOLITH_API_PATHS', ${MONOLITH_API_PATHS});
+        define('ENVATO_API_DOMAIN', "$ENVATO_API_DOMAIN");
+        define('ENVATO_API_HEADERS', $ENVATO_API_HEADERS);
+        define('MONOLITH_API_PATHS', $MONOLITH_API_PATHS);
         define( 'WP_DEBUG', true );
         // Disable the following line to test the plugin against the production api.
         define( 'ENVATO_LOCAL_DEVELOPMENT', true );
