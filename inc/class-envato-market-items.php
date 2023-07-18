@@ -369,7 +369,8 @@ if ( ! class_exists( 'Envato_Market_Items' ) ) :
 		 * @param bool $use_cache Attempts to rebuild from the cache before making an API request.
 		 */
 		public function set_themes( $forced = false, $use_cache = false ) {
-			self::$themes = get_site_transient( envato_market()->get_option_name() . '_themes' );
+			$themes_transient = get_site_transient( envato_market()->get_option_name() . '_themes' );
+			self::$themes = is_array($themes_transient) ? $themes_transient : array();
 
 			if ( false === self::$themes || true === $forced ) {
 				$themes = envato_market()->api()->themes();
@@ -405,7 +406,8 @@ if ( ! class_exists( 'Envato_Market_Items' ) ) :
 		 * @param array $args Used to remove or add a plugin during activate and deactivate routines.
 		 */
 		public function set_plugins( $forced = false, $use_cache = false, $args = array() ) {
-			self::$plugins = get_site_transient( envato_market()->get_option_name() . '_plugins' );
+			$plugins_transient = get_site_transient( envato_market()->get_option_name() . '_plugins' );
+			self::$plugins = is_array($plugins_transient) ? $plugins_transient : array();
 
 			if ( false === self::$plugins || true === $forced ) {
 				$plugins = envato_market()->api()->plugins();

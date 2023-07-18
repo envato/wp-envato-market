@@ -100,6 +100,8 @@ if ( ! class_exists( 'Envato_Market' ) ) :
 		 * @var string
 		 */
 		private $option_name;
+		private $envato_api_domain;
+		private $envato_api_headers;
 
 		/**
 		 * Main Envato_Market Instance
