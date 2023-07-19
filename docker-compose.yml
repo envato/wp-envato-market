@@ -36,7 +36,7 @@ services:
       WORDPRESS_DB_PASSWORD: wordpress
       WORDPRESS_DB_NAME: wordpress
   wordpress:
-    image: wordpress:latest
+    image: wordpress:6.2.2-php8.2-apache
     volumes:
       - wp_data:/var/www/html
       - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
