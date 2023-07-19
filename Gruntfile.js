@@ -188,7 +188,9 @@ module.exports = function( grunt ) {
 					'!package-lock.json',
 					'!phpcs.xml.dist',
 					'!composer.lock',
-					'!DEVELOPERS.md'
+					'!DEVELOPERS.md',
+					'!docker-compose.yml',
+					'!uploads.ini'
 				],
 				dest: 'dist/<%= pkg.name %>',
 				expand: true,
