@@ -458,3 +458,21 @@ function envato_market_plugins_column( $group = 'install' ) {
 		<?php
 	endforeach;
 }
+
+/**
+ * A handy method for logging to the st_out / and or debug_log
+ * Use: write_log("My variable is {$variable}")
+ */
+if (!function_exists('write_log') && defined('ENVATO_LOCAL_DEVELOPMENT')) {
+
+	function write_log($log) {
+
+		if (is_array($log) || is_object($log)) {
+				error_log(print_r($log, true));
+		} else {
+				error_log($log);
+		}
+
+	}
+
+}
