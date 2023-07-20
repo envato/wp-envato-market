@@ -10,9 +10,8 @@ services:
       - MYSQL_DATABASE=wordpress
       - MYSQL_USER=wordpress
       - MYSQL_PASSWORD=wordpress
-    expose:
-      - 3306
-      - 33060
+    ports:
+      - 33006:3306
     healthcheck:
       test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USER --password=$$MYSQL_PASSWORD
       start_period: 5s
@@ -51,12 +50,14 @@ services:
       WORDPRESS_DB_USER: wordpress
       WORDPRESS_DB_PASSWORD: wordpress
       WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DEBUG: 1
       WORDPRESS_CONFIG_EXTRA: |
-        if( !empty("$ENVATO_API_DOMAIN") ){ 
+        define( 'WP_DEBUG_LOG', true);
+        define( 'WP_DEBUG_DISPLAY', true );
+        if( !empty("$ENVATO_API_DOMAIN") ){
           define('ENVATO_API_DOMAIN', "$ENVATO_API_DOMAIN");
           define('ENVATO_API_HEADERS', $ENVATO_API_HEADERS);
           define('MONOLITH_API_PATHS', $MONOLITH_API_PATHS);
-          define( 'WP_DEBUG', true );
           // Disable the following line to test the plugin against the production api.
           define( 'ENVATO_LOCAL_DEVELOPMENT', true );
         }
