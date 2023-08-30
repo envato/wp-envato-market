@@ -1189,6 +1189,8 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 				wp_send_json_error( array( 'message' => __( 'The Token is missing.', 'envato-market' ) ) );
 			} elseif ( empty( $_POST['id'] ) ) {
 				wp_send_json_error( array( 'message' => __( 'The Item ID is missing.', 'envato-market' ) ) );
+			} elseif ( ! current_user_can( 'install_themes' ) || ! current_user_can( 'install_plugins' ) ) {
+				wp_send_json_error( array( 'message' => __( 'User not allowed to install items.', 'envato-market' ) ) );
 			}
 
 			$args = array(
@@ -1290,6 +1292,8 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 				wp_send_json_error( 'bad_method' );
 			} elseif ( empty( $_POST['id'] ) ) {
 				wp_send_json_error( array( 'message' => __( 'The Item ID is missing.', 'envato-market' ) ) );
+			} elseif ( ! current_user_can( 'delete_plugins' ) || ! current_user_can( 'delete_themes' ) ) {
+				wp_send_json_error( array( 'message' => __( 'User not allowed to update items.', 'envato-market' ) ) );
 			}
 
 			$options = get_option( envato_market()->get_option_name(), array() );
@@ -1332,6 +1336,8 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 			} elseif ( 'POST' !== $_SERVER['REQUEST_METHOD'] ) {
 				status_header( 405 );
 				wp_send_json_error( 'bad_method' );
+			} elseif ( ! current_user_can( 'install_themes' ) || ! current_user_can( 'install_plugins' ) ) {
+				wp_send_json_error( array( 'message' => __( 'User not allowed to install items.', 'envato-market' ) ) );
 			}
 
 			$limits = $this->get_server_limits();
