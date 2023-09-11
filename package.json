@@ -13,7 +13,7 @@
 	"author": "Envato",
 	"license": "GPL-2.0+",
 	"devDependencies": {
-		"eslint": "^8.47.0",
+		"eslint": "^8.49.0",
 		"eslint-plugin-import": "^2.27.5",
 		"eslint-plugin-n": "^16.0.1",
 		"eslint-plugin-promise": "^6.1.1",
