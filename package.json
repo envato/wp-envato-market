@@ -15,7 +15,7 @@
 	"devDependencies": {
 		"eslint": "^8.47.0",
 		"eslint-plugin-import": "^2.27.5",
-		"eslint-plugin-n": "^16.0.1",
+		"eslint-plugin-n": "^16.3.0",
 		"eslint-plugin-promise": "^6.1.1",
 		"grunt": "^1.6.1",
 		"grunt-checktextdomain": "~1.0.1",
