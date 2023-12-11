@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Envato Market package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Envato Market 2.0.10\n"
+"Project-Id-Version: Envato Market 2.0.11\n"
 "Report-Msgid-Bugs-To: Envato Support Team <support@envato.com>\n"
-"POT-Creation-Date: 2023-07-20 03:25:01+00:00\n"
+"POT-Creation-Date: 2023-12-11 02:54:11+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -186,20 +186,30 @@ msgid "The Token is missing."
 msgstr ""
 
 #: inc/admin/class-envato-market-admin.php:1191
-#: inc/admin/class-envato-market-admin.php:1292
+#: inc/admin/class-envato-market-admin.php:1294
 msgid "The Item ID is missing."
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:1202
+#: inc/admin/class-envato-market-admin.php:1193
+#: inc/admin/class-envato-market-admin.php:1340
+msgid "User not allowed to install items."
+msgstr ""
+
+#: inc/admin/class-envato-market-admin.php:1204
 msgid "The Token or Item ID is incorrect."
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:1206
+#: inc/admin/class-envato-market-admin.php:1208
 msgid "The item cannot be downloaded."
 msgstr ""
 
-#: inc/admin/class-envato-market-admin.php:1275
+#: inc/admin/class-envato-market-admin.php:1277
 msgid "An unknown error occurred."
+msgstr ""
+
+#: inc/admin/class-envato-market-admin.php:1296
+#: inc/class-envato-market-github.php:358
+msgid "User not allowed to update items."
 msgstr ""
 
 #: inc/admin/class-envato-market-theme-installer-skin.php:56
