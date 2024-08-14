@@ -120,9 +120,6 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 			// Maybe delete the site transients.
 			add_action( 'init', array( $this, 'maybe_delete_transients' ), 11 );
 
-			// Add the menu icon.
-			add_action( 'admin_head', array( $this, 'add_menu_icon' ) );
-
 			// Add the menu.
 			add_action( 'admin_menu', array( $this, 'add_menu_page' ) );
 
@@ -352,52 +349,6 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 		}
 
 		/**
-		 * Add a font based menu icon
-		 *
-		 * @since 1.0.0
-		 */
-		public function add_menu_icon() {
-			// Fonts directory URL.
-			$fonts_dir_url = envato_market()->get_plugin_url() . 'fonts/';
-
-			// Create font styles.
-			$style = '<style type="text/css">
-				/*<![CDATA[*/
-				@font-face {
-					font-family: "envato-market";
-					src:url("' . $fonts_dir_url . 'envato-market.eot?20150626");
-					src:url("' . $fonts_dir_url . 'envato-market.eot?#iefix20150626") format("embedded-opentype"),
-					url("' . $fonts_dir_url . 'envato-market.woff?20150626") format("woff"),
-					url("' . $fonts_dir_url . 'envato-market.ttf?20150626") format("truetype"),
-					url("' . $fonts_dir_url . 'envato-market.svg?20150626#envato") format("svg");
-					font-weight: normal;
-					font-style: normal;
-				}
-				#adminmenu .toplevel_page_' . envato_market()->get_slug() . ' .menu-icon-generic div.wp-menu-image:before {
-					font: normal 20px/1 "envato-market" !important;
-					content: "\e600";
-					speak: none;
-					padding: 6px 0;
-					height: 34px;
-					width: 20px;
-					display: inline-block;
-					-webkit-font-smoothing: antialiased;
-					-moz-osx-font-smoothing: grayscale;
-					-webkit-transition: all .1s ease-in-out;
-					-moz-transition:    all .1s ease-in-out;
-					transition:         all .1s ease-in-out;
-				}
-				/*]]>*/
-			</style>';
-
-			// Remove space after colons.
-			$style = str_replace( ': ', ':', $style );
-
-			// Remove whitespace.
-			echo str_replace( array( "\r\n", "\r", "\n", "\t", '	', '		', '		', '  ', '    ' ), '', $style );
-		}
-
-		/**
 		 * Adds the menu.
 		 *
 		 * @since 1.0.0
@@ -409,6 +360,8 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 				return;
 			}
 
+			$svg_icon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72"><path fill="black" d="M39.137058 70.157119c1.685122 0 3.051217-1.365967 3.051217-3.051217 0-1.685122-1.366095-3.051217-3.051217-3.051217-1.685121 0-3.051217 1.366095-3.051217 3.051217 0 1.68525 1.366096 3.051217 3.051217 3.051217zm17.560977-23.85614-17.212984 1.84103c-.321858.03862-.47635-.373356-.231738-.566471l16.852503-13.118945c1.094318-.901204 1.789532-2.291632 1.493422-3.785054-.296109-2.291632-2.188636-3.785054-4.570388-3.47607L34.721548 29.87333c-.321858.0515-.502099-.360481-.231738-.566471l18.139936-13.852782c3.579064-2.780856 3.875174-8.2524479.592219-11.4324082-2.986845-2.9868582-7.763223-2.8838635-10.737194.1029947L13.24716 33.864373c-1.094318 1.197313-1.596417 2.780856-1.287433 4.480268.502099 2.690736 3.17996 4.480268 5.870696 3.978169l15.758184-3.218583c.347607-.06437.527847.38623.231738.579345L16.337 50.871367c-2.188636 1.390428-3.17996 3.875175-2.484746 6.359921.695214 3.282955 3.978169 5.175482 7.158129 4.377273l26.134897-6.437166c.296109-.07725.514973.270361.321858.502099l-4.081164 5.033864c-1.094318 1.390428.695214 3.282955 2.188637 2.188637l13.42793-11.033304c2.381751-1.982647.798208-5.870696-2.291632-5.574586z"/></svg>';
+
 			$page = add_menu_page(
 				__( 'Envato Market', 'envato-market' ),
 				__( 'Envato Market', 'envato-market' ),
@@ -417,7 +370,8 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 				array(
 					$this,
 					'render_admin_callback',
-				)
+				),
+				'data:image/svg+xml;base64,' . base64_encode($svg_icon)
 			);
 
 			// Enqueue admin CSS.
