@@ -8,5 +8,16 @@
 
 ?>
 <div class="notice notice-error is-dismissible">
-	<p><?php printf( '<strong>Additional Error Details:</strong><br/>%s.<br/> %s <br/> %s', esc_html( $title ), esc_html( $message ), esc_html( json_encode( $data ) ) ); ?></p>
+	<p>
+		<strong><?php esc_html_e( 'Additional Error Details:', 'envato-market' ); ?></strong>
+		<?php if ( ! empty( $title ) ) : ?>
+			<br/><?php printf( esc_html__( 'Title: %s', 'envato-market' ), esc_html( $title ) ); ?>
+		<?php endif; ?>
+		<?php if ( ! empty( $message ) ) : ?>
+			<br/><?php printf( esc_html__( 'Message: %s', 'envato-market' ), esc_html( $message ) ); ?>
+		<?php endif; ?>
+		<?php if ( ! empty( $data ) ) : ?>
+			<br/><?php printf( esc_html__( 'Data: %s', 'envato-market' ), esc_html( json_encode( $data ) ) ); ?>
+		<?php endif; ?>
+	</p>
 </div>
