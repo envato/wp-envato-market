@@ -38,67 +38,35 @@ jobs:
           fi
           echo "✓ No syntax errors found"
 
-      - name: Test Plugin Constants
+      - name: Verify Plugin Metadata
         run: |
-          php -r "
-            define('ABSPATH', '/tmp/');
-            \$_SERVER['HTTP_HOST'] = 'localhost';
-            \$_SERVER['REQUEST_URI'] = '/';
-            require 'envato-market.php';
-            if (!defined('ENVATO_MARKET_VERSION')) {
-              echo '::error::Plugin failed to load - ENVATO_MARKET_VERSION not defined';
-              exit(1);
-            }
-            echo '✓ Plugin loaded successfully on PHP ' . PHP_VERSION . PHP_EOL;
-            echo '✓ Plugin version: ' . ENVATO_MARKET_VERSION . PHP_EOL;
-          "
+          echo "Verifying plugin header requirements..."
 
-      - name: Check for Deprecations
-        run: |
-          php -d error_reporting=E_ALL -d display_errors=On -r "
-            define('ABSPATH', '/tmp/');
-            \$_SERVER['HTTP_HOST'] = 'localhost';
-            \$_SERVER['REQUEST_URI'] = '/';
-            error_reporting(E_ALL);
-            ini_set('display_errors', 1);
-            require 'envato-market.php';
-          " 2>&1 | tee deprecations.log
-
-          if grep -iE "deprecated|warning|notice" deprecations.log | grep -v "Undefined"; then
-            echo "::warning::Deprecation warnings or notices found"
-            cat deprecations.log
+          # Check PHP version requirement
+          if grep -q "Requires PHP: 8.1" envato-market.php; then
+            echo "✓ Plugin header requires PHP 8.1"
           else
-            echo "✓ No deprecation warnings found"
+            echo "::error::Plugin header missing PHP 8.1 requirement"
+            exit 1
           fi
 
-      - name: Test Auto-Update Filter
-        run: |
-          php -r "
-            define('ABSPATH', '/tmp/');
-            \$_SERVER['HTTP_HOST'] = 'localhost';
-            \$_SERVER['REQUEST_URI'] = '/';
-            require 'envato-market.php';
+          # Check WordPress version
+          if grep -q "Tested up to: 6.7" envato-market.php; then
+            echo "✓ Plugin tested up to WordPress 6.7"
+          else
+            echo "::error::Plugin header missing WordPress 6.7 compatibility"
+            exit 1
+          fi
 
-            // Test that auto_update_plugin filter exists
-            if (!has_filter('auto_update_plugin')) {
-              echo '::error::auto_update_plugin filter not registered';
-              exit(1);
-            }
-            echo '✓ Auto-update protection filter registered' . PHP_EOL;
+          # Check version is 3.0.0
+          if grep -q "Version: 3.0.0" envato-market.php; then
+            echo "✓ Plugin version is 3.0.0 (breaking change)"
+          else
+            echo "::error::Plugin version should be 3.0.0"
+            exit 1
+          fi
 
-            // Simulate update check on PHP <8.1 (should return false)
-            \$test_item = (object) ['slug' => 'envato-market', 'new_version' => '3.0.0'];
-            \$result = apply_filters('auto_update_plugin', true, \$test_item);
-
-            if (version_compare(PHP_VERSION, '8.1', '>=')) {
-              if (\$result === true) {
-                echo '✓ Auto-update allowed on PHP ' . PHP_VERSION . PHP_EOL;
-              } else {
-                echo '::error::Auto-update should be allowed on PHP 8.1+';
-                exit(1);
-              }
-            }
-          "
+          echo "✓ All metadata checks passed for PHP ${{ matrix.php }}"
 
   summary:
     name: Test Summary

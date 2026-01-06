@@ -39,6 +39,35 @@ define( 'ENVATO_MARKET_PATH', trailingslashit( plugin_dir_path( __FILE__ ) ) );
 define( 'ENVATO_MARKET_URI', trailingslashit( plugin_dir_url( __FILE__ ) ) );
 
 /**
+ * Display admin notice for PHP upgrade requirement on legacy versions.
+ *
+ * Shows a warning to users on PHP <8.1 that version 3.0+ requires an upgrade.
+ * Notice is shown once per week and can be dismissed.
+ *
+ * @since 3.0.0
+ */
+if ( version_compare( PHP_VERSION, '8.1', '<' ) ) {
+	add_action( 'admin_notices', function() {
+		if ( get_transient( 'envato_market_php_upgrade_notice_dismissed' ) ) {
+			return;
+		}
+		$current_php = PHP_VERSION;
+		$message = sprintf(
+			/* translators: %s: Current PHP version */
+			__( 'The Envato Market plugin detected PHP %s. Version 3.0+ requires PHP 8.1+. Auto-update has been disabled to prevent errors. Please contact your hosting provider to upgrade PHP, then update this plugin manually.', 'envato-market' ),
+			esc_html( $current_php )
+		);
+		printf(
+			'<div class="notice notice-warning is-dismissible"><p><strong>%s:</strong> %s</p></div>',
+			esc_html__( 'Envato Market - Action Required', 'envato-market' ),
+			$message
+		);
+		// Set transient to show notice only once per week
+		set_transient( 'envato_market_php_upgrade_notice_dismissed', true, WEEK_IN_SECONDS );
+	} );
+}
+
+/**
  * Prevent auto-update on incompatible PHP versions.
  *
  * This filter prevents version 3.0+ from auto-updating on systems running PHP <8.1,
@@ -52,26 +81,7 @@ define( 'ENVATO_MARKET_URI', trailingslashit( plugin_dir_url( __FILE__ ) ) );
 add_filter( 'auto_update_plugin', function( $update, $item ) {
 	if ( isset( $item->slug ) && 'envato-market' === $item->slug ) {
 		if ( version_compare( PHP_VERSION, '8.1', '<' ) ) {
-			// Add one-time admin notice explaining why auto-update is disabled
-			add_action( 'admin_notices', function() {
-				if ( get_transient( 'envato_market_php_upgrade_notice_dismissed' ) ) {
-					return;
-				}
-				$current_php = PHP_VERSION;
-				$message = sprintf(
-					/* translators: %s: Current PHP version */
-					__( 'The Envato Market plugin detected PHP %s. Version 3.0+ requires PHP 8.1+. Auto-update has been disabled to prevent errors. Please contact your hosting provider to upgrade PHP, then update this plugin manually.', 'envato-market' ),
-					esc_html( $current_php )
-				);
-				printf(
-					'<div class="notice notice-warning is-dismissible"><p><strong>%s:</strong> %s</p></div>',
-					esc_html__( 'Envato Market - Action Required', 'envato-market' ),
-					$message
-				);
-				// Set transient to show notice only once per week
-				set_transient( 'envato_market_php_upgrade_notice_dismissed', true, WEEK_IN_SECONDS );
-			} );
-			return false; // Disable auto-update
+			return false; // Disable auto-update on legacy PHP
 		}
 	}
 	return $update;
