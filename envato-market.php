@@ -3,7 +3,7 @@
  * Plugin Name: Envato Market
  * Plugin URI: https://envato.com/market-plugin/
  * Description: WordPress Theme & Plugin management for the Envato Market.
- * Version: 2.0.12
+ * Version: 3.0.0
  * Author: Envato
  * Author URI: https://envato.com
  * Requires at least: 5.1
@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 /* Set plugin version constant. */
-define( 'ENVATO_MARKET_VERSION', '2.0.12' );
+define( 'ENVATO_MARKET_VERSION', '3.0.0' );
 
 /* Debug output control. */
 define( 'ENVATO_MARKET_DEBUG_OUTPUT', 0 );
@@ -39,7 +39,7 @@ define( 'ENVATO_MARKET_PATH', trailingslashit( plugin_dir_path( __FILE__ ) ) );
 define( 'ENVATO_MARKET_URI', trailingslashit( plugin_dir_url( __FILE__ ) ) );
 
 
-if ( ! version_compare( PHP_VERSION, '5.4', '>=' ) ) {
+if ( ! version_compare( PHP_VERSION, '8.1', '>=' ) ) {
 	add_action( 'admin_notices', 'envato_market_fail_php_version' );
 } elseif ( ENVATO_MARKET_SLUG !== 'envato-market' ) {
 	add_action( 'admin_notices', 'envato_market_fail_installation_method' );
@@ -96,7 +96,7 @@ if ( ! function_exists( 'envato_market_fail_php_version' ) ) {
 	 * @return void
 	 */
 	function envato_market_fail_php_version() {
-		$message      = esc_html__( 'The Envato Market plugin requires PHP version 5.4+, plugin is currently NOT ACTIVE. Please contact the hosting provider to upgrade the version of PHP.', 'envato-market' );
+		$message      = esc_html__( 'The Envato Market plugin requires PHP version 8.1+, plugin is currently NOT ACTIVE. Please contact the hosting provider to upgrade the version of PHP.', 'envato-market' );
 		$html_message = sprintf( '<div class="notice notice-error">%s</div>', wpautop( $message ) );
 		echo wp_kses_post( $html_message );
 	}
