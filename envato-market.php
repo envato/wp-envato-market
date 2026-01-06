@@ -7,8 +7,8 @@
  * Author: Envato
  * Author URI: https://envato.com
  * Requires at least: 5.1
- * Tested up to: 6.1
- * Requires PHP: 7.0
+ * Tested up to: 6.7
+ * Requires PHP: 8.1
  * Text Domain: envato-market
  * Domain Path: /languages/
  *
