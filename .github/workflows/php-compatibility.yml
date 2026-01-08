@@ -1,0 +1,84 @@
+name: PHP Compatibility Tests
+
+on:
+  pull_request:
+    branches: [ master, main ]
+  push:
+    branches: [ master, main ]
+
+jobs:
+  php-compatibility:
+    name: PHP ${{ matrix.php }} / WP ${{ matrix.wordpress }}
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['8.1', '8.2', '8.3']
+        wordpress: ['6.5', '6.6', '6.7']
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: mysqli, curl, json, mbstring
+          coverage: none
+
+      - name: Syntax Check
+        run: |
+          echo "Running PHP syntax check..."
+          find . -name "*.php" -not -path "./vendor/*" -not -path "./node_modules/*" -exec php -l {} \; | tee syntax-check.log
+          if grep -q "Parse error" syntax-check.log; then
+            echo "::error::PHP syntax errors found"
+            exit 1
+          fi
+          echo "✓ No syntax errors found"
+
+      - name: Verify Plugin Metadata
+        run: |
+          echo "Verifying plugin header requirements..."
+
+          # Check PHP version requirement
+          if grep -q "Requires PHP: 8.1" envato-market.php; then
+            echo "✓ Plugin header requires PHP 8.1"
+          else
+            echo "::error::Plugin header missing PHP 8.1 requirement"
+            exit 1
+          fi
+
+          # Check WordPress version
+          if grep -q "Tested up to: 6.7" envato-market.php; then
+            echo "✓ Plugin tested up to WordPress 6.7"
+          else
+            echo "::error::Plugin header missing WordPress 6.7 compatibility"
+            exit 1
+          fi
+
+          # Check version is 3.0.0
+          if grep -q "Version: 3.0.0" envato-market.php; then
+            echo "✓ Plugin version is 3.0.0 (breaking change)"
+          else
+            echo "::error::Plugin version should be 3.0.0"
+            exit 1
+          fi
+
+          echo "✓ All metadata checks passed for PHP ${{ matrix.php }}"
+
+  summary:
+    name: Test Summary
+    runs-on: ubuntu-latest
+    needs: php-compatibility
+    if: always()
+    steps:
+      - name: Check results
+        run: |
+          if [ "${{ needs.php-compatibility.result }}" == "success" ]; then
+            echo "✓ All PHP compatibility tests passed"
+          else
+            echo "::error::Some PHP compatibility tests failed"
+            exit 1
+          fi
