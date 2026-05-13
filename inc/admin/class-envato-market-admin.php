@@ -863,10 +863,10 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 
 			if ( is_wp_error( $response ) ) {
 				$notice = 'error';
-				$this->store_additional_error_debug_information( 'Failed to query total number of items in API response', $response->get_error_message(), $response->get_error_data() );
+				$this->store_additional_error_debug_information( __( 'Failed to query total number of items in API response', 'envato-market' ), $response->get_error_message(), $response->get_error_data() );
 			} elseif ( ! isset( $response['total-items'] ) ) {
 				$notice = 'error';
-				$this->store_additional_error_debug_information( 'Incorrect response from API when querying total items' );
+				$this->store_additional_error_debug_information( __( 'Incorrect response from API when querying total items', 'envato-market' ) );
 			}
 
 			return $notice;
@@ -884,9 +884,9 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 			return apply_filters(
 				'envato_market_required_permissions',
 				array(
-					'default'           => 'View and search Envato sites',
-					'purchase:download' => 'Download your purchased items',
-					'purchase:list'     => 'List purchases you\'ve made',
+					'default'           => __( 'View and search Envato sites', 'envato-market' ),
+					'purchase:download' => __( 'Download your purchased items', 'envato-market' ),
+					'purchase:list'     => __( 'List purchases you\'ve made', 'envato-market' ),
 				)
 			);
 		}
@@ -924,10 +924,10 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 			$response = envato_market()->api()->request( 'https://api.envato.com/whoami' );
 
 			if ( is_wp_error( $response ) && ( $response->get_error_code() === 'http_error' || $response->get_error_code() == 500 ) ) {
-				$this->store_additional_error_debug_information( 'An error occured checking token permissions', $response->get_error_message(), $response->get_error_data() );
+				$this->store_additional_error_debug_information( __( 'An error occured checking token permissions', 'envato-market' ), $response->get_error_message(), $response->get_error_data() );
 				$notice = 'http_error';
 			} elseif ( is_wp_error( $response ) || ! isset( $response['scopes'] ) || ! is_array( $response['scopes'] ) ) {
-				$this->store_additional_error_debug_information( 'No scopes found in API response message', $response->get_error_message(), $response->get_error_data() );
+				$this->store_additional_error_debug_information( __( 'No scopes found in API response message', 'envato-market' ), $response->get_error_message(), $response->get_error_data() );
 				$notice = 'error';
 			} else {
 
@@ -937,14 +937,14 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 				foreach ( $minimum_scopes as $required_scope => $required_scope_name ) {
 					if ( ! in_array( $required_scope, $response['scopes'] ) ) {
 						// The scope minimum required scope doesn't exist.
-						$this->store_additional_error_debug_information( 'Could not find required API permission scope in output.', $required_scope );
+						$this->store_additional_error_debug_information( __( 'Could not find required API permission scope in output.', 'envato-market' ), $required_scope );
 						$notice = 'missing-permissions';
 					}
 				}
 				foreach ( $response['scopes'] as $scope ) {
 					if ( ! isset( $maximum_scopes[ $scope ] ) ) {
 						// The available scope is outside our maximum bounds.
-						$this->store_additional_error_debug_information( 'Found too many permissions on token.', $scope );
+						$this->store_additional_error_debug_information( __( 'Found too many permissions on token.', 'envato-market' ), $scope );
 						$notice = 'too-many-permissions';
 					}
 				}
@@ -970,17 +970,17 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 
 			if ( is_wp_error( $response ) ) {
 				$notice = 'error';
-				$this->store_additional_error_debug_information( 'Error listing buyer purchases.', $response->get_error_message(), $response->get_error_data() );
+				$this->store_additional_error_debug_information( __( 'Error listing buyer purchases.', 'envato-market' ), $response->get_error_message(), $response->get_error_data() );
 			} elseif ( empty( $response ) ) {
 				$notice = 'error';
-				$this->store_additional_error_debug_information( 'Empty API result listing buyer purchases' );
+				$this->store_additional_error_debug_information( __( 'Empty API result listing buyer purchases', 'envato-market' ) );
 			} elseif ( empty( $response['results'] ) ) {
 				$notice = 'success-no-' . $type;
 			} else {
 				shuffle( $response['results'] );
 				$item = array_shift( $response['results'] );
 				if ( ! isset( $item['item']['id'] ) || ! envato_market()->api()->download( $item['item']['id'] ) ) {
-					$this->store_additional_error_debug_information( 'Failed to find the correct item format in API response' );
+					$this->store_additional_error_debug_information( __( 'Failed to find the correct item format in API response', 'envato-market' ) );
 					$notice = 'error';
 				}
 			}
@@ -1318,15 +1318,25 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 			  $memory_limit_in_mb   = $memory_limit < 0 ? 'Unlimited' : floor( $memory_limit / ( 1024 * 1024 ) ) . 'M';
 
 			  $limits['memory_limit'] = [
-				  'title'   => 'PHP Memory Limit',
+				  'title'   => esc_html__( 'PHP Memory Limit', 'envato-market' ),
 				  'ok'      => $memory_limit_ok,
-				  'message' => $memory_limit_ok ? "is ok at {$memory_limit_in_mb}." : "{$memory_limit_in_mb} may be too small. If you are having issues please set your PHP memory limit to at least 256M - or ask your hosting provider to do this if you're unsure."
+				  'message' => $memory_limit_ok ?
+				  		sprintf(
+							/* translators: %s: PHP memory limit in MB. */
+							esc_html__( 'is ok at %s.', 'envato-market' ),
+							$memory_limit_in_mb
+						) :
+						sprintf(
+							/* translators: %s: PHP memory limit in MB. */
+							esc_html__( '%s may be too small. If you are having issues please set your PHP memory limit to at least 256M - or ask your hosting provider to do this if you\'re unsure.', 'envato-market' ),
+							$memory_limit_in_mb
+						),
 			  ];
 		  } catch ( \Exception $e ) {
 			  $limits['memory_limit'] = [
-				  'title'   => 'PHP Memory Limit',
+				  'title'   => esc_html__( 'PHP Memory Limit', 'envato-market' ),
 				  'ok'      => false,
-				  'message' => 'Failed to check memory limit. If you are having issues please ask hosting provider to raise the memory limit for you.'
+				  'message' => esc_html__( 'Failed to check memory limit. If you are having issues please ask hosting provider to raise the memory limit for you.', 'envato-market' )
 			  ];
 		  }
 
@@ -1340,14 +1350,25 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 
 			  $limits['upload'] = [
 				  'ok'      => $upload_max_filesize_ok,
-				  'title'   => 'PHP Upload Limits',
-				  'message' => $upload_max_filesize_ok ? "is ok at $upload_max_filesize_in_mb." : "$upload_max_filesize_in_mb may be too small. If you are having issues please set your PHP upload limits to at least {$upload_size_desired}M - or ask your hosting provider to do this if you're unsure.",
+				  'title'   => esc_html__( 'PHP Upload Limits', 'envato-market' ),
+				  'message' => $upload_max_filesize_ok ?
+					sprintf(
+					/* translators: %s: Maximum upload file size in MB. */
+					esc_html__( 'is ok at %s.', 'envato-market' ),
+					$upload_max_filesize_in_mb
+					) :
+					sprintf(
+						/* translators: 1: Maximum upload file size in MB, 2: Desired minimum upload file size in MB. */
+						esc_html__( '%1$s may be too small. If you are having issues please set your PHP upload limits to at least %2$sM - or ask your hosting provider to do this if you\'re unsure.', 'envato-market' ),
+						$upload_max_filesize_in_mb,
+						$upload_size_desired
+					),
 			  ];
 		  } catch ( \Exception $e ) {
 			  $limits['upload'] = [
 				  'title'   => 'PHP Upload Limits',
 				  'ok'      => false,
-				  'message' => 'Failed to check upload limit. If you are having issues please ask hosting provider to raise the upload limit for you.'
+				  'message' => esc_html__( 'Failed to check upload limit. If you are having issues please ask hosting provider to raise the upload limit for you.', 'envato-market' )
 			  ];
 		  }
 
@@ -1359,16 +1380,27 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 
 			  $limits['max_input_vars'] = [
 				  'ok'      => $max_input_vars_ok,
-				  'title'   => 'PHP Max Input Vars',
-				  'message' => $max_input_vars_ok ? "is ok at $max_input_vars." : "$max_input_vars may be too small. If you are having issues please set your PHP max input vars to at least $max_input_vars_desired - or ask your hosting provider to do this if you're unsure.",
-			  ];
-		  } catch ( \Exception $e ) {
-			  $limits['max_input_vars'] = [
-				  'title'   => 'PHP Max Input Vars',
-				  'ok'      => false,
-				  'message' => 'Failed to check input vars limit. If you are having issues please ask hosting provider to raise the input vars limit for you.'
-			  ];
-		  }
+				  'title'   => esc_html__( 'PHP Max Input Vars', 'envato-market' ),
+				  'message' => $max_input_vars_ok ?
+						sprintf(
+				/* translators: %d: Maximum number of input variables allowed by PHP. */
+				esc_html__( 'is ok at %d.', 'envato-market' ),
+				$max_input_vars
+			) :
+			sprintf(
+				/* translators: 1: Maximum number of input variables allowed by PHP, 2: Desired minimum number of input variables. */
+				esc_html__( '%1$d may be too small. If you are having issues please set your PHP max input vars to at least %2$d - or ask your hosting provider to do this if you\'re unsure.', 'envato-market' ),
+				$max_input_vars,
+				$max_input_vars_desired
+			),
+			];
+			} catch ( \Exception $e ) {
+				$limits['max_input_vars'] = [
+					'title'	  => esc_html__( 'PHP Max Input Vars', 'envato-market' ),
+					'ok'	  => false,
+					'message' => esc_html__( 'Failed to check input vars limit. If you are having issues please ask hosting provider to raise the input vars limit for you.', 'envato-market' ),
+				];
+			}
 
 		  // Check max_execution_time.
 		  try {
@@ -1378,33 +1410,44 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 
 			  $limits['max_execution_time'] = [
 				  'ok'      => $max_execution_time_ok,
-				  'title'   => 'PHP Execution Time',
-				  'message' => $max_execution_time_ok ? "PHP execution time limit is ok at {$max_execution_time}." : "$max_execution_time is too small. Please set your PHP max execution time to at least $max_execution_time_desired - or ask your hosting provider to do this if you're unsure.",
-			  ];
-		  } catch ( \Exception $e ) {
-			  $limits['max_execution_time'] = [
-				  'title'   => 'PHP Execution Time',
-				  'ok'      => false,
-				  'message' => 'Failed to check PHP execution time limit. Please ask hosting provider to raise this limit for you.'
-			  ];
-		  }
+				  'title'   => esc_html__( 'PHP Execution Time', 'envato-market' ),
+				  'message' => $max_execution_time_ok ?
+					sprintf(
+						/* translators: %d: PHP execution time limit in seconds. */
+						esc_html__( 'PHP execution time limit is ok at %d seconds.', 'envato-market' ),
+						$max_execution_time
+					) :
+					sprintf(
+						/* translators: 1: Current PHP execution time limit in seconds, 2: Desired minimum PHP execution time limit in seconds. */
+						esc_html__( '%1$d seconds is too small. Please set your PHP max execution time to at least %2$d seconds - or ask your hosting provider to do this if you\'re unsure.', 'envato-market' ),
+						$max_execution_time,
+						$max_execution_time_desired
+					),
+			];
+} catch ( \Exception $e ) {
+	$limits['max_execution_time'] = [
+		'title'	  => esc_html__( 'PHP Execution Time', 'envato-market' ),
+		'ok'	  => false,
+		'message' => esc_html__( 'Failed to check PHP execution time limit. Please ask hosting provider to raise this limit for you.', 'envato-market' ),
+	];
+}
 
 		  // Check various hostname connectivity.
 		  $hosts_to_check = array(
 			  array(
 				  'hostname' => 'envato.github.io',
 				  'url'      => 'https://envato.github.io/wp-envato-market/dist/update-check.json',
-				  'title'    => 'Plugin Update API',
+				  'title'    => esc_html__( 'Plugin Update API', 'envato-market' ),
 			  ),
 			  array(
 				  'hostname' => 'api.envato.com',
 				  'url'      => 'https://api.envato.com/ping',
-				  'title'    => 'Envato Market API',
+				  'title'    => esc_html__( 'Envato Market API', 'envato-market' ),
 			  ),
 			  array(
 				  'hostname' => 'marketplace.envato.com',
 				  'url'      => 'https://marketplace.envato.com/robots.txt',
-				  'title'    => 'Download API',
+				  'title'    => esc_html__( 'Download API', 'envato-market' ),
 			  ),
 		  );
 
@@ -1419,20 +1462,31 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 					  $limits[ $host['hostname'] ] = [
 						  'ok'      => true,
 						  'title'   => $host['title'],
-						  'message' => 'Connected ok.',
+						  'message' => esc_html__( 'Connected ok.', 'envato-market' ),
 					  ];
 				  } else {
 					  $limits[ $host['hostname'] ] = [
 						  'ok'      => false,
 						  'title'   => $host['title'],
-						  'message' => "Connection failed. Status '$response_code'. Please ensure PHP is allowed to connect to the host '" . $host['hostname'] . "' - or ask your hosting provider to do this if you’re unsure. " . ( is_wp_error( $response ) ? $response->get_error_message() : '' ),
+						  'message' => sprintf(
+									/* translators: 1: HTTP status code, 2: Hostname. */
+									esc_html__( 'Connection failed. Status \'%1$s\'. Please ensure PHP is allowed to connect to the host \'%2$s\' - or ask your hosting provider to do this if you\'re unsure. %3$s', 'envato-market' ),
+									esc_html( $response_code ),
+									esc_html( $host['hostname'] ),
+									is_wp_error( $response ) ? esc_html( $response->get_error_message() ) : ''
+									),
 					  ];
 				  }
 			  } catch ( \Exception $e ) {
 				  $limits[ $host['hostname'] ] = [
 					  'ok'      => true,
 					  'title'   => $host['title'],
-					  'message' => "Connection failed. Please contact the hosting provider and ensure PHP is allowed to connect to the host '" . $host['hostname'] . "'. " . $e->getMessage(),
+					  'message' => sprintf(
+								/* translators: 1: Hostname, 2: Message. */
+								esc_html__( 'Connection failed. Please contact the hosting provider and ensure PHP is allowed to connect to the host \'%1$s\'. %2$s', 'envato-market' ),
+								esc_html( $host['hostname'] ),
+								esc_html( $e->getMessage() )
+								),
 				  ];
 			  }
 		  }
@@ -1445,14 +1499,18 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 				if ( is_wp_error( $response ) ) {
 					$limits['authentication'] = [
 						'ok'      => false,
-						'title'   => 'Envato API Authentication',
-						'message' => "Not currently authenticated with the Envato API. Please add your API token. " . $response->get_error_message(),
+						'title'   => esc_html__( 'Envato API Authentication', 'envato-market' ),
+						'message' => sprintf(
+							/* translators: %s: Error message from the Envato API. */
+							esc_html__( 'Not currently authenticated with the Envato API. Please add your API token. %s', 'envato-market' ),
+							esc_html( $response->get_error_message() )
+							),
 					];
 				} elseif ( ! isset( $response['scopes'] ) ) {
 					$limits['authentication'] = [
 						'ok'      => false,
-						'title'   => 'Envato API Authentication',
-						'message' => "Missing API permissions. Please re-create your Envato API token with the correct permissions. ",
+						'title'   => esc_html__( 'Envato API Authentication', 'envato-market' ),
+						'message' => esc_html__( 'Missing API permissions. Please re-create your Envato API token with the correct permissions.', 'envato-market' ),
 					];
 				} else {
 					$minimum_scopes    = $this->get_required_permissions();
@@ -1473,8 +1531,12 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 					}
 					$limits['authentication'] = [
 						'ok'      => true,
-						'title'   => 'Envato API Authentication',
-						'message' => "Authenticated successfully with correct scopes: " . implode( ', ', $response['scopes'] ),
+						'title'   => esc_html__( 'Envato API Authentication', 'envato-market' ),
+						'message' => sprintf(
+							/* translators: %s: List of authenticated API scopes. */
+							esc_html__( 'Authenticated successfully with correct scopes: %s', 'envato-market' ),
+							esc_html( implode( ', ', $response['scopes'] ) )
+							),
 					];
 				}
 			}
@@ -1482,23 +1544,33 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 		  $debug_enabled      = defined( 'WP_DEBUG' ) && WP_DEBUG;
 		  $limits['wp_debug'] = [
 			  'ok'      => ! $debug_enabled,
-			  'title'   => 'WP Debug',
-			  'message' => $debug_enabled ? 'If you’re on a production website, it’s best to set WP_DEBUG to false, please ask your hosting provider to do this if you’re unsure.' : 'WP Debug is disabled, all ok.',
+			  'title'   => esc_html__( 'WP Debug', 'envato-market' ),
+			  'message' => $debug_enabled ?
+			  	esc_html__( 'If you\'re on a production website, it’s best to set WP_DEBUG to false, please ask your hosting provider to do this if you\'re unsure.', 'envato-market' ) :
+				esc_html__( 'WP Debug is disabled, all ok.', 'envato-market' ),
 		  ];
 
 		  $zip_archive_installed = class_exists( '\ZipArchive' );
 		  $limits['zip_archive'] = [
 			  'ok'      => $zip_archive_installed,
-			  'title'   => 'ZipArchive Support',
-			  'message' => $zip_archive_installed ? 'ZipArchive is available.' : 'ZipArchive is not available. If you have issues installing or updating items please ask your hosting provider to enable ZipArchive.',
+			  'title'   => esc_html__( 'ZipArchive Support', 'envato-market' ),
+			  'message' => $zip_archive_installed ?
+			  	esc_html__( 'ZipArchive is available.', 'envato-market' ) :
+				esc_html__( 'ZipArchive is not available. If you have issues installing or updating items please ask your hosting provider to enable ZipArchive.', 'envato-market' ),
 		  ];
 
 
 		  $php_version_ok        = version_compare( PHP_VERSION, '7.0', '>=' );
 		  $limits['php_version'] = [
 			  'ok'      => $php_version_ok,
-			  'title'   => 'PHP Version',
-			  'message' => $php_version_ok ? 'PHP version is ok at ' . PHP_VERSION . '.' : 'Please ask the hosting provider to upgrade your PHP version to at least 7.0 or above.',
+			  'title'   => esc_html__( 'PHP Version', 'envato-market' ),
+			  'message' => $php_version_ok ?
+			  	sprintf(
+		/* translators: %s: Current PHP version. */
+				esc_html__( 'PHP version is ok at %s.', 'envato-market' ),
+				PHP_VERSION
+				) :
+				esc_html__( 'Please ask the hosting provider to upgrade your PHP version to at least 7.0 or above.', 'envato-market' ),
 		  ];
 
 		  require_once( ABSPATH . 'wp-admin/includes/file.php' );
@@ -1506,8 +1578,8 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 		  if ( $current_filesystem_method !== 'direct' ) {
 			  $limits['filesystem_method'] = [
 				  'ok'      => false,
-				  'title'   => 'WordPress Filesystem',
-				  'message' => 'Please enable WordPress FS_METHOD direct - or ask your hosting provider to do this if you’re unsure.',
+				  'title'   => esc_html__( 'WordPress Filesystem', 'envato-market' ),
+				  'message' => esc_html__( 'Please enable WordPress FS_METHOD direct - or ask your hosting provider to do this if you\'re unsure.', 'envato-market' ),
 			  ];
 		  }
 
@@ -1516,8 +1588,10 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 		  $upload_base_dir_writable      = is_writable( $upload_base_dir );
 		  $limits['wp_content_writable'] = [
 			  'ok'      => $upload_base_dir_writable,
-			  'title'   => 'WordPress File Permissions',
-			  'message' => $upload_base_dir_writable ? 'is ok.' : 'Please set correct WordPress PHP write permissions for the wp-content directory - or ask your hosting provider to do this if you’re unsure.',
+			  'title'   => esc_html__( 'WordPress File Permissions', 'envato-market' ),
+			  'message' => $upload_base_dir_writable ?
+			  	esc_html__( 'is ok.', 'envato-market' ) :
+				esc_html__( 'Please set correct WordPress PHP write permissions for the wp-content directory - or ask your hosting provider to do this if you\'re unsure.', 'envato-market' ),
 		  ];
 
 		  $active_plugins    = get_option( 'active_plugins' );
@@ -1525,8 +1599,8 @@ if ( ! class_exists( 'Envato_Market_Admin' ) && class_exists( 'Envato_Market' ) 
 		  if ( ! $active_plugins_ok ) {
 			  $limits['active_plugins'] = [
 				  'ok'      => false,
-				  'title'   => 'Active Plugins',
-				  'message' => 'Please try to reduce the number of active plugins on your WordPress site, as this will slow things down.',
+				  'title'   => esc_html__( 'Active Plugins', 'envato-market' ),
+				  'message' => esc_html__( 'Please try to reduce the number of active plugins on your WordPress site, as this will slow things down.', 'envato-market' ),
 			  ];
 		  }
 
