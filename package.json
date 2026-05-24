@@ -32,6 +32,6 @@
 		"grunt-shell": "~4.0.0",
 		"grunt-wp-i18n": "^1.0.3",
 		"node-bourbon": "~4.2.8",
-		"node-sass": "^8.0.0"
+		"node-sass": "^9.0.0"
 	}
 }
